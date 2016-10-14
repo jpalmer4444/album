@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group name="itemmaster">
+            <file>file:/u/local/jasonpalmer/zf-tutorial/module/Album/view/album/album/delete.phtml</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/data/schema.sql</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/module/Album/src/Model/AlbumTable.php</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/vendor/zendframework/zend-authentication/composer.json</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/module/Album/src/Controller/AlbumController.php</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/module/Album/src/Model/Album.php</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/composer.json</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/config/modules.config.php</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/vendor/zendframework/zend-authentication/README.md</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/public/index.php</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/public/phpinfo.php</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/module/Album/config/module.config.php</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/module/Album/view/album/album/add.phtml</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/module/Album/view/album/album/edit.phtml</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/module/Album/src/Module.php</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/module/Album/view/album/album/index.phtml</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/vendor/zendframework/zend-mvc/composer.json</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/module/Album/src/autoload_classmap.php</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/config/autoload/global.php</file>
+            <file>file:/u/local/jasonpalmer/zf-tutorial/config/application.config.php</file>
+        </group>
+    </open-files>
+</project-private>
