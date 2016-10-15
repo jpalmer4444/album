@@ -8,7 +8,7 @@
 
 namespace Album\Model;
 
-use RuntimeException;
+use Album\Model\Album;
 use Zend\Db\TableGateway\TableGatewayInterface;
 
 class AlbumTable
