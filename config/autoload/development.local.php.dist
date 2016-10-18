@@ -19,4 +19,7 @@ return [
     'view_manager' => [
         'display_exceptions' => true,
     ],
+    'myapp_config' => [
+        'display_exceptions' => true,
+    ],
 ];

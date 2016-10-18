@@ -7,7 +7,8 @@
 
 namespace Application;
 
-use Album\Controller\AlbumController;
+use Application\Controller\IndexController;
+use Auth\Controller\AuthController;
 use Zend\Router\Http\Literal;
 use Zend\Router\Http\Segment;
 use Zend\ServiceManager\Factory\InvokableFactory;
@@ -20,8 +21,8 @@ return [
                 'options' => [
                     'route'    => '/',
                     'defaults' => [
-                        'controller' => AlbumController::class,//<--Changes Home Page to 
-                        'action'     => 'index',
+                        'controller' => AuthController::class,//<--Changes Home Page to 
+                        'action'     => 'login',
                     ],
                 ],
             ],

@@ -66,4 +66,15 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
             ],
         ];
     }
+    
+    protected function _initAutoloader()
+    {
+        $loader = function($className) {
+            $className = str_replace('\\', '_', $className);
+            Zend_Loader_Autoloader::autoload($className);
+        };
+
+        $autoloader = Zend_Loader_Autoloader::getInstance();
+        $autoloader->pushAutoloader($loader, 'Application\\');
+    }
 }
