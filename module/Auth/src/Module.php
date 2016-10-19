@@ -9,9 +9,11 @@
 namespace Auth;
 
 use Auth\Controller\AuthController;
+use Auth\Controller\SuccessController;
 use Auth\Model\MyAuthStorage;
-use Zend\Authentication\Adapter\DbTable as DbTableAuthAdapter;
+use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter as AuthAdapter;
 use Zend\Authentication\AuthenticationService;
+use Zend\Crypt\Password\Bcrypt;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
@@ -40,6 +42,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                             $container->get('AuthService'), $container->get('Auth\Model\MyAuthStorage')
                     );
                 },
+                SuccessController::class => function($container) {
+                    return new SuccessController(
+                            $container->get('AuthService')
+                    );
+                },
             ],
         ];
     }
@@ -61,10 +68,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                     $credentialValidationCallback = function($dbCredential, $requestCredential) {
                                 return (new Bcrypt())->verify($requestCredential, $dbCredential);
                             };
+                            
                     $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $dbTableAuthAdapter = new DbTableAuthAdapter($dbAdapter, 'users', 'username', 'password', $credentialValidationCallback);
+                    $authAdapter = new AuthAdapter($dbAdapter, 'users', 'username', 'password', $credentialValidationCallback);
                     $authService = new AuthenticationService();
-                    $authService->setAdapter($dbTableAuthAdapter);
+                    $authService->setAdapter($authAdapter);
                     $authService->setStorage($sm->get('Auth\Model\MyAuthStorage'));
 
                     return $authService;

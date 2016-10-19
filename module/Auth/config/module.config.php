@@ -1,13 +1,9 @@
 <?php
 
 use Auth\Controller\AuthController;
+use Auth\Controller\SuccessController;
 
 return array(
-    'controllers' => array(
-        'invokables' => array(
-            'Auth\Controller\Success' => 'Auth\Controller\SuccessController'
-        )
-    ),
     'router' => array(
         'routes' => array(
             'login' => array(
@@ -40,8 +36,7 @@ return array(
                 'options' => array(
                     'route'    => '/success',
                     'defaults' => array(
-                        '__NAMESPACE__' => 'Auth\Controller',
-                        'controller'    => 'Success',
+                        'controller'    => SuccessController::class,
                         'action'        => 'index',
                     ),
                 ),

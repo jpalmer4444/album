@@ -8,9 +8,13 @@
 
 namespace Auth\Model;
 
+use Exception;
 use Zend\Form\Form;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
 
-class User extends Form {
+class User extends Form implements InputFilterAwareInterface {
 
     public function __construct() {
         
@@ -71,5 +75,61 @@ class User extends Form {
     public $submit;
     
     public $csrf;
+    
+    public $inputFilter;
+    
+         public function setInputFilter(InputFilterInterface $inputFilter)
+     {
+         throw new Exception("Not used");
+     }
+
+     public function getInputFilter()
+     {
+         if (!$this->inputFilter) {
+             $inputFilter = new InputFilter();
+
+             $inputFilter->add(array(
+                 'name'     => 'username',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 50,
+                         ),
+                     ),
+                 ),
+             ));
+
+             $inputFilter->add(array(
+                 'name'     => 'password',
+                 'required' => true,
+                 'filters'  => array(
+                     array('name' => 'StripTags'),
+                     array('name' => 'StringTrim'),
+                 ),
+                 'validators' => array(
+                     array(
+                         'name'    => 'StringLength',
+                         'options' => array(
+                             'encoding' => 'UTF-8',
+                             'min'      => 1,
+                             'max'      => 50,
+                         ),
+                     ),
+                 ),
+             ));
+
+             $this->inputFilter = $inputFilter;
+         }
+
+         return $this->inputFilter;
+     }
 
 }

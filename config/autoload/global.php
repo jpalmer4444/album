@@ -14,6 +14,11 @@
 return [
     'db' => [
         'driver' => 'Pdo',
-        'dsn'    => sprintf('sqlite:%s/data/zftutorial.db', realpath(getcwd())),
+        'dsn'    => sprintf('sqlite:%s/data/pricing_app.db', realpath(getcwd())),
     ],
+    'service_manager' => array(
+      'factories' => array(
+         'Zend\Db\Adapter\Adapter' => 'Zend\Db\Adapter\AdapterServiceFactory',
+      ),
+   ),
 ];

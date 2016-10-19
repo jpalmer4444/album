@@ -23,13 +23,14 @@ class AuthController extends AbstractActionController {
     protected $storage;
     protected $flashmessages;
     protected $authservice;
+    public $value;
     protected $logger;
 
     public function __construct(AuthenticationService $authservice, MyAuthStorage $storage) {
         $this->authservice = $authservice;
         $this->storage = $storage;
         $this->form = $this->getForm();
-        $writer = new Stream('php://stdout');
+        $writer = new Stream('php://stderr');
         $logger = new Logger();
         $logger->addWriter($writer);
         $this->logger = $logger;
@@ -56,8 +57,12 @@ class AuthController extends AbstractActionController {
 
     public function loginAction() {
         //if already login, redirect to success page 
+        $this->logger->info('Checking for identity');
         if ($this->getAuthService()->hasIdentity()) {
+            $this->logger->info('Identity found.');
             return $this->redirect()->toRoute('success');
+        }else{
+            $this->logger->info('Identity not found.');
         }
 
         $form = $this->getForm();
@@ -69,6 +74,9 @@ class AuthController extends AbstractActionController {
     }
 
     public function authenticateAction() {
+        
+        $this->logger->info('AuthenticationAction called.');
+        
         $form = $this->getForm();
         $redirect = 'login';
 
@@ -98,6 +106,8 @@ class AuthController extends AbstractActionController {
                     }
                     $this->getAuthService()->getStorage()->write($request->getPost('username'));
                 }
+            }else{
+               $this->logger->info('attempting AuthenticationAction.'); 
             }
         }
 

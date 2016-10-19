@@ -7,6 +7,7 @@
  * Author:  jasonpalmer
  * Created: Oct 12, 2016
  */
+
 CREATE TABLE album (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
     artist varchar(100) NOT NULL, 
@@ -28,7 +29,7 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (username, password, sales_attr_id) 
-VALUES('jpalmer', '$2y$11$wg5CMmCu96EclApFL/Uyl.iPa1YMyqv0PqsnXbl.ZbV7A7SHzbaRK', 1);
+VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 1);
 INSERT INTO users (username, password, sales_attr_id) 
 VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 2);
 INSERT INTO users (username, password, sales_attr_id) 
