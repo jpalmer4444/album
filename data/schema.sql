@@ -23,9 +23,7 @@ INSERT INTO album (artist, title) VALUES ('Gotye', 'Making Mirrors');
 CREATE TABLE users (
     username varchar(100) PRIMARY KEY,
     password varchar(100) NOT NULL,
-    sales_attr_id integer NOT NULL,
-    password_salt varchar(32) NULL,
-    real_name varchar(150) NULL
+    sales_attr_id integer NOT NULL
 );
 
 INSERT INTO users (username, password, sales_attr_id) 
@@ -35,3 +33,32 @@ VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO'
 INSERT INTO users (username, password, sales_attr_id) 
 VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 3);
 
+CREATE TABLE roles (
+    role varchar(25) PRIMARY KEY,
+    description varchar(100) NOT NULL
+);
+
+INSERT INTO roles (role, description) 
+VALUES('sales', 'Salespeople Access');
+
+INSERT INTO roles (role, description) 
+VALUES('admin', 'Admin Access');
+
+CREATE TABLE user_role_xref (
+    role varchar(25) NOT NULL,
+    username varchar(100) NOT NULL,
+    PRIMARY KEY(role, username)
+);
+
+INSERT INTO user_role_xref VALUES('admin', 'jpalmer');
+INSERT INTO user_role_xref VALUES('sales', 'dtanzer');
+INSERT INTO user_role_xref VALUES('sales', 'jdowns');
+
+CREATE TABLE `session` (
+    `id` char(32),
+    `name` char(32),
+    `modified` int,
+    `lifetime` int,
+    `data` text,
+     PRIMARY KEY (`id`, `name`)
+);

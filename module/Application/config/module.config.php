@@ -8,26 +8,23 @@
 namespace Application;
 
 use Application\Controller\IndexController;
-use Auth\Controller\AuthController;
-use Zend\Router\Http\Literal;
-use Zend\Router\Http\Segment;
-use Zend\ServiceManager\Factory\InvokableFactory;
+use Login\Controller\LoginController;
 
 return [
     'router' => [
         'routes' => [
             'home' => [
-                'type' => Literal::class,
+                'type' => 'Literal',
                 'options' => [
                     'route'    => '/',
                     'defaults' => [
-                        'controller' => AuthController::class,//<--Changes Home Page to 
+                        'controller' => LoginController::class,//<--Changes Home Page to 
                         'action'     => 'login',
                     ],
                 ],
             ],
             'application' => [
-                'type'    => Segment::class,
+                'type'    => 'Segment',
                 'options' => [
                     'route'    => '/application[/:action]',
                     'defaults' => [
@@ -36,11 +33,6 @@ return [
                     ],
                 ],
             ],
-        ],
-    ],
-    'controllers' => [
-        'factories' => [
-            IndexController::class => InvokableFactory::class,
         ],
     ],
     'view_manager' => [

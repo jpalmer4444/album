@@ -28,13 +28,18 @@
         "zendframework/zend-crypt": "^2.6.0",
         "zendframework/zend-servicemanager-di": "^1.0",
         "doctrine/common": ">=2.1",
-        "zendframework/zend-mvc-plugin-flashmessenger": "^1.0"
+        "zendframework/zend-mvc-plugin-flashmessenger": "^1.0",
+        "doctrine/doctrine-orm-module": "^1.1",
+        "zendframework/zend-permissions-acl": "^2.6"
     },
     "autoload": {
     "psr-4": {
         "Application\\": "module/Application/src/",
         "Album\\": "module/Album/src/",
-        "Auth\\": "module/Auth/src/"
+        "Login\\": "module/Login/src/",
+        "Sales\\": "module/Sales/src/",
+        "MyAcl\\": "module/MyAcl/src/",
+        "DataAccess\\": "module/DataAccess/src/"
     }
 },
     "autoload-dev": {
