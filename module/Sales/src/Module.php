@@ -14,9 +14,12 @@ use Sales\Controller\UsersController;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface {
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface, ConsoleBannerProviderInterface {
 
+    const VERSION = '3.0.2dev';
+    
     public function getAutoloaderConfig() {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
@@ -35,17 +38,23 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
             'factories' => [
                 UsersController::class => function($container) {
                     return new UsersController(
-                            $container->get('RestService')
+                            $container->get('RestService'),
+                            $container->get('LoggingService'),
+                            $container->get('Login\Model\MyAuthStorage')
                     );
                 },
                 ItemsController::class => function($container) {
                     return new ItemsController(
-                            $container->get('RestService')
+                            $container->get('RestService'),
+                            $container->get('LoggingService'),
+                            $container->get('Login\Model\MyAuthStorage')
                     );
                 },
                 SalesController::class => function($container) {
                     return new SalesController(
-                            $container->get('RestService')
+                            $container->get('RestService'),
+                            $container->get('LoggingService'),
+                            $container->get('Login\Model\MyAuthStorage')
                     );
                 },
             ],
@@ -59,6 +68,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getServiceConfig() {
         return array(
         );
+    }
+
+    public function getConsoleBanner(\Zend\Console\Adapter\AdapterInterface $console) {
+        return 'Sales Module V: ' . Module::VERSION;
     }
 
 }

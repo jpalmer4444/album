@@ -77,4 +77,5 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
         $autoloader = Zend_Loader_Autoloader::getInstance();
         $autoloader->pushAutoloader($loader, 'Application\\');
     }
+
 }

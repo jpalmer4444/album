@@ -1,9 +1,4 @@
 <?php
-/**
- * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
- * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   http://framework.zend.com/license/new-bsd New BSD License
- */
 
 namespace Application;
 
@@ -35,6 +30,21 @@ return [
             ],
         ],
     ],
+    'console' => array(
+        'router' => array(
+            'routes' => array(
+                'user-reset-password' => array(
+                    'options' => array(
+                        'route'    => 'user resetpassword [--verbose|-v] <userEmail>',
+                        'defaults' => array(
+                            'controller' => IndexController::class,
+                            'action'     => 'resetpassword'
+                        )
+                    )
+                )
+            )
+        )
+    ),
     'view_manager' => [
         'display_not_found_reason' => true,
         'display_exceptions'       => true,

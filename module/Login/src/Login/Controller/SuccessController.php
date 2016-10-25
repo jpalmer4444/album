@@ -27,9 +27,6 @@ class SuccessController extends AbstractActionController
     
     public function indexAction()
     {
-        if (! $this->authservice->hasIdentity()){
-            return $this->redirect()->toRoute('login');
-        }
          
         return new ViewModel();
     }

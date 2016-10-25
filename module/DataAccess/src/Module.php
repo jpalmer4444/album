@@ -11,9 +11,12 @@ namespace DataAccess;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface {
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface, ConsoleBannerProviderInterface {
 
+    const VERSION = '3.0.2dev';
+    
     public function getAutoloaderConfig() {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
@@ -37,6 +40,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
 
     public function getServiceConfig() {
         
+    }
+
+    public function getConsoleBanner(\Zend\Console\Adapter\AdapterInterface $console) {
+        return 'DataAccess Module V: ' . Module::VERSION;
     }
 
 }

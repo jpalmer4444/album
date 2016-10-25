@@ -2,9 +2,9 @@
 
 namespace Sales\Controller;
 
+use Application\Service\LoggingService;
 use Application\Service\RestServiceInterface;
-use Zend\Log\Logger;
-use Zend\Log\Writer\Stream;
+use Login\Model\MyAuthStorage;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -16,30 +16,29 @@ class SalesController extends AbstractActionController{
     
     //http://svc.ffmalpha.com/bySKU.php?id=jpalmer&pw=goodbass&object=salespeople
     
-    protected $id = "jpalmer";
-    protected $pw = "goodbass";
-    protected $object = "salespeople";
+    const ID = "jpalmer";
+    const PASSWORD = "goodbass";
+    const OBJECT = "salespeople";
+    protected $myauthstorage;
     
-    public function __construct(RestServiceInterface $restService){
+    public function __construct(RestServiceInterface $restService, LoggingService $logger, MyAuthStorage $myauthstorage){
         $this->restService = $restService;
-        $writer = new Stream('php://stderr');
-        $logger = new Logger();
-        $logger->addWriter($writer);
         $this->logger = $logger;
-        $this->logger->info('SalesController instantiated.');
+        $this->myauthstorage = $myauthstorage;
     }
 
     public function indexAction() {
-        $this->logger->info('Retrieving Salespeople.');
+        $this->logger->info('Retrieving ' . SalesController::OBJECT . '.');
         $params = [
-            "id" => $this->id,
-            "pw" => $this->pw,
-            "object" => $this->object
+            "id" => SalesController::ID,
+            "pw" => SalesController::PASSWORD,
+            "object" => SalesController::OBJECT
         ];
-        $url = "http://svc.ffmalpha.com/bySKU.php";
-        $method = "GET";
+        $url = \Application\Module::BYSKU_URL;
+        $method = \Application\Module::BYSKU_METHOD;
+        
         $json = $this->rest($url, $method, $params);
-        $this->logger->info('Retrieved Salespeople. #' . count($json));
+        $this->logger->info('Retrieved #' . count($json[SalesController::OBJECT]) . ' ' . SalesController::OBJECT . '.');
         return new ViewModel(array(
             "json" => $json
         ));

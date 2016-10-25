@@ -1,4 +1,3 @@
-// Floating label headings for the contact form
 $(function() {
     $("body").on("input propertychange", ".floating-label-form-group", function(e) {
         $(this).toggleClass("floating-label-form-group-with-value", !!$(e.target).val());
@@ -10,7 +9,7 @@ $(function() {
 });
 
 // Navigation Scripts to Show Header on Scroll-Up
-jQuery(document).ready(function($) {
+$(document).ready(function($) {
     var MQL = 1170;
 
     //primary navigation slide-in effect

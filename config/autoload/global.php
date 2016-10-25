@@ -28,7 +28,26 @@ return [
             'orm_default' => array(
                 'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
                 'params' => array(
-                    'url' => 'sqlite://../../data/pricing_app.db'
+                    'url' => 'sqlite://../data/pricing_app.db'
+                )
+            )
+        ),
+        'driver' => array(
+            // defines an annotation driver with two paths, and names it `my_annotation_driver`
+            'my_annotation_driver' => array(
+                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'cache' => 'array',
+                'paths' => array(
+                    __DIR__ . '/' . __NAMESPACE__
+                ),
+            ),
+
+            // default metadata driver, aggregates all other drivers into a single one.
+            // Override `orm_default` only if you know what you're doing
+            'orm_default' => array(
+                'drivers' => array(
+                    // register `my_annotation_driver` for any entity under namespace `My\Namespace`
+                    'DataAccess\FFM\Entity' => 'my_annotation_driver'
                 )
             )
         )

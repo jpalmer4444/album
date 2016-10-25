@@ -13,16 +13,20 @@ use Application\Service\LoggingService;
 use Application\Service\RestService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ServiceManager\Factory\InvokableFactory;
 use Zend\Session\Container;
 use Zend\Session\SaveHandler\DbTableGateway;
 use Zend\Session\SaveHandler\DbTableGatewayOptions;
 use Zend\Session\SessionManager;
+use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 
-class Module implements ConfigProviderInterface, ServiceProviderInterface {
+class Module implements ConfigProviderInterface, ServiceProviderInterface, ConsoleUsageProviderInterface, ConsoleBannerProviderInterface  {
 
     const VERSION = '3.0.2dev';
+    const BYSKU_URL = "https://svc.ffmalpha.com/bySKU.php";
+    const BYSKU_METHOD = "GET";
 
     public function getControllerConfig() {
         return [
@@ -31,6 +35,11 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface {
                     IndexController::class => InvokableFactory::class,
                 ],
         ]];
+    }
+
+    public function getConsoleBanner(\Zend\Console\Adapter\AdapterInterface $console)
+    {
+        return 'Application Module V: ' . Module::VERSION;
     }
 
     public function getConfig() {
@@ -45,6 +54,9 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface {
                 },
                 'RestService' => function($sm) {
                     return new RestService($sm->get('LoggingService'));
+                },
+                'FFMEntityManager' => function($sm) {
+                    return new Service\FFMEntityManagerService($sm->get('Doctrine\ORM\EntityManager'));
                 },
                 'Zend\Session\SessionManager' => function ($sm) {
                     $config = $sm->get('config');
@@ -86,5 +98,22 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface {
             ),
         );
     }
+
+    public function getConsoleUsage(\Zend\Console\Adapter\AdapterInterface $console) {
+        return array(
+            // Describe available commands
+            'user resetpassword [--verbose|-v] EMAIL'    => 'Reset password for a user',
+
+            // Describe expected parameters
+            array( 'EMAIL',            'Email of the user for a password reset' ),
+            array( '--verbose|-v',     '(optional) turn on verbose mode'        ),
+        );
+    }
+    
+    /**
+     * Adds global method available in layout
+     */
+    
+    
 
 }

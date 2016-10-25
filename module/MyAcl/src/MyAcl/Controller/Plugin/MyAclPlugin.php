@@ -5,29 +5,25 @@ namespace MyAcl\Controller\Plugin;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Permissions\Acl\Acl;
 use Zend\Permissions\Acl\Role\GenericRole as Role;
-use Zend\Session\Container as SessionContainer;
 
 class MyAclPlugin extends AbstractPlugin {
 
     protected $sesscontainer;
-    
     protected $logger;
-    
-    protected $session;
-    
-    public function __construct($logger, $session) {
+    protected $authService;
+
+    public function __construct($logger, $authService) {
         $this->logger = $logger;
-        $this->session = $session;
+        $this->authService = $authService;
     }
 
     public function doAuthorization($e) {
-        
+
         // set ACL
         $acl = new Acl();
-        
+
         $acl->deny(); // on by default
         //$acl->allow(); // this will allow every route by default so then you have to explicitly deny all routes that you want to protect.            
-        
         # ROLES ############################################
         $acl->addRole(new Role('anonymous'));
         $acl->addRole(new Role('user'), 'anonymous');
@@ -37,38 +33,74 @@ class MyAclPlugin extends AbstractPlugin {
         # 
         # RESOURCES ########################################
         //$acl->addResource('application'); // Application module
-        $acl->addResource('album'); // album route
-        $acl->addResource('login'); // login route
-        $acl->addResource('sales'); // sales route
-        $acl->addResource('items'); // items route
-        $acl->addResource('users'); // users route
+        $acl->addResource('album:Album\Controller\AlbumController:index'); // album module, album controller, index action
+        $acl->addResource('album:Album\Controller\AlbumController:add'); 
+        $acl->addResource('album:Album\Controller\AlbumController:edit'); 
+        $acl->addResource('album:Album\Controller\AlbumController:delete'); 
+        
+        $acl->addResource('application:Application\Controller\IndexController:index');
+        $acl->addResource('application:Application\Controller\IndexController:resetpassword');
+        
+        $acl->addResource('login:Login\Controller\LoginController:authenticate');
+        $acl->addResource('login:Login\Controller\LoginController:login');
+        $acl->addResource('login:Login\Controller\LoginController:logout');
+        
+        //success route
+        $acl->addResource('login:Login\Controller\SuccessController:index');
+        
+        //sales route
+        $acl->addResource('sales:Sales\Controller\SalesController:index');
+        $acl->addResource('sales:Sales\Controller\ItemsController:index');
+        $acl->addResource('sales:Sales\Controller\UsersController:index');
+        
+        //add doctrinemodule for Console calls or MyAclPlugin will intercept
+        $acl->addResource('doctrinemodule');
         //
         # end RESOURCES ########################################
         # 
         ################ PERMISSIONS #######################
         // $acl->allow('role', 'resource', 'controller:action');
         // Application -------------------------->
-        $acl->allow('anonymous', 'login');//allow login page to render
-        // Album -------------------------->
-        $acl->allow('anonymous', 'album');
-        // $acl->allow('role', 'resource', 'controller:action');
-        // Sales -------------------------->
-        $acl->allow('sales', 'items');
-        $acl->allow('sales', 'users');
+        $acl->allow('anonymous', 'album:Album\Controller\AlbumController:index');
+        $acl->allow('anonymous', 'album:Album\Controller\AlbumController:add');
+        $acl->allow('anonymous', 'album:Album\Controller\AlbumController:edit');
+        $acl->allow('anonymous', 'album:Album\Controller\AlbumController:delete');
+        $acl->allow('anonymous', 'application:Application\Controller\IndexController:index');
+        $acl->allow('anonymous', 'application:Application\Controller\IndexController:resetpassword');
+        $acl->allow('anonymous', 'login:Login\Controller\LoginController:authenticate');
+        $acl->allow('anonymous', 'login:Login\Controller\LoginController:login');
+        $acl->allow('anonymous', 'doctrinemodule');
+        
+        
+        
         
         // $acl->allow('role', 'resource', 'controller:action');
         // Sales -------------------------->
-        $acl->allow('admin', 'sales');//admin should inherit
-        
+        $acl->allow('sales', 'login:Login\Controller\LoginController:logout');
+        $acl->allow('sales', 'login:Login\Controller\SuccessController:index');
+        $acl->allow('sales', 'sales:Sales\Controller\ItemsController:index');
+        $acl->allow('sales', 'sales:Sales\Controller\UsersController:index');
+
+        // $acl->allow('role', 'resource', 'controller:action');
+        // Sales -------------------------->
+        $acl->allow('admin', 'sales:Sales\Controller\SalesController:index'); //admin should inherit
         // ################ end PERMISSIONS #####################
 
         $controller = $e->getTarget();
         $controllerClass = get_class($controller);
         $moduleName = strtolower(substr($controllerClass, 0, strpos($controllerClass, '\\')));
-        $role = (isset($this->session['role'])) ? $this->session['role'] : 'anonymous';
-        
+        $roles = [];
+        if (null !== $this->authService->getStorage()->getRoles()) {
+            $roles = $this->authService->getStorage()->getRoles();
+        } else {
+            $anonymous = new \DataAccess\FFM\Entity\UserRoleXref();
+            $anonymous->setUsername("anonymous");
+            $anonymous->setRole("anonymous");
+            $roles[0] = $anonymous;
+        }
+
         //$role = (!$this->getSessContainer()->__get('role')) ? 'anonymous' : $this->getSessContainer()->$this->getSessContainer()->__get('role');
-        
+
         $routeMatch = $e->getRouteMatch();
 
         $actionName = strtolower($routeMatch->getParam('action', 'not-found')); // get the action name 
@@ -83,8 +115,22 @@ class MyAclPlugin extends AbstractPlugin {
 
 
         #################### Check Access ########################
-        if (!$acl->isAllowed($role, $moduleName, $controllerName . ':' . $actionName)) {
+        $allowed = FALSE;
+        foreach ($roles as $role) {
+            if ($acl->isAllowed($role->getRole(), $moduleName . ':' . $controllerName . ':' . $actionName)) {
+                $allowed = TRUE;
+            }
+        }
+        
+        $this->logger->info("Allowed: " . $allowed);
+
+        if (!$allowed) {
             $router = $e->getRouter();
+            $request = $e->getRequest();
+            $routeMatch = $router->match($request);
+            if (!is_null($routeMatch)){
+                $this->authService->getStorage()->addRequestedRoute($routeMatch->getMatchedRouteName());
+            }
             // $url    = $router->assemble(array(), array('name' => 'Login/auth')); // assemble a login route
             $url = $router->assemble(array(), array('name' => 'login'));
             $response = $e->getResponse();

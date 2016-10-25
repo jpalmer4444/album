@@ -9,11 +9,14 @@ use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\ModuleManager;
 use Zend\Mvc\MvcEvent;
+use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 
 // end: added for Acl   ###################################
 //class Module
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface{
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface, ConsoleBannerProviderInterface{
 
+    const VERSION = '3.0.2dev';
+    
     public function getConfig() {
         return include __DIR__ . '/../config/module.config.php';
     }
@@ -78,6 +81,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                 ),
             ),
         );
+    }
+
+    public function getConsoleBanner(\Zend\Console\Adapter\AdapterInterface $console) {
+        return 'MyAcl Module V: ' . Module::VERSION;
     }
 
 }

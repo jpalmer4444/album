@@ -10,6 +10,7 @@ namespace Login\Controller;
 
 require 'vendor/autoload.php';
 
+use Application\Service\FFMEntityManagerService;
 use Application\Service\LoggingService;
 use Login\Model\MyAuthStorage;
 use Login\Model\User;
@@ -24,12 +25,14 @@ class LoginController extends AbstractActionController {
     protected $authservice;
     public $value;
     protected $logger;
+    protected $entityManager;
 
-    public function __construct(AuthenticationService $authservice, MyAuthStorage $storage, LoggingService $logger) {
+    public function __construct(AuthenticationService $authservice, MyAuthStorage $storage, LoggingService $logger, FFMEntityManagerService $entityManager) {
         $this->authservice = $authservice;
         $this->storage = $storage;
         $this->form = $this->getForm();
         $this->logger = $logger;
+        $this->entityManager = $entityManager->getEntityManager();
     }
 
     public function getAuthService() {
@@ -54,8 +57,11 @@ class LoginController extends AbstractActionController {
         //if already login, redirect to success page 
         $this->logger->info('Checking for identity');
         if ($this->getAuthService()->hasIdentity()) {
+            
             $this->logger->info('Identity found.');
+            
             return $this->redirect()->toRoute('success');
+            
         }else{
             $this->logger->info('Identity not found.');
         }
@@ -69,12 +75,9 @@ class LoginController extends AbstractActionController {
     }
 
     public function authenticateAction() {
-        
         $this->logger->info('AuthenticationAction called.');
-        
         $form = $this->getForm();
         $redirect = 'login';
-
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
@@ -83,21 +86,35 @@ class LoginController extends AbstractActionController {
                 $this->getAuthService()->getAdapter()
                         ->setIdentity($request->getPost('username'))
                         ->setCredential($request->getPost('password'));
-
                 $result = $this->getAuthService()->authenticate();
                 foreach ($result->getMessages() as $message) {
                     //save message temporary into flashmessenger
                     $this->plugin('flashmessenger')->addMessage($message);
                 }
-
                 if ($result->isValid()) {
-                    $redirect = 'success';
+                    $redirect = 'users';
+                    if(null !== $this->getSessionStorage()->getRequestedRoute()){
+                        $redirect = $this->getSessionStorage()->getRequestedRoute();
+                    }
+                    //set roles
+                    $user = $this->entityManager->find('DataAccess\FFM\Entity\User', $request->getPost('username'));
+                    $this->logger->info('Username: ' . $user->getUsername());
+                    $roleXrefObjs = $this->entityManager->getRepository('DataAccess\FFM\Entity\UserRoleXref')->findBy(array('username' => $request->getPost('username')));
+                    $roles = [];
+                    $idx = 0;
+                    foreach ($roleXrefObjs as $role) {
+                        //save message temporary into flashmessenger
+                        //$this->logger->info('Role: ' . $role->getRole());
+                        $roles[$idx++] = $role;
+                    }
+                    $this->getSessionStorage()->addRoles($roles);
+                    $this->getSessionStorage()->addUser($user);//set $user in session storage for later access.
                     //check if it has rememberMe :
+                    $this->getAuthService()->setStorage($this->getSessionStorage());
                     if ($request->getPost('rememberme') == 1) {
                         $this->getSessionStorage()
                                 ->setRememberMe(1);
                         //set storage again 
-                        $this->getAuthService()->setStorage($this->getSessionStorage());
                     }
                     $this->getAuthService()->getStorage()->write($request->getPost('username'));
                 }
@@ -105,7 +122,6 @@ class LoginController extends AbstractActionController {
                $this->logger->info('attempting AuthenticationAction.'); 
             }
         }
-
         return $this->redirect()->toRoute($redirect);
     }
 

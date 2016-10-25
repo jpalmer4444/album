@@ -1,16 +1,11 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace Application\Service;
 
+use Application\Service\RestServiceInterface;
 use Zend\Http\Client;
-use Zend\Http\Request;
 use Zend\Stdlib\Parameters;
+use Zend\Http\Request;
 
 /**
  * Description of RestService
@@ -21,6 +16,10 @@ class RestService implements RestServiceInterface {
     
     protected $logger;
     
+    public function __construct(LoggingService $logger){
+        $this->logger = $logger;
+    }
+    
     /**
      * 
      * @param type $url URL
@@ -29,15 +28,23 @@ class RestService implements RestServiceInterface {
      * @return type
      */
     public function rest($url, $method = 'GET', $params = []) {
+        
         $request = new Request();
         $request->getHeaders()->addHeaders(array(
             'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
         ));
         $request->setUri($url);
         $request->setMethod($method);
-        $request->setPost(new Parameters($params));
+        
+        if(strcmp(strtoupper($method), "GET") == 0){
+            $request->setQuery(new Parameters($params));
+        }else{
+            $request->setPost(new Parameters($params));
+        }
 
         $client = new Client();
+        $client->setAdapter('Zend\Http\Client\Adapter\Curl');
+        
         $response = $client->dispatch($request);
         return json_decode($response->getBody(), true);
     }

@@ -35,3 +35,82 @@ div.container a.navbar-brand > img {
 img.logo {
     width: 125px;
 }
+
+
+.ffm-callout-warning {
+    border-left-color: #f0ad4e;
+}
+.ffm-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .50rem;
+    border-radius: .50rem;
+}
+
+.ffm-callout-warning h4 {
+    color: #f0ad4e;
+}
+.ffm-callout h4 {
+    font-size: 2.5rem;
+    margin-top: 0;
+    margin-bottom: .25rem;
+}
+.ffm-callout code {
+    border-radius: .25rem;
+}
+
+code {
+    padding: .2rem .4rem;
+    font-size: 90%;
+    color: #bd4147;
+    background-color: #f7f7f9;
+    border-radius: .25rem;
+}
+code, kbd, pre, samp {
+    font-family: Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;
+}
+code, kbd, pre, samp {
+    font-family: monospace,monospace;
+    font-size: 1em;
+}
+
+.float-xs-right {
+    float: right !important;
+}
+
+.tag-default {
+    background-color: #818a91;
+}
+
+.tag-charcoal {
+    background-color: #337ab7;
+}
+
+.tag-orange{
+    background-color: #f0ad4e;
+}
+
+.tag-grey{
+    background-color: #999999;
+}
+
+.tag-pill {
+    padding-right: .6em;
+    padding-left: .6em;
+    border-radius: 10rem;
+}
+.tag {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
+}
+

@@ -20,17 +20,19 @@
         "zendframework/zend-mvc-form": "^1.0",
         "zendframework/zend-json": "^3.0",
         "zendframework/zend-log": "^2.9",
-        "zendframework/zend-mvc-console": "^1.1.10",
+        "zendframework/zend-mvc-console": "^1.1",
         "zendframework/zend-mvc-plugins": "^1.0.1",
         "zendframework/zend-psr7bridge": "^0.2.2",
         "zendframework/zend-session": "^2.7.1",
         "zendframework/zend-loader": "^2.4.0",
         "zendframework/zend-crypt": "^2.6.0",
+        "zendframework/zend-servicemanager": "^3.0.1",
         "zendframework/zend-servicemanager-di": "^1.0",
         "doctrine/common": ">=2.1",
         "zendframework/zend-mvc-plugin-flashmessenger": "^1.0",
         "doctrine/doctrine-orm-module": "^1.1",
-        "zendframework/zend-permissions-acl": "^2.6"
+        "zendframework/zend-permissions-acl": "^2.6",
+        "zendframework/zend-console": "^2.6"
     },
     "autoload": {
     "psr-4": {
@@ -39,7 +41,8 @@
         "Login\\": "module/Login/src/",
         "Sales\\": "module/Sales/src/",
         "MyAcl\\": "module/MyAcl/src/",
-        "DataAccess\\": "module/DataAccess/src/"
+        "DataAccess\\": "module/DataAccess/src/",
+        "Ajax\\": "module/Ajax/src/"
     }
 },
     "autoload-dev": {

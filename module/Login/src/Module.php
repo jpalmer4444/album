@@ -17,9 +17,12 @@ use Zend\Crypt\Password\Bcrypt;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
+use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface {
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface, ConsoleBannerProviderInterface {
 
+    const VERSION = '3.0.2dev';
+    
     public function getAutoloaderConfig() {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
@@ -41,7 +44,8 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                     return new LoginController(
                             $container->get('AuthService'), 
                             $container->get('Login\Model\MyAuthStorage'),
-                            $container->get('LoggingService')
+                            $container->get('LoggingService'),
+                            $container->get('FFMEntityManager')
                     );
                 },
                 SuccessController::class => function($container) {
@@ -82,6 +86,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                 },
             ),
         );
+    }
+
+    public function getConsoleBanner(\Zend\Console\Adapter\AdapterInterface $console) {
+        return 'Login Module V: ' . Module::VERSION;
     }
 
 }

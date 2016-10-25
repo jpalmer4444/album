@@ -6,12 +6,8 @@ return array(
             'factories' => array(
                 'MyAclPlugin' => function($sm) {
                     $loggingService = $sm->get('LoggingService');
-                    
-                    $config = $sm->get('config');
-                    $session = $config['session'];
-
-                    
-                    return new \MyAcl\Controller\Plugin\MyAclPlugin($loggingService, $session);
+                    $authService = $sm->get('AuthService');
+                    return new \MyAcl\Controller\Plugin\MyAclPlugin($loggingService, $authService);
                 },
             ),
          ),

@@ -6,12 +6,14 @@
  * and open the template in the editor.
  */
 
-namespace REST\Model;
+namespace Application\Service;
 
 /**
  *
  * @author jasonpalmer
  */
-interface UserListInterface {
-    //put your code here
+interface FFMEntityManagerServiceInterface {
+    
+    public function getEntityManager();
+    
 }
