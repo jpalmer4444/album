@@ -1,46 +1,32 @@
 <?= $this->doctype() ?>
+
 <html lang="en">
     <head>
         <meta charset="utf-8">
         <?= $this->headTitle('Pricing App')->setSeparator(' - ')->setAutoEscape(false) ?>
-
-        <?=
-                $this->headMeta()
+        <?= $this->headMeta()
                 ->appendName('viewport', 'width=device-width, initial-scale=1.0')
-                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge')
-        ?>
-
+                ->appendHttpEquiv('X-UA-Compatible', 'IE=edge') ?>
         <!-- Le styles -->
-        <?=
-                $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
+        <?= $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
                 ->prependStylesheet($this->basePath('css/style.css'))
-                ->prependStylesheet($this->basePath('css/bootstrap-theme.min.css'))
-                ->prependStylesheet($this->basePath('css/bootstrap.min.css'))
                 ->prependStylesheet($this->basePath('css/clean-blog.min.css'))
-                ->prependStylesheet($this->basePath('font-awesome/css/font-awesome.min.css'))
-        ?>
-
+                ->prependStylesheet($this->basePath('font-awesome/css/font-awesome.min.css')); ?>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.6/jq-2.2.3/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.12/af-2.1.2/b-1.2.2/b-colvis-1.2.2/b-flash-1.2.2/b-html5-1.2.2/b-print-1.2.2/fc-3.2.2/fh-3.1.2/r-2.1.0/rr-1.1.2/sc-1.4.2/se-1.2.0/datatables.min.css"/>
         <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-
+        <script type="text/javascript" src="https://cdn.datatables.net/v/bs-3.3.6/jq-2.2.3/jszip-2.5.0/pdfmake-0.1.18/dt-1.10.12/af-2.1.2/b-1.2.2/b-colvis-1.2.2/b-flash-1.2.2/b-html5-1.2.2/b-print-1.2.2/fc-3.2.2/fh-3.1.2/r-2.1.0/rr-1.1.2/sc-1.4.2/se-1.2.0/datatables.min.js"></script>
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-
-        <!-- Scripts -->
-        <?=
-                $this->headScript()
-                ->prependFile($this->basePath('js/bootstrap.min.js'))
-                ->prependFile($this->basePath('js/jquery-3.1.0.min.js'))
-                ->prependFile($this->basePath('js/clean-blog.js'))
-        ?>
+        <?= $this->headScript()->prependFile($this->basePath('js/clean-blog.js')); ?>
     </head>
     <body>
         <!-- Navigation -->
-        <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <nav id="top_nav_bar" class="navbar navbar-default navbar-custom navbar-fixed-top">
             <div class="container-fluid">
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="navbar-header page-scroll">
@@ -52,25 +38,34 @@
                         <img src="/img/wms-logo-dev.svg" alt="Pricing Logo" />
                     </a>
                 </div>
-
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
                         <?php if (isset($_SESSION["user"])): ?>
                             <li>
-                                <a href="<?php echo $this->url('login/process', array('action'=>'logout')); ?>">Logout</a>
+                                <a href="<?php echo $this->url('login/process', array('action' => 'logout')); ?>">Logout</a>
                             </li>
                         <?php endif; ?>
                         <?php if (isset($_SESSION["roles"])): ?>
                             <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
                                 <li>
-                                    <a href="<?= $this->url('sales') ?>">Sales</a>
+                                    <a 
+                                    <?php if (strcmp($this->CURRENT_ROUTE_NAME, "sales") == 0): ?>
+                                            class="ffm-active"
+                                        <?php endif; ?>
+                                        href="<?= $this->url('sales') ?>">Salespeople</a>
                                 </li>
                             <?php endif; ?>
                         <?php endif; ?>
                         <?php if (isset($_SESSION["user"])): ?>
                             <li>
-                                <a href="<?= $this->url('users') ?>">Users</a>
+                                <a 
+                                <?php
+                                if (strcmp($this->CURRENT_ROUTE_NAME, "users") == 0):
+                                    ?>
+                                        class="ffm-active"
+                                    <?php endif; ?>
+                                    href="<?= $this->url('users') ?>">Customers</a>
                             </li>
                         <?php endif; ?>
                     </ul>
@@ -79,11 +74,7 @@
             </div>
             <!-- /.container -->
         </nav>
-
-
-
-
-        <div class="container">
+        <div class="container-fluid">
             <?= $this->content ?>
             <hr>
         </div>

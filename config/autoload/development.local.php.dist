@@ -19,7 +19,24 @@ return [
     'view_manager' => [
         'display_exceptions' => true,
     ],
-    'myapp_config' => [
-        'display_exceptions' => true,
+    'pricing_config' => [
+        'by_sku_base_url' => 'https://svc.localhost/bySKU.php',
+        'by_sku_userid' => 'jpalmer',
+        'by_sku_password' => 'goodbass',
+        'by_sku_method' => 'GET',
+        'by_sku_object_items_controller' => 'customerlistitems',
+        'by_sku_object_users_controller' => 'customers',
+        'by_sku_object_sales_controller' => 'salespeople',
+        'sslcapath' => '/Users/jasonpalmer/svc.localhost.key', 
+        'sslcafile' => '/Users/jasonpalmer/svc.localhost.crt', 
+        'ssl' => array(
+                // Do not Verify server side certificate,
+                // accept invalid or self-signed SSL certificates
+                'verify_peer' => true,
+                'allow_self_signed' => true,
+                // Capture the peer's certificate
+                'capture_peer_cert' => true,
+                'passphrase' => 'changeme'
+            ),
     ],
 ];

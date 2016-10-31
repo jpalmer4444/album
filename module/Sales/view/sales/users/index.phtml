@@ -1,6 +1,17 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
+        <div class="col-md-12">
+            &nbsp;
+        </div>
+        <div class="col-md-12">
+            <nav class="breadcrumb">
+                <?php if (isset($_SESSION["roles"])): ?>
+                    <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
+                        <li><a href="/sales">Salespeople</a></li>
+                    <?php endif; ?>
+                <?php endif; ?>
+                <li class="active">Customers</li>
+            </nav>
             <div class="ffm-callout ffm-callout-warning">
                 <h4 >Customers</h4>
                 <hr/>
@@ -9,7 +20,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
+        <div class="col-md-12">
             <div class="list-group">
                 <?php foreach ($this->json["customers"] as $customer): ?>
                     <a href="<?php echo $this->url('items', [], array('query' => array('customerid' => $customer["id"]))); ?>" 

@@ -4,40 +4,38 @@
 
 namespace Sales\Controller;
 
-use Application\Service\LoggingService;
-use Application\Service\RestServiceInterface;
-use Login\Model\MyAuthStorage;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 class ItemsController extends AbstractActionController
 {
-    
-    const ID = "jpalmer";
-    const PASSWORD = "goodbass";
-    const OBJECT = "items";
-    
-    protected $restService;
 
     protected $logger;
     
     protected $myauthstorage;
     
-    public function __construct(RestServiceInterface $restService, LoggingService $logger, MyAuthStorage $myauthstorage){
-        $this->restService = $restService;
-        $this->logger = $logger;
-        $this->myauthstorage = $myauthstorage;
+    protected $pricingconfig;
+    
+    protected $customerid;
+    
+    public function __construct($container){
+        $this->logger = $container->get('LoggingService');
+        $this->myauthstorage = $container->get('Login\Model\MyAuthStorage');
+        $this->pricingconfig = $container->get('config')['pricing_config'];
     }
     
     public function indexAction()
     {
+        $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
+        $this->customerid = $this->params()->fromQuery('customerid');
+        
         return new ViewModel(array(
-             
-         ));
+            "customerid" => $this->customerid
+        ));
     }
     
-    public function rest($url, $method = "GET", $params = []) {
-        return $this->restService->rest($url, $method, $params);
+    public function editAction(){
+        
     }
     
 }

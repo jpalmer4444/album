@@ -4,9 +4,6 @@
 
 namespace Sales\Controller;
 
-use Application\Service\LoggingService;
-use Application\Service\RestServiceInterface;
-use Login\Model\MyAuthStorage;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -22,10 +19,13 @@ class UsersController extends AbstractActionController
    
     protected $myauthstorage;
     
-    public function __construct(RestServiceInterface $restService, LoggingService $logger, MyAuthStorage $myauthstorage){
-        $this->restService = $restService;
-        $this->logger = $logger;
-        $this->myauthstorage = $myauthstorage;
+    protected $pricingconfig;
+    
+    public function __construct($container){
+        $this->restService = $container->get('RestService');
+        $this->logger = $container->get('LoggingService');
+        $this->myauthstorage = $container->get('Login\Model\MyAuthStorage');
+        $this->pricingconfig = $container->get('config')['pricing_config'];
     }
     
     public function indexAction()
@@ -33,7 +33,6 @@ class UsersController extends AbstractActionController
         //http://svc.ffmalpha.com/bySKU.php?id=jpalmer&pw=goodbass&object=customers&salespersonid=183
         
         $requestedsalespersonid = $this->params()->fromQuery('salespersonid');
-        $userroles = $this->myauthstorage->getRoles();
         
         if(isset($requestedsalespersonid) && $this->myauthstorage->admin()){
             $salespersonid = $requestedsalespersonid;
@@ -43,18 +42,18 @@ class UsersController extends AbstractActionController
         
         $this->logger->info('Retrieving Salespeople. ID: ' . $salespersonid);
         $params = [
-            "id" => UsersController::ID,
-            "pw" => UsersController::PASSWORD,
-            "object" => UsersController::OBJECT,
+            "id" => $this->pricingconfig['by_sku_userid'],
+            "pw" => $this->pricingconfig['by_sku_password'],
+            "object" => $this->pricingconfig['by_sku_object_users_controller'],
             "salespersonid" => $salespersonid
         ];
         
-        $url = \Application\Module::BYSKU_URL;
-        $method = \Application\Module::BYSKU_METHOD;
+        $url = $this->pricingconfig['by_sku_base_url'];
+        $method = $this->pricingconfig['by_sku_method'];
         
         $json = $this->rest($url, $method, $params);
-        $this->logger->info('Retrieved #' . count($json) . ' ' . UsersController::OBJECT . '.');
-        //$this->logger->debug($json);
+        $this->logger->info('Retrieved #' . count($json) . ' ' . $this->pricingconfig['by_sku_object_users_controller'] . '.');
+        
         return new ViewModel(array(
             "json" => $json
         ));

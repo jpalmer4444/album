@@ -1,6 +1,102 @@
-<div class="container">
+<?php
+
+use Zend\Escaper\Escaper;
+
+$escaper = new Escaper('utf-8');
+?>
+<script>
+    var php_var = "<?= $escaper->escapeHtml($this->customerid) ?>";
+    $(document).ready(function () {
+        $('#customerlisttable').DataTable({
+            "ajax": 'https://pricing.localhost/ajax/items?customerid=' + php_var,
+            "columns": [
+                {"data": "sku"},
+                {"data": "productname"},
+                {"data": "shortescription"},
+                {"data": "comment"},
+                {"data": "qty"},
+                {"data": "wholesale",
+                "render": function (data, type, row, meta) {
+                        var result = "$";
+                        return result + row['wholesale'];
+                    }
+                },
+                {"data": "retail",
+                "render": function (data, type, row, meta) {
+                        var result = "$";
+                        return result + row['retail'];
+                    }
+                },
+                {"data": "uom"},
+                {"data": "status"},
+                {"data": "saturdayenabled",
+                    "render": function (data, type, row, meta) {
+                        var result = "";
+                        if (row['saturdayenabled']) {
+                            result = "On";
+                        } else {
+                            result = "Off";
+                        }
+                        return result;
+                    }
+                }
+            ],
+            rowCallback: function (row, data, index) {
+                if (data.status !== 'Enabled') {
+                    $(row).attr('class', 'ffm-table-disabled');
+                }
+            },
+            responsive: {
+                details: {
+                    display: $.fn.dataTable.Responsive.display.modal({
+                        header: function (row) {
+                            var data = row.data();
+                            return data['shortescription'] + ' ' + data['sku'];
+                        }
+                    }),
+                    renderer: function (api, rowIdx, columns) {
+                        var data = '<thead >\n\
+                                        <tr>\n\
+                                            <th>Field</th>\n\
+                                            <th>Value</th>\n\
+                                            <th>Field</th>\n\
+                                            <th>Value</th>\n\
+                                        </tr>\n\
+                                    </thead>';
+                        data += $.map(columns, function (col, i) {
+                            if(i % 2 === 0){
+                                 return '<tr data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' +
+                                    '<td>' + columns[i].title + ':' + '</td> ' +
+                                    '<td>' + columns[i].data + '</td>' +
+                                    '<td>' + columns[i+1].title + ':' + '</td> ' +
+                                    '<td>' + columns[i+1].data + '</td>' +
+                                    '</tr>';
+                            }
+                        }).join('');
+                        return data ?
+                                $('<table class="table table-bordered" />').append(data) :
+                                false;
+                    }
+                }
+            }
+        });
+    });
+</script>
+<div class="container-fluid">
     <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
+        <div class="col-md-12">
+            &nbsp;
+        </div>
+        <div class="col-md-12">
+            <nav class="breadcrumb">
+                <?php if (isset($_SESSION["roles"])): ?>
+                    <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
+                        <li><a href="/sales">Salespeople</a></li>
+                    <?php endif; ?>
+                <?php endif; ?>
+                <li><a href="/users">Customers</a></li>
+                <li class="active">Products</li>
+            </nav>
             <div class="ffm-callout ffm-callout-warning">
                 <h4 >Products</h4>
                 <hr/>
@@ -9,21 +105,37 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-sm-6 col-md-4 col-md-offset-4">
-            <div class="list-group">
-                <?php
-                
-                /*foreach ($this->json["salespeople"] as $salesperson): ?>
-              
-                    <a href="<?php echo $this->url('users', [], array('query' => array('salespersonid' => $salesperson["id"]))); ?>" 
-                       class="list-group-item list-group-item-action">
-                        <span class="tag tag-grey tag-pill float-xs-right"><?php echo $salesperson["id"] ?></span>
-                        <h5 class="list-group-item-heading"><?php echo $salesperson["salesperson"] ?></h5>
-                    </a>
-                <?php endforeach;*/
-                
-                ?>
-            </div>
+        <div class="col-md-12">
+            <table id="customerlisttable" class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Comment</th>
+                        <th>Qty</th>
+                        <th>Wholesale</th>
+                        <th>Retail</th>
+                        <th>UOM</th>
+                        <th>Status</th>
+                        <th>Saturday Enabled</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>SKU</th>
+                        <th>Product</th>
+                        <th>Description</th>
+                        <th>Comment</th>
+                        <th>Qty</th>
+                        <th>Wholesale</th>
+                        <th>Retail</th>
+                        <th>UOM</th>
+                        <th>Status</th>
+                        <th>Saturday Enabled</th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 </div>

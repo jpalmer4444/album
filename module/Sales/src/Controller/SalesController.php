@@ -2,9 +2,6 @@
 
 namespace Sales\Controller;
 
-use Application\Service\LoggingService;
-use Application\Service\RestServiceInterface;
-use Login\Model\MyAuthStorage;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
@@ -15,30 +12,33 @@ class SalesController extends AbstractActionController{
     protected $logger;
     
     //http://svc.ffmalpha.com/bySKU.php?id=jpalmer&pw=goodbass&object=salespeople
-    
-    const ID = "jpalmer";
-    const PASSWORD = "goodbass";
-    const OBJECT = "salespeople";
     protected $myauthstorage;
     
-    public function __construct(RestServiceInterface $restService, LoggingService $logger, MyAuthStorage $myauthstorage){
-        $this->restService = $restService;
-        $this->logger = $logger;
-        $this->myauthstorage = $myauthstorage;
+    //environment specifics properties/values
+    protected $pricingconfig;
+    
+    public function __construct($container){
+        $this->restService = $container->get('RestService');
+        $this->logger = $container->get('LoggingService');
+        $this->myauthstorage = $container->get('Login\Model\MyAuthStorage');
+        $this->pricingconfig = $container->get('config')['pricing_config'];
     }
 
     public function indexAction() {
-        $this->logger->info('Retrieving ' . SalesController::OBJECT . '.');
+        $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_sales_controller'] . '.');
         $params = [
-            "id" => SalesController::ID,
-            "pw" => SalesController::PASSWORD,
-            "object" => SalesController::OBJECT
+            "id" => $this->pricingconfig['by_sku_userid'],
+            "pw" => $this->pricingconfig['by_sku_password'],
+            "object" => $this->pricingconfig['by_sku_object_sales_controller']
         ];
-        $url = \Application\Module::BYSKU_URL;
-        $method = \Application\Module::BYSKU_METHOD;
-        
+        $url = $this->pricingconfig['by_sku_base_url'];
+        $method = $this->pricingconfig['by_sku_method'];
         $json = $this->rest($url, $method, $params);
-        $this->logger->info('Retrieved #' . count($json[SalesController::OBJECT]) . ' ' . SalesController::OBJECT . '.');
+        if(array_key_exists($this->pricingconfig['by_sku_object_sales_controller'], $json)){
+            $this->logger->debug('Retrieved ' . count($json[$this->pricingconfig['by_sku_object_sales_controller']]) . ' ' . $this->pricingconfig['by_sku_object_sales_controller'] . '.');
+        }else{
+            $this->logger->debug('No ' . $this->pricingconfig['by_sku_object_sales_controller'] . ' items found! Error!');
+        }
         return new ViewModel(array(
             "json" => $json
         ));

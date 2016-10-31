@@ -32,6 +32,10 @@ INSERT INTO users (username, password, sales_attr_id)
 VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 183);
 INSERT INTO users (username, password, sales_attr_id) 
 VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 183);
+INSERT INTO users (username, password, sales_attr_id) 
+VALUES('cmetallo', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 183);
+INSERT INTO users (username, password, sales_attr_id) 
+VALUES('mspindler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 183);
 
 CREATE TABLE roles (
     role varchar(25) PRIMARY KEY,
@@ -51,8 +55,10 @@ CREATE TABLE user_role_xref (
 );
 
 INSERT INTO user_role_xref VALUES('admin', 'jpalmer');
-INSERT INTO user_role_xref VALUES('sales', 'dtanzer');
-INSERT INTO user_role_xref VALUES('sales', 'jdowns');
+INSERT INTO user_role_xref VALUES('admin', 'dtanzer');
+INSERT INTO user_role_xref VALUES('admin', 'jdowns');
+INSERT INTO user_role_xref VALUES('admin', 'mspindler');
+INSERT INTO user_role_xref VALUES('sales', 'cmetallo');
 
 CREATE TABLE `session` (
     `id` char(32),
@@ -61,4 +67,13 @@ CREATE TABLE `session` (
     `lifetime` int,
     `data` text,
      PRIMARY KEY (`id`, `name`)
+);
+
+CREATE TABLE `customers` (
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
+    `email` VARCHAR(100),
+    `name` VARCHAR(100),
+    `company` VARCHAR(100),
+    `saturdayenabled` BOOLEAN,
+     PRIMARY KEY (`id`)
 );

@@ -38,23 +38,17 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
             'factories' => [
                 UsersController::class => function($container) {
                     return new UsersController(
-                            $container->get('RestService'),
-                            $container->get('LoggingService'),
-                            $container->get('Login\Model\MyAuthStorage')
+                            $container
                     );
                 },
                 ItemsController::class => function($container) {
                     return new ItemsController(
-                            $container->get('RestService'),
-                            $container->get('LoggingService'),
-                            $container->get('Login\Model\MyAuthStorage')
+                            $container
                     );
                 },
                 SalesController::class => function($container) {
                     return new SalesController(
-                            $container->get('RestService'),
-                            $container->get('LoggingService'),
-                            $container->get('Login\Model\MyAuthStorage')
+                            $container
                     );
                 },
             ],

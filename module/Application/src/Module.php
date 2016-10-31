@@ -22,11 +22,9 @@ use Zend\Session\SaveHandler\DbTableGatewayOptions;
 use Zend\Session\SessionManager;
 use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 
-class Module implements ConfigProviderInterface, ServiceProviderInterface, ConsoleUsageProviderInterface, ConsoleBannerProviderInterface  {
+class Module implements ConfigProviderInterface, ServiceProviderInterface, ConsoleUsageProviderInterface, ConsoleBannerProviderInterface {
 
     const VERSION = '3.0.2dev';
-    const BYSKU_URL = "https://svc.ffmalpha.com/bySKU.php";
-    const BYSKU_METHOD = "GET";
 
     public function getControllerConfig() {
         return [
@@ -37,8 +35,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Conso
         ]];
     }
 
-    public function getConsoleBanner(\Zend\Console\Adapter\AdapterInterface $console)
-    {
+    public function getConsoleBanner(\Zend\Console\Adapter\AdapterInterface $console) {
         return 'Application Module V: ' . Module::VERSION;
     }
 
@@ -53,45 +50,32 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Conso
                     return new LoggingService("Logging initialized from Application module.");
                 },
                 'RestService' => function($sm) {
-                    return new RestService($sm->get('LoggingService'));
+                    return new RestService($sm);
                 },
                 'FFMEntityManager' => function($sm) {
                     return new Service\FFMEntityManagerService($sm->get('Doctrine\ORM\EntityManager'));
                 },
                 'Zend\Session\SessionManager' => function ($sm) {
                     $config = $sm->get('config');
-                    if (isset($config['session'])) {
-                        $session = $config['session'];
-
-                        $sessionConfig = null;
-                        if (isset($session['config'])) {
-                            $class = isset($session['config']['class']) ? $session['config']['class'] : 'Zend\Session\Config\SessionConfig';
-                            $options = isset($session['config']['options']) ? $session['config']['options'] : array();
-                            $sessionConfig = new $class();
-                            $sessionConfig->setOptions($options);
-                        }
-
-                        $sessionStorage = null;
-                        if (isset($session['storage'])) {
-                            $class = $session['storage'];
-                            $sessionStorage = new $class();
-                        }
-
-                        /* $sessionSaveHandler = null;
-                          if (isset($session['save_handler'])) {
-                          // class should be fetched from service manager since it will require constructor arguments
-                          $sessionSaveHandler = $sm->get($session['save_handler']);
-                          } */
-                        $adapter = $sm->get('Zend\Db\Adapter\Adapter');
-                        $tableGateway = new TableGateway('session', $adapter);
-                        $saveHandler = new DbTableGateway($tableGateway, new DbTableGatewayOptions());
-                        $manager = new SessionManager();
-                        $manager->setSaveHandler($saveHandler);
-
-                        $sessionManager = new SessionManager($sessionConfig, $sessionStorage, $saveHandler);
-                    } else {
-                        $sessionManager = new SessionManager();
+                    $session = $config['session'];
+                    $sessionConfig = null;
+                    if (isset($session['config'])) {
+                        $class = isset($session['config']['class']) ? $session['config']['class'] : 'Zend\Session\Config\SessionConfig';
+                        $options = isset($session['config']['options']) ? $session['config']['options'] : array();
+                        $sessionConfig = new $class();
+                        $sessionConfig->setOptions($options);
                     }
+                    $sessionStorage = null;
+                    if (isset($session['storage'])) {
+                        $class = $session['storage'];
+                        $sessionStorage = new $class();
+                    }
+                    $adapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $tableGateway = new TableGateway('session', $adapter);
+                    $saveHandler = new DbTableGateway($tableGateway, new DbTableGatewayOptions());
+                    $manager = new SessionManager();
+                    $manager->setSaveHandler($saveHandler);
+                    $sessionManager = new SessionManager($sessionConfig, $sessionStorage, $saveHandler);
                     Container::setDefaultManager($sessionManager);
                     return $sessionManager;
                 },
@@ -102,18 +86,45 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Conso
     public function getConsoleUsage(\Zend\Console\Adapter\AdapterInterface $console) {
         return array(
             // Describe available commands
-            'user resetpassword [--verbose|-v] EMAIL'    => 'Reset password for a user',
-
+            'user resetpassword [--verbose|-v] EMAIL' => 'Reset password for a user',
             // Describe expected parameters
-            array( 'EMAIL',            'Email of the user for a password reset' ),
-            array( '--verbose|-v',     '(optional) turn on verbose mode'        ),
+            array('EMAIL', 'Email of the user for a password reset'),
+            array('--verbose|-v', '(optional) turn on verbose mode'),
         );
     }
-    
+
     /**
      * Adds global method available in layout
      */
-    
-    
+    public function onBootstrap($e) {
+        $sm = $e->getApplication()->getServiceManager();
+
+        $router = $sm->get('router');
+        $request = $sm->get('request');
+        $matchedRoute = $router->match($request);
+
+        $params = $matchedRoute->getParams();
+
+        $controller = $params['controller'];
+
+        //only needed when this is not an Ajax request and not security related.
+        if (isset($params['action'])) {
+            $action = $params['action'];
+
+            $module_array = explode('\\', $controller);
+            $module = array_pop($module_array);
+
+            $route = $matchedRoute->getMatchedRouteName();
+
+            $e->getViewModel()->setVariables(
+                    array(
+                        'CURRENT_MODULE_NAME' => $module,
+                        'CURRENT_CONTROLLER_NAME' => $controller,
+                        'CURRENT_ACTION_NAME' => $action,
+                        'CURRENT_ROUTE_NAME' => $route,
+                    )
+            );
+        }
+    }
 
 }

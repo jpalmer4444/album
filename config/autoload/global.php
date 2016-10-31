@@ -58,6 +58,7 @@ return [
             'options' => array(
                 'name' => 'pricing_app',
             ),
+            'save_handler' => 'sessionTable'
         ),
         'storage' => 'Zend\Session\Storage\SessionArrayStorage',
         'validators' => array(

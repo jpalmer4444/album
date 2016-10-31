@@ -55,6 +55,8 @@ class MyAclPlugin extends AbstractPlugin {
         
         //add doctrinemodule for Console calls or MyAclPlugin will intercept
         $acl->addResource('doctrinemodule');
+        //doctrinemodule:DoctrineModule\Controller\Cli:cli
+        $acl->addResource('doctrinemodule:DoctrineModule\Controller\Cli:cli');
         //
         # end RESOURCES ########################################
         # 
@@ -69,7 +71,8 @@ class MyAclPlugin extends AbstractPlugin {
         $acl->allow('anonymous', 'application:Application\Controller\IndexController:resetpassword');
         $acl->allow('anonymous', 'login:Login\Controller\LoginController:authenticate');
         $acl->allow('anonymous', 'login:Login\Controller\LoginController:login');
-        $acl->allow('anonymous', 'doctrinemodule');
+        $acl->allow('anonymous', 'doctrinemodule:DoctrineModule\Controller\Cli:cli');
+        /// module/MyAcl/src/MyAcl/Controller/Plugin/MyAclPlugin.php
         
         
         
