@@ -23,7 +23,7 @@
         <div class="col-md-12">
             <div class="list-group">
                 <?php foreach ($this->json["customers"] as $customer): ?>
-                    <a href="<?php echo $this->url('items', [], array('query' => array('customerid' => $customer["id"]))); ?>" 
+                    <a href="<?php echo $this->url('items', [], array('query' => array('customerid' => $customer["id"], 'customername' => $customer["name"]))); ?>" 
                        class="list-group-item list-group-item-action">
                         <span class="tag tag-grey tag-pill float-xs-right"><?php echo $customer["id"] ?></span>
                         <h5 class="list-group-item-heading"><?php echo $customer["name"] ?> <small><?php echo $customer["company"] ?></small></h5>

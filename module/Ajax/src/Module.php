@@ -5,6 +5,7 @@ namespace Ajax;
 use Ajax\Controller\Sales\ItemsController;
 use Ajax\Controller\Sales\SalesController;
 use Ajax\Controller\Sales\UsersController;
+use Ajax\Service\Sales\ItemsFilterTableArrayService;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -28,7 +29,15 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     }
     
     public function getServiceConfig() {
-        return [];
+        return [
+            'factories' => [
+                "ItemsFilterTableArrayService" => function($sm) {
+                    return new ItemsFilterTableArrayService(
+                            $sm
+                    );
+                },
+            ],
+        ];
     }
     
     public function getControllerConfig(){

@@ -69,11 +69,38 @@ CREATE TABLE `session` (
      PRIMARY KEY (`id`, `name`)
 );
 
-CREATE TABLE `customers` (
+CREATE TABLE `row_plus_items_page` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
-    `email` VARCHAR(100),
-    `name` VARCHAR(100),
-    `company` VARCHAR(100),
+    `sku` VARCHAR(25),
+    `productname` VARCHAR(255),
+    `description` VARCHAR(255),
+    `comment` TEXT,
+    `option` TEXT,
+    `qty` INTEGER,
+    `wholesale` INTEGER,
+    `retail` INTEGER,
+    `overrideprice` INTEGER,
+    `uom` VARCHAR(100),
+    `status` BOOLEAN,
+    `active` BOOLEAN,
     `saturdayenabled` BOOLEAN,
-     PRIMARY KEY (`id`)
+    `created` DATETIME,
+    `customerid` INTEGER,
+    `salesperson` INTEGER,
+     FOREIGN KEY(salesperson) REFERENCES users(username)
+);
+
+CREATE TABLE `pricing_override_report` (
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
+    `sku` VARCHAR(25),
+    `productname` VARCHAR(255),
+    `description` VARCHAR(255),
+    `comment` TEXT,
+    `retail` INTEGER,
+    `overrideprice` INTEGER,
+    `uom` VARCHAR(100),
+    `created` DATETIME,
+    `customerid` INTEGER,
+    `salesperson` INTEGER,
+     FOREIGN KEY(salesperson) REFERENCES users(username)
 );

@@ -23,9 +23,8 @@ class MyAuthStorage extends Session
     public function forgetMe()
     {
         $this->session->getManager()->forgetMe();
-        $this->session->getManager()->getStorage()['roles'] = NULL;
-        $this->session->getManager()->getStorage()['user'] = NULL;
-        $this->session->getManager()->getStorage()['requestedRoute'] = NULL;
+        $this->session->getManager()->getStorage()->clear();
+        
     } 
     
     public function addRoles($roles) {
@@ -63,6 +62,30 @@ class MyAuthStorage extends Session
     
     public function getRequestedRoute(){
         return $this->session->getManager()->getStorage()['requestedRoute'];
+    }
+    
+    //holds references to deleted or removed rows from items page. logout to reset.
+    public function addRemovedSKU($sku, $customerid) {
+        $custstorage = $this->session->getManager()->getStorage()['_' . $customerid];
+        if(empty($custstorage)){
+            $this->session->getManager()->getStorage()['_' . $customerid] = array();
+            $custstorage = $this->session->getManager()->getStorage()['_' . $customerid];
+        }
+        $removed = [];
+        if(array_key_exists("removedSKUS", $custstorage)){
+            $removed = $custstorage['removedSKUS'];
+        }
+        if(empty($removed)){
+            $this->session->getManager()->getStorage()['_' . $customerid]['removedSKUS'] = array($sku);
+        }else{
+            $this->session->getManager()->getStorage()['_' . $customerid]['removedSKUS'][] = $sku;
+        }
+    }
+    
+    public function getRemovedSKUS($customerid){
+        if(!empty($this->session->getManager()->getStorage()['_' . $customerid])){
+            return $this->session->getManager()->getStorage()['_' . $customerid]['removedSKUS'];
+        }
     }
     
 }

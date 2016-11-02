@@ -1,6 +1,6 @@
 {
-    "name": "zendframework/skeleton-application",
-    "description": "Skeleton Application for Zend Framework zend-mvc applications",
+    "name": "Pricing App",
+    "description": "Pricing Tablet App for internal use by Salespeople.",
     "type": "project",
     "license": "BSD-3-Clause",
     "keywords": [
@@ -8,7 +8,7 @@
         "mvc",
         "zf"
     ],
-    "homepage": "http://framework.zend.com/",
+    "homepage": "http://pricing.fultonfishmarket.com/",
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {

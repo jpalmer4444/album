@@ -31,10 +31,12 @@ class UserRoleXref
 
     public function setRole($role) {
         $this->role = $role;
+        return $this;
     }
 
     public function setUsername($username) {
         $this->username = $username;
+        return $this;
     }
 
 

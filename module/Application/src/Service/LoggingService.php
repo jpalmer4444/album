@@ -15,14 +15,11 @@ class LoggingService implements LoggingServiceInterface {
     
     protected $logger;
     
-    public function __construct($message = NULL){
+    public function __construct(){
         $writer = new Stream('php://stderr');
         $logger = new Logger();
         $logger->addWriter($writer);
         $this->logger = $logger;
-        if($message != NULL){
-            $this->logger->info($message);
-        }
     }
     
     public function debug($message) {

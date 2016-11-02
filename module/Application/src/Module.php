@@ -47,7 +47,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Conso
         return array(
             'factories' => array(
                 'LoggingService' => function($sm) {
-                    return new LoggingService("Logging initialized from Application module.");
+                    return new LoggingService();
                 },
                 'RestService' => function($sm) {
                     return new RestService($sm);

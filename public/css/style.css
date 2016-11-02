@@ -66,10 +66,20 @@ img.logo {
 
 .ffm-table-disabled{
     opacity: .5;
+    background-color: #CCCCCC !important;
 }
 
 .ffm-form-group{
     padding: 25px;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child.dataTables_empty:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child.dataTables_empty:before {
+  display: block !important;
+}
+
+.table.dataTable.dtr-inline.collapsed > tbody > tr.child td:before {
+  display: block !important;
 }
 
 nav li a.ffm-active {

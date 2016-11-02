@@ -54,6 +54,8 @@ class UsersController extends AbstractActionController
         $json = $this->rest($url, $method, $params);
         $this->logger->info('Retrieved #' . count($json) . ' ' . $this->pricingconfig['by_sku_object_users_controller'] . '.');
         
+        
+        
         return new ViewModel(array(
             "json" => $json
         ));
