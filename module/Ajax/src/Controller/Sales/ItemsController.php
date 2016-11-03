@@ -30,16 +30,15 @@ class ItemsController extends AbstractRestfulController {
 
     public function getList() {
         switch ($this->params()->fromQuery("action")) {
-            case "addRowPlusItemsPage" : {
-                
-                break;
+            case "overridePrice" : {
+                return $this->overridePrice();
             }
             case "removeRow" : {
-                return $this->customerListTableRemoveRow();
+                return $this->removeRow();
             }
             case "customerlisttableget" :
             default : {
-                return $this->customerListTableGet();
+                return $this->getTable();
             }
         }
     }
@@ -47,8 +46,16 @@ class ItemsController extends AbstractRestfulController {
     public function rest($url, $method = "GET", $params = []) {
         return $this->restService->rest($url, $method, $params);
     }
+    
+    protected function overridePrice(){
+        
+        //save overridePrice in DB
+        
+        
+        
+    }
 
-    protected function customerListTableGet() {
+    protected function getTable() {
         $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
         $customerid = $this->params()->fromQuery('customerid');
         $params = $this->getBaseBySkuParams();
@@ -67,7 +74,7 @@ class ItemsController extends AbstractRestfulController {
         ));
     }
     
-    protected function customerListTableRemoveRow() {
+    protected function removeRow() {
         $sku = $this->params()->fromQuery('sku');
         $customerid = $this->params()->fromQuery('customerid');
         $this->logger->info('Removing SKU ' . $sku . ' and adding to session removedSKUS.');

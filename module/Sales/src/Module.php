@@ -11,15 +11,19 @@ namespace Sales;
 use Sales\Controller\ItemsController;
 use Sales\Controller\SalesController;
 use Sales\Controller\UsersController;
+use Sales\DTO\RowPlusItemsPageForm;
+use Sales\Filter\RowPlusItemsPageInputFilter;
+use Zend\Console\Adapter\AdapterInterface;
+use Zend\Hydrator\ObjectProperty;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
+use Zend\ModuleManager\Feature\ServiceProviderInterface;
 
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface, ConsoleBannerProviderInterface {
 
     const VERSION = '3.0.2dev';
-    
+
     public function getAutoloaderConfig() {
         return array(
             'Zend\Loader\ClassMapAutoloader' => array(
@@ -60,11 +64,33 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     }
 
     public function getServiceConfig() {
+        return [
+            'factories' => [
+                'RowPlusItemsPageInputFilterFactory' => function($serviceManager) {
+                    $inputFilterManager = $serviceManager->get('InputFilterManager');
+                    return function() use ($inputFilterManager) {
+                                $inputFilter = $inputFilterManager->get(RowPlusItemsPageInputFilter::class);
+                                return new RowPlusItemsPageForm($inputFilter);
+                            };
+                }
+            ]
+        ];
+    }
+
+    public function getFormElementConfig() {
         return array(
+            'factories' => array(
+                'RowPlusItemsPageForm' => function($sm) {
+                    $form = new RowPlusItemsPageForm();
+                    $form->setInputFilter(new RowPlusItemsPageInputFilter());
+                    $form->setHydrator(new ObjectProperty());
+                    return $form;
+                },
+            ),
         );
     }
 
-    public function getConsoleBanner(\Zend\Console\Adapter\AdapterInterface $console) {
+    public function getConsoleBanner(AdapterInterface $console) {
         return 'Sales Module V: ' . Module::VERSION;
     }
 

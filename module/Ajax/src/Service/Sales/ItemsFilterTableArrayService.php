@@ -22,7 +22,9 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
     }
 
     /**
-     * filters array returned from svc call and array returned from local db and any removed SKUs that could be in Session scope.
+     * filters array returned from svc call and array returned from local db and any removed 
+     * SKUs that could be in Session scope as well as any saved price overrides.
+     * 
      * @param type $restcallitems
      * @param type $customerid
      * @return string
@@ -40,29 +42,46 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         
         //now lookup any RowPlusItemsPage rows that are active and add them to the results.
         //take care to only get latest rows and ignoring any rows added previously today.
-        $query = "SELECT rowPlus FROM DataAccess\FFM\Entity\RowPlusItemsPage rowPlus WHERE "
+        $queryPages = "SELECT rowPlus FROM DataAccess\FFM\Entity\RowPlusItemsPage rowPlus WHERE "
                 . "rowPlus._created >= CURRENT_DATE() AND "
                 . "rowPlus._active = 1 AND "
                 . "rowPlus._customerid = :customerid AND rowPlus._salesperson = :salesperson "
                 . "GROUP BY rowPlus.product ORDER BY rowPlus._created DESC";
 
         $rollPlusItemPages = $this->entityManager->getEntityManager()->
-                        createQuery($query)->setParameter("customerid", $customerid)->
+                        createQuery($queryPages)->setParameter("customerid", $customerid)->
                         setParameter("salesperson", $this->myauthstorage->getUser()->
                                 getUsername())->getResult();
         
-        //now allow rows found in DB SO: A row will either be from aUser adding the entire row OR it 
-        //could be just a price override, either case should override the array from svc when ACTIVE
+        $queryOverrides = "SELECT override FROM DataAccess\FFM\Entity\ItemPriceOverride override WHERE "
+                . "override._created >= CURRENT_DATE() AND "
+                . "override._active = 1 AND "
+                . "override._customerid = :customerid AND override._salesperson = :salesperson "
+                . "GROUP BY override.sku ORDER BY override._created DESC";
+        
+        $itemPriceOverrides = $this->entityManager->getEntityManager()->
+                        createQuery($queryOverrides)->setParameter("customerid", $customerid)->
+                        setParameter("salesperson", $this->myauthstorage->getUser()->
+                                getUsername())->getResult();
+        
+        $overrideMap = array();
+        foreach ($itemPriceOverrides as $price){
+            $overrideMap[strval($price->getSku())] = number_format($price->getOverrideprice() / 100, 2);
+        }
+        
+        //now allow rows found in DB SO: A row will either be from a User adding the entire row it
+        //should override the array from svc when ACTIVE
         //create HashMap of keys - then override
         $map = array();
         //first add all items from DB to results
         foreach ($rollPlusItemPages as &$item) {
-            /*
-             must adjust integer prices here!
-             */
-            $adjWholesale = $item->getWholesale();
-            $adjRetail = $item->getRetail();
-            $adjOverrideprice = $item->getOverrideprice();
+            $adjWholesale = number_format($item->getWholesale() / 100, 2);
+            $adjRetail = number_format($item->getRetail() / 100, 2);
+            $adjOverrideprice = number_format($item->getOverrideprice() / 100, 2);
+            //if override exists - then graphed it in.
+            if(array_key_exists($item->getSku(), $overrideMap)){
+                $adjOverrideprice = $overrideMap[$item->getSku()];
+            }
             $merged[] = array(
                 "productname" => $item->getProduct(),
                 "shortescription" => $item->getDescription(),
@@ -74,8 +93,8 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 "overrideprice" => $adjOverrideprice,
                 "uom" => $item->getUom(),
                 "sku" => $item->getSku(),
-                "status" => $item->getStatus(),
-                "saturdayenabled" => $item->getSaturdayenabled(),
+                "status" => strcmp(strval($item->getStatus()), "1") == 0 ? "Enabled" : "Disabled",
+                "saturdayenabled" => strcmp(strval($item->getSaturdayenabled()), "1") == 0 ? "Enabled" : "Disabled",
                 );
             //add to the map
             $map[$item->getSku()] = $item;

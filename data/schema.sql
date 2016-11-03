@@ -90,6 +90,17 @@ CREATE TABLE `row_plus_items_page` (
      FOREIGN KEY(salesperson) REFERENCES users(username)
 );
 
+CREATE TABLE `item_price_override` (
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
+    `sku` VARCHAR(25),
+    `overrideprice` INTEGER,
+    `active` BOOLEAN,
+    `created` DATETIME,
+    `customerid` INTEGER,
+    `salesperson` INTEGER,
+     FOREIGN KEY(salesperson) REFERENCES users(username)
+);
+
 CREATE TABLE `pricing_override_report` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
     `sku` VARCHAR(25),

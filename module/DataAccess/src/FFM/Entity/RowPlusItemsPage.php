@@ -12,100 +12,123 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="row_plus_items_page")
  */
 class RowPlusItemsPage {
-    
+
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
-    
+
     /**
      * @ORM\Column(name="sku", type="string", length=25)
      */
     protected $sku;
-    
+
     /**
      * @ORM\Column(name="productname", type="string", length=255)
      */
     protected $product;
-    
+
     /**
      * @ORM\Column(name="description", type="string")
      */
     protected $description;
-    
+
     /**
      * @ORM\Column(type="string")
      */
     protected $comment;
-    
+
     /**
      * @ORM\Column(type="string")
      */
     protected $option;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     protected $qty;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     protected $wholesale;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     protected $retail;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     protected $overrideprice;
-    
+
     /**
      * @ORM\Column(type="string")
      */
     protected $uom;
-    
+
     /**
      * @ORM\Column(type="boolean")
      */
     protected $status;
-    
+
     /**
      * @ORM\Column(name="active", type="boolean")
      */
     protected $_active;
-    
+
     /**
      * @ORM\Column(type="boolean")
      */
     protected $saturdayenabled;
-    
+
     /**
      * @ORM\Column(name="created", type="date")
      */
     protected $_created;
-    
+
     /**
      * @ORM\Column(name="customerid", type="integer")
      */
     protected $_customerid;
-    
+
     /**
      * @ManyToOne(targetEntity="User", cascade={"all"}, fetch="LAZY")
      * @JoinColumn(name="salesperson", referencedColumnName="username")
      */
     protected $_salesperson;
-    
-    
+
+    /*
+     * Hydration
+     */
+
+    public function exchangeArray($data) {
+        $this->sku = (isset($data['sku'])) ? $data['sku'] : null;
+        $this->comment = (isset($data['comment'])) ? $data['comment'] : null;
+        $this->description = (isset($data['description'])) ? $data['description'] : null;
+        $this->option = (isset($data['option'])) ? $data['option'] : null;
+        $this->overrideprice = (isset($data['overrideprice'])) ? $data['overrideprice'] : null;
+        $this->product = (isset($data['product'])) ? $data['product'] : null;
+        $this->qty = (isset($data['qty'])) ? $data['qty'] : null;
+        $this->retail = (isset($data['retail'])) ? $data['retail'] : null;
+        $this->saturdayenabled = (isset($data['saturdayenabled'])) ? $data['saturdayenabled'] : null;
+        $this->status = (isset($data['status'])) ? $data['status'] : null;
+        $this->uom = (isset($data['uom'])) ? $data['uom'] : null;
+        $this->wholesale = (isset($data['wholesale'])) ? $data['wholesale'] : null;
+    }
+
+    // Add the following method:
+    public function getArrayCopy() {
+        return get_object_vars($this);
+    }
+
     /*
      * Accessors and Mutators.
      */
-    
+
     public function getId() {
         return $this->id;
     }
@@ -117,7 +140,7 @@ class RowPlusItemsPage {
     public function getProduct() {
         return $this->product;
     }
-    
+
     public function getCustomerid() {
         return $this->_customerid;
     }
@@ -157,7 +180,7 @@ class RowPlusItemsPage {
     public function getStatus() {
         return $this->status;
     }
-    
+
     public function getActive() {
         return $this->_active;
     }
@@ -183,7 +206,7 @@ class RowPlusItemsPage {
         $this->sku = $sku;
         return $this;
     }
-    
+
     public function setCustomerid($customerid) {
         $this->_customerid = $customerid;
         return $this;
@@ -238,7 +261,7 @@ class RowPlusItemsPage {
         $this->status = $status;
         return $this;
     }
-    
+
     public function setActive($active) {
         $this->_active = $active;
         return $this;
@@ -258,5 +281,5 @@ class RowPlusItemsPage {
         $this->_salesperson = $salesperson;
         return $this;
     }
-    
+
 }
