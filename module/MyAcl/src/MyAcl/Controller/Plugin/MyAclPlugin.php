@@ -51,6 +51,7 @@ class MyAclPlugin extends AbstractPlugin {
         //sales route
         $acl->addResource('sales:Sales\Controller\SalesController:index');
         $acl->addResource('sales:Sales\Controller\ItemsController:index');
+        $acl->addResource('sales:Sales\Controller\ItemsController:report');
         $acl->addResource('sales:Sales\Controller\UsersController:index');
         
         //add doctrinemodule for Console calls or MyAclPlugin will intercept
@@ -82,6 +83,7 @@ class MyAclPlugin extends AbstractPlugin {
         $acl->allow('sales', 'login:Login\Controller\LoginController:logout');
         $acl->allow('sales', 'login:Login\Controller\SuccessController:index');
         $acl->allow('sales', 'sales:Sales\Controller\ItemsController:index');
+        $acl->allow('sales', 'sales:Sales\Controller\ItemsController:report');
         $acl->allow('sales', 'sales:Sales\Controller\UsersController:index');
 
         // $acl->allow('role', 'resource', 'controller:action');

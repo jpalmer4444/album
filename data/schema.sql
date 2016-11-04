@@ -106,7 +106,7 @@ CREATE TABLE `item_price_override` (
 CREATE TABLE `pricing_override_report` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
     `sku` VARCHAR(25),
-    `productname` VARCHAR(255),
+    `product` VARCHAR(255),
     `description` VARCHAR(255),
     `comment` TEXT,
     `retail` INTEGER,

@@ -27,6 +27,21 @@ $form->prepare();
     //#############################################################
     var $API;
 
+    var deleteMe = function (e) {
+        var sku = $(e.target).attr('data-sku-number');
+        var idx = $(e.target).attr('data-index-number');
+        console.log('SKU: ' + sku + ' Idx: ' + idx);
+        $.getJSON('ajax/items?action=removeRow&sku=' + sku + '&customerid=' + php_var, function () {
+            console.log("REST Call made.");
+        }).done(function () {
+            console.log('Ajax call successful with sku: ' + sku);
+            $API.row(idx).remove().draw();
+            $('.modal').modal('hide');
+        }).fail(function () {
+            console.log("REST Call failed.");
+        });
+    };
+
     //#############################################################
     //#############################################################
     //##
@@ -210,9 +225,9 @@ $form->prepare();
                     "render": function (data, type, row, meta) {
                         var result = "";
                         if (row['saturdayenabled']) {
-                            result = 'On <button class="btn btn-primary deleteMe"><span class="glyphicon glyphicon-minus"></span></button>';
+                            result = 'On';
                         } else {
-                            result = 'Off <button class="btn btn-primary deleteMe"><span class="glyphicon glyphicon-minus"></span></button>';
+                            result = 'Off';
                         }
                         return result;
                     }
@@ -248,16 +263,93 @@ $form->prepare();
                     display: $.fn.dataTable.Responsive.display.modal({
                         header: function (row) {
                             var data = row.data();
-                            return data['productname'] + ' <div class="pull-right"><span>' + data['sku'] + '</span><span><button type="button" class="close" data-dismiss="modal">&times;</button></span></div>';
+                            return data['productname'] + ' <div class="pull-right"><small ><span class="glyphicon glyphicon-barcode" aria-hidden="true"></span> <span >' + data['sku'] + '</span></small><span><button type="button" class="close" data-dismiss="modal">&times;</button></span></div>';
                         }
                     }),
                     renderer: function (api, rowIdx, columns) {
                         //handle case where item is disabled!
-                        var comments = columns[2].data;
-                        var options = columns[3].data;
+                        var product = columns[0].data;
+                        var description = columns[1].data;
+                        var comment = columns[2].data;
+                        var option = columns[3].data;
+                        var qty = columns[4].data;
+                        var wholesale = columns[5].data;
+                        var retail = columns[6].data;
+                        var overrideprice = columns[7].data;
+                        var uom = columns[8].data;
                         var sku = columns[9].data;
                         var status = columns[10].data;
+                        var saturdayenabled = columns[11].data;
                         var data = '';
+                        var copy = '<div class="row">\n\
+                                        <div class="col-md-12">\n\
+                                            <hr/>\n\
+                                        </div>\n\
+                                    </div>\n\
+                                    <div class="row">\n\
+                                        <div class="col-md-12">\n\
+                                            <div class="table-responsive">\n\
+                                                <table class="table">\n\
+                                                    <thead>\n\
+                                                        <tr>\n\
+                                                            <th>Comment</th>\n\
+                                                            <th>Option</th>\n\
+                                                        </tr>\n\
+                                                    </thead>\n\
+                                                    <tbody>\n\
+                                                        <tr>\n\
+                                                            <td style="width: 50%;">' + comment + '</td>\n\
+                                                            <td style="width: 50%;">' + option + '</td>\n\
+                                                        <tr>\n\
+                                                    </tbody>\n\
+                                                </table>\n\
+                                            </div>\n\
+                                        </div>\n\
+                                    </div>\n\
+                                    <div class="row">\n\
+                                        <div class="col-md-12">\n\
+                                            <div class="table-responsive">\n\
+                                                <table class="table">\n\
+                                                    <thead>\n\
+                                                        <tr>\n\
+                                                            <th>Wholesale</th>\n\
+                                                            <th>Retail</th>\n\
+                                                            <th>Override Price</th>\n\
+                                                        </tr>\n\
+                                                    </thead>\n\
+                                                    <tbody>\n\
+                                                        <tr>\n\
+                                                            <td style="width: 33%;">' + wholesale + '</td>\n\
+                                                            <td style="width: 33%;">' + retail + '</td>\n\
+                                                            <td style="width: 33%;">' + overrideprice + '</td>\n\
+                                                        <tr>\n\
+                                                    </tbody>\n\
+                                                </table>\n\
+                                            </div>\n\
+                                        </div>\n\
+                                    </div>\n\
+                                    <div class="row">\n\
+                                        <div class="col-md-12">\n\
+                                            <div class="table-responsive">\n\
+                                                <table class="table">\n\
+                                                    <thead>\n\
+                                                        <tr>\n\
+                                                            <th>Qty</th>\n\
+                                                            <th>UOM</th>\n\
+                                                            <th>Saturday</th>\n\
+                                                        </tr>\n\
+                                                    </thead>\n\
+                                                    <tbody>\n\
+                                                        <tr>\n\
+                                                            <td style="width: 33%;">' + qty + '</td>\n\
+                                                            <td style="width: 33%;">' + uom + '</td>\n\
+                                                            <td style="width: 33%;">' + saturdayenabled + '</td>\n\
+                                                        <tr>\n\
+                                                    </tbody>\n\
+                                                </table>\n\
+                                            </div>\n\
+                                        </div>\n\
+                                    </div>';
                         //#############################################################
                         //#############################################################
                         //##
@@ -285,7 +377,7 @@ $form->prepare();
                         data += '               <div class="row form-group">\n\
                                                     <div class="col-md-4">\n\
                                                         <label for="overrideprice">\n\
-                                                            <span style="color:red;">*</span>&nbsp;<i>Override Price</i> \n\
+                                                            <i>Override Price</i>&nbsp;<span style="color:red;">*</span> \n\
                                                         </label>\n\
                                                     </div>\n\
                                                     <div class="col-md-4">\n\
@@ -306,7 +398,7 @@ $form->prepare();
                                                         </label>\n\
                                                     </div>\n\
                                                     <div class="col-md-4">\n\
-                                                        <input type="textarea" class="form-control" id="comment" value="' + comments + '" aria-describedby="commentHelpInline" placeholder="Comments">\n\
+                                                        <input type="textarea" class="form-control" id="comment" value="' + comment + '" aria-describedby="commentHelpInline" placeholder="Comments">\n\
                                                     </div>\n\
                                                     \n\
                                                     <div class="col-md-4">\n\
@@ -320,7 +412,7 @@ $form->prepare();
                                                         </label>\n\
                                                     </div>\n\
                                                     <div class="col-md-4">\n\
-                                                        <input type="textarea" class="form-control" id="option" value="' + options + '" aria-describedby="optionHelpInline" placeholder="Options">\n\
+                                                        <input type="textarea" class="form-control" id="option" value="' + option + '" aria-describedby="optionHelpInline" placeholder="Options">\n\
                                                     </div>\n\
                                                     \n\
                                                     <div class="col-md-4">\n\
@@ -336,30 +428,29 @@ $form->prepare();
                         //##
                         //#############################################################
                         //#############################################################
-                        data += '                       <div class="col-md-4 col-md-offset-8">\n\
+                        data += '                       <div class="col-md-4 col-md-offset-4">\n\
                                                             <span class="pull-right">\n\
+                                                                <button data-toggle="tooltip" title="Press To Delete Product" class="btn btn-danger" onclick="deleteMe(event); return false;" data-sku-number="' + sku + '" data-index-number="' + rowIdx + '">\n\
+                                                                    Delete\n\
+                                                                </button>\n\
+                                                            </span>\n\
+                                                        </div>\n\
+                                                        <div class="col-md-4">\n\
+                                                            <span class="pull-left">\n\
                                                                 <button type="submit" onclick=\'return submitOverride(' + rowIdx + ', ' + sku + ');\' \n\
-                                                                        data-toggle="tooltip" data-placement="top" title="Submit Price Override" class="btn btn-default">\n\
+                                                                        data-toggle="tooltip" title="Submit Price Override" class="btn btn-default">\n\
                                                                     Override\n\
                                                                 </button>\n\
                                                             </span>\n\
-                                                    </div>\n\
+                                                        </div>\n\
                                                 </div>';
                         data += '           </form>';
                         data += '       </div>';
                         data += '   </div>';
-                        data += '<div class="row">\n\
-                                        <div class="col-md-12">\n\
-                                            <div class="list-group">';
-                        data += $.map(columns, function (col, i) {
-                            return '            <div class="list-group-item" data-dt-row="' + col.rowIndex + '" data-dt-column="' + col.columnIndex + '">' +
-                                    '           <h5><small>' + columns[i].title + '</small><span class="pull-right">' + columns[i].data + '</span></h5>' +
-                                    '       </div>';
-                        }).join('');
-                        data += '           </div>\n\
-                                        </div>\n\
-                                    </div>';
-                        return $(data);
+
+
+                        //data =+ '';
+                        return $(data + copy);
                     }
                 }
             },
@@ -378,6 +469,7 @@ $form->prepare();
                 {
                     extend: 'pdfHtml5',
                     customize: function (doc) {
+                        var form_data = new Array();
                         doc.content.forEach(function (row) {
                             if (row['table'] && row['table']['body']) {
                                 var newRowData = [];
@@ -390,6 +482,9 @@ $form->prepare();
                                         var head = JSON.parse('[{"text": "Product","style": "tableHeader"}, {"text": "Description","style": "tableHeader"}, {"text": "Comment","style": "tableHeader"}, {"text": "UOM","style": "tableHeader"}, {"text": "SKU","style": "tableHeader"}, {"text": "Price","style": "tableHeader"}]');
                                         newRowData.push(head);
                                     } else {
+                                        var tablerow = $API.row(idx).data();
+                                        if (tablerow)
+                                            form_data.push('ID_' + tablerow['id'], JSON.stringify(tablerow));
                                         var row = [];
                                         row.push(rowdata[0]);
                                         row.push(rowdata[1]);
@@ -418,6 +513,25 @@ $form->prepare();
                             alignment: 'right',
                             //add User's name to report.
                             text: 'Creator: <?= $this->salesperson ?> (<?= $this->salespersonid ?>)     Customer: <?= $this->customername ?> (<?= $this->customerid ?>)      ' + today
+                        });
+                        var out = new Array();
+                        for (var key in form_data) {
+                            out.push(key + '=' + encodeURIComponent(form_data[key]));
+                        }
+                        var outdata = out.join('&');
+                        $.ajax({
+                            url: 'items/report?customerid=' + php_var,
+                            type: 'POST',
+                            data: outdata,
+                            contentType: 'application/x-www-form-urlencoded',
+                            success: function (data) {
+                                console.log('Successful response from server at items/report');
+                                console.log(JSON.stringify(data));
+                            },
+                            error: function (xhr, ajaxOptions, thrownError) {
+                                alert(xhr.status);
+                                alert(thrownError);
+                            }
                         });
                     }
                 },
@@ -448,8 +562,15 @@ $form->prepare();
         $('body').on('click', '.deleteMe', function () {
             //first make ajax call to ItemsController to add the removedSKU to session
             //then remove the row and call draw after the call returns
-            var sku = $(this).parent().parent().parent("div").prev().prev().find('.pull-right').html();
-            var idx = $(this).parent().parent().parent("div").attr('data-dt-row');
+
+            //Component markup must have sku and index data attributes like so:
+            //<button class="btn btn-danger deleteMe" data-sku-number="123456" data-index-number="0">
+            //  <span class="glyphicon glyphicon-minus">
+            //  </span>
+            //</button>
+
+            var sku = $(this).attr('data-sku-number');
+            var idx = $(this).attr('data-index-number');
             console.log('SKU: ' + sku + ' Idx: ' + idx);
             $.getJSON('ajax/items?action=removeRow&sku=' + sku + '&customerid=' + php_var, function () {
                 console.log("REST Call made.");
@@ -525,65 +646,145 @@ $form->prepare();
                         </div>
                         <div class="modal-body">
                             <?= $this->form()->openTag($form); ?> 
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('product')) ?>
-                                <?= $this->formElement($form->get('product')) ?>
-                                <?= $this->formElementErrors()->render($form->get('product'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('product')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <?= $this->formElement($form->get('product')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="productHelpInline" class="text-muted"> -- Enter Product Name.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('description')) ?>
-                                <?= $this->formElement($form->get('description')) ?>
-                                <?= $this->formElementErrors()->render($form->get('description'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('description')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <?= $this->formElement($form->get('description')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="descriptionHelpInline" class="text-muted"> -- Enter Description.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('comment')) ?>
-                                <?= $this->formElement($form->get('comment')) ?>
-                                <?= $this->formElementErrors()->render($form->get('comment'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('comment')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <?= $this->formElement($form->get('comment')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="commentHelpInline" class="text-muted"> -- Enter Comment.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('option')) ?>
-                                <?= $this->formElement($form->get('option')) ?>
-                                <?= $this->formElementErrors()->render($form->get('option'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('option')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <?= $this->formElement($form->get('option')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="optionHelpInline" class="text-muted"> -- Enter Option.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('qty')) ?>
-                                <?= $this->formElement($form->get('qty')) ?>
-                                <?= $this->formElementErrors()->render($form->get('qty'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('qty')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <?= $this->formElement($form->get('qty')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="qtyHelpInline" class="text-muted"> -- Enter Quantity.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('wholesale')) ?>
-                                <?= $this->formElement($form->get('wholesale')) ?>
-                                <?= $this->formElementErrors()->render($form->get('wholesale'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('wholesale')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <?= $this->formElement($form->get('wholesale')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="wholesaleHelpInline" class="text-muted"> -- Enter Wholesale Price.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('retail')) ?>
-                                <?= $this->formElement($form->get('retail')) ?>
-                                <?= $this->formElementErrors()->render($form->get('retail'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('retail')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <?= $this->formElement($form->get('retail')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="retailHelpInline" class="text-muted"> -- Enter Retail Price.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('overrideprice')) ?>
-                                <?= $this->formElement($form->get('overrideprice')) ?>
-                                <?= $this->formElementErrors()->render($form->get('overrideprice'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('overrideprice')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <?= $this->formElement($form->get('overrideprice')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="overridepriceHelpInline" class="text-muted"> -- Enter Override Price.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('uom')) ?>
-                                <?= $this->formElement($form->get('uom')) ?>
-                                <?= $this->formElementErrors()->render($form->get('uom'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('uom')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <?= $this->formElement($form->get('uom')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="uomHelpInline" class="text-muted"> -- Enter Unit of Measure.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('sku')) ?>
-                                <?= $this->formElement($form->get('sku')) ?>
-                                <?= $this->formElementErrors()->render($form->get('sku'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('sku')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <?= $this->formElement($form->get('sku')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="skuHelpInline" class="text-muted"> -- Enter SKU.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('status')) ?>
-                                <?= $this->formElement($form->get('status')) ?>
-                                <?= $this->formElementErrors()->render($form->get('status'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('status')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-3 col-md-offset-9">
+                                            <?= $this->formElement($form->get('status')) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="statusHelpInline" class="text-muted"> -- Check Status.</small>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <?= $this->formLabel($form->get('saturdayenabled')) ?>
-                                <?= $this->formElement($form->get('saturdayenabled')) ?>
-                                <?= $this->formElementErrors()->render($form->get('saturdayenabled'), ['class' => 'help-block']) ?>
+                            <div class="row form-group">
+                                <div class="col-md-4">
+                                    <?= $this->formlabel($form->get('saturdayenabled')) ?>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="row">
+                                        <div class="col-md-3 col-md-offset-9">
+                                            <?= $this->formElement($form->get('saturdayenabled')) ?>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <small id="saturdayenabledHelpInline" class="text-muted"> -- Check Saturday Enabled.</small>
+                                </div>
                             </div>
                             <?= $this->form()->closeTag(); ?> 
                         </div>
@@ -591,13 +792,13 @@ $form->prepare();
                             <!--
                              AJAX Form Submit
                             -->
+                            <button id="cancel" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             <input type="submit" class="btn btn-default" 
                                    onclick='$.post("/items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>", $("#div_form").serialize(), function (data) {
                                                appendRowToTable(data);
                                            });
                                            return false;' 
-                                   value="OK" form="addRowItemsForm">
-                            <button id="cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                   value="Submit" form="addRowItemsForm">
                         </div>
                     </div>
 

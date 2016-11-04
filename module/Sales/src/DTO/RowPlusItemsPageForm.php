@@ -9,6 +9,8 @@ class RowPlusItemsPageForm extends Form {
     public function __construct($name = null) {
         // We will ignore the name provided to the constructor
         parent::__construct('addRowItemsForm');
+        
+        $this->setAttribute('class', 'form');
 
         $this->add([
             'name' => 'product',
@@ -16,6 +18,10 @@ class RowPlusItemsPageForm extends Form {
                 'label' => 'Product',
             ),
             'type' => 'text',
+            'attributes' => array(
+                'class' => 'form-control',
+                'required' => true
+            ),
         ]);
         $this->add([
             'name' => 'description',
@@ -23,6 +29,9 @@ class RowPlusItemsPageForm extends Form {
             'options' => [
                 'label' => 'Description',
             ],
+            'attributes' => array(
+                'class' => 'form-control'
+            ),
         ]);
         $this->add([
             'name' => 'comment',
@@ -30,6 +39,9 @@ class RowPlusItemsPageForm extends Form {
             'options' => [
                 'label' => 'Comment',
             ],
+            'attributes' => array(
+                'class' => 'form-control'
+            ),
         ]);
         $this->add([
             'name' => 'option',
@@ -37,6 +49,9 @@ class RowPlusItemsPageForm extends Form {
             'options' => [
                 'label' => 'Option',
             ],
+            'attributes' => array(
+                'class' => 'form-control'
+            ),
         ]);
         $this->add([
             'name' => 'qty',
@@ -44,6 +59,10 @@ class RowPlusItemsPageForm extends Form {
             'options' => [
                 'label' => 'Qty',
             ],
+            'attributes' => array(
+                'class' => 'form-control',
+                'required' => true
+            ),
         ]);
         $this->add([
             'name' => 'wholesale',
@@ -51,6 +70,10 @@ class RowPlusItemsPageForm extends Form {
             'options' => [
                 'label' => 'Wholesale',
             ],
+            'attributes' => array(
+                'class' => 'form-control',
+                'required' => true
+            ),
         ]);
         $this->add([
             'name' => 'retail',
@@ -58,6 +81,10 @@ class RowPlusItemsPageForm extends Form {
             'options' => [
                 'label' => 'Retail',
             ],
+            'attributes' => array(
+                'class' => 'form-control',
+                'required' => true
+            ),
         ]);
         $this->add([
             'name' => 'overrideprice',
@@ -65,6 +92,9 @@ class RowPlusItemsPageForm extends Form {
             'options' => [
                 'label' => 'Override Price',
             ],
+            'attributes' => array(
+                'class' => 'form-control'
+            ),
         ]);
         $this->add([
             'name' => 'uom',
@@ -72,6 +102,10 @@ class RowPlusItemsPageForm extends Form {
             'options' => [
                 'label' => 'UOM',
             ],
+            'attributes' => array(
+                'class' => 'form-control',
+                'required' => true
+            ),
         ]);
         $this->add([
             'name' => 'sku',
@@ -79,13 +113,21 @@ class RowPlusItemsPageForm extends Form {
             'options' => [
                 'label' => 'SKU',
             ],
+            'attributes' => array(
+                'class' => 'form-control',
+                'required' => true
+            ),
         ]);
         $this->add([
             'name' => 'status',
             'type' => 'checkbox',
             'options' => [
                 'label' => 'Status',
-            ]
+            ],
+            'attributes' => array(
+                'class' => 'form-control',
+                'checked' => 'checked',
+            ),
         ]);
         $this->add([
             'name' => 'saturdayenabled',
@@ -93,6 +135,9 @@ class RowPlusItemsPageForm extends Form {
             'options' => [
                 'label' => 'Saturday Enabled',
             ],
+            'attributes' => array(
+                'class' => 'form-control'
+            ),
         ]);
     }
 }

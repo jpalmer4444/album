@@ -38,13 +38,8 @@ class ItemsController extends AbstractActionController {
      * @param type $config simple array of environment specific properties
      */
     public function __construct(
-            LoggingServiceInterface  $logger, 
-            MyAuthStorage $myauthstorage, 
-            AbstractPluginManager $formManager,
-            PricingReportPersistenceServiceInterface $pricingReportPersistenceService,
-            FFMEntityManagerServiceInterface $ffmEntityManagerService,
-            $config = NULL
-            ) {
+    LoggingServiceInterface $logger, MyAuthStorage $myauthstorage, AbstractPluginManager $formManager, PricingReportPersistenceServiceInterface $pricingReportPersistenceService, FFMEntityManagerServiceInterface $ffmEntityManagerService, $config = NULL
+    ) {
         $this->logger = $logger;
         $this->myauthstorage = $myauthstorage;
         $this->pricingconfig = $config;
@@ -57,7 +52,7 @@ class ItemsController extends AbstractActionController {
         $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
         $this->customerid = $this->params()->fromQuery('customerid');
         $this->customername = $this->params()->fromQuery('customername');
-        
+
         if (empty($this->customerid) ||
                 empty($this->customername)) {
             //must have customerid and customername params or redirect back to /users to retrieve
@@ -133,7 +128,7 @@ class ItemsController extends AbstractActionController {
                 $record->setCreated($created);
                 $record->setActive(true);
                 $record->setCustomerid($this->customerid);
-                $salesperson = $this->entityManager->merge($this->myauthstorage->getUser());
+                $salesperson = $this->entityManager->find("DataAccess\FFM\Entity\User", $this->myauthstorage->getUser()->getUsername());
                 $record->setSalesperson($salesperson);
                 $this->entityManager->persist($record);
                 $this->entityManager->flush();
@@ -153,7 +148,7 @@ class ItemsController extends AbstractActionController {
         //this might need to be changed if we want the report to always render the 
         //selected salesperson instead of the logged-in salesperson as is the case when
         //an admin is using the app.
-        
+
         return new ViewModel(array(
             "customerid" => $this->customerid,
             "customername" => $this->customername,
@@ -168,7 +163,65 @@ class ItemsController extends AbstractActionController {
     }
 
     public function reportAction() {
-        
+        $this->logger->info('Persisting PDF Report ');
+        $this->customerid = $this->params()->fromQuery('customerid');
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+
+            $counter = 0;
+            foreach ($_POST as $key => $value) {
+                $this->logger->info($key . ': ' . $value);
+                //if KEY is ODD then $value is stringified JSON row object
+                if (!($counter % 2 == 0)) {
+
+                    //{"id":792,"sku":"2868","productname":"Clams - Hard Shell, 
+                    //  Littleneck, Southern, Farmed, USA, 100ct",
+                    //  "shortescription":"Quarter Bushel<br/>\r\nVirginia, USA",
+                    //  "comment":null,"qty":1,"wholesale":24.5,"retail":32.67,
+                    //  "uom":"Qtr Bushel","option":null,"status":"Enabled",
+                    //  "saturdayenabled":1,"overrideprice":""};
+
+                    $obj = json_decode($value, true);
+                    $por = new \DataAccess\FFM\Entity\PricingOverrideReport();
+                    if (array_key_exists("sku", $obj)) {
+                        $por->setSku($obj['sku']);
+                    }
+                    if (array_key_exists("comment", $obj)) {
+                        $por->setComment($obj['comment']);
+                    }
+                    if (array_key_exists("shortescription", $obj)) {
+                        $por->setDescription($obj['shortescription']);
+                    }
+                    if (array_key_exists("uom", $obj)) {
+                        $por->setUom($obj['uom']);
+                    }
+                    if (array_key_exists("overrideprice", $obj)) {
+                        $int1 = filter_var($obj["overrideprice"], FILTER_SANITIZE_NUMBER_INT);
+                        $por->setOverrideprice($int1);
+                    }
+                    if (array_key_exists("productname", $obj)) {
+                        $por->setProduct($obj['productname']);
+                    }
+                    if (array_key_exists("retail", $obj)) {
+                        $int2 = filter_var($obj["retail"], FILTER_SANITIZE_NUMBER_INT);
+                        $por->setRetail($int2);
+                    }
+                    $created = new DateTime("now");
+                    $por->setCreated($created);
+                    $por->setCustomerid($this->customerid);
+                    $salesperson = $this->entityManager->find("DataAccess\FFM\Entity\User", $this->myauthstorage->getUser()->getUsername());
+                    $por->setSalesperson($salesperson);
+                    $this->entityManager->persist($por);
+                    $this->entityManager->flush();
+                }
+                $counter++;
+            }
+        } else {
+            $this->logger->info('Ignoring Request that is not a POST!');
+        }
+        return new JsonModel(array(
+            "success" => true
+        ));
     }
 
 }

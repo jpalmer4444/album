@@ -4,7 +4,6 @@ namespace Sales\Service;
 
 use Application\Service\FFMEntityManagerServiceInterface;
 use Application\Service\LoggingServiceInterface;
-use DataAccess\FFM\Entity\PricingOverrideReport;
 
 /**
  * Description of PricingReportPersistenceService
@@ -22,7 +21,7 @@ class PricingReportPersistenceService implements PricingReportPersistenceService
         $this->entityManager = $entityManager->getEntityManager();
     }
     
-    public function persist(PricingOverrideReport $pricingOverrideReport) {
+    public function persist($pricingOverrideReports) {
         
     }
 

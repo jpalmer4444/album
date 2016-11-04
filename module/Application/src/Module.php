@@ -126,5 +126,14 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Conso
             );
         }
     }
+    
+    public function getViewHelperConfig()
+{
+    return array(
+        'invokables' => array(
+            'formlabel' => 'Application\ViewHelper\RequiredMarkInFormLabel',
+        ),
+    );
+}
 
 }

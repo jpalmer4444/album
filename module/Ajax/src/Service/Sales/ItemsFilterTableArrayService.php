@@ -65,8 +65,16 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                                 getUsername())->getResult();
         
         $overrideMap = array();
+        $foundSomeOverrides = false;
         foreach ($itemPriceOverrides as $price){
-            $overrideMap[strval($price->getSku())] = number_format($price->getOverrideprice() / 100, 2);
+            $override = number_format($price->getOverrideprice() / 100, 2);
+            $this->logger->info('Found saved overrideprice: ' + $override);
+            $overrideMap[strval($price->getSku())] = $override;
+            $foundSomeOverrides = true;
+        }
+        
+        if(!$foundSomeOverrides){
+            $this->logger->info("No price overrides found!");
         }
         
         //now allow rows found in DB SO: A row will either be from a User adding the entire row it
@@ -110,12 +118,25 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         }
         foreach ($restcallitems as &$item) {
             //only add rest call items when map doesnt have SKU!
-            if(!array_key_exists($item['sku'], $map) && empty(in_array($item['sku'], $removedSKUS))){
-                $merged[] = $item;
+            if(!array_key_exists($item['sku'], $map) && 
+                    empty(in_array($item['sku'], $removedSKUS))){
+                
+                //apply priceoverride if exists
+                $merged = $this->applyOverride($overrideMap, $item, $merged);
             }
         }
+        
+        
 
         return $merged;
+    }
+    
+    protected function applyOverride($overrideMap, $item, $merged){
+        if(array_key_exists(strval($item['sku']), $overrideMap)){
+                    $item['overrideprice'] = $overrideMap[strval($item['sku'])];
+                }
+                $merged[] = $item;
+                return $merged;
     }
 
 }
