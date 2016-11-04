@@ -73,6 +73,28 @@ img.logo {
     padding: 25px;
 }
 
+.ffm-items-table-remove-row{
+    top: 9px;
+    left: 28px;
+    height: 18px;
+    width: 18px;
+    display: inline-block;
+    position: relative;
+    color: white;
+    border: 2px solid white;
+    border-radius: 14px;
+    box-shadow: 0 0 3px #444;
+    text-align: center;
+    font-family: 'Courier New', Courier, monospace;
+    line-height: 14px;
+    font-size: 14px;
+    background-color: #ff3333;
+}
+
+.ffm-items-table-remove-row-after{
+    margin-left:25px;
+}
+
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child.dataTables_empty:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child.dataTables_empty:before {
   display: block !important;

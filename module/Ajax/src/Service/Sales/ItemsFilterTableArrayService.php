@@ -79,8 +79,8 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
             $adjRetail = number_format($item->getRetail() / 100, 2);
             $adjOverrideprice = number_format($item->getOverrideprice() / 100, 2);
             //if override exists - then graphed it in.
-            if(array_key_exists($item->getSku(), $overrideMap)){
-                $adjOverrideprice = $overrideMap[$item->getSku()];
+            if(array_key_exists(strval($item->getSku()), $overrideMap)){
+                $adjOverrideprice = $overrideMap[strval($item->getSku())];
             }
             $merged[] = array(
                 "productname" => $item->getProduct(),

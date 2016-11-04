@@ -25,6 +25,14 @@ class ItemPriceOverride {
      */
     protected $sku;
     /**
+     * @ORM\Column(name="comment", type="string", length=255)
+     */
+    protected $comment;
+    /**
+     * @ORM\Column(name="option", type="string", length=255)
+     */
+    protected $option;
+    /**
      * @ORM\Column(type="integer")
      */
     protected $overrideprice;
@@ -57,6 +65,8 @@ class ItemPriceOverride {
     public function exchangeArray($data) {
         $this->sku = (isset($data['sku'])) ? $data['sku'] : null;
         $this->overrideprice = (isset($data['overrideprice'])) ? $data['overrideprice'] : null;
+        $this->overrideprice = (isset($data['option'])) ? $data['option'] : null;
+        $this->overrideprice = (isset($data['comment'])) ? $data['comment'] : null;
     }
 
     // Add the following method:
@@ -70,6 +80,14 @@ class ItemPriceOverride {
 
     public function getId() {
         return $this->id;
+    }
+    
+    public function getOption() {
+        return $this->option;
+    }
+    
+    public function getComment() {
+        return $this->comment;
     }
 
     public function getSku() {
@@ -98,6 +116,16 @@ class ItemPriceOverride {
 
     public function setId($id) {
         $this->id = $id;
+        return $this;
+    }
+    
+    public function setOption($option) {
+        $this->option = $option;
+        return $this;
+    }
+    
+    public function setComment($comment) {
+        $this->comment = $comment;
         return $this;
     }
 

@@ -53,7 +53,7 @@ class RowPlusItemsPageInputFilter extends InputFilter{
                     'name' => 'string_length',
                     'options' => array(
                         'min' => 0,
-                        'max' => 65536
+                        'max' => 255
                     ),
                 ),
             ),
@@ -67,7 +67,7 @@ class RowPlusItemsPageInputFilter extends InputFilter{
                     'name' => 'string_length',
                     'options' => array(
                         'min' => 0,
-                        'max' => 65536
+                        'max' => 255
                     ),
                 ),
             ),
