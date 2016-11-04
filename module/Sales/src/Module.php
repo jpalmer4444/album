@@ -13,6 +13,7 @@ use Sales\Controller\SalesController;
 use Sales\Controller\UsersController;
 use Sales\DTO\RowPlusItemsPageForm;
 use Sales\Filter\RowPlusItemsPageInputFilter;
+use Sales\Service\PricingReportPersistenceService;
 use Zend\Console\Adapter\AdapterInterface;
 use Zend\Hydrator\ObjectProperty;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -46,8 +47,19 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                     );
                 },
                 ItemsController::class => function($container) {
+                    $loggingService = $container->get('LoggingService');
+                    $myauthstorage = $container->get('Login\Model\MyAuthStorage');
+                    $pricingconfig = $container->get('config')['pricing_config'];
+                    $formManager = $container->get('FormElementManager');
+                    $pricingReportPersistenceService = $container->get('PricingReportPersistenceService');
+                    $entityManager = $container->get('FFMEntityManager');
                     return new ItemsController(
-                            $container
+                            $loggingService,
+                            $myauthstorage,
+                            $formManager,
+                            $pricingReportPersistenceService,
+                            $entityManager,
+                            $pricingconfig
                     );
                 },
                 SalesController::class => function($container) {
@@ -66,13 +78,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getServiceConfig() {
         return [
             'factories' => [
-                'RowPlusItemsPageInputFilterFactory' => function($serviceManager) {
-                    $inputFilterManager = $serviceManager->get('InputFilterManager');
-                    return function() use ($inputFilterManager) {
-                                $inputFilter = $inputFilterManager->get(RowPlusItemsPageInputFilter::class);
-                                return new RowPlusItemsPageForm($inputFilter);
-                            };
-                }
+                'PricingReportPersistenceService' => function($sm) {
+                    $loggingService = $sm->get('LoggingService');
+                    $entityManager = $sm->get('FFMEntityManager');
+                    return new PricingReportPersistenceService($entityManager, $loggingService);
+                },
             ]
         ];
     }

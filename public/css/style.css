@@ -95,6 +95,10 @@ img.logo {
     margin-left:25px;
 }
 
+.ffm-table-padding{
+    margin: 20px;
+}
+
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child.dataTables_empty:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child.dataTables_empty:before {
   display: block !important;

@@ -1,0 +1,40 @@
+[
+    [{
+            "text": "Product",
+            "style": "tableHeader"
+        }, {
+            "text": "Description",
+            "style": "tableHeader"
+        }, {
+            "text": "Comment",
+            "style": "tableHeader"
+        }, {
+            "text": "UOM",
+            "style": "tableHeader"
+        }, {
+            "text": "SKU",
+            "style": "tableHeader"
+        }, {
+            "text": "Price",
+            "style": "tableHeader"
+        }],
+    [{
+            "text": "Bass - Hybrid Striped, Farmed, USA, Head On  (1lb avg)",
+            "style": "tableBodyOdd"
+        }, {
+            "text": "",
+            "style": "tableBodyOdd"
+        }, {
+            "text": "",
+            "style": "tableBodyOdd"
+        }, {
+            "text": "lb",
+            "style": "tableBodyOdd"
+        }, {
+            "text": "16768102",
+            "style": "tableBodyOdd"
+        }, {
+            "text": "$6.66",
+            "style": "tableBodyOdd"
+        }]
+]

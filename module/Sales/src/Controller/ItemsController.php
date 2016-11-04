@@ -5,9 +5,14 @@
 
 namespace Sales\Controller;
 
+use Application\Service\FFMEntityManagerServiceInterface;
+use Application\Service\LoggingServiceInterface;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
 use DateTime;
+use Login\Model\MyAuthStorage;
+use Sales\Service\PricingReportPersistenceServiceInterface;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\ServiceManager\AbstractPluginManager;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
@@ -21,19 +26,38 @@ class ItemsController extends AbstractActionController {
     protected $inputFilter;
     protected $formManager;
     protected $entityManager;
+    protected $pricingReportPersistenceService;
 
-    public function __construct($container) {
-        $this->logger = $container->get('LoggingService');
-        $this->myauthstorage = $container->get('Login\Model\MyAuthStorage');
-        $this->pricingconfig = $container->get('config')['pricing_config'];
-        $this->formManager = $container->get('FormElementManager');
-        $this->entityManager = $container->get('FFMEntityManager')->getEntityManager();
+    /**
+     * 
+     * @param LoggingServiceInterface $logger
+     * @param MyAuthStorage $myauthstorage
+     * @param \Sales\Controller\FormElementManager $formManager
+     * @param PricingReportPersistenceServiceInterface $pricingReportPersistenceService
+     * @param FFMEntityManagerServiceInterface $ffmEntityManagerService
+     * @param type $config simple array of environment specific properties
+     */
+    public function __construct(
+            LoggingServiceInterface  $logger, 
+            MyAuthStorage $myauthstorage, 
+            AbstractPluginManager $formManager,
+            PricingReportPersistenceServiceInterface $pricingReportPersistenceService,
+            FFMEntityManagerServiceInterface $ffmEntityManagerService,
+            $config = NULL
+            ) {
+        $this->logger = $logger;
+        $this->myauthstorage = $myauthstorage;
+        $this->pricingconfig = $config;
+        $this->formManager = $formManager;
+        $this->pricingReportPersistenceService = $pricingReportPersistenceService;
+        $this->entityManager = $ffmEntityManagerService->getEntityManager();
     }
 
     public function indexAction() {
         $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
         $this->customerid = $this->params()->fromQuery('customerid');
         $this->customername = $this->params()->fromQuery('customername');
+        
         if (empty($this->customerid) ||
                 empty($this->customername)) {
             //must have customerid and customername params or redirect back to /users to retrieve
@@ -125,9 +149,16 @@ class ItemsController extends AbstractActionController {
             return new JsonModel($jsonModelArr);
         }
 
+        //add salesperson username to view for report access.
+        //this might need to be changed if we want the report to always render the 
+        //selected salesperson instead of the logged-in salesperson as is the case when
+        //an admin is using the app.
+        
         return new ViewModel(array(
             "customerid" => $this->customerid,
             "customername" => $this->customername,
+            "salesperson" => $this->myauthstorage->getUser()->getUsername(),
+            "salespersonid" => $this->myauthstorage->getUser()->getSales_attr_id(),
             "form" => $form
         ));
     }
@@ -136,7 +167,7 @@ class ItemsController extends AbstractActionController {
         
     }
 
-    public function editAction() {
+    public function reportAction() {
         
     }
 
