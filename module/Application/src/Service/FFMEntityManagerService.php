@@ -16,13 +16,17 @@ namespace Application\Service;
 class FFMEntityManagerService implements FFMEntityManagerServiceInterface {
 
     protected $entityManager;
-    
+
     public function __construct($entityManager) {
         $this->entityManager = $entityManager;
     }
 
     public function getEntityManager() {
         return $this->entityManager;
+    }
+
+    public function bind($entity) {
+        
     }
 
 }

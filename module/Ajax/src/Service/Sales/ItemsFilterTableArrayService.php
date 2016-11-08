@@ -42,30 +42,19 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         
         //now lookup any RowPlusItemsPage rows that are active and add them to the results.
         //take care to only get latest rows and ignoring any rows added previously today.
-        $queryPages = "SELECT rowPlus FROM DataAccess\FFM\Entity\RowPlusItemsPage rowPlus WHERE "
-                . "rowPlus._created >= CURRENT_DATE() AND "
-                . "rowPlus._active = 1 AND "
-                . "rowPlus._customerid = :customerid AND rowPlus._salesperson = :salesperson "
-                . "GROUP BY rowPlus.product ORDER BY rowPlus._created DESC";
-
-        $rollPlusItemPages = $this->entityManager->getEntityManager()->
-                        createQuery($queryPages)->setParameter("customerid", $customerid)->
-                        setParameter("salesperson", $this->myauthstorage->getUser()->
-                                getUsername())->getResult();
+        $rollPlusItemPages = $this->query(
+                ItemsFilterTableArrayService::QUERY_PAGES, 
+                $customerid
+                );
         
-        $queryOverrides = "SELECT override FROM DataAccess\FFM\Entity\ItemPriceOverride override WHERE "
-                . "override._created >= CURRENT_DATE() AND "
-                . "override._active = 1 AND "
-                . "override._customerid = :customerid AND override._salesperson = :salesperson "
-                . "GROUP BY override.sku ORDER BY override._created DESC";
-        
-        $itemPriceOverrides = $this->entityManager->getEntityManager()->
-                        createQuery($queryOverrides)->setParameter("customerid", $customerid)->
-                        setParameter("salesperson", $this->myauthstorage->getUser()->
-                                getUsername())->getResult();
+        $itemPriceOverrides = $this->query(
+                ItemsFilterTableArrayService::QUERY_OVERRIDES, 
+                $customerid
+                );
         
         $overrideMap = array();
         $foundSomeOverrides = false;
+        
         foreach ($itemPriceOverrides as $price){
             $override = number_format($price->getOverrideprice() / 100, 2);
             $this->logger->info('Found saved overrideprice: ' + $override);
@@ -110,25 +99,44 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         }
         
         //get a reference to Session scope SKUs that have been removed from the table.
-        $removedSKUS = !empty($this->myauthstorage->getRemovedSKUS($customerid)) ? $this->myauthstorage->getRemovedSKUS($customerid) : [];
+        $removedSKUS = $this->retrieveRemovedSkus($customerid);
+        
         $this->logger->info('Found ' . count($removedSKUS) . ' removedSKUs in Session!');
-        //$this->logger->info('Removed ' . $removedSKUS);
+        
         foreach ($removedSKUS as $removed) {
             $this->logger->info('Removed: ' . $removed);
         }
         foreach ($restcallitems as &$item) {
-            //only add rest call items when map doesnt have SKU!
-            if(!array_key_exists($item['sku'], $map) && 
-                    empty(in_array($item['sku'], $removedSKUS))){
-                
-                //apply priceoverride if exists
-                $merged = $this->applyOverride($overrideMap, $item, $merged);
-            }
+            $merged = $this->notEither($item, 'sku', $map, $removedSKUS, $merged, $overrideMap);
         }
-        
-        
 
         return $merged;
+    }
+    
+    protected function query($q, $customerid){
+        //needs to be aware of admin role because if the User is an admin - they need to see the Products for the selected salesperson.
+        return $this->entityManager->getEntityManager()->
+                        createQuery($q)->setParameter("customerid", $customerid)->
+                        setParameter("salesperson", $this->myauthstorage->admin() ? 
+                                $this->myauthstorage->getSalespersonInPlay()->getUsername() 
+                                : 
+                            $this->myauthstorage->getUser()->getUsername())
+                ->getResult();
+    }
+    
+    protected function notEither($notValItem, $prop, $notIn1, $notIn2, $dest, $override){
+        if(!array_key_exists($notValItem[$prop], $notIn1) && 
+                    empty(in_array($notValItem[$prop], $notIn2))){
+                //apply priceoverride if exists
+                return $this->applyOverride($override, $notValItem, $dest);
+            }
+            return $dest;
+    }
+    
+    protected function retrieveRemovedSkus($customerid){
+        return !empty($this->myauthstorage->getRemovedSKUS($customerid)) ? 
+            $this->myauthstorage->getRemovedSKUS($customerid) : 
+            [];
     }
     
     protected function applyOverride($overrideMap, $item, $merged){

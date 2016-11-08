@@ -99,6 +99,10 @@ img.logo {
     margin: 20px;
 }
 
+.error{
+    color:red;
+}
+
 table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child.dataTables_empty:before,
 table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child.dataTables_empty:before {
   display: block !important;

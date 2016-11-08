@@ -71,6 +71,7 @@ class ItemsController extends AbstractActionController {
             if ($form->isValid()) {
                 $success = true;
                 $record = new RowPlusItemsPage();
+                $record->bind($form, $jsonModelArr);
                 $jsonModelArr["sku"] = empty($form->getData()['sku']) ? '' : $form->getData()['sku'];
                 if (array_key_exists("sku", $jsonModelArr)) {
                     $record->setSku($jsonModelArr["sku"]);
@@ -222,6 +223,10 @@ class ItemsController extends AbstractActionController {
         return new JsonModel(array(
             "success" => true
         ));
+    }
+    
+    protected function validateReport($postArgs){
+        //first check that there is a value for productname
     }
 
 }

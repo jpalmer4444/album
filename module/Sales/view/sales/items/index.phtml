@@ -4,7 +4,6 @@ use Zend\Escaper\Escaper;
 
 $escaper = new Escaper('utf-8');
 $form = $this->form;
-$form->setAttribute('id', 'div_form');
 $form->prepare();
 ?>
 <script>
@@ -84,13 +83,28 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var submitOverride = function (rowIdx, sku) {
-        var overrideprice = $("#overrideprice").val();
-        var comment = $("#comment").val();
-        var option = $("#option").val();
+        var overrideprice = $('#overrideprice').val();
+        var comment = $('[name="comment"]').val();
+        var option = $('[name="option"]').val();
         $.getJSON("ajax/items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>&action=overridePrice&index=" + rowIdx + "&sku=" + sku + "&overrideprice=" + overrideprice + "&comment=" + comment + "&option=" + option + "", function (data) {
             overrideCallback(data);
         });
         return false;
+    };
+
+    var initForm = function () {
+        if($("#override_form").length){
+        $("#override_form").validate({
+            submitHandler: function (form) {
+                var rowIdx = $('#override_form_submit').attr('data-ffm-row-index');
+                var sku = $('#override_form_submit').attr('data-ffm-sku');
+                submitOverride(rowIdx, sku);
+                return false;
+            }
+        });
+    }else{
+        console.log('No DIV!');
+    }
     };
 
     //#############################################################
@@ -116,7 +130,25 @@ $form->prepare();
                 "status": data['status'] === '1' ? 'Enabled' : 'Disabled',
                 "saturdayenabled": data['saturdayenabled'] === '1' ? 'Enabled' : 'Disabled'
             }).draw(false);
-            $('.modal').modal('hide');
+            //remove values from the form.
+            $('[name="product"]').val('');
+            $('[name="description"]').val('');
+            $('[name="comment"]').val('');
+            $('[name="option"]').val('');
+            $('[name="qty"]').val('');
+            $('[name="wholesale"]').val('');
+            $('[name="retail"]').val('');
+            $('[name="overrideprice"]').val('');
+            $('[name="uom"]').val('');
+            $('[name="sku"]').val('');
+            //default status to true
+            $('[name="status" type="hidden"]').val('1');
+            $('[name="status" type="checkbox"]').val('1').attr('checked', 'checked');
+            //default saturdayenabled to false
+            $('[name="saturdayenabled" type="checkbox"]').removeAttr('checked');
+            $('[name="saturdayenabled" type="checkbox"]').val('0');
+
+            return false;
         } else {
             console.log('Row NOT added response: ' + JSON.stringify(data));
         }
@@ -171,7 +203,7 @@ $form->prepare();
                 {"data": "shortescription"},
                 {"data": "comment"},
                 {"data": "option"},
-                {"data": "qty"},
+                {"data": "qty", visible: false},
                 {"data": "wholesale",
                     "render": function (data, type, row, meta) {
                         if (data) {
@@ -180,25 +212,22 @@ $form->prepare();
                         } else {
                             return  '';
                         }
-                    }},
+                    }
+                },
                 {"data": "retail",
                     "render": function (data, type, row, meta) {
                         var enabled = row['status'] === 'Enabled';
-                        var overrideprice = row['overrideprice'];
-                        if (enabled && data && !overrideprice) {
+                        var hasOverride = row['overrideprice'];
+                        if (enabled && data) {
                             var result = "$";
                             return result + row['retail'];
-                        } else if (overrideprice) {
-                            var result = "$";
-                            return result + overrideprice;
-                        }
-                        if (!enabled) {
+                        } else if (!enabled && !hasOverride) {
                             return  'Call for availability';
                         }
                         return data;
                     }
                 },
-                {"data": "overrideprice", "visible": false,
+                {"data": "overrideprice", 
                     "render": function (data, type, row, meta) {
                         if (data) {
                             var result = "$";
@@ -268,8 +297,6 @@ $form->prepare();
                     }),
                     renderer: function (api, rowIdx, columns) {
                         //handle case where item is disabled!
-                        var product = columns[0].data;
-                        var description = columns[1].data;
                         var comment = columns[2].data;
                         var option = columns[3].data;
                         var qty = columns[4].data;
@@ -285,8 +312,10 @@ $form->prepare();
                                         <div class="col-md-12">\n\
                                             <hr/>\n\
                                         </div>\n\
-                                    </div>\n\
-                                    <div class="row">\n\
+                                    </div>';
+                        if ((comment && comment.length) ||
+                                (option && option.length)) {
+                            copy += '   <div class="row">\n\
                                         <div class="col-md-12">\n\
                                             <div class="table-responsive">\n\
                                                 <table class="table">\n\
@@ -305,8 +334,9 @@ $form->prepare();
                                                 </table>\n\
                                             </div>\n\
                                         </div>\n\
-                                    </div>\n\
-                                    <div class="row">\n\
+                                    </div>';
+                        }
+                        copy += '   <div class="row">\n\
                                         <div class="col-md-12">\n\
                                             <div class="table-responsive">\n\
                                                 <table class="table">\n\
@@ -327,8 +357,9 @@ $form->prepare();
                                                 </table>\n\
                                             </div>\n\
                                         </div>\n\
-                                    </div>\n\
-                                    <div class="row">\n\
+                                    </div>';
+
+                        copy += '   <div class="row">\n\
                                         <div class="col-md-12">\n\
                                             <div class="table-responsive">\n\
                                                 <table class="table">\n\
@@ -373,7 +404,7 @@ $form->prepare();
                         }
                         data += '   <div class="row">';
                         data += '       <div class="col-md-12">';
-                        data += '           <form id="override_form" class="form" action="#" >';
+                        data += '           <form id="override_form" class="form" novalidate="novalidate">';
                         data += '               <div class="row form-group">\n\
                                                     <div class="col-md-4">\n\
                                                         <label for="overrideprice">\n\
@@ -398,7 +429,7 @@ $form->prepare();
                                                         </label>\n\
                                                     </div>\n\
                                                     <div class="col-md-4">\n\
-                                                        <input type="textarea" class="form-control" id="comment" value="' + comment + '" aria-describedby="commentHelpInline" placeholder="Comments">\n\
+                                                        <input type="textarea" class="form-control" name="comment" value="' + comment + '" aria-describedby="commentHelpInline" data-rule-maxlength="255" data-msg-maxlength="At most 255 chars for Comment" placeholder="Comments">\n\
                                                     </div>\n\
                                                     \n\
                                                     <div class="col-md-4">\n\
@@ -412,7 +443,7 @@ $form->prepare();
                                                         </label>\n\
                                                     </div>\n\
                                                     <div class="col-md-4">\n\
-                                                        <input type="textarea" class="form-control" id="option" value="' + option + '" aria-describedby="optionHelpInline" placeholder="Options">\n\
+                                                        <input type="textarea" class="form-control" name="option" value="' + option + '" aria-describedby="optionHelpInline" data-rule-maxlength="255" data-msg-maxlength="At most 255 chars for Option" placeholder="Options">\n\
                                                     </div>\n\
                                                     \n\
                                                     <div class="col-md-4">\n\
@@ -420,7 +451,8 @@ $form->prepare();
                                                     </div>\n\
                                                 </div>';
                         data += '               <div class="row form-group">';
-
+                        data += '                       <div class="col-md-4 col-md-offset-4">\n\
+                                                            <span class="pull-right">';
                         //#############################################################
                         //#############################################################
                         //##
@@ -428,16 +460,14 @@ $form->prepare();
                         //##
                         //#############################################################
                         //#############################################################
-                        data += '                       <div class="col-md-4 col-md-offset-4">\n\
-                                                            <span class="pull-right">\n\
-                                                                <button data-toggle="tooltip" title="Press To Delete Product" class="btn btn-danger" onclick="deleteMe(event); return false;" data-sku-number="' + sku + '" data-index-number="' + rowIdx + '">\n\
+                        data += '                                       <button data-toggle="tooltip" title="Press To Delete Product" class="btn btn-danger" onclick="deleteMe(event); return false;" data-sku-number="' + sku + '" data-index-number="' + rowIdx + '">\n\
                                                                     Delete\n\
                                                                 </button>\n\
                                                             </span>\n\
                                                         </div>\n\
                                                         <div class="col-md-4">\n\
                                                             <span class="pull-left">\n\
-                                                                <button type="submit" onclick=\'return submitOverride(' + rowIdx + ', ' + sku + ');\' \n\
+                                                                <button id="override_form_submit" onclick="initForm()" type="submit" data-ffm-row-index="' + rowIdx + '" data-ffm-sku="' + sku + '" \n\
                                                                         data-toggle="tooltip" title="Submit Price Override" class="btn btn-default">\n\
                                                                     Override\n\
                                                                 </button>\n\
@@ -468,6 +498,8 @@ $form->prepare();
             buttons: [
                 {
                     extend: 'pdfHtml5',
+                    orientation: 'landscape',
+                    pageSize: 'LEGAL',
                     customize: function (doc) {
                         var form_data = new Array();
                         doc.content.forEach(function (row) {
@@ -507,13 +539,21 @@ $form->prepare();
                                 row['table']['body'] = newRowData;
                             }
                         });
+                        //doc.content.body.table.widths = [ '*', 'auto', 100, '*' ];
+                        
                         var today = getPrettyTime();
                         doc.content.splice(1, 0, {
-                            margin: [0, 0, 0, 12],
-                            alignment: 'right',
+                            margin: [0, 0, 0, 20],
+                            alignment: 'center',
                             //add User's name to report.
                             text: 'Creator: <?= $this->salesperson ?> (<?= $this->salespersonid ?>)     Customer: <?= $this->customername ?> (<?= $this->customerid ?>)      ' + today
                         });
+                        
+                        var rep = '*';
+                        doc.content[2].table.widths = [ rep, rep, rep, rep, rep, rep ];
+                        //alert(JSON.stringify(doc.styles));
+                        doc.styles.tableHeader.alignment = 'left';
+                        //doc.content[2].table.widths = [ '100%'];
                         var out = new Array();
                         for (var key in form_data) {
                             out.push(key + '=' + encodeURIComponent(form_data[key]));
@@ -607,6 +647,25 @@ $form->prepare();
             }
             //##########  END Custom Datatables Buttons Impl ##############
         });
+
+        $("[name='addRowItemsForm']").validate({
+            submitHandler: function (form) {
+                $.ajax({
+                    type: 'POST',
+                    url: "https://pricing.localhost/items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>",
+                    data: $(form).serialize()
+                })
+                        .done(function (response) {
+                            if (response.success) {
+                                appendRowToTable(response);
+                            } else {
+                                alert('Error - Please contact IT.');
+                            }
+                        });
+                return false;
+            }
+        });
+
     });
 
 </script>
@@ -794,10 +853,6 @@ $form->prepare();
                             -->
                             <button id="cancel" class="btn btn-danger" data-dismiss="modal">Cancel</button>
                             <input type="submit" class="btn btn-default" 
-                                   onclick='$.post("/items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>", $("#div_form").serialize(), function (data) {
-                                               appendRowToTable(data);
-                                           });
-                                           return false;' 
                                    value="Submit" form="addRowItemsForm">
                         </div>
                     </div>

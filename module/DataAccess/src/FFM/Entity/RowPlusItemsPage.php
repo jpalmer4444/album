@@ -11,7 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity 
  * @ORM\Table(name="row_plus_items_page")
  */
-class RowPlusItemsPage {
+class RowPlusItemsPage extends PostFormBinder {
+    
+    public function __construct()
+    {
+        $this->_created=new \DateTime();
+    }
 
     /**
      * @ORM\Id
@@ -86,7 +91,7 @@ class RowPlusItemsPage {
     protected $saturdayenabled;
 
     /**
-     * @ORM\Column(name="created", type="date")
+     * @ORM\Column(name="created", type="datetime", nullable=true)
      */
     protected $_created;
 

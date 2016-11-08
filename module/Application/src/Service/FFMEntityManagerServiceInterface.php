@@ -8,6 +8,8 @@
 
 namespace Application\Service;
 
+use Zend\Form\Form;
+
 /**
  *
  * @author jasonpalmer

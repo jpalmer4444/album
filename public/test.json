@@ -1,113 +1,24 @@
-[
-    [{
-            "text": "Product",
-            "style": "tableHeader"
-        }, {
-            "text": "Description",
-            "style": "tableHeader"
-        }, {
-            "text": "Comment",
-            "style": "tableHeader"
-        }, {
-            "text": "Option",
-            "style": "tableHeader"
-        }, {
-            "text": "Qty",
-            "style": "tableHeader"
-        }, {
-            "text": "Wholesale",
-            "style": "tableHeader"
-        }, {
-            "text": "Retail",
-            "style": "tableHeader"
-        }, {
-            "text": "Override Price",
-            "style": "tableHeader"
-        }, {
-            "text": "UOM",
-            "style": "tableHeader"
-        }, {
-            "text": "SKU",
-            "style": "tableHeader"
-        }, {
-            "text": "Status",
-            "style": "tableHeader"
-        }, {
-            "text": "Saturday Enabled",
-            "style": "tableHeader"
-        }],
-    [{
-            "text": "Bass - Hybrid Striped, Farmed, USA, Head On  (1lb avg)",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "1",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "$4.25",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "$5.67",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "lb",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "16768102",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "Enabled",
-            "style": "tableBodyOdd"
-        }, {
-            "text": "Off",
-            "style": "tableBodyOdd"
-        }],
-    [{
-            "text": "Bronzini - 400/600, Farmed, Turkey, Whole (1lb avg)",
-            "style": "tableBodyEven"
-        }, {
-            "text": "",
-            "style": "tableBodyEven"
-        }, {
-            "text": "",
-            "style": "tableBodyEven"
-        }, {
-            "text": "",
-            "style": "tableBodyEven"
-        }, {
-            "text": "1",
-            "style": "tableBodyEven"
-        }, {
-            "text": "$5.1",
-            "style": "tableBodyEven"
-        }, {
-            "text": "$7.29",
-            "style": "tableBodyEven"
-        }, {
-            "text": "",
-            "style": "tableBodyEven"
-        }, {
-            "text": "lb",
-            "style": "tableBodyEven"
-        }, {
-            "text": "25401",
-            "style": "tableBodyEven"
-        }, {
-            "text": "Enabled",
-            "style": "tableBodyEven"
-        }, {
-            "text": "On",
-            "style": "tableBodyEven"
-        }]
-]
+{
+    "tableHeader": {
+        "bold": true,
+        "fontSize": 11,
+        "color": "white",
+        "fillColor": "#2d4154",
+        "alignment": "center"
+    },
+    "tableBodyEven": {},
+    "tableBodyOdd": {
+        "fillColor": "#f3f3f3"
+    },
+    "tableFooter": {
+        "bold": true,
+        "fontSize": 11,
+        "color": "white",
+        "fillColor": "#2d4154"
+    },
+    "title": {
+        "alignment": "center",
+        "fontSize": 15
+    },
+    "message": {}
+}

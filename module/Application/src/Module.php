@@ -103,37 +103,38 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Conso
         $request = $sm->get('request');
         $matchedRoute = $router->match($request);
 
-        $params = $matchedRoute->getParams();
+        if ($matchedRoute) {
+            $params = $matchedRoute->getParams();
 
-        $controller = $params['controller'];
+            $controller = $params['controller'];
 
-        //only needed when this is not an Ajax request and not security related.
-        if (isset($params['action'])) {
-            $action = $params['action'];
+            //only needed when this is not an Ajax request and not security related.
+            if (isset($params['action'])) {
+                $action = $params['action'];
 
-            $module_array = explode('\\', $controller);
-            $module = array_pop($module_array);
+                $module_array = explode('\\', $controller);
+                $module = array_pop($module_array);
 
-            $route = $matchedRoute->getMatchedRouteName();
+                $route = $matchedRoute->getMatchedRouteName();
 
-            $e->getViewModel()->setVariables(
-                    array(
-                        'CURRENT_MODULE_NAME' => $module,
-                        'CURRENT_CONTROLLER_NAME' => $controller,
-                        'CURRENT_ACTION_NAME' => $action,
-                        'CURRENT_ROUTE_NAME' => $route,
-                    )
-            );
+                $e->getViewModel()->setVariables(
+                        array(
+                            'CURRENT_MODULE_NAME' => $module,
+                            'CURRENT_CONTROLLER_NAME' => $controller,
+                            'CURRENT_ACTION_NAME' => $action,
+                            'CURRENT_ROUTE_NAME' => $route,
+                        )
+                );
+            }
         }
     }
-    
-    public function getViewHelperConfig()
-{
-    return array(
-        'invokables' => array(
-            'formlabel' => 'Application\ViewHelper\RequiredMarkInFormLabel',
-        ),
-    );
-}
+
+    public function getViewHelperConfig() {
+        return array(
+            'invokables' => array(
+                'formlabel' => 'Application\ViewHelper\RequiredMarkInFormLabel',
+            ),
+        );
+    }
 
 }

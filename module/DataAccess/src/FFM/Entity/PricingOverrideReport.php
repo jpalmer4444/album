@@ -13,6 +13,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class PricingOverrideReport {
     
+    public function __construct()
+    {
+        $this->_created=new \DateTime();
+    }
+    
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
@@ -56,7 +61,7 @@ class PricingOverrideReport {
     protected $overrideprice;
     
     /**
-     * @ORM\Column(name="created", type="date")
+     * @ORM\Column(name="created", type="datetime", nullable=true)
      */
     protected $_created;
     

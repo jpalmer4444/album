@@ -11,7 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity 
  * @ORM\Table(name="item_price_override")
  */
-class ItemPriceOverride {
+class ItemPriceOverride extends PostFormBinder {
+    
+    public function __construct()
+    {
+        $this->_created=new \DateTime();
+    }
 
     /**
      * @ORM\Id
@@ -41,9 +46,9 @@ class ItemPriceOverride {
      * @ORM\Column(name="active", type="boolean")
      */
     protected $_active;
-
+    
     /**
-     * @ORM\Column(name="created", type="date")
+     * @ORM\Column(name="created", type="datetime", nullable=true)
      */
     protected $_created;
 

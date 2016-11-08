@@ -9,7 +9,7 @@ use Zend\Log\Writer\Stream;
  * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-system-configuration
  * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-application-configuration
  */
-$env = getenv('APPLICATION_ENV') ?: 'production';
+$env = getenv('APPLICATION_ENV') ?: 'development';
 $writer = new Stream('php://stderr');
 $logger = new Logger();
 $logger->addWriter($writer);

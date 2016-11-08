@@ -8,6 +8,7 @@
 
 namespace Login\Model;
 
+use DataAccess\FFM\Entity\User;
 use Zend\Authentication\Storage\Session;
  
 class MyAuthStorage extends Session
@@ -48,7 +49,7 @@ class MyAuthStorage extends Session
         return $this->session->getManager()->getStorage()['roles'];
     }
     
-    public function addUser($user) {
+    public function addUser(User $user) {
         $this->session->getManager()->getStorage()['user'] = $user;
     }
     
@@ -62,6 +63,18 @@ class MyAuthStorage extends Session
     
     public function getRequestedRoute(){
         return $this->session->getManager()->getStorage()['requestedRoute'];
+    }
+    
+    /**
+     * 
+     * @param User $userModel
+     */
+    public function addSalespersonInPlay(User $userModel) {
+        $this->session->getManager()->getStorage()['salespersoninplay'] = $userModel;
+    }
+    
+    public function getSalespersonInPlay(){
+        return $this->session->getManager()->getStorage()['salespersoninplay'];
     }
     
     //holds references to deleted or removed rows from items page. logout to reset.

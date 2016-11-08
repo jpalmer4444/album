@@ -84,7 +84,7 @@ CREATE TABLE `row_plus_items_page` (
     `status` BOOLEAN,
     `active` BOOLEAN,
     `saturdayenabled` BOOLEAN,
-    `created` DATETIME,
+    `created` TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` INTEGER,
      FOREIGN KEY(salesperson) REFERENCES users(username)
@@ -97,7 +97,7 @@ CREATE TABLE `item_price_override` (
     `active` BOOLEAN,
     `comment` VARCHAR(255),
     `option` VARCHAR(255),
-    `created` DATETIME,
+    `created` TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` INTEGER,
      FOREIGN KEY(salesperson) REFERENCES users(username)
@@ -112,7 +112,7 @@ CREATE TABLE `pricing_override_report` (
     `retail` INTEGER,
     `overrideprice` INTEGER,
     `uom` VARCHAR(100),
-    `created` DATETIME,
+    `created` TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` INTEGER,
      FOREIGN KEY(salesperson) REFERENCES users(username)
