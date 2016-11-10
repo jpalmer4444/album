@@ -117,7 +117,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         //needs to be aware of admin role because if the User is an admin - they need to see the Products for the selected salesperson.
         return $this->entityManager->getEntityManager()->
                         createQuery($q)->setParameter("customerid", $customerid)->
-                        setParameter("salesperson", $this->myauthstorage->admin() ? 
+                        setParameter("salesperson", $this->myauthstorage->admin() && !empty($this->myauthstorage->getSalespersonInPlay()) ? 
                                 $this->myauthstorage->getSalespersonInPlay()->getUsername() 
                                 : 
                             $this->myauthstorage->getUser()->getUsername())

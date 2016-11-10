@@ -21,12 +21,21 @@ class User
     protected $password;
     
     /**
+     * @ORM\Column(type="string")
+     */
+    protected $salespersonname;
+    
+    /**
      * @ORM\Column(type="integer")
      */
     protected $sales_attr_id;
     
     public function getUsername() {
         return $this->username;
+    }
+    
+    public function getSalespersonname() {
+        return $this->salespersonname;
     }
 
     public function getSales_attr_id() {
@@ -35,6 +44,10 @@ class User
 
     public function setUsername($username) {
         $this->username = $username;
+    }
+    
+    public function setSalespersonname($salespersonname) {
+        $this->salespersonname = $salespersonname;
     }
 
     public function setSales_attr_id($sales_attr_id) {

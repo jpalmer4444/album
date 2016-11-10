@@ -19,7 +19,7 @@
             <div class="list-group">
                 <?php foreach ($this->json["salespeople"] as $salesperson): ?>
               
-                    <a href="<?php echo $this->url('users', [], array('query' => array('salespersonid' => $salesperson["id"]))); ?>" 
+                    <a href="<?php echo $this->url('users', [], array('query' => array('salespersonid' => $salesperson["id"], 'salesperson' => $salesperson["salesperson"]))); ?>" 
                        class="list-group-item list-group-item-action">
                         <span class="tag tag-grey tag-pill float-xs-right"><?php echo $salesperson["id"] ?></span>
                         <h5 class="list-group-item-heading"><?php echo $salesperson["salesperson"] ?></h5>

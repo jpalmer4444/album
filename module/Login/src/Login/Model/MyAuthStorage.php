@@ -51,6 +51,7 @@ class MyAuthStorage extends Session
     
     public function addUser(User $user) {
         $this->session->getManager()->getStorage()['user'] = $user;
+        $this->session->getManager()->getStorage()['username'] = $user->getUsername();
     }
     
     public function getUser(){

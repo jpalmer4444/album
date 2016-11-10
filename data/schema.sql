@@ -23,19 +23,26 @@ INSERT INTO album (artist, title) VALUES ('Gotye', 'Making Mirrors');
 CREATE TABLE users (
     username varchar(100) PRIMARY KEY,
     password varchar(100) NOT NULL,
+    salespersonname varchar(100) NOT NULL,
     sales_attr_id integer NOT NULL
 );
 
-INSERT INTO users (username, password, sales_attr_id) 
-VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 183);
-INSERT INTO users (username, password, sales_attr_id) 
-VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 183);
-INSERT INTO users (username, password, sales_attr_id) 
-VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 183);
-INSERT INTO users (username, password, sales_attr_id) 
-VALUES('cmetallo', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 183);
-INSERT INTO users (username, password, sales_attr_id) 
-VALUES('mspindler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 183);
+INSERT INTO users (username, password, salespersonname, sales_attr_id) 
+VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Cyndi Metallo', 183);
+INSERT INTO users (username, password, salespersonname, sales_attr_id) 
+VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183);
+INSERT INTO users (username, password, salespersonname, sales_attr_id) 
+VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183);
+INSERT INTO users (username, password, salespersonname, sales_attr_id) 
+VALUES('cmetallo', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183);
+INSERT INTO users (username, password, salespersonname, sales_attr_id) 
+VALUES('mspindler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183);
+INSERT INTO users (username, password, salespersonname, sales_attr_id) 
+VALUES('bzakrinski', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Bill Zakrinski', 206);
+INSERT INTO users (username, password, salespersonname, sales_attr_id) 
+VALUES('iderfler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Iris Derfler', 181);
+INSERT INTO users (username, password, salespersonname, sales_attr_id) 
+VALUES('jmeade', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Jody Meade', 180);
 
 CREATE TABLE roles (
     role varchar(25) PRIMARY KEY,
@@ -58,7 +65,11 @@ INSERT INTO user_role_xref VALUES('admin', 'jpalmer');
 INSERT INTO user_role_xref VALUES('admin', 'dtanzer');
 INSERT INTO user_role_xref VALUES('admin', 'jdowns');
 INSERT INTO user_role_xref VALUES('admin', 'mspindler');
-INSERT INTO user_role_xref VALUES('sales', 'cmetallo');
+INSERT INTO user_role_xref VALUES('admin', 'cmetallo');
+INSERT INTO user_role_xref VALUES('sales', 'bzakrinski');
+INSERT INTO user_role_xref VALUES('sales', 'iderfler');
+INSERT INTO user_role_xref VALUES('sales', 'jmeade');
+
 
 CREATE TABLE `session` (
     `id` char(32),

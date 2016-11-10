@@ -13,7 +13,7 @@ class UsersController extends AbstractActionController {
     const ID = "jpalmer";
     const PASSWORD = "goodbass";
     const OBJECT = "customers";
-    const QUERY_SALESPERSON_BY_ID = "SELECT user FROM DataAccess\FFM\Entity\User user WHERE user.sales_attr_id = :sales_attr_id";
+    const QUERY_SALESPERSON_BY_ID = "SELECT user FROM DataAccess\FFM\Entity\User user WHERE user.sales_attr_id = :sales_attr_id AND user.salespersonname = :salespersonname";
 
     protected $restService;
     protected $logger;
@@ -32,24 +32,16 @@ class UsersController extends AbstractActionController {
     public function indexAction() {
         //http://svc.ffmalpha.com/bySKU.php?id=jpalmer&pw=goodbass&object=customers&salespersonid=183
         $requestedsalespersonid = $this->params()->fromQuery('salespersonid');
-        if (isset($requestedsalespersonid) && $this->myauthstorage->admin()) {
+        $requestedsalespersonname = $this->params()->fromQuery('salesperson');
+        if (isset($requestedsalespersonid) && isset($requestedsalespersonname) && $this->myauthstorage->admin()) {
             $salespersonid = $requestedsalespersonid;
             //lookup salesperson by id and set in Session
             //now lookup the Salesperson they are impersonating...
-            $salespersons = $this->entityManager->getEntityManager()->
+            $salesperson = $this->entityManager->getEntityManager()->
                     createQuery(UsersController::QUERY_SALESPERSON_BY_ID)->
-                    setParameter("sales_attr_id", $salespersonid)->getResult();
-            $found = false;
+                    setParameter("sales_attr_id", $salespersonid)->setParameter("salespersonname", $requestedsalespersonname)->getResult();
             //we have multiple salespersons here possibly - so match it to logged in username
-            foreach($salespersons as $salesperson){
-                if(strcmp($salesperson->getUsername(), $this->myauthstorage->getUser()->getUsername()) == 0){
-                    $this->myauthstorage->addSalespersonInPlay($salesperson);
-                    $found = true;
-                }
-            }
-            if(!$found){
-                $this->logger->info("Could not locate salesperson to impersonate! sales_attr_id: "+$salespersonid);
-            }
+            $this->myauthstorage->addSalespersonInPlay($salesperson[0]);
            
         } else {
             $salespersonid = $this->myauthstorage->getUser()->getSales_attr_id();

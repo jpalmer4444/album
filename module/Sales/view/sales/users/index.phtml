@@ -7,7 +7,15 @@
             <nav class="breadcrumb">
                 <?php if (isset($_SESSION["roles"])): ?>
                     <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
-                        <li><a href="/sales">Salespeople</a></li>
+                        <?php if (isset($_SESSION["salespersoninplay"])): ?>
+                                <li>
+                                    <a href="/sales"><?= $_SESSION["salespersoninplay"]->getSalespersonname() ?></a>
+                                </li>
+                        <?php else: ?>
+                            <li>
+                                <a href="/sales">Salespeople</a>
+                            </li>
+                        <?php endif; ?>
                     <?php endif; ?>
                 <?php endif; ?>
                 <li class="active">Customers</li>

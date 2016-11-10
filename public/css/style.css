@@ -99,6 +99,18 @@ img.logo {
     margin: 20px;
 }
 
+#customerlisttable tbody tr:hover{
+   background-color: #a6e1ec;
+   cursor: pointer;
+}
+
+.navbar-mybrand {
+  padding: 0px;
+}
+.navbar-mybrand>img {
+  padding: 5px;
+}
+
 .error{
     color:red;
 }

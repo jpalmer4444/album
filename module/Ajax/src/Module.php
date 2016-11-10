@@ -6,15 +6,13 @@ use Ajax\Controller\Sales\ItemsController;
 use Ajax\Controller\Sales\SalesController;
 use Ajax\Controller\Sales\UsersController;
 use Ajax\Service\Sales\ItemsFilterTableArrayService;
-use Zend\Console\Adapter\AdapterInterface;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 
-class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface, ConsoleBannerProviderInterface{
+class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface{
 
     const VERSION = '3.0.2dev';
     
@@ -75,10 +73,6 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                 ),
             ),
         );
-    }
-
-    public function getConsoleBanner(AdapterInterface $console) {
-        return 'Rest Module V: ' . Module::VERSION;
     }
 
 }

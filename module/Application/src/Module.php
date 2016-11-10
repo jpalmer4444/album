@@ -13,16 +13,14 @@ use Application\Service\LoggingService;
 use Application\Service\RestService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\ConsoleUsageProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ServiceManager\Factory\InvokableFactory;
 use Zend\Session\Container;
 use Zend\Session\SaveHandler\DbTableGateway;
 use Zend\Session\SaveHandler\DbTableGatewayOptions;
 use Zend\Session\SessionManager;
-use Zend\ModuleManager\Feature\ConsoleBannerProviderInterface;
 
-class Module implements ConfigProviderInterface, ServiceProviderInterface, ConsoleUsageProviderInterface, ConsoleBannerProviderInterface {
+class Module implements ConfigProviderInterface, ServiceProviderInterface {
 
     const VERSION = '3.0.2dev';
 
@@ -33,10 +31,6 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Conso
                     IndexController::class => InvokableFactory::class,
                 ],
         ]];
-    }
-
-    public function getConsoleBanner(\Zend\Console\Adapter\AdapterInterface $console) {
-        return 'Application Module V: ' . Module::VERSION;
     }
 
     public function getConfig() {
@@ -80,16 +74,6 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Conso
                     return $sessionManager;
                 },
             ),
-        );
-    }
-
-    public function getConsoleUsage(\Zend\Console\Adapter\AdapterInterface $console) {
-        return array(
-            // Describe available commands
-            'user resetpassword [--verbose|-v] EMAIL' => 'Reset password for a user',
-            // Describe expected parameters
-            array('EMAIL', 'Email of the user for a password reset'),
-            array('--verbose|-v', '(optional) turn on verbose mode'),
         );
     }
 

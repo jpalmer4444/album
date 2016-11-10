@@ -109,6 +109,9 @@ class LoginController extends AbstractActionController {
                     }
                     $this->getSessionStorage()->addRoles($roles);
                     $this->getSessionStorage()->addUser($user);//set $user in session storage for later access.
+                    //if user is admin user then set salespersonInPlay to the user
+                    
+                    
                     //check if it has rememberMe :
                     $this->getAuthService()->setStorage($this->getSessionStorage());
                     if ($request->getPost('rememberme') == 1) {
