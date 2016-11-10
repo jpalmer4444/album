@@ -42,7 +42,8 @@ class UsersController extends AbstractActionController {
                     setParameter("sales_attr_id", $salespersonid)->setParameter("salespersonname", $requestedsalespersonname)->getResult();
             //we have multiple salespersons here possibly - so match it to logged in username
             $this->myauthstorage->addSalespersonInPlay($salesperson[0]);
-           
+        } else if($this->myauthstorage->admin() && !empty($this->myauthstorage->getSalespersonInPlay())){
+            $salespersonid = $this->myauthstorage->getSalespersonInPlay()->getSales_attr_id();
         } else {
             $salespersonid = $this->myauthstorage->getUser()->getSales_attr_id();
         }

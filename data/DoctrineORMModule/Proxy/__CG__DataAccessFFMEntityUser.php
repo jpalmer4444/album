@@ -64,10 +64,10 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'username', 'password', 'sales_attr_id'];
+            return ['__isInitialized__', 'username', 'password', 'salespersonname', 'sales_attr_id'];
         }
 
-        return ['__isInitialized__', 'username', 'password', 'sales_attr_id'];
+        return ['__isInitialized__', 'username', 'password', 'salespersonname', 'sales_attr_id'];
     }
 
     /**
@@ -191,6 +191,17 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
     /**
      * {@inheritDoc}
      */
+    public function getSalespersonname()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSalespersonname', []);
+
+        return parent::getSalespersonname();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getSales_attr_id()
     {
 
@@ -208,6 +219,17 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUsername', [$username]);
 
         return parent::setUsername($username);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSalespersonname($salespersonname)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSalespersonname', [$salespersonname]);
+
+        return parent::setSalespersonname($salespersonname);
     }
 
     /**

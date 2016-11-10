@@ -1,3 +1,8 @@
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+</script>
 <div class="container">
     <div class="row">
         <div class="col-md-12">
@@ -9,11 +14,11 @@
                     <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
                         <?php if (isset($_SESSION["salespersoninplay"])): ?>
                                 <li>
-                                    <a href="/sales"><?= $_SESSION["salespersoninplay"]->getSalespersonname() ?></a>
+                                    <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales"><?= $_SESSION["salespersoninplay"]->getSalespersonname() ?></a>
                                 </li>
                         <?php else: ?>
                             <li>
-                                <a href="/sales">Salespeople</a>
+                                <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales">Salespeople</a>
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>

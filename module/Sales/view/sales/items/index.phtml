@@ -94,6 +94,7 @@ $form->prepare();
 
     var initForm = function () {
         if ($("#override_form").length) {
+            console.log('Initializing override_form validation.');
             $("#override_form").validate({
                 submitHandler: function (form) {
                     var rowIdx = $('#override_form_submit').attr('data-ffm-row-index');
@@ -142,18 +143,26 @@ $form->prepare();
             $('[name="uom"]').val('');
             $('[name="sku"]').val('');
             //default status to true
-            $('[name="status" type="hidden"]').val('1');
-            $('[name="status" type="checkbox"]').val('1').attr('checked', 'checked');
+            $('[name="status"] [type="hidden"]').val('1');
+            $('[name="status"] [type="checkbox"]').val('1').attr('checked', 'checked');
             //default saturdayenabled to false
-            $('[name="saturdayenabled" type="checkbox"]').removeAttr('checked');
-            $('[name="saturdayenabled" type="checkbox"]').val('0');
-
+            $('[name="saturdayenabled"] [type="checkbox"]').removeAttr('checked');
+            $('[name="saturdayenabled"] [type="checkbox"]').val('0');
+            $('.modal').modal('hide');
             return false;
         } else {
             console.log('Row NOT added response: ' + JSON.stringify(data));
         }
     };
 
+    //#############################################################
+    //#############################################################
+    //##
+    //##    Utility method that wraps up and delivers override 
+    //##    price modal markup.
+    //##
+    //#############################################################
+    //#############################################################
     var wrapModal = function (row, rowIdx) {
         var wrapper = ' <div id="detailRowModal" class="modal fade dtr-bs-modal in" role="dialog" style="display: block; padding-left: 0px;">\n\
                             <div class="modal-dialog" role="document">\n\
@@ -171,11 +180,27 @@ $form->prepare();
         return wrapper;
     };
 
+    //#############################################################
+    //#############################################################
+    //##
+    //##    Utility method that generates raw markup for override 
+    //##    price popup modal header.
+    //##
+    //#############################################################
+    //#############################################################
     var generateDetailsModalHeader = function (row) {
         var data = row.data();
         return data['productname'] + ' <div class="pull-right"><small ><span class="glyphicon glyphicon-barcode" aria-hidden="true"></span> <span >' + data['sku'] + '</span></small><span><button type="button" class="close" data-dismiss="modal">&times;</button></span></div>';
     };
 
+    //#############################################################
+    //#############################################################
+    //##
+    //##    Utility method to generate raw html for modal popup
+    //##    override price form.
+    //##
+    //#############################################################
+    //#############################################################
     var generateDetailsModalBody = function (rowIdx, columns) {
         var comment = columns.comment;
         var option = columns.option;
@@ -294,7 +319,7 @@ $form->prepare();
                                                     <div class="col-md-4">\n\
                                                         <div class="input-group">\n\
                                                             <div class="input-group-addon">$</div>\n\
-                                                            <input type="text" class="form-control" id="overrideprice" aria-describedby="priceHelpInline" placeholder="Price">\n\
+                                                            <input type="text" class="form-control" required data-msg="Override Price is required" id="overrideprice" aria-describedby="priceHelpInline" placeholder="Price">\n\
                                                         </div>\n\
                                                     </div>\n\
                                                     \n\
@@ -398,6 +423,8 @@ $form->prepare();
     //#############################################################
     //#############################################################
     $(document).ready(function () {
+        //initialize page tool tips.
+        $('[data-toggle="tooltip"]').tooltip();
         $API = $('#customerlisttable').DataTable({
             "ajax": '/ajax/items?action=customerlisttableget&customerid=' + php_var,
             //#############################################################
@@ -412,7 +439,7 @@ $form->prepare();
                 {"data": "shortescription"},
                 {"data": "comment"},
                 {"data": "option"},
-                {"data": "qty"},
+                {"data": "qty", visible: false},
                 {"data": "wholesale",
                     "render": function (data, type, row, meta) {
                         if (data) {
@@ -448,7 +475,6 @@ $form->prepare();
                     }
                 },
                 {"data": "uom"},
-                {"data": "sku"},
                 {"data": "status",
                     "render": function (data, type, row, meta) {
                         var result = "";
@@ -469,7 +495,8 @@ $form->prepare();
                         }
                         return result;
                     }
-                }
+                },
+                {"data": "sku"}
             ],
             //#############################################################
             //#############################################################
@@ -538,7 +565,7 @@ $form->prepare();
                                     //remove idx: 3-7
                                     if (idx++ === 0) {
                                         //add our customized Header Row.
-                                        var head = JSON.parse('[{"text": "Product","style": "tableHeader"}, {"text": "Description","style": "tableHeader"}, {"text": "Comment","style": "tableHeader"}, {"text": "UOM","style": "tableHeader"}, {"text": "SKU","style": "tableHeader"}, {"text": "Price","style": "tableHeader"}]');
+                                        var head = JSON.parse('[{"text": "Product","style": "tableHeader"}, {"text": "Description","style": "tableHeader"}, {"text": "Comment","style": "tableHeader"}, {"text": "Price","style": "tableHeader"}, {"text": "UOM","style": "tableHeader"}, {"text": "SKU","style": "tableHeader"}]');
                                         newRowData.push(head);
                                     } else {
                                         var tablerow = $API.row(idx).data();
@@ -548,14 +575,14 @@ $form->prepare();
                                         row.push(rowdata[0]);
                                         row.push(rowdata[1]);
                                         row.push(rowdata[2]);
-                                        row.push(rowdata[8]);
-                                        row.push(rowdata[9]);
                                         var override = rowdata[7].text;
                                         if (override) {
                                             row.push(rowdata[7]);
                                         } else {
                                             row.push(rowdata[6]);
                                         }
+                                        row.push(rowdata[8]);
+                                        row.push(rowdata[11]);
 
                                         //only add this row if Price
                                         if (override || rowdata[6].text.indexOf('Call') === -1) {
@@ -608,6 +635,7 @@ $form->prepare();
                 }
             ]
         });
+        
         //#############################################################
         //#############################################################
         //##
@@ -650,6 +678,13 @@ $form->prepare();
             });
         });
 
+        //#############################################################
+        //#############################################################
+        //##
+        //##    Click Handler for row clicks (price override form)
+        //##
+        //#############################################################
+        //#############################################################
         $("#customerlisttable").on('click', 'tbody tr', function (e) {
             $('#detailRowModal').remove();
             var idx = $(this).index();
@@ -687,6 +722,13 @@ $form->prepare();
             //##########  END Custom Datatables Buttons Impl ##############
         });
 
+        //#############################################################
+        //#############################################################
+        //##
+        //##    JQuery Validate Plugin. Validates the add row form.
+        //##
+        //#############################################################
+        //#############################################################
         $("[name='addRowItemsForm']").validate({
             submitHandler: function (form) {
                 $.ajax({
@@ -719,17 +761,17 @@ $form->prepare();
                     <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
                         <?php if (isset($_SESSION["salespersoninplay"])): ?>
                                 <li>
-                                    <a href="/sales"><?= $_SESSION["salespersoninplay"]->getSalespersonname() ?></a>
+                                    <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales"><?= $_SESSION["salespersoninplay"]->getSalespersonname() ?></a>
                                 </li>
                         <?php else: ?>
                             <li>
-                                <a href="/sales">Salespeople</a>
+                                <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales">Salespeople</a>
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
                 <?php endif; ?>
                 <li>
-                    <a href="/users">
+                    <a data-toggle="tooltip" data-placement="top" title="Click to change selected Customer." href="/users">
                         <?= $escaper->escapeHtml($this->customername) ?>
                     </a>
                 </li>
@@ -924,9 +966,9 @@ $form->prepare();
                                 <th>Retail</th>
                                 <th>Override Price</th>
                                 <th>UOM</th>
-                                <th>SKU</th>
                                 <th>Status</th>
                                 <th>Saturday Enabled</th>
+                                <th>SKU</th>
                             </tr>
                         </thead>
                         <tfoot>
@@ -940,9 +982,9 @@ $form->prepare();
                                 <th>Retail</th>
                                 <th>Override Price</th>
                                 <th>UOM</th>
-                                <th>SKU</th>
                                 <th>Status</th>
                                 <th>Saturday Enabled</th>
+                                <th>SKU</th>
                             </tr>
                         </tfoot>
                     </table>

@@ -65,8 +65,8 @@ img.logo {
 }
 
 .ffm-table-disabled{
-    opacity: .5;
-    background-color: #CCCCCC !important;
+    opacity: .8;
+    background-color: #CCCCCC;
 }
 
 .ffm-form-group{

@@ -28,12 +28,12 @@ class PostFormBinder implements PostFormBinderInterface {
 
         $jsonModelArr["qty"] = empty($form->getData()['qty']) ? '' : $form->getData()['qty'];
         if (array_key_exists("qty", $jsonModelArr)) {
-            $record->setQty($jsonModelArr["qty"]);
+            $this->setQty($jsonModelArr["qty"]);
         }
         $jsonModelArr["wholesale"] = empty($form->getData()['wholesale']) ? '' : $form->getData()['wholesale'];
         if (array_key_exists("wholesale", $jsonModelArr)) {
             $int = filter_var($jsonModelArr["wholesale"], FILTER_SANITIZE_NUMBER_INT);
-            $record->setWholesale($int);
+            $this->setWholesale($int);
         }
 
         foreach ($postData as $key => $value) {

@@ -75,7 +75,7 @@ class ItemsController extends AbstractRestfulController {
         if (!empty($comment)) {
             $record->setComment($comment);
         }
-        $salesperson = $this->entityManager->merge($this->myauthstorage->getUser());
+        $salesperson = $this->entityManager->merge(empty($this->myauthstorage->getSalespersonInPlay()) ? $this->myauthstorage->getUser() : $this->myauthstorage->getSalespersonInPlay());
         $record->setSalesperson($salesperson);
         $this->entityManager->persist($record);
         $this->entityManager->flush();
