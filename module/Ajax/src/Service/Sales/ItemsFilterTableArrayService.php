@@ -104,8 +104,9 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         $this->logger->info('Found ' . count($removedSKUS) . ' removedSKUs in Session!');
         
         foreach ($removedSKUS as $removed) {
-            $this->logger->info('Removed: ' . $removed);
+            $this->logger->info('Setting checkbox for table row with SKU: ' . $removed);
         }
+        
         foreach ($restcallitems as &$item) {
             $merged = $this->notEither($item, 'sku', $map, $removedSKUS, $merged, $overrideMap);
         }
@@ -124,11 +125,11 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 ->getResult();
     }
     
-    protected function notEither($notValItem, $prop, $notIn1, $notIn2, $dest, $override){
-        if(!array_key_exists($notValItem[$prop], $notIn1) && 
-                    empty(in_array($notValItem[$prop], $notIn2))){
+    protected function notEither($item, $prop, $skuMap, $removedSKUs, $dest, $override){
+        if(!array_key_exists($item[$prop], $skuMap) && 
+                    empty(in_array($item[$prop], $removedSKUs))){
                 //apply priceoverride if exists
-                return $this->applyOverride($override, $notValItem, $dest);
+                return $this->applyOverride($override, $item, $dest);
             }
             return $dest;
     }
