@@ -38,6 +38,12 @@ class ItemsController extends AbstractRestfulController {
             case "removeRow" : {
                     return $this->removeRow();
                 }
+            case "select" : {
+                    return $this->select();
+                }
+            case "unselect" : {
+                    return $this->unselect();
+                }
             case "customerlisttableget" :
             default : {
                     return $this->getTable();
@@ -114,6 +120,41 @@ class ItemsController extends AbstractRestfulController {
         $this->myauthstorage->addRemovedSKU($sku, $customerid);
         return new JsonModel(array(
             "success" => $sku
+        ));
+    }
+
+    protected function select() {
+        $skus = $this->params()->fromQuery('skus');
+        $customerid = $this->params()->fromQuery('customerid');
+        //$this->logger->info('Selecting ' . $skus);
+        $this->myauthstorage->addRemovedSKU($skus, $customerid);
+        return new JsonModel(array(
+            "success" => true
+        ));
+    }
+    
+    protected function unselect() {
+        $skus = $this->params()->fromQuery('skus');
+        if(empty($skus)){
+            return $this->unselectAll();
+        }
+        $customerid = $this->params()->fromQuery('customerid');
+        //$this->logger->info('Unselecting ' . $skus);
+        $this->myauthstorage->removeRemovedSKU($skus, $customerid);
+        return new JsonModel(array(
+            "success" => true
+        ));
+    }
+    
+    protected function unselectAll() {
+        $customerid = $this->params()->fromQuery('customerid');
+        $this->logger->info('UnSelecting All.');
+        $removedSKUS = $this->myauthstorage->getRemovedSKUS($customerid);
+        foreach($removedSKUS as $sku){
+            $this->myauthstorage->removeRemovedSKU($sku, $customerid);
+        }
+        return new JsonModel(array(
+            "success" => true
         ));
     }
 

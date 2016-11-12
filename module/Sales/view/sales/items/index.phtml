@@ -102,6 +102,7 @@ $form->prepare();
     var initForm = function () {
         if ($("#override_form").length) {
             console.log('Initializing override_form validation.');
+            $('[data-toggle="tooltip"]').tooltip();
             $("#override_form").validate({
                 submitHandler: function (form) {
                     var rowIdx = $('#override_form_submit').attr('data-ffm-row-index');
@@ -372,8 +373,8 @@ $form->prepare();
         //##
         //#############################################################
         //#############################################################
-        data += '                                       <button data-toggle="tooltip" title="Press To Delete Product" class="btn btn-danger" onclick="deleteMe(event); return false;" data-sku-number="' + sku + '" data-index-number="' + rowIdx + '">\n\
-                                                                    Delete\n\
+        data += '                                       <button data-toggle="tooltip" data-dismiss="modal" title="Press To Cancel" class="btn btn-danger" >\n\
+                                                                    Close\n\
                                                                 </button>\n\
                                                             </span>\n\
                                                         </div>\n\
@@ -442,6 +443,26 @@ $form->prepare();
             //#############################################################
             //#############################################################
             "columns": [
+                {
+                    'data': 'selected',
+                    'targets': 0,
+                    'searchable': false,
+                    'orderable': false,
+                    'width': '1%',
+                    'className': 'dt-body-center',
+                    'render': function (data, type, row, meta) {
+                        if (data) {
+                            //inform select plugin of selected state.
+                            //console.log(meta)
+                            $API.row(meta.row).select();
+                            //row.select();
+                            return '<input class="row_checkbox" id="selected_row_' + meta.row + '" type="checkbox" checked>';
+                        } else {
+                            $API.row(meta.row).deselect();
+                            return '<input class="row_checkbox" id="selected_row_' + meta.row + '" type="checkbox" >';
+                        }
+                    }
+                },
                 {"data": "productname"},
                 {"data": "shortescription"},
                 {"data": "comment"},
@@ -546,6 +567,12 @@ $form->prepare();
                 }
             },
             dom: 'Bfrtip',
+            select: {
+                style: 'multi',
+                selector: 'td:first-child'
+            },
+            rowId: 'extn',
+            order: [[1, 'asc']],
             //#############################################################
             //#############################################################
             //##
@@ -639,50 +666,48 @@ $form->prepare();
                 {
                     text: 'Add Product',
                     className: 'ffm-custom-append'
+                },
+                {
+                    text: 'Select all',
+                    action: function () {
+                        $API.rows({page: 'all'}).select();
+                        //now manually select all checkboxes and redraw table.
+                        var url = 'ajax/items?action=select';
+                        $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
+                            $('#selected_row_' + rowIdx).attr('checked', 'checked');
+                            url += '&skus[]=' + $API.row(rowIdx).data()['sku'];
+                            $API.row(rowIdx).data()['selected'] = true;
+                            $API.row(rowIdx).invalidate();
+                        }).draw(true);
+                        //send notify to items REST controller to select all items in result set.
+                        $.getJSON(url + '&customerid=' + php_var, function () {
+                        }).done(function () {
+                            console.log('Selected All');
+                        }).fail(function () {
+                            console.log("select REST Call failed.");
+                        });
+
+                    }
+                },
+                {
+                    text: 'Select none',
+                    action: function () {
+                        $API.rows({page: 'all'}).deselect();
+                        $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
+                            $('#selected_row_' + rowIdx).removeAttr('checked');
+                            $API.row(rowIdx).data()['selected'] = false;
+                            $API.row(rowIdx).invalidate();
+                        });
+                        //send notify to items REST controller to un-select all items in result set.
+                        $.getJSON('ajax/items?action=unselect&customerid=' + php_var, function () {
+                        }).done(function () {
+                            console.log('Unselected All');
+                        }).fail(function () {
+                            console.log("unselect REST Call failed.");
+                        });
+                    }
                 }
             ]
-        });
-        
-        //#############################################################
-        //#############################################################
-        //##
-        //##    REMOVE Table Row.
-        //##    Remove button added to each table row. 
-        //##    Removes the row after sending an AJAX GET call 
-        //##    with query params specifying customerid and
-        //##    sku and action. Then the AbstractRestful ItemsController
-        //##    Endpoint handles the request and adds the removedSKU
-        //##    to session scope [customerid][removedSKUS]=[$skus1Dim]
-        //##    so even if the Salesperson navigates to other customers
-        //##    and prints other PDF's, as long as they stay logged-in
-        //##    and do not press the logout button -> The removed rows
-        //##    are always respected and override the svc GET calls.
-        //##    @see \Ajax\Service\Sales\ItemsFilterTableArrayService.
-        //##
-        //#############################################################
-        //#############################################################
-        $('body').on('click', '.deleteMe', function () {
-            //first make ajax call to ItemsController to add the removedSKU to session
-            //then remove the row and call draw after the call returns
-
-            //Component markup must have sku and index data attributes like so:
-            //<button class="btn btn-danger deleteMe" data-sku-number="123456" data-index-number="0">
-            //  <span class="glyphicon glyphicon-minus">
-            //  </span>
-            //</button>
-
-            var sku = $(this).attr('data-sku-number');
-            var idx = $(this).attr('data-index-number');
-            console.log('SKU: ' + sku + ' Idx: ' + idx);
-            $.getJSON('ajax/items?action=removeRow&sku=' + sku + '&customerid=' + php_var, function () {
-                console.log("REST Call made.");
-            }).done(function () {
-                console.log('Ajax call successful with sku: ' + sku);
-                $API.row(idx).remove().draw();
-                $('.modal').modal('hide');
-            }).fail(function () {
-                console.log("REST Call failed.");
-            });
         });
 
         //#############################################################
@@ -692,14 +717,52 @@ $form->prepare();
         //##
         //#############################################################
         //#############################################################
-        $("#customerlisttable").on('click', 'tbody tr', function (e) {
+        $("#customerlisttable").on('click', 'tbody tr td:nth-child(2), tbody tr td:nth-child(3), tbody tr td:nth-child(4), tbody tr td:nth-child(5), tbody tr td:nth-child(6), tbody tr td:nth-child(7), tbody tr td:nth-child(8), tbody tr td:nth-child(9), tbody tr td:nth-child(10), tbody tr td:nth-child(11), tbody tr td:nth-child(12)', function (e) {
             $('#detailRowModal').remove();
-            var idx = $(this).index();
+            var idx = $(this).parent('tr').index();
             var row = $API.row(idx);
             //alert(JSON.stringify(row.data()));
             var modal = wrapModal(row, idx);
             console.log('Showing Modal!');
             $('footer').after($(modal).modal('show'));
+        });
+
+        //row_checkbox
+        //#############################################################
+        //#############################################################
+        //##
+        //##    Click Handler for checkbox. Triggered by click anywhere
+        //##    on first child column (then filter to see if checkbox 
+        //##    is source to know whether or not to set property 
+        //##    checked on the input)
+        //##
+        //#############################################################
+        //#############################################################
+        $("#customerlisttable").on('click', 'tbody tr td:first-child', function (e) {
+            //id looks like
+            //id="selected_row_${rowIdx}
+            var $input = $(this).children('input');
+            if(e.target.id !== $input.attr('id'))
+                $input.prop('checked', !$input.prop('checked'));
+            var rowIdx = new Number($input.attr('id').replace('selected_row_', ''));
+            //console.log('Idx: '+rowIdx);
+            var checked = $(this)[0].checked;
+            var rowObj = $API.row(rowIdx).data();
+            var sku = rowObj['sku'];
+            var url = 'ajax/items?action=';
+            if (checked) {
+                url += 'select';
+            } else {
+                url += 'unselect';
+            }
+            url += '&skus[]=' + sku;
+            //send notify to items REST controller to select all items in result set.
+            $.getJSON(url + '&customerid=' + php_var, function () {
+            }).done(function () {
+                console.log(checked ? 'Selected ' + sku : 'Unselected ' + sku);
+            }).fail(function () {
+                console.log("select/unselect REST Call failed.");
+            });
         });
 
 
@@ -767,9 +830,9 @@ $form->prepare();
                 <?php if (isset($_SESSION["roles"])): ?>
                     <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
                         <?php if (isset($_SESSION["salespersoninplay"])): ?>
-                                <li>
-                                    <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales"><?= $_SESSION["salespersoninplay"]->getSalespersonname() ?></a>
-                                </li>
+                            <li>
+                                <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales"><?= $_SESSION["salespersoninplay"]->getSalespersonname() ?></a>
+                            </li>
                         <?php else: ?>
                             <li>
                                 <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales">Salespeople</a>
@@ -964,6 +1027,7 @@ $form->prepare();
                     <table id="customerlisttable" class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
                         <thead>
                             <tr>
+                                <th></th>
                                 <th>Product</th>
                                 <th>Description</th>
                                 <th>Comment</th>
@@ -980,6 +1044,7 @@ $form->prepare();
                         </thead>
                         <tfoot>
                             <tr>
+                                <th></th>
                                 <th>Product</th>
                                 <th>Description</th>
                                 <th>Comment</th>

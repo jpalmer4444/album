@@ -80,6 +80,7 @@ class MyAuthStorage extends Session
     
     //holds references to deleted or removed rows from items page. logout to reset.
     public function addRemovedSKU($sku, $customerid) {
+        $localSKUS = is_array($sku) ? $sku : array(sku);
         $custstorage = $this->session->getManager()->getStorage()['_' . $customerid];
         if(empty($custstorage)){
             $this->session->getManager()->getStorage()['_' . $customerid] = array();
@@ -90,16 +91,35 @@ class MyAuthStorage extends Session
             $removed = $custstorage['removedSKUS'];
         }
         if(empty($removed)){
-            $this->session->getManager()->getStorage()['_' . $customerid]['removedSKUS'] = array($sku);
+            $this->session->getManager()->getStorage()['_' . $customerid]['removedSKUS'] = $localSKUS;
         }else{
-            $this->session->getManager()->getStorage()['_' . $customerid]['removedSKUS'][] = $sku;
+            foreach($localSKUS as $_sku){
+                $this->session->getManager()->getStorage()['_' . $customerid]['removedSKUS'][] = $_sku;
+            }
         }
+    }
+    
+    public function removeRemovedSKU($sku, $customerid) {
+        $removed = $this->getRemovedSKUS($customerid);
+        $renewed = array();
+        if(is_string($sku)){
+            $sku = array($sku);
+        }
+        foreach($removed as $s){
+            foreach($sku as $_sku){
+                if(strcmp($_sku, $s) != 0){
+                $renewed [] = $s;
+            }
+            }
+        }
+        $this->session->getManager()->getStorage()['_' . $customerid]['removedSKUS'] = $renewed;
     }
     
     public function getRemovedSKUS($customerid){
         if(!empty($this->session->getManager()->getStorage()['_' . $customerid])){
             return $this->session->getManager()->getStorage()['_' . $customerid]['removedSKUS'];
         }
+        return array();
     }
     
 }

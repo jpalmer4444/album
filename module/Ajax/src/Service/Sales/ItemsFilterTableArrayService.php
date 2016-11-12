@@ -107,8 +107,16 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
             $this->logger->info('Setting checkbox for table row with SKU: ' . $removed);
         }
         
+        //create a selected field for each REST call item based on removed SKUs.
+        
         foreach ($restcallitems as &$item) {
-            $merged = $this->notEither($item, 'sku', $map, $removedSKUS, $merged, $overrideMap);
+            //add checkbox
+            if(!in_array($item['sku'], $removedSKUS)){
+                $item['selected'] = false;
+            }else{
+                $item['selected'] = true;
+            }
+            $merged = $this->notInMerge($item, 'sku', $map, $merged, $overrideMap);
         }
 
         return $merged;
@@ -125,9 +133,8 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 ->getResult();
     }
     
-    protected function notEither($item, $prop, $skuMap, $removedSKUs, $dest, $override){
-        if(!array_key_exists($item[$prop], $skuMap) && 
-                    empty(in_array($item[$prop], $removedSKUs))){
+    protected function notInMerge($item, $prop, $skuMap, $dest, $override){
+        if(!array_key_exists($item[$prop], $skuMap)){
                 //apply priceoverride if exists
                 return $this->applyOverride($override, $item, $dest);
             }

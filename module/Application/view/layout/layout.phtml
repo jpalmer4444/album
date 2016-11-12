@@ -12,8 +12,6 @@
         <!-- Le styles -->
         <?=
                 $this->headLink(['rel' => 'shortcut icon', 'type' => 'image/vnd.microsoft.icon', 'href' => $this->basePath() . '/img/favicon.ico'])
-                ->prependStylesheet($this->basePath('css/style.css'))
-                ->prependStylesheet($this->basePath('css/clean-blog.min.css'))
                 ->prependStylesheet($this->basePath('font-awesome/css/font-awesome.min.css'));
         ?>
         <link rel="stylesheet" type="text/css" href="<?= $this->basePath('css/datatables.cdn.css'); ?>"/>
@@ -29,6 +27,7 @@
         <?= $this->headScript()->prependFile($this->basePath('js/clean-blog.js')); ?>
         <?= $this->headScript()->prependFile($this->basePath('js/jquery.validate.min.js')); ?>
         <?= $this->headScript()->prependFile($this->basePath('js/additional-methods.min.js')); ?>
+        <?= $this->headLink()->prependStylesheet($this->basePath('css/style.css')); ?>
     </head>
     <body>
 
