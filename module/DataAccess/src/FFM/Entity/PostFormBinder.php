@@ -25,30 +25,22 @@ class PostFormBinder implements PostFormBinderInterface {
     public function bind(Form $form, $postData) {
 
         //need to know if this Element
-
-        $jsonModelArr["qty"] = empty($form->getData()['qty']) ? '' : $form->getData()['qty'];
-        if (array_key_exists("qty", $jsonModelArr)) {
-            $this->setQty($jsonModelArr["qty"]);
-        }
-        $jsonModelArr["wholesale"] = empty($form->getData()['wholesale']) ? '' : $form->getData()['wholesale'];
-        if (array_key_exists("wholesale", $jsonModelArr)) {
-            $int = filter_var($jsonModelArr["wholesale"], FILTER_SANITIZE_NUMBER_INT);
-            $this->setWholesale($int);
-        }
-
-        foreach ($postData as $key => $value) {
-
-            //get element attribute keys and check if this is a price item
-            $keys = array_keys($form->get($key)->getAttributes());
-            $isPriceType = preg_grep("[data-rule-digits|data-rule-number]", $keys);
-
-            if ($isPriceType) {
-                //$int = filter_var($jsonModelArr["wholesale"], FILTER_SANITIZE_NUMBER_INT);
-                    //$record->setWholesale($int);
-            } else {
-                
+        //iterate the form and inject properties using reflection into model
+        foreach ($form->getData() as $formKey => $formValue) {
+            if (method_exists($this, $formKey)) {
+                $keys = array_keys($form->get($formKey)->getAttributes());
+                $isPriceType = preg_grep("[data-rule-digits|data-rule-number]", $keys);
+                $reflectionMethod = new ReflectionMethod(get_parent_class($this), $formKey);
+                $postData[$formKey] = $formValue;
+                if ($isPriceType) {
+                    $int = filter_var($formValue, FILTER_SANITIZE_NUMBER_INT);
+                    $reflectionMethod->invoke($this, $int);
+                } else {
+                    $reflectionMethod->invoke($this, $formValue);
+                }
             }
         }
+        return $postData;
     }
 
 }

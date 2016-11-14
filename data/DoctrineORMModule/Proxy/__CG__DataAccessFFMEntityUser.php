@@ -64,10 +64,10 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'username', 'password', 'salespersonname', 'sales_attr_id'];
+            return ['__isInitialized__', 'username', '' . "\0" . 'DataAccess\\FFM\\Entity\\User' . "\0" . 'version', 'password', 'salespersonname', 'phone1', 'email', 'sales_attr_id'];
         }
 
-        return ['__isInitialized__', 'username', 'password', 'salespersonname', 'sales_attr_id'];
+        return ['__isInitialized__', 'username', '' . "\0" . 'DataAccess\\FFM\\Entity\\User' . "\0" . 'version', 'password', 'salespersonname', 'phone1', 'email', 'sales_attr_id'];
     }
 
     /**
@@ -208,6 +208,50 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSales_attr_id', []);
 
         return parent::getSales_attr_id();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getPhone1()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPhone1', []);
+
+        return parent::getPhone1();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getEmail()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getEmail', []);
+
+        return parent::getEmail();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setPhone1($phone1)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPhone1', [$phone1]);
+
+        return parent::setPhone1($phone1);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setEmail($email)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setEmail', [$email]);
+
+        return parent::setEmail($email);
     }
 
     /**

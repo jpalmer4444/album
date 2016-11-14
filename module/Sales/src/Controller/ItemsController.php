@@ -7,8 +7,10 @@ namespace Sales\Controller;
 
 use Application\Service\FFMEntityManagerServiceInterface;
 use Application\Service\LoggingServiceInterface;
+use DataAccess\FFM\Entity\PricingOverrideReport;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
 use DateTime;
+use Exception;
 use Login\Model\MyAuthStorage;
 use Sales\Service\PricingReportPersistenceServiceInterface;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -71,6 +73,7 @@ class ItemsController extends AbstractActionController {
             if ($form->isValid()) {
                 $success = true;
                 $record = new RowPlusItemsPage();
+                //not used but was supposed to do all the if work below
                 $record->bind($form, $jsonModelArr);
                 $jsonModelArr["sku"] = empty($form->getData()['sku']) ? '' : $form->getData()['sku'];
                 if (array_key_exists("sku", $jsonModelArr)) {
@@ -158,11 +161,7 @@ class ItemsController extends AbstractActionController {
             "form" => $form
         ));
     }
-
-    public function buildInputSpec($inputFilter) {
-        
-    }
-
+    
     public function reportAction() {
         $this->logger->info('Persisting PDF Report ');
         $this->customerid = $this->params()->fromQuery('customerid');
@@ -224,8 +223,8 @@ class ItemsController extends AbstractActionController {
             "success" => true
         ));
     }
-    
-    protected function validateReport($postArgs){
+
+    protected function validateReport($postArgs) {
         //first check that there is a value for productname
     }
 

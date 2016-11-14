@@ -36,5 +36,6 @@ return [
     'Login',
     'Sales',
     'MyAcl',
-    'Ajax'
+    'Ajax',
+    'Command'
 ];

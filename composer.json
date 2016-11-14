@@ -46,7 +46,8 @@
         "Sales\\": "module/Sales/src/",
         "MyAcl\\": "module/MyAcl/src/",
         "DataAccess\\": "module/DataAccess/src/",
-        "Ajax\\": "module/Ajax/src/"
+        "Ajax\\": "module/Ajax/src/",
+        "Command\\": "module/Command/src/"
     }
 },
     "autoload-dev": {

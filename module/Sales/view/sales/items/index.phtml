@@ -85,8 +85,7 @@ $form->prepare();
     var submitOverride = function (rowIdx, sku) {
         var overrideprice = $('#overrideprice').val();
         var comment = $('[name="comment"]').val();
-        var option = $('[name="option"]').val();
-        $.getJSON("ajax/items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>&action=overridePrice&index=" + rowIdx + "&sku=" + sku + "&overrideprice=" + overrideprice + "&comment=" + comment + "&option=" + option + "", function (data) {
+        $.getJSON("ajax/items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>&action=overridePrice&index=" + rowIdx + "&sku=" + sku + "&overrideprice=" + overrideprice + "&comment=" + comment, function (data) {
             overrideCallback(data);
         });
         return false;
@@ -171,7 +170,7 @@ $form->prepare();
     //##
     //#############################################################
     //#############################################################
-    var wrapModal = function (row, rowIdx) {
+    var wrapModal = function (row) {
         var wrapper = ' <div id="detailRowModal" class="modal fade dtr-bs-modal in" role="dialog" style="display: block; padding-left: 0px;">\n\
                             <div class="modal-dialog" role="document">\n\
                                 <div class="modal-content">\n\
@@ -181,7 +180,7 @@ $form->prepare();
                                         </h4>\n\
                                     </div>\n\
                                 <div class="modal-body">\n\
-                                ' + generateDetailsModalBody(rowIdx, row.data()) + '\n\
+                                ' + generateDetailsModalBody(row.index(), row.data()) + '\n\
                                 </div>\n\
                             </div>\n\
                         </div>';
@@ -210,12 +209,12 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var generateDetailsModalBody = function (rowIdx, columns) {
-        var comment = columns.comment;
+        var comment = columns.comment ? columns.comment : '';
         var option = columns.option;
         var qty = columns.qty;
         var wholesale = columns.wholesale;
         var retail = columns.retail;
-        var overrideprice = columns.overrideprice;
+        var overrideprice = columns.overrideprice ? columns.overrideprice : '';
         var uom = columns.uom;
         var sku = columns.sku;
         var status = columns.status;
@@ -327,7 +326,7 @@ $form->prepare();
                                                     <div class="col-md-4">\n\
                                                         <div class="input-group">\n\
                                                             <div class="input-group-addon">$</div>\n\
-                                                            <input type="text" class="form-control" required data-msg="Override Price is required" id="overrideprice" aria-describedby="priceHelpInline" placeholder="Price">\n\
+                                                            <input type="text" class="form-control" value="' + overrideprice + '" required data-msg="Override Price is required" id="overrideprice" aria-describedby="priceHelpInline" placeholder="Price">\n\
                                                         </div>\n\
                                                     </div>\n\
                                                     \n\
@@ -347,20 +346,6 @@ $form->prepare();
                                                     \n\
                                                     <div class="col-md-4">\n\
                                                         <small id="commentHelpInline" class="text-muted"> -- Enter/Edit Comment.</small>\n\
-                                                    </div>\n\
-                                                </div>';
-        data += '               <div class="row form-group">\n\
-                                                    <div class="col-md-4">\n\
-                                                        <label for="option">\n\
-                                                            Option\n\
-                                                        </label>\n\
-                                                    </div>\n\
-                                                    <div class="col-md-4">\n\
-                                                        <input type="textarea" class="form-control" name="option" value="' + option + '" aria-describedby="optionHelpInline" data-rule-maxlength="255" data-msg-maxlength="At most 255 chars for Option" placeholder="Options">\n\
-                                                    </div>\n\
-                                                    \n\
-                                                    <div class="col-md-4">\n\
-                                                        <small id="optionHelpInline" class="text-muted"> -- Enter/Edit Option.</small>\n\
                                                     </div>\n\
                                                 </div>';
         data += '               <div class="row form-group">';
@@ -414,7 +399,6 @@ $form->prepare();
             var rowData = $API.row(rowIdx).data();
             rowData['overrideprice'] = data.overrideprice;
             rowData['comment'] = data.comment;
-            rowData['option'] = data.option;
             $API.row(rowIdx).data(rowData);
             $API.draw(false);
             $('.modal').modal('hide');
@@ -433,6 +417,7 @@ $form->prepare();
     $(document).ready(function () {
         //initialize page tool tips.
         $('[data-toggle="tooltip"]').tooltip();
+        
         $API = $('#customerlisttable').DataTable({
             "ajax": '/ajax/items?action=customerlisttableget&customerid=' + php_var,
             //#############################################################
@@ -588,6 +573,11 @@ $form->prepare();
                     extend: 'pdfHtml5',
                     orientation: 'landscape',
                     pageSize: 'LEGAL',
+                    exportOptions: {
+                        rows: {
+                            selected: true
+                        }
+                    },
                     customize: function (doc) {
                         var form_data = new Array();
                         doc.content.forEach(function (row) {
@@ -606,20 +596,20 @@ $form->prepare();
                                         if (tablerow)
                                             form_data.push('ID_' + tablerow['id'], JSON.stringify(tablerow));
                                         var row = [];
-                                        row.push(rowdata[0]);
                                         row.push(rowdata[1]);
                                         row.push(rowdata[2]);
-                                        var override = rowdata[7].text;
+                                        row.push(rowdata[3]);
+                                        var override = rowdata[8].text;
                                         if (override) {
-                                            row.push(rowdata[7]);
+                                            row.push(rowdata[8]);
                                         } else {
-                                            row.push(rowdata[6]);
+                                            row.push(rowdata[7]);
                                         }
-                                        row.push(rowdata[8]);
-                                        row.push(rowdata[11]);
+                                        row.push(rowdata[9]);
+                                        row.push(rowdata[12]);
 
                                         //only add this row if Price
-                                        if (override || rowdata[6].text.indexOf('Call') === -1) {
+                                        if (override || rowdata[7].text.indexOf('Call') === -1) {
                                             newRowData.push(row);
                                         }
                                     }
@@ -718,12 +708,11 @@ $form->prepare();
         //#############################################################
         //#############################################################
         $("#customerlisttable").on('click', 'tbody tr td:nth-child(2), tbody tr td:nth-child(3), tbody tr td:nth-child(4), tbody tr td:nth-child(5), tbody tr td:nth-child(6), tbody tr td:nth-child(7), tbody tr td:nth-child(8), tbody tr td:nth-child(9), tbody tr td:nth-child(10), tbody tr td:nth-child(11), tbody tr td:nth-child(12)', function (e) {
-            $('#detailRowModal').remove();
-            var idx = $(this).parent('tr').index();
-            var row = $API.row(idx);
+            var row = $API.row($(this).parent());
             //alert(JSON.stringify(row.data()));
-            var modal = wrapModal(row, idx);
+            var modal = wrapModal(row);
             console.log('Showing Modal!');
+            $('#detailRowModal').remove();
             $('footer').after($(modal).modal('show'));
         });
 
@@ -742,11 +731,12 @@ $form->prepare();
             //id looks like
             //id="selected_row_${rowIdx}
             var $input = $(this).children('input');
-            if(e.target.id !== $input.attr('id'))
+            var forCheck = $input[0];
+            if (e.target.id !== $input.attr('id'))
                 $input.prop('checked', !$input.prop('checked'));
             var rowIdx = new Number($input.attr('id').replace('selected_row_', ''));
             //console.log('Idx: '+rowIdx);
-            var checked = $(this)[0].checked;
+            var checked = forCheck.checked;
             var rowObj = $API.row(rowIdx).data();
             var sku = rowObj['sku'];
             var url = 'ajax/items?action=';
@@ -786,6 +776,24 @@ $form->prepare();
                     if ($(this).hasClass('ffm-custom-append')) {
                         $(this).attr('data-target', '#addProductModal');
                         $(this).attr('data-toggle', 'modal');
+                        $(this).attr('title', 'Add Product. Please call or lookup the correct SKU.');
+                        $(this).attr('data-placement', 'bottom');
+                        $(this).tooltip();
+                    }else if($(this).hasClass('buttons-pdf')){
+                        //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
+                        $(this).attr('title', 'Click to generate PDF. Disabled rows with no override price and unchecked Product rows will not be included.');
+                        $(this).attr('data-placement', 'top');
+                        $(this).tooltip();
+                    }else if(index === 2){
+                        //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
+                        $(this).attr('title', 'Click to select all rows.');
+                        $(this).attr('data-placement', 'top');
+                        $(this).tooltip();
+                    }else if(index === 3){
+                        //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
+                        $(this).attr('title', 'Click to unselect all rows.');
+                        $(this).attr('data-placement', 'bottom');
+                        $(this).tooltip();
                     }
                 });
             }

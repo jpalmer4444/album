@@ -14,6 +14,13 @@ class User
      * @ORM\Column(type="string")
      */
     protected $username;
+    
+    /** 
+     * Used internally by Doctrine - Do not touch or manipulate.
+     * @ORM\Column(type="integer") 
+     * @ORM\Version 
+     */
+    private $version;
 
     /**
      * @ORM\Column(type="string")
@@ -24,6 +31,16 @@ class User
      * @ORM\Column(type="string")
      */
     protected $salespersonname;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $phone1;
+    
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $email;
     
     /**
      * @ORM\Column(type="integer")
@@ -40,6 +57,22 @@ class User
 
     public function getSales_attr_id() {
         return $this->sales_attr_id;
+    }
+    
+    public function getPhone1() {
+        return $this->phone1;
+    }
+    
+    public function getEmail() {
+        return $this->email;
+    }
+    
+    public function setPhone1($phone1) {
+        $this->phone1 = $phone1;
+    }
+    
+    public function setEmail($email) {
+        $this->email = $email;
     }
 
     public function setUsername($username) {

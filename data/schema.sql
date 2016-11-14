@@ -3,10 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/**
- * Author:  jasonpalmer
- * Created: Oct 12, 2016
- */
 
 CREATE TABLE album (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -22,27 +18,30 @@ INSERT INTO album (artist, title) VALUES ('Gotye', 'Making Mirrors');
 
 CREATE TABLE users (
     username varchar(100) PRIMARY KEY,
+    version integer,
     password varchar(100) NOT NULL,
     salespersonname varchar(100) NOT NULL,
+    email varchar(100) NOT NULL,
+    phone1 varchar(100) NOT NULL,
     sales_attr_id integer NOT NULL
 );
 
-INSERT INTO users (username, password, salespersonname, sales_attr_id) 
-VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Cyndi Metallo', 183);
-INSERT INTO users (username, password, salespersonname, sales_attr_id) 
-VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183);
-INSERT INTO users (username, password, salespersonname, sales_attr_id) 
-VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183);
-INSERT INTO users (username, password, salespersonname, sales_attr_id) 
-VALUES('cmetallo', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183);
-INSERT INTO users (username, password, salespersonname, sales_attr_id) 
-VALUES('mspindler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183);
-INSERT INTO users (username, password, salespersonname, sales_attr_id) 
-VALUES('bzakrinski', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Bill Zakrinski', 206);
-INSERT INTO users (username, password, salespersonname, sales_attr_id) 
-VALUES('iderfler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Iris Derfler', 181);
-INSERT INTO users (username, password, salespersonname, sales_attr_id) 
-VALUES('jmeade', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Jody Meade', 180);
+INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
+VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
+VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
+VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
+VALUES('cmetallo', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
+VALUES('mspindler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
+VALUES('bzakrinski', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Bill Zakrinski', 206, 'bzak@meadedigital.com', '999-999-9999');
+INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
+VALUES('iderfler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Iris Derfler', 181, 'iderfler@meadedigital.com', '999-999-9999');
+INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
+VALUES('jmeade', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Jody Meade', 180, 'jody@meadedigital.com', '999-999-9999');
 
 CREATE TABLE roles (
     role varchar(25) PRIMARY KEY,
@@ -82,6 +81,7 @@ CREATE TABLE `session` (
 
 CREATE TABLE `row_plus_items_page` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
+    `version` integer,
     `sku` VARCHAR(25),
     `productname` VARCHAR(255),
     `description` VARCHAR(255),
@@ -103,6 +103,7 @@ CREATE TABLE `row_plus_items_page` (
 
 CREATE TABLE `item_price_override` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
+    `version` integer,
     `sku` VARCHAR(25),
     `overrideprice` INTEGER,
     `active` BOOLEAN,
@@ -116,6 +117,7 @@ CREATE TABLE `item_price_override` (
 
 CREATE TABLE `pricing_override_report` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
+    `version` integer,
     `sku` VARCHAR(25),
     `product` VARCHAR(255),
     `description` VARCHAR(255),

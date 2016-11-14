@@ -4,6 +4,8 @@ namespace Ajax\Controller\Sales;
 
 use DataAccess\FFM\Entity\ItemPriceOverride;
 use DateTime;
+use Doctrine\DBAL\LockMode;
+use Exception;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 
@@ -61,7 +63,6 @@ class ItemsController extends AbstractRestfulController {
         $overrideprice = $this->params()->fromQuery('overrideprice');
         $sku = $this->params()->fromQuery('sku');
         $comment = $this->params()->fromQuery('comment');
-        $option = $this->params()->fromQuery('option');
         $this->logger->info('Saving overrideprice: ' . $overrideprice . '.');
 
         //save overridePrice in DB
@@ -75,23 +76,35 @@ class ItemsController extends AbstractRestfulController {
             $int2 = filter_var($overrideprice, FILTER_SANITIZE_NUMBER_INT);
             $record->setOverrideprice($int2);
         }
-        if (!empty($option)) {
-            $record->setOption($option);
-        }
         if (!empty($comment)) {
             $record->setComment($comment);
         }
-        $salesperson = $this->entityManager->merge(empty($this->myauthstorage->getSalespersonInPlay()) ? $this->myauthstorage->getUser() : $this->myauthstorage->getSalespersonInPlay());
-        $record->setSalesperson($salesperson);
-        $this->entityManager->persist($record);
-        $this->entityManager->flush();
+        $this->entityManager->getConnection()->beginTransaction(); // suspend auto-commit
+        try {
+            //... do some work
+            $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', 
+                    empty($this->myauthstorage->getSalespersonInPlay()) ? 
+                    $this->myauthstorage->getUser()->getUsername() : 
+                $this->myauthstorage->getSalespersonInPlay()->getUsername(), 
+                    LockMode::PESSIMISTIC_READ);
+
+            $record->setSalesperson($salesperson);
+            $this->entityManager->persist($record);
+            $this->entityManager->flush();
+            $this->entityManager->getConnection()->commit();
+            return new JsonModel(array(
+                'success' => true,
+                'index' => $rowIndex,
+                'overrideprice' => number_format($record->getOverrideprice() / 100, 2),
+                'comment' => $record->getComment(),
+            ));
+        } catch (Exception $e) {
+            $this->entityManager->getConnection()->rollBack();
+            throw $e;
+        }
         return new JsonModel(array(
-            'success' => true,
-            'index' => $rowIndex,
-            'overrideprice' => number_format($record->getOverrideprice() / 100, 2),
-            'comment' => $record->getComment(),
-            'option' => $record->getOption(),
-        ));
+                'success' => false,
+            ));
     }
 
     protected function getTable() {
@@ -132,10 +145,10 @@ class ItemsController extends AbstractRestfulController {
             "success" => true
         ));
     }
-    
+
     protected function unselect() {
         $skus = $this->params()->fromQuery('skus');
-        if(empty($skus)){
+        if (empty($skus)) {
             return $this->unselectAll();
         }
         $customerid = $this->params()->fromQuery('customerid');
@@ -145,12 +158,12 @@ class ItemsController extends AbstractRestfulController {
             "success" => true
         ));
     }
-    
+
     protected function unselectAll() {
         $customerid = $this->params()->fromQuery('customerid');
         $this->logger->info('UnSelecting All.');
         $removedSKUS = $this->myauthstorage->getRemovedSKUS($customerid);
-        foreach($removedSKUS as $sku){
+        foreach ($removedSKUS as $sku) {
             $this->myauthstorage->removeRemovedSKU($sku, $customerid);
         }
         return new JsonModel(array(

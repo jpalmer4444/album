@@ -25,6 +25,13 @@ class PricingOverrideReport {
      */
     protected $id;
     
+    /** 
+     * Used internally by Doctrine - Do not touch or manipulate.
+     * @ORM\Column(type="integer") 
+     * @ORM\Version 
+     */
+    private $version;
+    
     /**
      * @ORM\Column(type="string")
      */

@@ -24,6 +24,13 @@ class ItemPriceOverride extends PostFormBinder {
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
+    
+    /** 
+     * Used internally by Doctrine - Do not touch or manipulate.
+     * @ORM\Column(type="integer") 
+     * @ORM\Version 
+     */
+    private $version;
 
     /**
      * @ORM\Column(name="sku", type="string", length=25)

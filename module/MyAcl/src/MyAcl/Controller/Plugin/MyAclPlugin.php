@@ -54,6 +54,9 @@ class MyAclPlugin extends AbstractPlugin {
         $acl->addResource('sales:Sales\Controller\ItemsController:report');
         $acl->addResource('sales:Sales\Controller\UsersController:index');
         
+        //command route
+        $acl->addResource('command:Command\Controller\Reporting\PriceOverrideController:priceoverridereport');
+        
         //add doctrinemodule for Console calls or MyAclPlugin will intercept
         $acl->addResource('doctrinemodule');
         //doctrinemodule:DoctrineModule\Controller\Cli:cli
@@ -73,6 +76,7 @@ class MyAclPlugin extends AbstractPlugin {
         $acl->allow('anonymous', 'login:Login\Controller\LoginController:authenticate');
         $acl->allow('anonymous', 'login:Login\Controller\LoginController:login');
         $acl->allow('anonymous', 'doctrinemodule:DoctrineModule\Controller\Cli:cli');
+        $acl->allow('anonymous', 'command:Command\Controller\Reporting\PriceOverrideController:priceoverridereport');
         /// module/MyAcl/src/MyAcl/Controller/Plugin/MyAclPlugin.php
         
         
