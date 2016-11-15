@@ -69,7 +69,10 @@ class ItemsController extends AbstractActionController {
         $request = $this->getRequest();
         if ($request->isPost()) {
             $jsonModelArr = array();
-            $form->setData($request->getPost());
+            $postData = $request->getPost();
+            //manually set required properties not in the form.
+            
+            $form->setData($postData);
             if ($form->isValid()) {
                 $success = true;
                 $record = new RowPlusItemsPage();

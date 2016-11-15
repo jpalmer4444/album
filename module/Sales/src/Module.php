@@ -1,11 +1,5 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace Sales;
 
 use Sales\Controller\ItemsController;
@@ -13,11 +7,18 @@ use Sales\Controller\SalesController;
 use Sales\Controller\UsersController;
 use Sales\DTO\RowPlusItemsPageForm;
 use Sales\Filter\RowPlusItemsPageInputFilter;
+use Sales\Service\CheckboxService;
 use Sales\Service\PricingReportPersistenceService;
 use Zend\Hydrator\ObjectProperty;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface{
 
@@ -62,7 +63,8 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                 },
                 SalesController::class => function($container) {
                     return new SalesController(
-                            $container
+                            $container,
+                            $container->get('FFMEntityManager')
                     );
                 },
             ],
@@ -80,6 +82,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                     $loggingService = $sm->get('LoggingService');
                     $entityManager = $sm->get('FFMEntityManager');
                     return new PricingReportPersistenceService($entityManager, $loggingService);
+                },
+                'CheckboxService' => function($sm) {
+                    $loggingService = $sm->get('LoggingService');
+                    $entityManager = $sm->get('FFMEntityManager');
+                    return new CheckboxService($loggingService, $entityManager);
                 },
             ]
         ];

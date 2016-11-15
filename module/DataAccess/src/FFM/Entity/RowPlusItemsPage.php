@@ -2,20 +2,19 @@
 
 namespace DataAccess\FFM\Entity;
 
+use DataAccess\FFM\Entity\PostFormBinder;
 use DataAccess\FFM\Entity\User;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity 
+ * @ORM\Entity(repositoryClass="RowPlusItemsPageRepository")
  * @ORM\Table(name="row_plus_items_page")
  */
 class RowPlusItemsPage extends PostFormBinder {
     
     public function __construct()
     {
-        $this->_created=new \DateTime();
+        $this->_created=new DateTime();
     }
 
     /**
@@ -108,8 +107,8 @@ class RowPlusItemsPage extends PostFormBinder {
     protected $_customerid;
 
     /**
-     * @ManyToOne(targetEntity="User", cascade={"all"}, fetch="LAZY")
-     * @JoinColumn(name="salesperson", referencedColumnName="username")
+     * @ORM\ManyToOne(targetEntity="User", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="salesperson", referencedColumnName="username")
      */
     protected $_salesperson;
 

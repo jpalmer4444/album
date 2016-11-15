@@ -22,9 +22,11 @@ class ItemsController extends AbstractRestfulController {
     protected $pricingconfig;
     protected $entityManager;
     protected $itemsFilterService;
+    protected $checkboxService;
 
     public function __construct($container) {
         $this->restService = $container->get('RestService');
+        $this->checkboxService = $container->get('CheckboxService');
         $this->logger = $container->get('LoggingService');
         $this->myauthstorage = $container->get('Login\Model\MyAuthStorage');
         $this->pricingconfig = $container->get('config')['pricing_config'];
@@ -130,7 +132,11 @@ class ItemsController extends AbstractRestfulController {
         $sku = $this->params()->fromQuery('sku');
         $customerid = $this->params()->fromQuery('customerid');
         $this->logger->info('Removing SKU ' . $sku . ' and adding to session removedSKUS.');
-        $this->myauthstorage->addRemovedSKU($sku, $customerid);
+        $userinplay = $this->myauthstorage->getSalespersonInPlay();
+        if(empty($userinplay)){
+            $userinplay = $this->myauthstorage->getUser();
+        }
+        $this->checkboxService->addRemovedSKU($sku, $customerid, $userinplay->getUsername());
         return new JsonModel(array(
             "success" => $sku
         ));
@@ -140,7 +146,11 @@ class ItemsController extends AbstractRestfulController {
         $skus = $this->params()->fromQuery('skus');
         $customerid = $this->params()->fromQuery('customerid');
         //$this->logger->info('Selecting ' . $skus);
-        $this->myauthstorage->addRemovedSKU($skus, $customerid);
+        $userinplay = $this->myauthstorage->getSalespersonInPlay();
+        if(empty($userinplay)){
+            $userinplay = $this->myauthstorage->getUser();
+        }
+        $this->checkboxService->addRemovedSKU($skus, $customerid, $userinplay->getUsername());
         return new JsonModel(array(
             "success" => true
         ));
@@ -153,7 +163,11 @@ class ItemsController extends AbstractRestfulController {
         }
         $customerid = $this->params()->fromQuery('customerid');
         //$this->logger->info('Unselecting ' . $skus);
-        $this->myauthstorage->removeRemovedSKU($skus, $customerid);
+        $userinplay = $this->myauthstorage->getSalespersonInPlay();
+        if(empty($userinplay)){
+            $userinplay = $this->myauthstorage->getUser();
+        }
+        $this->checkboxService->removeRemovedSKU($skus, $customerid, $userinplay->getUsername());
         return new JsonModel(array(
             "success" => true
         ));
@@ -162,9 +176,13 @@ class ItemsController extends AbstractRestfulController {
     protected function unselectAll() {
         $customerid = $this->params()->fromQuery('customerid');
         $this->logger->info('UnSelecting All.');
-        $removedSKUS = $this->myauthstorage->getRemovedSKUS($customerid);
+        $userinplay = $this->myauthstorage->getSalespersonInPlay();
+        if(empty($userinplay)){
+            $userinplay = $this->myauthstorage->getUser();
+        }
+        $removedSKUS = $this->checkboxService->getRemovedSKUS($customerid, $userinplay->getUsername());
         foreach ($removedSKUS as $sku) {
-            $this->myauthstorage->removeRemovedSKU($sku, $customerid);
+            $this->checkboxService->removeRemovedSKU($sku, $customerid, $userinplay->getUsername());
         }
         return new JsonModel(array(
             "success" => true

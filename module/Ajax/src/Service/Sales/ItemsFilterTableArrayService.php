@@ -13,12 +13,14 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
     protected $pricingconfig;
     protected $myauthstorage;
     protected $entityManager;
+    protected $checkboxService;
 
     public function __construct($sm) {
         $this->logger = $sm->get('LoggingService');
         $this->myauthstorage = $sm->get('Login\Model\MyAuthStorage');
         $this->pricingconfig = $sm->get('config')['pricing_config'];
         $this->entityManager = $sm->get('FFMEntityManager');
+        $this->checkboxService = $sm->get('CheckboxService');
     }
 
     /**
@@ -142,8 +144,12 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
     }
     
     protected function retrieveRemovedSkus($customerid){
-        return !empty($this->myauthstorage->getRemovedSKUS($customerid)) ? 
-            $this->myauthstorage->getRemovedSKUS($customerid) : 
+        $userinplay = $this->myauthstorage->getSalespersonInPlay();
+        if(empty($userinplay)){
+            $userinplay = $this->myauthstorage->getUser();
+        }
+        return !empty($this->checkboxService->getRemovedSKUS($customerid, $userinplay->getUsername())) ? 
+            $this->checkboxService->getRemovedSKUS($customerid, $userinplay->getUsername()) : 
             [];
     }
     

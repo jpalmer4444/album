@@ -221,3 +221,27 @@ $ composer cs-fix
 # Run PHPUnit tests:
 $ composer test
 ```
+
+
+
+Select Salesperson to run pricing report:
+a) Cyndi Metallo
+b) Bill Zakrinski
+c) Iris Derfler
+d) All of the above.
+
+foreach(salesperson){
+    Show Added Products?
+    foreach(salesperson.additemrows){display report}
+    Show Price Overrides?
+    foreach(salesperson.priceoverrides){display report}
+    Show Pricing Reports?
+    foreach(salesperson.priceoverridereports){display report}
+}
+
+Pricing Report for Customer ${customer} by Salesperson ${salesperson} at: ${time} on ${date}
+Product             ||  Description             ||  Comment             ||  Price           ||  UOM             ||  SKU             ||  Variance (+/-)
+Arctic Char - Farmed |                          |                       | $7.35             | ib                | 16200102              +$.35
+
+Show Aggregate Total Discounts per salesperson?
+foreach(salesperson){show total discounts per uom, show avg. percent of discount per uom ordered by largest margin}

@@ -35,12 +35,18 @@ class PriceOverrideController extends AbstractActionController {
 
         $request = $this->getRequest();
 
+        $console = Console::getInstance();
+        
         // Make sure that we are running in a console and the user has not tricked our
         // application into running this action from a public web server.
         if (!$request instanceof Request) {
             //$this->logger->info(get_class($request));
             throw new RuntimeException('You can only use this action from a console!');
+        }else{
+            $console->clear();
         }
+        
+        
 
         // Get user email from console and check if the user used --verbose or -v flag
         $verbose = $request->getParam('verbose') || $request->getParam('v');
@@ -57,7 +63,6 @@ class PriceOverrideController extends AbstractActionController {
 
         $toDate = empty($to) ? date("Y-m-d H:i:s", strval(strtotime('now'))) : date("Y-m-d H:i:s", strval(strtotime($to)));
 
-        $console = Console::getInstance();
         if ($verbose) {
             $console->writeLine("<-v|--verbose> Output Enabled.");
         }

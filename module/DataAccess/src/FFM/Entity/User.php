@@ -1,10 +1,11 @@
 <?php
 
 namespace DataAccess\FFM\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /** 
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserRepository")
  * @ORM\Table(name="users")
  */
 class User
@@ -47,8 +48,17 @@ class User
      */
     protected $sales_attr_id;
     
+    /**
+     * @ORM\Column(name="last_login", type="datetime", nullable=true)
+     */
+    protected $lastlogin;
+    
     public function getUsername() {
         return $this->username;
+    }
+    
+    public function getLastlogin() {
+        return $this->lastlogin;
     }
     
     public function getSalespersonname() {
@@ -69,6 +79,10 @@ class User
     
     public function setPhone1($phone1) {
         $this->phone1 = $phone1;
+    }
+    
+    public function setLastlogin($lastlogin) {
+        $this->lastlogin = $lastlogin;
     }
     
     public function setEmail($email) {

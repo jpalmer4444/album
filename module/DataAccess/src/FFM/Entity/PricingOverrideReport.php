@@ -3,19 +3,17 @@
 namespace DataAccess\FFM\Entity;
 
 use DataAccess\FFM\Entity\User;
-use Doctrine\ORM\Mapping\JoinColumn;
-use Doctrine\ORM\Mapping\ManyToOne;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity 
+ * @ORM\Entity(repositoryClass="PricingOverrideReportRepository")
  * @ORM\Table(name="pricing_override_report")
  */
 class PricingOverrideReport {
     
     public function __construct()
     {
-        $this->_created=new \DateTime();
+        $this->_created=new DateTime();
     }
     
     /**

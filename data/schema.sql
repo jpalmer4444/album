@@ -23,8 +23,21 @@ CREATE TABLE users (
     salespersonname varchar(100) NOT NULL,
     email varchar(100) NOT NULL,
     phone1 varchar(100) NOT NULL,
-    sales_attr_id integer NOT NULL
+    sales_attr_id integer NOT NULL,
+    last_login TIMESTAMP DEFAULT NULL
 );
+
+CREATE INDEX index_users_salespersonname
+ON users (salespersonname);
+
+CREATE INDEX index_users_sales_attr_id
+ON users (sales_attr_id);
+
+CREATE INDEX cmp_index_users_salespersonname_sales_attr_id
+ON users (salespersonname, sales_attr_id);
+
+CREATE INDEX cmp_index_users_username_salespersonname_sales_attr_id
+ON users (username, salespersonname, sales_attr_id);
 
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
@@ -101,6 +114,12 @@ CREATE TABLE `row_plus_items_page` (
      FOREIGN KEY(salesperson) REFERENCES users(username)
 );
 
+CREATE INDEX index_row_plus_items_page_sku
+ON row_plus_items_page (sku);
+
+CREATE INDEX index_row_plus_items_page_customer_id
+ON row_plus_items_page (customerid);
+
 CREATE TABLE `item_price_override` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
     `version` integer,
@@ -114,6 +133,12 @@ CREATE TABLE `item_price_override` (
     `salesperson` INTEGER,
      FOREIGN KEY(salesperson) REFERENCES users(username)
 );
+
+CREATE INDEX index_item_price_override_sku
+ON item_price_override (sku);
+
+CREATE INDEX index_item_price_override_customer_id
+ON item_price_override (customerid);
 
 CREATE TABLE `pricing_override_report` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
@@ -129,4 +154,21 @@ CREATE TABLE `pricing_override_report` (
     `customerid` INTEGER,
     `salesperson` INTEGER,
      FOREIGN KEY(salesperson) REFERENCES users(username)
+);
+
+CREATE INDEX index_pricing_override_report_sku
+ON pricing_override_report (sku);
+
+CREATE INDEX index_pricing_override_report_customer_id
+ON pricing_override_report (customerid);
+
+CREATE TABLE `item_table_checkbox` (
+    `version` integer,
+    `sku` VARCHAR(25),
+    `checked` BOOLEAN DEFAULT 0,
+    `customerid` INTEGER,
+    `salesperson` VARCHAR(100),
+    `created` TIMESTAMP,
+     FOREIGN KEY(salesperson) REFERENCES users(username),
+     PRIMARY KEY(sku, customerid, salesperson)
 );

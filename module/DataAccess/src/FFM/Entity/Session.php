@@ -1,10 +1,11 @@
 <?php
 
 namespace DataAccess\FFM\Entity;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /** 
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="SessionRepository")
  * @ORM\Table(name="session")
  */
 class Session {
