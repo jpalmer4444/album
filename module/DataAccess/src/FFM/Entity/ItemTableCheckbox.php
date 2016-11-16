@@ -17,6 +17,13 @@ class ItemTableCheckbox extends PostFormBinder {
         $this->_created=new DateTime();
     }
     
+    /**
+     * @ORM\Id
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    protected $id;
+    
     /** 
      * Used internally by Doctrine - Do not touch or manipulate.
      * @ORM\Column(type="integer") 
@@ -25,10 +32,14 @@ class ItemTableCheckbox extends PostFormBinder {
     private $version;
 
     /**
-     * @ORM\Id
      * @ORM\Column(name="sku", type="string", length=25)
      */
     protected $sku;
+    
+    /**
+     * @ORM\Column(name="product", type="string", length=255)
+     */
+    protected $product;
     
     /**
      * @ORM\Column(name="created", type="datetime", nullable=true)
@@ -36,13 +47,11 @@ class ItemTableCheckbox extends PostFormBinder {
     protected $_created;
 
     /**
-     * @ORM\Id
      * @ORM\Column(name="customerid", type="integer")
      */
     protected $_customerid;
 
     /**
-     * @ORM\Id
      * @ORM\Column(name="salesperson", type="string", length=100)
      * @ORM\ManyToOne(targetEntity="User", cascade={"all"}, fetch="LAZY")
      * @ORM\JoinColumn(name="salesperson", referencedColumnName="username")
@@ -53,6 +62,10 @@ class ItemTableCheckbox extends PostFormBinder {
      * @ORM\Column(name="checked", type="boolean")
      */
     protected $checked;
+    
+    public function getId() {
+        return $this->id;
+    }
 
     public function getSku() {
         return $this->sku;
@@ -76,6 +89,11 @@ class ItemTableCheckbox extends PostFormBinder {
 
     public function setSku($sku) {
         $this->sku = $sku;
+        return $this;
+    }
+    
+    public function setId($id) {
+        $this->id = $id;
         return $this;
     }
     

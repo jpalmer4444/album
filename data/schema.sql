@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+DROP TABLE IF EXISTS album;
 CREATE TABLE album (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
     artist varchar(100) NOT NULL, 
@@ -16,6 +16,11 @@ INSERT INTO album (artist, title) VALUES ('Bruce Springsteen', 'Wrecking Ball (D
 INSERT INTO album (artist, title) VALUES ('Lana Del Rey', 'Born To Die');
 INSERT INTO album (artist, title) VALUES ('Gotye', 'Making Mirrors');
 
+DROP TABLE IF EXISTS row_plus_items_page;
+DROP TABLE IF EXISTS item_price_override;
+DROP TABLE IF EXISTS pricing_override_report;
+DROP TABLE IF EXISTS item_table_checkbox;
+DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     username varchar(100) PRIMARY KEY,
     version integer,
@@ -56,6 +61,7 @@ VALUES('iderfler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('jmeade', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Jody Meade', 180, 'jody@meadedigital.com', '999-999-9999');
 
+DROP TABLE IF EXISTS roles;
 CREATE TABLE roles (
     role varchar(25) PRIMARY KEY,
     description varchar(100) NOT NULL
@@ -67,11 +73,13 @@ VALUES('sales', 'Salespeople Access');
 INSERT INTO roles (role, description) 
 VALUES('admin', 'Admin Access');
 
+DROP TABLE IF EXISTS user_role_xref;
 CREATE TABLE user_role_xref (
     role varchar(25) NOT NULL,
     username varchar(100) NOT NULL,
     PRIMARY KEY(role, username)
 );
+
 
 INSERT INTO user_role_xref VALUES('admin', 'jpalmer');
 INSERT INTO user_role_xref VALUES('admin', 'dtanzer');
@@ -83,6 +91,7 @@ INSERT INTO user_role_xref VALUES('sales', 'iderfler');
 INSERT INTO user_role_xref VALUES('sales', 'jmeade');
 
 
+DROP TABLE IF EXISTS session;
 CREATE TABLE `session` (
     `id` char(32),
     `name` char(32),
@@ -94,7 +103,7 @@ CREATE TABLE `session` (
 
 CREATE TABLE `row_plus_items_page` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
-    `version` integer,
+    `version` INTEGER DEFAULT 1,
     `sku` VARCHAR(25),
     `productname` VARCHAR(255),
     `description` VARCHAR(255),
@@ -110,7 +119,7 @@ CREATE TABLE `row_plus_items_page` (
     `saturdayenabled` BOOLEAN,
     `created` TIMESTAMP,
     `customerid` INTEGER,
-    `salesperson` INTEGER,
+    `salesperson` VARCHAR(100),
      FOREIGN KEY(salesperson) REFERENCES users(username)
 );
 
@@ -122,7 +131,7 @@ ON row_plus_items_page (customerid);
 
 CREATE TABLE `item_price_override` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
-    `version` integer,
+    `version` INTEGER DEFAULT 1,
     `sku` VARCHAR(25),
     `overrideprice` INTEGER,
     `active` BOOLEAN,
@@ -130,7 +139,7 @@ CREATE TABLE `item_price_override` (
     `option` VARCHAR(255),
     `created` TIMESTAMP,
     `customerid` INTEGER,
-    `salesperson` INTEGER,
+    `salesperson` VARCHAR(100),
      FOREIGN KEY(salesperson) REFERENCES users(username)
 );
 
@@ -142,7 +151,7 @@ ON item_price_override (customerid);
 
 CREATE TABLE `pricing_override_report` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
-    `version` integer,
+    `version` INTEGER DEFAULT 1,
     `sku` VARCHAR(25),
     `product` VARCHAR(255),
     `description` VARCHAR(255),
@@ -152,7 +161,7 @@ CREATE TABLE `pricing_override_report` (
     `uom` VARCHAR(100),
     `created` TIMESTAMP,
     `customerid` INTEGER,
-    `salesperson` INTEGER,
+    `salesperson` VARCHAR(100),
      FOREIGN KEY(salesperson) REFERENCES users(username)
 );
 
@@ -163,12 +172,16 @@ CREATE INDEX index_pricing_override_report_customer_id
 ON pricing_override_report (customerid);
 
 CREATE TABLE `item_table_checkbox` (
-    `version` integer,
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
+    `version` INTEGER DEFAULT 1,
     `sku` VARCHAR(25),
+    `product` VARCHAR(255),
     `checked` BOOLEAN DEFAULT 0,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
     `created` TIMESTAMP,
-     FOREIGN KEY(salesperson) REFERENCES users(username),
-     PRIMARY KEY(sku, customerid, salesperson)
+     FOREIGN KEY(salesperson) REFERENCES users(username)
 );
+
+CREATE INDEX cmp_index_item_table_checkbox_salesperson_customerid_product
+ON `item_table_checkbox` (`salesperson`, `customerid`, `product`);

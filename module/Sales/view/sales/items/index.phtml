@@ -607,7 +607,7 @@ $form->prepare();
                                         row.push(rowdata[12]);
 
                                         //only add this row if Price
-                                        if (override || rowdata[7].text.indexOf('Call') === -1) {
+                                        if (override || rowdata[8].text.indexOf('Call') === -1) {
                                             newRowData.push(row);
                                         }
                                     }
@@ -809,7 +809,7 @@ $form->prepare();
             submitHandler: function (form) {
                 $.ajax({
                     type: 'POST',
-                    url: "https://pricing.localhost/items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>",
+                    url: "items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>",
                     data: $(form).serialize()
                 })
                         .done(function (response) {
@@ -1035,34 +1035,34 @@ $form->prepare();
                             <tr>
                                 <th data-priority="1" ></th>
                                 <th data-priority="2">Product</th>
-                                <th data-priority="6">Description</th>
-                                <th data-priority="8">Comment</th>
+                                <th data-priority="7">Description</th>
+                                <th data-priority="9">Comment</th>
                                 <th data-priority="13">Option</th>
-                                <th data-priority="7">Qty</th>
+                                <th data-priority="8">Qty</th>
                                 <th data-priority="3">Wholesale</th>
                                 <th data-priority="4">Retail</th>
-                                <th data-priority="11">Override Price</th>
-                                <th data-priority="9">UOM</th>
-                                <th data-priority="10">Status</th>
+                                <th data-priority="5">Override Price</th>
+                                <th data-priority="10">UOM</th>
+                                <th data-priority="11">Status</th>
                                 <th data-priority="12">Saturday Enabled</th>
-                                <th data-priority="5">SKU</th>
+                                <th data-priority="6">SKU</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th data-priority="1" ></th>
                                 <th data-priority="2">Product</th>
-                                <th data-priority="6">Description</th>
-                                <th data-priority="8">Comment</th>
+                                <th data-priority="7">Description</th>
+                                <th data-priority="9">Comment</th>
                                 <th data-priority="13">Option</th>
-                                <th data-priority="7">Qty</th>
+                                <th data-priority="8">Qty</th>
                                 <th data-priority="3">Wholesale</th>
                                 <th data-priority="4">Retail</th>
-                                <th data-priority="11">Override Price</th>
-                                <th data-priority="9">UOM</th>
-                                <th data-priority="10">Status</th>
+                                <th data-priority="5">Override Price</th>
+                                <th data-priority="10">UOM</th>
+                                <th data-priority="11">Status</th>
                                 <th data-priority="12">Saturday Enabled</th>
-                                <th data-priority="5">SKU</th>
+                                <th data-priority="6">SKU</th>
                             </tr>
                         </tfoot>
                     </table>

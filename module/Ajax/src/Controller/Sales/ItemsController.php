@@ -136,7 +136,13 @@ class ItemsController extends AbstractRestfulController {
         if(empty($userinplay)){
             $userinplay = $this->myauthstorage->getUser();
         }
-        $this->checkboxService->addRemovedSKU($sku, $customerid, $userinplay->getUsername());
+        if(is_array($sku)){
+            foreach($sku as $s){
+                $this->checkboxService->removeRemovedSKU($s, $customerid, $userinplay->getUsername());
+            }
+        }else{
+            $this->checkboxService->removeRemovedSKU($sku, $customerid, $userinplay->getUsername());
+        }
         return new JsonModel(array(
             "success" => $sku
         ));
@@ -150,7 +156,9 @@ class ItemsController extends AbstractRestfulController {
         if(empty($userinplay)){
             $userinplay = $this->myauthstorage->getUser();
         }
-        $this->checkboxService->addRemovedSKU($skus, $customerid, $userinplay->getUsername());
+        foreach($skus as $sku){
+            $this->checkboxService->addRemovedSKU($sku, $customerid, $userinplay->getUsername());
+        }
         return new JsonModel(array(
             "success" => true
         ));
@@ -167,7 +175,9 @@ class ItemsController extends AbstractRestfulController {
         if(empty($userinplay)){
             $userinplay = $this->myauthstorage->getUser();
         }
-        $this->checkboxService->removeRemovedSKU($skus, $customerid, $userinplay->getUsername());
+        foreach($skus as $sku){
+            $this->checkboxService->removeRemovedSKU($sku, $customerid, $userinplay->getUsername());
+        }
         return new JsonModel(array(
             "success" => true
         ));

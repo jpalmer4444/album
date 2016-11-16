@@ -64,10 +64,10 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'username', '' . "\0" . 'DataAccess\\FFM\\Entity\\User' . "\0" . 'version', 'password', 'salespersonname', 'phone1', 'email', 'sales_attr_id'];
+            return ['__isInitialized__', 'username', '' . "\0" . 'DataAccess\\FFM\\Entity\\User' . "\0" . 'version', 'password', 'salespersonname', 'phone1', 'email', 'sales_attr_id', 'lastlogin'];
         }
 
-        return ['__isInitialized__', 'username', '' . "\0" . 'DataAccess\\FFM\\Entity\\User' . "\0" . 'version', 'password', 'salespersonname', 'phone1', 'email', 'sales_attr_id'];
+        return ['__isInitialized__', 'username', '' . "\0" . 'DataAccess\\FFM\\Entity\\User' . "\0" . 'version', 'password', 'salespersonname', 'phone1', 'email', 'sales_attr_id', 'lastlogin'];
     }
 
     /**
@@ -191,6 +191,17 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
     /**
      * {@inheritDoc}
      */
+    public function getLastlogin()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getLastlogin', []);
+
+        return parent::getLastlogin();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getSalespersonname()
     {
 
@@ -241,6 +252,17 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setPhone1', [$phone1]);
 
         return parent::setPhone1($phone1);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setLastlogin($lastlogin)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLastlogin', [$lastlogin]);
+
+        return parent::setLastlogin($lastlogin);
     }
 
     /**

@@ -4,6 +4,7 @@ namespace DataAccess\FFM\Entity;
 
 use DataAccess\FFM\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="PricingOverrideReportRepository")
@@ -76,8 +77,8 @@ class PricingOverrideReport {
     protected $_customerid;
     
     /**
-     * @ManyToOne(targetEntity="User", cascade={"all"}, fetch="LAZY")
-     * @JoinColumn(name="salesperson", referencedColumnName="username")
+     * @ORM\ManyToOne(targetEntity="User", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="salesperson", referencedColumnName="username")
      */
     protected $_salesperson;
     

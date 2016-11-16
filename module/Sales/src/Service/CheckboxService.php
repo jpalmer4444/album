@@ -55,7 +55,9 @@ class CheckboxService implements CheckboxServiceInterface {
         //create non-associate (1d) array of SKUs. This will eliminate the need
         $onedim = array();
         foreach ($arrayOfCheckboxEntities as $entity) {
-            $onedim [] = $entity->getSku();
+            if($entity->getChecked()){
+                $onedim [] = $entity->getSku();   
+            }
         }
         return $onedim;
     }
@@ -72,6 +74,7 @@ class CheckboxService implements CheckboxServiceInterface {
         //$audi = $em->createQuery($dql)
         //->setParameter(1, array("name" => "Audi A8", "year" => 2010))
         //->getSingleResult();
+        $this->checkboxrepository->removeCheckbox($sku, $customerid, $salespersonusername);
     }
 
     protected function findCheckbox($sku, $customerid, $salespersonusername) {

@@ -5,6 +5,7 @@ namespace DataAccess\FFM\Entity;
 use DataAccess\FFM\Entity\PostFormBinder;
 use DataAccess\FFM\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /**
  * @ORM\Entity(repositoryClass="RowPlusItemsPageRepository")
