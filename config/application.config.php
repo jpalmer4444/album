@@ -8,6 +8,7 @@ use Zend\Log\Writer\Stream;
  * there is an example in the documentation
  * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-system-configuration
  * @see https://docs.zendframework.com/tutorials/advanced-config/#environment-specific-application-configuration
+ * https://svc.ffmalpha.com/bySKU.php?id=jpalmer&pw=goodbass&object=customers&salespersonid=183
  */
 $env = getenv('APPLICATION_ENV') ?: 'development';
 $writer = new Stream('php://stderr');

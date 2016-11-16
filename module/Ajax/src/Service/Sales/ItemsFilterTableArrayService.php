@@ -82,20 +82,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
             if (array_key_exists(strval($item->getSku()), $overrideMap)) {
                 $adjOverrideprice = $overrideMap[strval($item->getSku())];
             }
-            $merged[] = array(
-                "productname" => $item->getProduct(),
-                "shortescription" => $item->getDescription(),
-                "comment" => $item->getComment(),
-                "option" => $item->getOption(),
-                "qty" => $item->getQty(),
-                "wholesale" => $adjWholesale,
-                "retail" => $adjRetail,
-                "overrideprice" => $adjOverrideprice,
-                "uom" => $item->getUom(),
-                "sku" => $item->getSku(),
-                "status" => strcmp(strval($item->getStatus()), "1") == 0 ? "Enabled" : "Disabled",
-                "saturdayenabled" => strcmp(strval($item->getSaturdayenabled()), "1") == 0 ? "Enabled" : "Disabled",
-            );
+            $merged[] = $this->addItem($item, $adjWholesale, $adjRetail, $adjOverrideprice);
             //add to the map
             $map[$item->getSku()] = $item;
         }
@@ -152,6 +139,23 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 $this->checkboxService->getRemovedSKUS($customerid, $userinplay->getUsername()) :
                 [];
     }
+    
+    private function addItem($item, $adjWholesale, $adjRetail, $adjOverrideprice){
+        return array(
+                "productname" => $item->getProduct(),
+                "shortescription" => $item->getDescription(),
+                "comment" => $item->getComment(),
+                "option" => $item->getOption(),
+                "qty" => $item->getQty(),
+                "wholesale" => $adjWholesale,
+                "retail" => $adjRetail,
+                "overrideprice" => $adjOverrideprice,
+                "uom" => $item->getUom(),
+                "sku" => $item->getSku(),
+                "status" => strcmp(strval($item->getStatus()), "1") == 0 ? "Enabled" : "Disabled",
+                "saturdayenabled" => strcmp(strval($item->getSaturdayenabled()), "1") == 0 ? "Enabled" : "Disabled",
+            );
+    }
 
     private function getDailyCutoff() {
         $pre1pm = false;
@@ -160,32 +164,33 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         }
         if ($pre1pm) {
             //it is before 1:00PM UTC now - so set the query to retrieve all rows since yesterday at 1:00PM
-            $date = strtotime("today");
-            $date->modify('-1 day');
-            $time = "13:00:00";//overwrite time to 1:00 if it is after 1:00.
-            $timee = explode(":", $time);
-            $tz_string = "US/Samoa"; // Use one from list of TZ names http://php.net/manual/en/timezones.php UTC?
-            $tz_object = new DateTimeZone($tz_string);
-
-            $datetime = new DateTime();
-            $datetime->setTimestamp($date);
-            $datetime->setTimezone($tz_object);
-            $datetime->setTime($timee[0], $timee[1], $timee[2]);
-            return $datetime;
+            return $this->fromOneToOne();
         } else {
             //it is after 1:00PM UTC now - so set the query to retrieve all rows since today at 1:00PM
-            $date = strtotime("today midnight");
-            $time = "13:00:00";//overwrite time to 1:00 if it is after 1:00.
-            $timee = explode(":", $time);
+            return $this->fromOne();
+        }
+    }
+    
+    private function fromOne(){
+        $date = new DateTime();
+            $time = "13:00:00"; //overwrite time to 1:00 if it is after 1:00.
             $tz_string = "US/Samoa"; // Use one from list of TZ names http://php.net/manual/en/timezones.php UTC?
             $tz_object = new DateTimeZone($tz_string);
-
             $datetime = new DateTime();
             $datetime->setTimestamp($date);
             $datetime->setTimezone($tz_object);
-            $datetime->setTime($timee[0], $timee[1], $timee[2]);
             return $datetime;
-        }
+    }
+
+    private function fromOneToOne() {
+        $date = strtotime('today -1 day');
+        $time = "13:00:00"; //overwrite time to 1:00 if it is after 1:00.
+        $tz_string = "US/Samoa"; // Use one from list of TZ names http://php.net/manual/en/timezones.php UTC?
+        $tz_object = new DateTimeZone($tz_string);
+        $datetime = new DateTime();
+        $datetime->setTimestamp($date);
+        $datetime->setTimezone($tz_object);
+        return $datetime;
     }
 
     protected function applyOverride($overrideMap, $item, $merged) {

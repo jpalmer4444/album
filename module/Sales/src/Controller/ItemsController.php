@@ -135,8 +135,10 @@ class ItemsController extends AbstractActionController {
                 $record->setCreated($created);
                 $record->setActive(true);
                 $record->setCustomerid($this->customerid);
-                $salesperson = $this->entityManager->merge(empty($this->myauthstorage->getSalespersonInPlay()) ? $this->myauthstorage->getUser() : $this->myauthstorage->getSalespersonInPlay());
+                $salesperson = $this->entityManager->find("DataAccess\FFM\Entity\User", empty($this->myauthstorage->getSalespersonInPlay()) ? $this->myauthstorage->getUser()->getUsername() : $this->myauthstorage->getSalespersonInPlay()->getUsername());
+                
                 $record->setSalesperson($salesperson);
+                //var_dump($record);
                 $this->entityManager->persist($record);
                 $this->entityManager->flush();
                 $this->logger->info('Saved added row: ' . $record->getId());

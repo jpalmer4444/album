@@ -53,7 +53,7 @@ class RowPlusItemsPage extends PostFormBinder {
     protected $comment;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="`option`", type="string")
      */
     protected $option;
 

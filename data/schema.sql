@@ -20,10 +20,12 @@ DROP TABLE IF EXISTS row_plus_items_page;
 DROP TABLE IF EXISTS item_price_override;
 DROP TABLE IF EXISTS pricing_override_report;
 DROP TABLE IF EXISTS item_table_checkbox;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     username varchar(100) PRIMARY KEY,
-    version integer,
+    version INTEGER DEFAULT 1,
     password varchar(100) NOT NULL,
     salespersonname varchar(100) NOT NULL,
     email varchar(100) NOT NULL,
@@ -100,6 +102,47 @@ CREATE TABLE `session` (
     `data` text,
      PRIMARY KEY (`id`, `name`)
 );
+
+CREATE TABLE `products` (
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT,
+    `version` INTEGER DEFAULT 1,
+    `sku` VARCHAR(25),
+    `product` VARCHAR(255),
+    `description` VARCHAR(255),
+    `comment` VARCHAR(255),
+    `option` VARCHAR(255),
+    `qty` INTEGER,
+    `wholesale` INTEGER,
+    `retail` INTEGER,
+    `overrideprice` INTEGER,
+    `uom` VARCHAR(100),
+    `status` BOOLEAN,
+    `saturdayenabled` BOOLEAN,
+    `created` TIMESTAMP,
+);
+
+CREATE INDEX index_products_sku
+ON `products` (`sku`);
+
+CREATE INDEX index_products_product
+ON `products` (`product`);
+
+CREATE TABLE `customers` (
+    `id` INTEGER PRIMARY KEY,
+    `version` INTEGER DEFAULT 1,
+    `email` VARCHAR(100) NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `company` VARCHAR(255) NOT NULL,
+);
+
+CREATE INDEX index_customers_email
+ON `customers` (`email`);
+
+CREATE INDEX index_customers_name
+ON `customers` (`name`);
+
+CREATE INDEX index_customers_company
+ON `customers` (`company`);
 
 CREATE TABLE `row_plus_items_page` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
