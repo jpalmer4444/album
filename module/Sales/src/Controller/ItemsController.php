@@ -8,11 +8,11 @@ namespace Sales\Controller;
 use Application\Service\FFMEntityManagerServiceInterface;
 use Application\Service\LoggingServiceInterface;
 use DataAccess\FFM\Entity\PricingOverrideReport;
+use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
+use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
 use DateTime;
-use Exception;
 use Login\Model\MyAuthStorage;
-use Sales\Service\PricingReportPersistenceServiceInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\View\Model\JsonModel;
@@ -29,25 +29,30 @@ class ItemsController extends AbstractActionController {
     protected $formManager;
     protected $entityManager;
     protected $pricingReportPersistenceService;
+    protected $rowplusitemspagerepository;
+    protected $userrepository;
 
     /**
      * 
      * @param LoggingServiceInterface $logger
      * @param MyAuthStorage $myauthstorage
      * @param \Sales\Controller\FormElementManager $formManager
-     * @param PricingReportPersistenceServiceInterface $pricingReportPersistenceService
-     * @param FFMEntityManagerServiceInterface $ffmEntityManagerService
      * @param type $config simple array of environment specific properties
      */
     public function __construct(
-    LoggingServiceInterface $logger, MyAuthStorage $myauthstorage, AbstractPluginManager $formManager, PricingReportPersistenceServiceInterface $pricingReportPersistenceService, FFMEntityManagerServiceInterface $ffmEntityManagerService, $config = NULL
+            LoggingServiceInterface $logger, 
+            MyAuthStorage $myauthstorage, 
+            AbstractPluginManager $formManager, 
+            UserRepositoryImpl $userrepository, 
+            RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, 
+            $config = NULL
     ) {
         $this->logger = $logger;
         $this->myauthstorage = $myauthstorage;
         $this->pricingconfig = $config;
         $this->formManager = $formManager;
-        $this->pricingReportPersistenceService = $pricingReportPersistenceService;
-        $this->entityManager = $ffmEntityManagerService->getEntityManager();
+        $this->userrepository = $userrepository;
+        $this->rowplusitemspagerepository = $rowplusitemspagerepository;
     }
 
     public function indexAction() {
@@ -135,12 +140,11 @@ class ItemsController extends AbstractActionController {
                 $record->setCreated($created);
                 $record->setActive(true);
                 $record->setCustomerid($this->customerid);
-                $salesperson = $this->entityManager->find("DataAccess\FFM\Entity\User", empty($this->myauthstorage->getSalespersonInPlay()) ? $this->myauthstorage->getUser()->getUsername() : $this->myauthstorage->getSalespersonInPlay()->getUsername());
+                $salesperson = $this->userrepository->findUser(empty($this->myauthstorage->getSalespersonInPlay()) ? $this->myauthstorage->getUser()->getUsername() : $this->myauthstorage->getSalespersonInPlay()->getUsername());
                 
                 $record->setSalesperson($salesperson);
                 //var_dump($record);
-                $this->entityManager->persist($record);
-                $this->entityManager->flush();
+                $this->rowplusitemspagerepository->persistAndFlush($record);
                 $this->logger->info('Saved added row: ' . $record->getId());
                 $jsonModelArr["success"] = $success;
             } else {
@@ -187,7 +191,7 @@ class ItemsController extends AbstractActionController {
                     //  "saturdayenabled":1,"overrideprice":""};
 
                     $obj = json_decode($value, true);
-                    $por = new \DataAccess\FFM\Entity\PricingOverrideReport();
+                    $por = new PricingOverrideReport();
                     if (array_key_exists("sku", $obj)) {
                         $por->setSku($obj['sku']);
                     }
@@ -214,10 +218,9 @@ class ItemsController extends AbstractActionController {
                     $created = new DateTime("now");
                     $por->setCreated($created);
                     $por->setCustomerid($this->customerid);
-                    $salesperson = $this->entityManager->find("DataAccess\FFM\Entity\User", $this->myauthstorage->getUser()->getUsername());
+                    $salesperson = $this->userrepository->findUser($this->myauthstorage->getUser()->getUsername());
                     $por->setSalesperson($salesperson);
-                    $this->entityManager->persist($por);
-                    $this->entityManager->flush();
+                    $this->rowplusitemspagerepository->persistAndFlush($por);
                 }
                 $counter++;
             }

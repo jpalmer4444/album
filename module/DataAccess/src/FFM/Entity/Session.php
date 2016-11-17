@@ -5,7 +5,7 @@ namespace DataAccess\FFM\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /** 
- * @ORM\Entity(repositoryClass="SessionRepository")
+ * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\SessionRepositoryImpl")
  * @ORM\Table(name="session")
  */
 class Session {

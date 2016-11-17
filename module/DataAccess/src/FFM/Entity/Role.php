@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 
  /** 
-  * @ORM\Entity(repositoryClass="RoleRepository")
+  * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\RoleRepositoryImpl")
   * @ORM\Table(name="roles")
   */
 class Role

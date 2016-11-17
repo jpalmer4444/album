@@ -10,7 +10,7 @@ class SalesController extends AbstractActionController {
 
     protected $restService;
     protected $logger;
-    //http://svc.ffmalpha.com/bySKU.php?id=jpalmer&pw=goodbass&object=salespeople
+    //https://svc.ffmalpha.com/bySKU.php?id=jpalmer&pw=goodbass&object=salespeople
     protected $myauthstorage;
     //environment specifics properties/values
     protected $pricingconfig;

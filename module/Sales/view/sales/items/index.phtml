@@ -455,7 +455,7 @@ $form->prepare();
                     "render": function (data, type, row, meta) {
                         if (data) {
                             var result = "$";
-                            return result + row['wholesale'];
+                            return result + (data.toFixed(2));
                         } else {
                             return  '';
                         }
@@ -467,7 +467,7 @@ $form->prepare();
                         var hasOverride = row['overrideprice'];
                         if (enabled && data) {
                             var result = "$";
-                            return result + row['retail'];
+                            return result + (data.toFixed(2));
                         } else if (!enabled && !hasOverride) {
                             return  'Call for availability';
                         }
@@ -478,7 +478,7 @@ $form->prepare();
                     "render": function (data, type, row, meta) {
                         if (data) {
                             var result = "$";
-                            return result + data;
+                            return result + (data.toFixed(2));
                         } else {
                             return  data;
                         }
@@ -568,6 +568,50 @@ $form->prepare();
             //#############################################################
             buttons: [
                 {
+                    text: 'Select all',
+                    action: function () {
+                        $API.rows({page: 'all'}).select();
+                        //now manually select all checkboxes and redraw table.
+                        var url = 'ajax/items?action=select';
+                        $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
+                            $('#selected_row_' + rowIdx).attr('checked', 'checked');
+                            url += '&skus[]=' + $API.row(rowIdx).data()['sku'];
+                            $API.row(rowIdx).data()['selected'] = true;
+                            $API.row(rowIdx).invalidate();
+                        }).draw(true);
+                        //send notify to items REST controller to select all items in result set.
+                        $.getJSON(url + '&customerid=' + _customer_id, function () {
+                        }).done(function () {
+                            console.log('Selected All');
+                        }).fail(function () {
+                            console.log("select REST Call failed.");
+                        });
+
+                    }
+                },
+                {
+                    text: 'Select none',
+                    action: function () {
+                        $API.rows({page: 'all'}).deselect();
+                        $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
+                            $('#selected_row_' + rowIdx).removeAttr('checked');
+                            $API.row(rowIdx).data()['selected'] = false;
+                            $API.row(rowIdx).invalidate();
+                        });
+                        //send notify to items REST controller to un-select all items in result set.
+                        $.getJSON('ajax/items?action=unselect&customerid=' + _customer_id, function () {
+                        }).done(function () {
+                            console.log('Unselected All');
+                        }).fail(function () {
+                            console.log("unselect REST Call failed.");
+                        });
+                    }
+                },
+                {
+                    text: 'Add Product',
+                    className: 'ffm-custom-append'
+                },
+                {
                     extend: 'pdfHtml5',
                     orientation: 'landscape',
                     pageSize: 'LEGAL',
@@ -648,50 +692,6 @@ $form->prepare();
                                 alert(xhr.status);
                                 alert(thrownError);
                             }
-                        });
-                    }
-                },
-                {
-                    text: 'Add Product',
-                    className: 'ffm-custom-append'
-                },
-                {
-                    text: 'Select all',
-                    action: function () {
-                        $API.rows({page: 'all'}).select();
-                        //now manually select all checkboxes and redraw table.
-                        var url = 'ajax/items?action=select';
-                        $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
-                            $('#selected_row_' + rowIdx).attr('checked', 'checked');
-                            url += '&skus[]=' + $API.row(rowIdx).data()['sku'];
-                            $API.row(rowIdx).data()['selected'] = true;
-                            $API.row(rowIdx).invalidate();
-                        }).draw(true);
-                        //send notify to items REST controller to select all items in result set.
-                        $.getJSON(url + '&customerid=' + _customer_id, function () {
-                        }).done(function () {
-                            console.log('Selected All');
-                        }).fail(function () {
-                            console.log("select REST Call failed.");
-                        });
-
-                    }
-                },
-                {
-                    text: 'Select none',
-                    action: function () {
-                        $API.rows({page: 'all'}).deselect();
-                        $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
-                            $('#selected_row_' + rowIdx).removeAttr('checked');
-                            $API.row(rowIdx).data()['selected'] = false;
-                            $API.row(rowIdx).invalidate();
-                        });
-                        //send notify to items REST controller to un-select all items in result set.
-                        $.getJSON('ajax/items?action=unselect&customerid=' + _customer_id, function () {
-                        }).done(function () {
-                            console.log('Unselected All');
-                        }).fail(function () {
-                            console.log("unselect REST Call failed.");
                         });
                     }
                 }
@@ -782,12 +782,12 @@ $form->prepare();
                         $(this).attr('title', 'Click to generate PDF. Disabled rows with no override price and unchecked Product rows will not be included.');
                         $(this).attr('data-placement', 'top');
                         $(this).tooltip();
-                    }else if(index === 2){
+                    }else if(index === 0){
                         //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
                         $(this).attr('title', 'Click to select all rows.');
                         $(this).attr('data-placement', 'top');
                         $(this).tooltip();
-                    }else if(index === 3){
+                    }else if(index === 1){
                         //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
                         $(this).attr('title', 'Click to unselect all rows.');
                         $(this).attr('data-placement', 'bottom');
@@ -854,7 +854,7 @@ $form->prepare();
                 <li class="active">Products</li>
             </nav>
             <div class="ffm-callout ffm-callout-warning">
-                <h4 >Products <small class="pull-right"><?= $this->customername ?></small></h4>
+                <h2 >Products <span class="text-lowercase text-muted pull-right"><?= $this->customername ?></span></h2>
                 <hr/>
                 <p>Please make selections for your customer.</p>
             </div>

@@ -50,14 +50,14 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                     $myauthstorage = $container->get('Login\Model\MyAuthStorage');
                     $pricingconfig = $container->get('config')['pricing_config'];
                     $formManager = $container->get('FormElementManager');
-                    $pricingReportPersistenceService = $container->get('PricingReportPersistenceService');
-                    $entityManager = $container->get('FFMEntityManager');
+                    $userrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
+                    $rowplusitemspagerepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\RowPlusItemsPage');
                     return new ItemsController(
                             $loggingService,
                             $myauthstorage,
                             $formManager,
-                            $pricingReportPersistenceService,
-                            $entityManager,
+                            $userrepository,
+                            $rowplusitemspagerepository,
                             $pricingconfig
                     );
                 },
@@ -78,11 +78,6 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getServiceConfig() {
         return [
             'factories' => [
-                'PricingReportPersistenceService' => function($sm) {
-                    $loggingService = $sm->get('LoggingService');
-                    $entityManager = $sm->get('FFMEntityManager');
-                    return new PricingReportPersistenceService($entityManager, $loggingService);
-                },
                 'CheckboxService' => function($sm) {
                     $loggingService = $sm->get('LoggingService');
                     $entityManager = $sm->get('FFMEntityManager');

@@ -172,7 +172,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
     }
     
     private function fromOne(){
-        $date = new DateTime();
+        $date = strtotime('today');
             $time = "13:00:00"; //overwrite time to 1:00 if it is after 1:00.
             $tz_string = "US/Samoa"; // Use one from list of TZ names http://php.net/manual/en/timezones.php UTC?
             $tz_object = new DateTimeZone($tz_string);

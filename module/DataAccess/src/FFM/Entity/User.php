@@ -5,7 +5,7 @@ namespace DataAccess\FFM\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /** 
- * @ORM\Entity(repositoryClass="UserRepository")
+ * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl")
  * @ORM\Table(name="users")
  */
 class User
@@ -53,6 +53,16 @@ class User
      */
     protected $lastlogin;
     
+    /**
+     * @ORM\Column(name="created", type="datetime", nullable=true)
+     */
+    protected $_created;
+    
+    /**
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    protected $_updated;
+    
     public function getUsername() {
         return $this->username;
     }
@@ -75,6 +85,18 @@ class User
     
     public function getEmail() {
         return $this->email;
+    }
+    
+    public function getCreated() {
+        return $this->_created;
+    }
+    
+    public function getUpdated() {
+        return $this->_updated;
+    }
+    
+    public function getPassword() {
+        return $this->password;
     }
     
     public function setPhone1($phone1) {
@@ -100,11 +122,15 @@ class User
     public function setSales_attr_id($sales_attr_id) {
         $this->sales_attr_id = $sales_attr_id;
     }
-    
-    public function getPassword() {
-        return $this->password;
+
+    public function setCreated($created) {
+        $this->_created = $created;
+        return $this;
     }
-
-
+    
+    public function setUpdated($updated) {
+        $this->_updated = $updated;
+        return $this;
+    }
 
 }

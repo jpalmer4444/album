@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
- * @ORM\Entity(repositoryClass="ProductRepository")
+ * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\ProductRepositoryImpl")
  * @ORM\Table(name="products")
  */
 class Product {
@@ -19,7 +19,6 @@ class Product {
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
     
@@ -76,14 +75,14 @@ class Product {
     protected $retail;
     
     /**
-     * @ORM\Column(type="integer")
-     */
-    protected $overrideprice;
-    
-    /**
      * @ORM\Column(name="created", type="datetime", nullable=true)
      */
     protected $_created;
+    
+    /**
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    protected $_updated;
     
     public function getId() {
         return $this->id;
@@ -129,12 +128,12 @@ class Product {
         return $this->retail;
     }
 
-    public function getOverrideprice() {
-        return $this->overrideprice;
-    }
-
-    public function get_created() {
+    public function getCreated() {
         return $this->_created;
+    }
+    
+    public function getUpdated() {
+        return $this->_updated;
     }
 
     public function setId($id) {
@@ -192,15 +191,14 @@ class Product {
         return $this;
     }
 
-    public function setOverrideprice($overrideprice) {
-        $this->overrideprice = $overrideprice;
-        return $this;
-    }
-
-    public function set_created($_created) {
+    public function setCreated($_created) {
         $this->_created = $_created;
         return $this;
     }
 
-
+    public function setUpdated($_updated) {
+        $this->_updated = $_updated;
+        return $this;
+    }
+    
 }

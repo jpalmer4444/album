@@ -15,15 +15,13 @@ use Sales\Service\CheckboxServiceInterface;
 class CheckboxService implements CheckboxServiceInterface {
 
     protected $logger;
-    protected $entityManager;
     protected $checkboxrepository;
     protected $userrepository;
 
     public function __construct(LoggingServiceInterface $logger, FFMEntityManagerServiceInterface $ffmEntityManagerService) {
         $this->logger = $logger;
-        $this->entityManager = $ffmEntityManagerService->getEntityManager();
-        $this->checkboxrepository = $this->entityManager->getRepository('DataAccess\FFM\Entity\ItemTableCheckbox');
-        $this->userrepository = $this->entityManager->getRepository('DataAccess\FFM\Entity\User');
+        $this->checkboxrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\ItemTableCheckbox');
+        $this->userrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
     }
 
     public function addRemovedSKU($sku, $customerid, $salespersonusername) {
@@ -42,9 +40,9 @@ class CheckboxService implements CheckboxServiceInterface {
                 $record->setChecked(true);
                 $record->setCustomerid($customerid);
                 $record->setSku($s);
-                $this->entityManager->persist($record);
+                $this->checkboxrepository->persist($record);
             }
-            $this->entityManager->flush();
+            $this->checkboxrepository->flush();
         }
     }
 
@@ -70,10 +68,6 @@ class CheckboxService implements CheckboxServiceInterface {
         } else {
             $this->logger->info("Checkbox record not found to remove. SKU: " . $sku . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
         }
-        //$dql = "SELECT c FROM VehicleCatalogue\Model\Car c WHERE c.id = ?1";
-        //$audi = $em->createQuery($dql)
-        //->setParameter(1, array("name" => "Audi A8", "year" => 2010))
-        //->getSingleResult();
         $this->checkboxrepository->removeCheckbox($sku, $customerid, $salespersonusername);
     }
 

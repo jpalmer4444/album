@@ -7,7 +7,7 @@ use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="ItemTableCheckboxRepository")
+ * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\ItemTableCheckboxRepositoryImpl")
  * @ORM\Table(name="item_table_checkbox")
  */
 class ItemTableCheckbox extends PostFormBinder {

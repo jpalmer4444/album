@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
- * @ORM\Entity(repositoryClass="PricingOverrideReportRepository")
+ * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\PricingOverrideReportRepositoryImpl")
  * @ORM\Table(name="pricing_override_report")
  */
 class PricingOverrideReport {

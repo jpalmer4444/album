@@ -3,17 +3,23 @@
 namespace DataAccess\FFM\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use DateTime;
 
 /** 
- * @ORM\Entity(repositoryClass="CustomerRepository")
+ * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl")
  * @ORM\Table(name="customers")
  */
 class Customer
 {
+    
+    public function __construct()
+    {
+        $this->_created=new DateTime();
+    }
+    
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
     
@@ -39,6 +45,16 @@ class Customer
      */
     protected $company;
     
+    /**
+     * @ORM\Column(name="created", type="datetime", nullable=true)
+     */
+    protected $_created;
+    
+    /**
+     * @ORM\Column(name="updated", type="datetime", nullable=true)
+     */
+    protected $_updated;
+    
     public function getId() {
         return $this->id;
     }
@@ -57,6 +73,14 @@ class Customer
 
     public function getCompany() {
         return $this->company;
+    }
+    
+    public function getCreated() {
+        return $this->_created;
+    }
+    
+    public function getUpdated() {
+        return $this->_updated;
     }
 
     public function setId($id) {
@@ -81,6 +105,16 @@ class Customer
 
     public function setCompany($company) {
         $this->company = $company;
+        return $this;
+    }
+    
+    public function setCreated($created) {
+        $this->_created = $created;
+        return $this;
+    }
+    
+    public function setUpdated($updated) {
+        $this->_updated = $updated;
         return $this;
     }
 

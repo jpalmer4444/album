@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
- * @ORM\Entity(repositoryClass="ItemPriceOverrideRepository")
+ * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\ItemPriceOverrideRepositoryImpl")
  * @ORM\Table(name="item_price_override")
  */
 class ItemPriceOverride extends PostFormBinder {

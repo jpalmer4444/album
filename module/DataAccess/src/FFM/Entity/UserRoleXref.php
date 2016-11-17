@@ -5,7 +5,7 @@ namespace DataAccess\FFM\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /** 
-  * @ORM\Entity(repositoryClass="UserRoleXrefRepository")
+  * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\UserRoleXrefRepositoryImpl")
   * @ORM\Table(name="user_role_xref")
   */
 class UserRoleXref

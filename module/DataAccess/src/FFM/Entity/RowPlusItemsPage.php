@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use DateTime;
 
 /**
- * @ORM\Entity(repositoryClass="RowPlusItemsPageRepository")
+ * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl")
  * @ORM\Table(name="row_plus_items_page")
  */
 class RowPlusItemsPage extends PostFormBinder {

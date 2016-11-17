@@ -52,7 +52,7 @@ img.logo {
     border-radius: .50rem;
 }
 
-.ffm-callout-warning h4 {
+.ffm-callout-warning h2, .ffm-callout-warning h1, .ffm-callout-warning h3, .ffm-callout-warning h4 {
     color: #f0ad4e;
 }
 .ffm-callout h4 {
