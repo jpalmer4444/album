@@ -7,7 +7,9 @@ namespace Sales\Controller;
 
 use Application\Service\LoggingServiceInterface;
 use DataAccess\FFM\Entity\PricingOverrideReport;
+use DataAccess\FFM\Entity\Product;
 use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
+use DataAccess\FFM\Entity\Repository\Impl\ProductRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
@@ -32,6 +34,7 @@ class ItemsController extends AbstractActionController {
     protected $rowplusitemspagerepository;
     protected $userrepository;
     protected $customerrepository;
+    protected $productrepository;
 
     /**
      * 
@@ -46,7 +49,8 @@ class ItemsController extends AbstractActionController {
             AbstractPluginManager $formManager, 
             UserRepositoryImpl $userrepository, 
             RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository,
-            CustomerRepositoryImpl $customerrepository, 
+            CustomerRepositoryImpl $customerrepository,
+            ProductRepositoryImpl $productrepository, 
             $config = NULL
     ) {
         $this->logger = $logger;
@@ -56,6 +60,7 @@ class ItemsController extends AbstractActionController {
         $this->userrepository = $userrepository;
         $this->rowplusitemspagerepository = $rowplusitemspagerepository;
         $this->customerrepository = $customerrepository;
+        $this->productrepository = $productrepository;
     }
 
     public function indexAction() {
@@ -83,42 +88,55 @@ class ItemsController extends AbstractActionController {
             $form->setData($postData);
             if ($form->isValid()) {
                 $success = true;
+                //create a row_plus_items_page_row and create a Product with negative ID in Products table.
+                $product = new Product();
+                $product->setId($this->productrepository->findMaxNegative());
+                
                 $record = new RowPlusItemsPage();
                 //not used but was supposed to do all the if work below
                 $record->bind($form, $jsonModelArr);
+                
                 $jsonModelArr["sku"] = empty($form->getData()['sku']) ? '' : $form->getData()['sku'];
                 if (array_key_exists("sku", $jsonModelArr)) {
                     $record->setSku($jsonModelArr["sku"]);
+                    $product->setSku($record->getSku());
                 }
                 $jsonModelArr["productname"] = empty($form->getData()['product']) ? '' : $form->getData()['product'];
                 if (array_key_exists("productname", $jsonModelArr)) {
                     $record->setProduct($jsonModelArr["productname"]);
+                    $product->setProduct($record->getProduct());
                 }
                 $jsonModelArr["shortescription"] = empty($form->getData()['description']) ? '' : $form->getData()['description'];
                 if (array_key_exists("shortescription", $jsonModelArr)) {
                     $record->setDescription($jsonModelArr["shortescription"]);
+                    $product->setDescription($record->getDescription());
                 }
                 $jsonModelArr["comment"] = empty($form->getData()['comment']) ? '' : $form->getData()['comment'];
                 if (array_key_exists("comment", $jsonModelArr)) {
                     $record->setComment($jsonModelArr["comment"]);
+                    $product->setComment($record->getComment());
                 }
                 $jsonModelArr["option"] = empty($form->getData()['option']) ? '' : $form->getData()['option'];
                 if (array_key_exists("option", $jsonModelArr)) {
                     $record->setOption($jsonModelArr["option"]);
+                    $product->setOption($record->getOption());
                 }
                 $jsonModelArr["qty"] = empty($form->getData()['qty']) ? '' : $form->getData()['qty'];
                 if (array_key_exists("qty", $jsonModelArr)) {
                     $record->setQty($jsonModelArr["qty"]);
+                    $product->setQty($record->getQty());
                 }
                 $jsonModelArr["wholesale"] = empty($form->getData()['wholesale']) ? '' : $form->getData()['wholesale'];
                 if (array_key_exists("wholesale", $jsonModelArr)) {
                     $int = filter_var($jsonModelArr["wholesale"], FILTER_SANITIZE_NUMBER_INT);
                     $record->setWholesale($int);
+                    $product->setWholesale($record->getWholesale());
                 }
                 $jsonModelArr["retail"] = empty($form->getData()['retail']) ? '' : $form->getData()['retail'];
                 if (array_key_exists("retail", $jsonModelArr)) {
                     $int2 = filter_var($jsonModelArr["retail"], FILTER_SANITIZE_NUMBER_INT);
                     $record->setRetail($int2);
+                    $product->setRetail($record->getRetail());
                 }
                 $jsonModelArr["overrideprice"] = empty($form->getData()['overrideprice']) ? '' : $form->getData()['overrideprice'];
                 if (array_key_exists("overrideprice", $jsonModelArr)) {
@@ -128,6 +146,7 @@ class ItemsController extends AbstractActionController {
                 $jsonModelArr["uom"] = empty($form->getData()['uom']) ? '' : $form->getData()['uom'];
                 if (array_key_exists("uom", $jsonModelArr)) {
                     $record->setUom($jsonModelArr["uom"]);
+                    $product->setUom($record->getUom());
                 }
                 $jsonModelArr["status"] = empty($form->getData()['status']) ? '' : $form->getData()['status'];
                 if (array_key_exists("status", $jsonModelArr)) {
@@ -141,7 +160,9 @@ class ItemsController extends AbstractActionController {
                 }
                 $created = new DateTime("now");
                 $record->setCreated($created);
+                $product->setCreated($record->getCreated());
                 $record->setActive(true);
+                $product->setActive($record->getActive());
                 $customer = $this->customerrepository->findCustomer($this->customerid);
                 $record->setCustomer($customer);
                 
@@ -150,7 +171,9 @@ class ItemsController extends AbstractActionController {
                 $record->setSalesperson($salesperson);
                 //var_dump($record);
                 $this->rowplusitemspagerepository->persistAndFlush($record);
+                $this->productrepository->persistAndFlush($product);
                 $this->logger->info('Saved added row: ' . $record->getId());
+                $this->logger->info('Saved added product with negative PK: ' . $product->getId());
                 $jsonModelArr["success"] = $success;
             } else {
                 //find out why it failed here.

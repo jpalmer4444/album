@@ -52,6 +52,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                     $userrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
                     $rowplusitemspagerepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\RowPlusItemsPage');
                     $customerrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Customer');
+                    $productrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Product');
                     return new ItemsController(
                             $loggingService,
                             $myauthstorage,
@@ -59,6 +60,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                             $userrepository,
                             $rowplusitemspagerepository,
                             $customerrepository,
+                            $productrepository,
                             $pricingconfig
                     );
                 },

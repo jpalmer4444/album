@@ -8,10 +8,10 @@ namespace Sales\Service;
  */
 interface CheckboxServiceInterface {
     
-    public function addRemovedSKU($sku, $customerid, $salespersonusername);
+    public function addRemovedID($sku, $customerid, $salespersonusername);
     
-    public function removeRemovedSKU($sku, $customerid, $salespersonusername);
+    public function removeRemovedID($sku, $customerid, $salespersonusername);
     
-    public function getRemovedSKUS($customerid, $salespersonusername);
+    public function getRemovedIDS($customerid, $salespersonusername);
     
 }

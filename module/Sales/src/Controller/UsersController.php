@@ -90,7 +90,7 @@ class UsersController extends AbstractActionController {
 
         $query = $this->qb->getQuery();
         $dbcustomers = $query->getResult();
-        $this->logger->info('Found ' . count($dbcustomers) . ' customers in db.');
+        $this->logger->info('Found ' . count($dbcustomers) . ' users in db.');
 
         $inDb = count($dbcustomers);
         $inSvc = count($json['customers']);

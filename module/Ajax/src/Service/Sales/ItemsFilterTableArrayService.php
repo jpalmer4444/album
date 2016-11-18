@@ -47,7 +47,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
 
         //now lookup any RowPlusItemsPage rows that are active and add them to the results.
         //take care to only get latest rows and ignoring any rows added previously today.
-        $rollPlusItemPages = $this->query(
+        $rowPlusItemPages = $this->query(
                 ItemsFilterTableArrayService::QUERY_PAGES, $customerid
         );
 
@@ -74,7 +74,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         //create HashMap of keys - then override
         $map = array();
         //first add all items from DB to results
-        foreach ($rollPlusItemPages as &$item) {
+        foreach ($rowPlusItemPages as &$item) {
             $adjWholesale = number_format($item->getWholesale() / 100, 2);
             $adjRetail = number_format($item->getRetail() / 100, 2);
             $adjOverrideprice = number_format($item->getOverrideprice() / 100, 2);
@@ -92,9 +92,9 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
 
         $this->logger->info('Found ' . count($removedSKUS) . ' removedSKUs in Session!');
 
-        foreach ($removedSKUS as $removed) {
-            $this->logger->info('Setting checkbox for table row with SKU: ' . $removed);
-        }
+        //foreach ($removedSKUS as $removed) {
+            //$this->logger->info('Setting checkbox for table row with SKU: ' . $removed);
+        //}
 
         //create a selected field for each REST call item based on removed SKUs.
 
@@ -135,12 +135,12 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         if (empty($userinplay)) {
             $userinplay = $this->myauthstorage->getUser();
         }
-        return !empty($this->checkboxService->getRemovedSKUS($customerid, $userinplay->getUsername())) ?
-                $this->checkboxService->getRemovedSKUS($customerid, $userinplay->getUsername()) :
+        return !empty($this->checkboxService->getRemovedIDS($customerid, $userinplay->getUsername())) ?
+                $this->checkboxService->getRemovedIDS($customerid, $userinplay->getUsername()) :
                 [];
     }
     
-    private function addItem($item, $adjWholesale, $adjRetail, $adjOverrideprice){
+    private function addItem(\DataAccess\FFM\Entity\RowPlusItemsPage $item, $adjWholesale, $adjRetail, $adjOverrideprice){
         return array(
                 "productname" => $item->getProduct(),
                 "shortescription" => $item->getDescription(),

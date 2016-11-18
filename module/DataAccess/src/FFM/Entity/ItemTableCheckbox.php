@@ -30,14 +30,11 @@ class ItemTableCheckbox extends PostFormBinder {
      * @ORM\Version 
      */
     private $version;
-
-    /**
-     * @ORM\Column(name="sku", type="string", length=25)
-     */
-    protected $sku;
     
     /**
-     * @ORM\Column(name="product", type="string", length=255)
+     * @ORM\Column(name="product", type="integer")
+     * @ORM\ManyToOne(targetEntity="Product", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="product", referencedColumnName="id")
      */
     protected $product;
     
@@ -48,6 +45,8 @@ class ItemTableCheckbox extends PostFormBinder {
 
     /**
      * @ORM\Column(name="customerid", type="integer")
+     * @ORM\ManyToOne(targetEntity="Customer", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="customerid", referencedColumnName="id")
      */
     protected $_customerid;
 
@@ -66,10 +65,6 @@ class ItemTableCheckbox extends PostFormBinder {
     public function getId() {
         return $this->id;
     }
-
-    public function getSku() {
-        return $this->sku;
-    }
     
     public function getChecked() {
         return $this->checked;
@@ -86,14 +81,18 @@ class ItemTableCheckbox extends PostFormBinder {
     public function getSalesperson() {
         return $this->_salesperson;
     }
-
-    public function setSku($sku) {
-        $this->sku = $sku;
-        return $this;
+    
+    public function getProduct() {
+        return $this->product;
     }
     
     public function setId($id) {
         $this->id = $id;
+        return $this;
+    }
+    
+    public function setProduct($product) {
+        $this->product = $product;
         return $this;
     }
     

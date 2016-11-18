@@ -219,14 +219,14 @@ ON pricing_override_report (sku);
 CREATE TABLE `item_table_checkbox` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
     `version` INTEGER DEFAULT 1,
-    `sku` VARCHAR(25),
-    `product` VARCHAR(255),
+    `product` INTEGER,
     `checked` BOOLEAN DEFAULT 0,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-     FOREIGN KEY(salesperson) REFERENCES users(username),
-     FOREIGN KEY(customerid) REFERENCES customers(id)
+    FOREIGN KEY(product) REFERENCES products(id),
+    FOREIGN KEY(salesperson) REFERENCES users(username),
+    FOREIGN KEY(customerid) REFERENCES customers(id)
 );
 
 CREATE INDEX cmp_index_item_table_checkbox_salesperson_customerid_product

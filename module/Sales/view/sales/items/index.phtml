@@ -26,21 +26,6 @@ $form->prepare();
     //#############################################################
     var $API;
 
-    var deleteMe = function (e) {
-        var sku = $(e.target).attr('data-sku-number');
-        var idx = $(e.target).attr('data-index-number');
-        console.log('SKU: ' + sku + ' Idx: ' + idx);
-        $.getJSON('ajax/items?action=removeRow&sku=' + sku + '&customerid=' + _customer_id, function () {
-            console.log("REST Call made.");
-        }).done(function () {
-            console.log('Ajax call successful with sku: ' + sku);
-            $API.row(idx).remove().draw();
-            $('.modal').modal('hide');
-        }).fail(function () {
-            console.log("REST Call failed.");
-        });
-    };
-
     //#############################################################
     //#############################################################
     //##
@@ -125,6 +110,7 @@ $form->prepare();
     var appendRowToTable = function (data) {
         if (data.success) {
             $API.row.add({
+                "id": data['id'],
                 "productname": data['productname'],
                 "shortescription": data['shortescription'],
                 "comment": data['comment'],
@@ -519,7 +505,8 @@ $form->prepare();
                         return result;
                     }
                 },
-                {"data": "sku"}
+                {"data": "sku"},
+                {"data": "id", visible: false},
             ],
             //#############################################################
             //#############################################################
@@ -587,7 +574,7 @@ $form->prepare();
                         var url = 'ajax/items?action=select';
                         $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
                             $('#selected_row_' + rowIdx).attr('checked', 'checked');
-                            url += '&skus[]=' + $API.row(rowIdx).data()['sku'];
+                            url += '&ids[]=' + $API.row(rowIdx).data()['id'];
                             $API.row(rowIdx).data()['selected'] = true;
                             $API.row(rowIdx).invalidate();
                         }).draw(true);
@@ -661,6 +648,8 @@ $form->prepare();
                                         }
                                         row.push(rowdata[9]);
                                         row.push(rowdata[12]);
+                                        //ignore
+                                        //rowdata[13] (product.id)
 
                                         //only add this row if Price
                                         if (override || rowdata[8].text.indexOf('Call') === -1) {
@@ -748,18 +737,18 @@ $form->prepare();
             //console.log('Idx: '+rowIdx);
             var checked = forCheck.checked;
             var rowObj = $API.row(rowIdx).data();
-            var sku = rowObj['sku'];
+            var id = rowObj['id'];
             var url = 'ajax/items?action=';
             if (checked) {
                 url += 'select';
             } else {
                 url += 'unselect';
             }
-            url += '&skus[]=' + sku;
+            url += '&ids[]=' + id;
             //send notify to items REST controller to select all items in result set.
             $.getJSON(url + '&customerid=' + _customer_id, function () {
             }).done(function () {
-                console.log(checked ? 'Selected ' + sku : 'Unselected ' + sku);
+                console.log(checked ? 'Selected ' + id : 'Unselected ' + id);
             }).fail(function () {
                 console.log("select/unselect REST Call failed.");
             });
@@ -1046,35 +1035,37 @@ $form->prepare();
                         <thead>
                             <tr>
                                 <th data-priority="1" ></th>
-                                <th data-priority="2">Product</th>
-                                <th data-priority="7">Description</th>
-                                <th data-priority="9">Comment</th>
-                                <th data-priority="13">Option</th>
-                                <th data-priority="8">Qty</th>
-                                <th data-priority="3">Wholesale</th>
-                                <th data-priority="4">Retail</th>
-                                <th data-priority="5">Override Price</th>
-                                <th data-priority="10">UOM</th>
-                                <th data-priority="11">Status</th>
-                                <th data-priority="12">Saturday Enabled</th>
-                                <th data-priority="6">SKU</th>
+                                <th data-priority="1">Product</th>
+                                <th data-priority="1">Description</th>
+                                <th data-priority="1">Comment</th>
+                                <th data-priority="1">Option</th>
+                                <th data-priority="1">Qty</th>
+                                <th data-priority="1">Wholesale</th>
+                                <th data-priority="1">Retail</th>
+                                <th data-priority="1">Override Price</th>
+                                <th data-priority="1">UOM</th>
+                                <th data-priority="1">Status</th>
+                                <th data-priority="1">Saturday Enabled</th>
+                                <th data-priority="1">SKU</th>
+                                <th >ID</th>
                             </tr>
                         </thead>
                         <tfoot>
                             <tr>
                                 <th data-priority="1" ></th>
-                                <th data-priority="2">Product</th>
-                                <th data-priority="7">Description</th>
-                                <th data-priority="9">Comment</th>
-                                <th data-priority="13">Option</th>
-                                <th data-priority="8">Qty</th>
-                                <th data-priority="3">Wholesale</th>
-                                <th data-priority="4">Retail</th>
-                                <th data-priority="5">Override Price</th>
-                                <th data-priority="10">UOM</th>
-                                <th data-priority="11">Status</th>
-                                <th data-priority="12">Saturday Enabled</th>
-                                <th data-priority="6">SKU</th>
+                                <th data-priority="1">Product</th>
+                                <th data-priority="1">Description</th>
+                                <th data-priority="1">Comment</th>
+                                <th data-priority="1">Option</th>
+                                <th data-priority="1">Qty</th>
+                                <th data-priority="1">Wholesale</th>
+                                <th data-priority="1">Retail</th>
+                                <th data-priority="1">Override Price</th>
+                                <th data-priority="1">UOM</th>
+                                <th data-priority="1">Status</th>
+                                <th data-priority="1">Saturday Enabled</th>
+                                <th data-priority="1">SKU</th>
+                                <th >ID</th>
                             </tr>
                         </tfoot>
                     </table>

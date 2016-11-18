@@ -24,55 +24,55 @@ class CheckboxService implements CheckboxServiceInterface {
         $this->userrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
     }
 
-    public function addRemovedSKU($sku, $customerid, $salespersonusername) {
-        $record = $this->findCheckbox($sku, $customerid, $salespersonusername);
+    public function addRemovedID($id, $customerid, $salespersonusername) {
+        $record = $this->findCheckbox($id, $customerid, $salespersonusername);
         if (!empty($record)) {
             $record->setChecked(true);
         } else {
-            if(empty(is_array($sku))){
-                $sku = array($sku);
+            if(empty(is_array($id))){
+                $id = array($id);
             }
-            foreach ($sku as $s) {
-                $this->logger->info("Creating and persisting Checkbox record. SKU: " . $s . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
+            foreach ($id as $i) {
+                $this->logger->info("Creating and persisting Checkbox record. ID: " . $i . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
                 $record = new ItemTableCheckbox();
                 $user = $this->findUser($salespersonusername);
                 $record->setSalesperson($user->getUsername());
                 $record->setChecked(true);
                 $record->setCustomerid($customerid);
-                $record->setSku($s);
+                $record->setProduct($i);
                 $this->checkboxrepository->persist($record);
             }
             $this->checkboxrepository->flush();
         }
     }
 
-    public function getRemovedSKUS($customerid, $salespersonusername) {
+    public function getRemovedIDS($customerid, $salespersonusername) {
         //return 1d array of skus
         $arrayOfCheckboxEntities = $this->checkboxrepository->
-                getAllSkusByCustomerIdAndSalesperson($salespersonusername, $customerid);
+                getAllIDsByCustomerIdAndSalesperson($salespersonusername, $customerid);
         //create non-associate (1d) array of SKUs. This will eliminate the need
         $onedim = array();
         foreach ($arrayOfCheckboxEntities as $entity) {
             if($entity->getChecked()){
-                $onedim [] = $entity->getSku();   
+                $onedim [] = $entity->getProduct();   
             }
         }
         return $onedim;
     }
 
-    public function removeRemovedSKU($sku, $customerid, $salespersonusername) {
+    public function removeRemovedID($id, $customerid, $salespersonusername) {
         //first find the record
-        $record = $this->findCheckbox($sku, $customerid, $salespersonusername);
+        $record = $this->findCheckbox($id, $customerid, $salespersonusername);
         if (!empty($record)) {
             $record->setChecked(false);
         } else {
-            $this->logger->info("Checkbox record not found to remove. SKU: " . $sku . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
+            $this->logger->info("Checkbox record not found to remove. ID: " . $id . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
         }
-        $this->checkboxrepository->removeCheckbox($sku, $customerid, $salespersonusername);
+        $this->checkboxrepository->removeCheckbox($id, $customerid, $salespersonusername);
     }
 
-    protected function findCheckbox($sku, $customerid, $salespersonusername) {
-        return $this->checkboxrepository->findCheckbox($sku, $customerid, $salespersonusername);
+    protected function findCheckbox($id, $customerid, $salespersonusername) {
+        return $this->checkboxrepository->findCheckbox($id, $customerid, $salespersonusername);
     }
 
     protected function findUser($username) {
