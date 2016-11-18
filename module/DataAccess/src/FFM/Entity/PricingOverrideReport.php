@@ -72,7 +72,8 @@ class PricingOverrideReport {
     protected $_created;
     
     /**
-     * @ORM\Column(name="customerid", type="integer")
+     * @ORM\ManyToOne(targetEntity="Customer", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="customerid", referencedColumnName="id")
      */
     protected $_customerid;
     
@@ -136,8 +137,8 @@ class PricingOverrideReport {
         return $this;
     }
     
-    public function setCustomerid($customerid) {
-        $this->_customerid = $customerid;
+    public function setCustomer($customer) {
+        $this->_customerid = $customer;
         return $this;
     }
 

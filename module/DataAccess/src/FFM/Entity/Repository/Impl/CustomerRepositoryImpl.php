@@ -9,7 +9,7 @@ namespace DataAccess\FFM\Entity\Repository\Impl;
  */
 class CustomerRepositoryImpl extends FFMRepository {
     
-    public function find($id){
+    public function findCustomer($id){
         return $this->getEntityManager()->find("DataAccess\FFM\Entity\Customer", $id);
     }
     

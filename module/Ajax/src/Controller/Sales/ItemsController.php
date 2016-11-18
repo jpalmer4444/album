@@ -28,6 +28,7 @@ class ItemsController extends AbstractRestfulController {
     protected $itemsFilterService;
     protected $checkboxService;
     protected $productrepository;
+    protected $customerrepository;
     protected $qb;
 
     public function __construct($container) {
@@ -41,6 +42,9 @@ class ItemsController extends AbstractRestfulController {
         $this->productrepository = $container->get('FFMEntityManager')->
                 getEntityManager()->
                 getRepository('DataAccess\FFM\Entity\Product');
+        $this->customerrepository = $container->get('FFMEntityManager')->
+                getEntityManager()->
+                getRepository('DataAccess\FFM\Entity\Customer');
         $this->qb = $container->get('FFMEntityManager')->
                         getEntityManager()->createQueryBuilder();
     }
@@ -83,7 +87,8 @@ class ItemsController extends AbstractRestfulController {
         $created = new DateTime("now");
         $record->setCreated($created);
         $record->setActive(true);
-        $record->setCustomerid($customerid);
+        $customer = $this->customerrepository->findCustomer($customerid);
+        $record->setCustomer($customer);
         $record->setSku($sku);
         if (!empty($overrideprice)) {
             $int2 = filter_var($overrideprice, FILTER_SANITIZE_NUMBER_INT);
@@ -136,9 +141,6 @@ class ItemsController extends AbstractRestfulController {
         } else {
             $this->logger->debug('No ' . $this->pricingconfig['by_sku_object_items_controller'] . ' items found.');
         }
-
-
-
         return new JsonModel(array(
             "data" => $restcallitemsmerged
         ));
@@ -150,7 +152,6 @@ class ItemsController extends AbstractRestfulController {
                 ->add('from', new From('DataAccess\FFM\Entity\Product', 'u'));
         $arr = [];
         foreach ($json[$this->pricingconfig['by_sku_object_items_controller']] as $product) {
-
             $arr [] = $this->qb->expr()->eq('u.id', "'" . utf8_encode($product['id']) . "'");
         }
 
@@ -158,25 +159,19 @@ class ItemsController extends AbstractRestfulController {
                                 implode(" OR ", $arr)
                 ))
                 ->add('orderBy', new OrderBy('u.product', 'ASC'));
-
         $query = $this->qb->getQuery();
         $dbcustomers = $query->getResult();
         $this->logger->info('Found ' . count($dbcustomers) . ' customers in db.');
-
         $inDb = count($dbcustomers);
         $inSvc = count($json[$this->pricingconfig['by_sku_object_items_controller']]);
-
         if ($inDb < $inSvc) {
-
             //remove every matching row in DB and rewrite them all to guarantee we have latest data
             //in theory this should flush everything out and keep records up-to-date over time.
             $some = false;
             foreach ($json[$this->pricingconfig['by_sku_object_items_controller']] as $product) {
-
                 //lookup item with id
                 $cdb = $this->productrepository->find($product['id']);
                 if (!empty($cdb)) {
-
                     //update existing record
                     $cdb->setSku($product['sku']);
                     $cdb->setProduct($product['productname']);
@@ -219,7 +214,6 @@ class ItemsController extends AbstractRestfulController {
                     $some = true;
                 }
             }
-
             if ($some) {
                 $this->productrepository->flush();
             }

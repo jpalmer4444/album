@@ -24,7 +24,7 @@ class ItemTableCheckboxRepositoryImpl extends FFMRepository {
         try {
             $arr = $query->getResult();
             if(!empty(count($arr))){
-                return arr[0];
+                return $arr[0];
             }
         } catch (Exception $exc) {
             $this->logger->info($exc->getTraceAsString());

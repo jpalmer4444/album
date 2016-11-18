@@ -60,7 +60,8 @@ class ItemPriceOverride extends PostFormBinder {
     protected $_created;
 
     /**
-     * @ORM\Column(name="customerid", type="integer")
+     * @ORM\ManyToOne(targetEntity="Customer", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="customerid", referencedColumnName="id")
      */
     protected $_customerid;
 
@@ -146,8 +147,8 @@ class ItemPriceOverride extends PostFormBinder {
         return $this;
     }
 
-    public function setCustomerid($customerid) {
-        $this->_customerid = $customerid;
+    public function setCustomer($customer) {
+        $this->_customerid = $customer;
         return $this;
     }
 

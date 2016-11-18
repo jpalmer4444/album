@@ -5,9 +5,9 @@
 
 namespace Sales\Controller;
 
-use Application\Service\FFMEntityManagerServiceInterface;
 use Application\Service\LoggingServiceInterface;
 use DataAccess\FFM\Entity\PricingOverrideReport;
+use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
@@ -31,6 +31,7 @@ class ItemsController extends AbstractActionController {
     protected $pricingReportPersistenceService;
     protected $rowplusitemspagerepository;
     protected $userrepository;
+    protected $customerrepository;
 
     /**
      * 
@@ -44,7 +45,8 @@ class ItemsController extends AbstractActionController {
             MyAuthStorage $myauthstorage, 
             AbstractPluginManager $formManager, 
             UserRepositoryImpl $userrepository, 
-            RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, 
+            RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository,
+            CustomerRepositoryImpl $customerrepository, 
             $config = NULL
     ) {
         $this->logger = $logger;
@@ -53,6 +55,7 @@ class ItemsController extends AbstractActionController {
         $this->formManager = $formManager;
         $this->userrepository = $userrepository;
         $this->rowplusitemspagerepository = $rowplusitemspagerepository;
+        $this->customerrepository = $customerrepository;
     }
 
     public function indexAction() {
@@ -139,7 +142,9 @@ class ItemsController extends AbstractActionController {
                 $created = new DateTime("now");
                 $record->setCreated($created);
                 $record->setActive(true);
-                $record->setCustomerid($this->customerid);
+                $customer = $this->customerrepository->findCustomer($this->customerid);
+                $record->setCustomer($customer);
+                
                 $salesperson = $this->userrepository->findUser(empty($this->myauthstorage->getSalespersonInPlay()) ? $this->myauthstorage->getUser()->getUsername() : $this->myauthstorage->getSalespersonInPlay()->getUsername());
                 
                 $record->setSalesperson($salesperson);
@@ -217,7 +222,8 @@ class ItemsController extends AbstractActionController {
                     }
                     $created = new DateTime("now");
                     $por->setCreated($created);
-                    $por->setCustomerid($this->customerid);
+                    $customer = $this->customerrepository->findCustomer($this->customerid);
+                    $por->setCustomer($customer);
                     $salesperson = $this->userrepository->findUser($this->myauthstorage->getUser()->getUsername());
                     $por->setSalesperson($salesperson);
                     $this->rowplusitemspagerepository->persistAndFlush($por);

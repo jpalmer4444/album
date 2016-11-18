@@ -8,7 +8,6 @@ use Sales\Controller\UsersController;
 use Sales\DTO\RowPlusItemsPageForm;
 use Sales\Filter\RowPlusItemsPageInputFilter;
 use Sales\Service\CheckboxService;
-use Sales\Service\PricingReportPersistenceService;
 use Zend\Hydrator\ObjectProperty;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -52,12 +51,14 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                     $formManager = $container->get('FormElementManager');
                     $userrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
                     $rowplusitemspagerepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\RowPlusItemsPage');
+                    $customerrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Customer');
                     return new ItemsController(
                             $loggingService,
                             $myauthstorage,
                             $formManager,
                             $userrepository,
                             $rowplusitemspagerepository,
+                            $customerrepository,
                             $pricingconfig
                     );
                 },

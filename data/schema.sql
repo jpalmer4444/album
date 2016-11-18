@@ -165,7 +165,8 @@ CREATE TABLE `row_plus_items_page` (
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
-     FOREIGN KEY(salesperson) REFERENCES users(username)
+     FOREIGN KEY(salesperson) REFERENCES users(username),
+     FOREIGN KEY(customerid) REFERENCES customers(id)
 );
 
 CREATE INDEX index_row_plus_items_page_sku
@@ -185,7 +186,8 @@ CREATE TABLE `item_price_override` (
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
-     FOREIGN KEY(salesperson) REFERENCES users(username)
+     FOREIGN KEY(salesperson) REFERENCES users(username),
+     FOREIGN KEY(customerid) REFERENCES customers(id)
 );
 
 CREATE INDEX index_item_price_override_sku
@@ -207,14 +209,12 @@ CREATE TABLE `pricing_override_report` (
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
-     FOREIGN KEY(salesperson) REFERENCES users(username)
+     FOREIGN KEY(salesperson) REFERENCES users(username),
+     FOREIGN KEY(customerid) REFERENCES customers(id)
 );
 
 CREATE INDEX index_pricing_override_report_sku
 ON pricing_override_report (sku);
-
-CREATE INDEX index_pricing_override_report_customer_id
-ON pricing_override_report (customerid);
 
 CREATE TABLE `item_table_checkbox` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
@@ -225,7 +225,8 @@ CREATE TABLE `item_table_checkbox` (
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-     FOREIGN KEY(salesperson) REFERENCES users(username)
+     FOREIGN KEY(salesperson) REFERENCES users(username),
+     FOREIGN KEY(customerid) REFERENCES customers(id)
 );
 
 CREATE INDEX cmp_index_item_table_checkbox_salesperson_customerid_product
