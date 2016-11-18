@@ -94,49 +94,43 @@ class ItemsController extends AbstractActionController {
                 
                 $record = new RowPlusItemsPage();
                 //not used but was supposed to do all the if work below
-                $record->bind($form, $jsonModelArr);
+                //$record->bind($form, $jsonModelArr);
+                
+                $record->setProduct($product);
                 
                 $jsonModelArr["sku"] = empty($form->getData()['sku']) ? '' : $form->getData()['sku'];
                 if (array_key_exists("sku", $jsonModelArr)) {
-                    $record->setSku($jsonModelArr["sku"]);
-                    $product->setSku($record->getSku());
+                    $product->setSku($jsonModelArr["sku"]);
                 }
                 $jsonModelArr["productname"] = empty($form->getData()['product']) ? '' : $form->getData()['product'];
                 if (array_key_exists("productname", $jsonModelArr)) {
-                    $record->setProduct($jsonModelArr["productname"]);
-                    $product->setProduct($record->getProduct());
+                    $product->setProduct($jsonModelArr["productname"]);
                 }
                 $jsonModelArr["shortescription"] = empty($form->getData()['description']) ? '' : $form->getData()['description'];
                 if (array_key_exists("shortescription", $jsonModelArr)) {
-                    $record->setDescription($jsonModelArr["shortescription"]);
-                    $product->setDescription($record->getDescription());
+                    $product->setDescription($jsonModelArr["shortescription"]);
                 }
                 $jsonModelArr["comment"] = empty($form->getData()['comment']) ? '' : $form->getData()['comment'];
                 if (array_key_exists("comment", $jsonModelArr)) {
-                    $record->setComment($jsonModelArr["comment"]);
-                    $product->setComment($record->getComment());
+                    $product->setComment($jsonModelArr["comment"]);
                 }
                 $jsonModelArr["option"] = empty($form->getData()['option']) ? '' : $form->getData()['option'];
                 if (array_key_exists("option", $jsonModelArr)) {
-                    $record->setOption($jsonModelArr["option"]);
-                    $product->setOption($record->getOption());
+                    $product->setOption($jsonModelArr["option"]);
                 }
                 $jsonModelArr["qty"] = empty($form->getData()['qty']) ? '' : $form->getData()['qty'];
                 if (array_key_exists("qty", $jsonModelArr)) {
-                    $record->setQty($jsonModelArr["qty"]);
-                    $product->setQty($record->getQty());
+                    $product->setQty($jsonModelArr["qty"]);
                 }
                 $jsonModelArr["wholesale"] = empty($form->getData()['wholesale']) ? '' : $form->getData()['wholesale'];
                 if (array_key_exists("wholesale", $jsonModelArr)) {
                     $int = filter_var($jsonModelArr["wholesale"], FILTER_SANITIZE_NUMBER_INT);
-                    $record->setWholesale($int);
-                    $product->setWholesale($record->getWholesale());
+                    $product->setWholesale($int);
                 }
                 $jsonModelArr["retail"] = empty($form->getData()['retail']) ? '' : $form->getData()['retail'];
                 if (array_key_exists("retail", $jsonModelArr)) {
                     $int2 = filter_var($jsonModelArr["retail"], FILTER_SANITIZE_NUMBER_INT);
-                    $record->setRetail($int2);
-                    $product->setRetail($record->getRetail());
+                    $product->setRetail($int2);
                 }
                 $jsonModelArr["overrideprice"] = empty($form->getData()['overrideprice']) ? '' : $form->getData()['overrideprice'];
                 if (array_key_exists("overrideprice", $jsonModelArr)) {
@@ -145,18 +139,17 @@ class ItemsController extends AbstractActionController {
                 }
                 $jsonModelArr["uom"] = empty($form->getData()['uom']) ? '' : $form->getData()['uom'];
                 if (array_key_exists("uom", $jsonModelArr)) {
-                    $record->setUom($jsonModelArr["uom"]);
-                    $product->setUom($record->getUom());
+                    $product->setUom($jsonModelArr["uom"]);
                 }
                 $jsonModelArr["status"] = empty($form->getData()['status']) ? '' : $form->getData()['status'];
                 if (array_key_exists("status", $jsonModelArr)) {
                     $status = $jsonModelArr["status"] == "1";
-                    $record->setStatus($status);
+                    $product->setStatus($status);
                 }
                 $jsonModelArr["saturdayenabled"] = empty($form->getData()['saturdayenabled']) ? '' : $form->getData()['saturdayenabled'];
                 if (array_key_exists("saturdayenabled", $jsonModelArr)) {
                     $saturdayenabled = $jsonModelArr["saturdayenabled"] == "1";
-                    $record->setSaturdayenabled($saturdayenabled);
+                    $product->setSaturdayenabled($saturdayenabled);
                 }
                 $created = new DateTime("now");
                 $record->setCreated($created);

@@ -17,6 +17,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
     protected $myauthstorage;
     protected $entityManager;
     protected $checkboxService;
+    protected $productrepository;
 
     public function __construct($sm) {
         $this->logger = $sm->get('LoggingService');
@@ -24,6 +25,9 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         $this->pricingconfig = $sm->get('config')['pricing_config'];
         $this->entityManager = $sm->get('FFMEntityManager');
         $this->checkboxService = $sm->get('CheckboxService');
+        $this->productrepository = $sm->get('FFMEntityManager')->
+                getEntityManager()->
+                getRepository('DataAccess\FFM\Entity\Product');
     }
 
     /**
@@ -82,7 +86,8 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
             if (array_key_exists(strval($item->getSku()), $overrideMap)) {
                 $adjOverrideprice = $overrideMap[strval($item->getSku())];
             }
-            $merged[] = $this->addItem($item, $adjWholesale, $adjRetail, $adjOverrideprice);
+            $this->logger->info("ItemsFilterTableArrayService: ProductID: " . $item->getProduct());
+            $merged[] = $this->addItem($item->getProduct(), $adjWholesale, $adjRetail, $adjOverrideprice);
             //add to the map
             $map[$item->getSku()] = $item;
         }
@@ -100,12 +105,12 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
 
         foreach ($restcallitems as &$item) {
             //add checkbox
-            if (!in_array($item['sku'], $removedSKUS)) {
+            if (!in_array($item['id'], $removedSKUS)) {
                 $item['selected'] = false;
             } else {
                 $item['selected'] = true;
             }
-            $merged = $this->notInMerge($item, 'sku', $map, $merged, $overrideMap);
+            $merged = $this->notInMerge($item, 'id', $map, $merged, $overrideMap);
         }
 
         return $merged;
@@ -140,20 +145,20 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 [];
     }
     
-    private function addItem(\DataAccess\FFM\Entity\RowPlusItemsPage $item, $adjWholesale, $adjRetail, $adjOverrideprice){
+    private function addItem(\DataAccess\FFM\Entity\Product $product, $adjWholesale, $adjRetail, $adjOverrideprice){
         return array(
-                "productname" => $item->getProduct(),
-                "shortescription" => $item->getDescription(),
-                "comment" => $item->getComment(),
-                "option" => $item->getOption(),
-                "qty" => $item->getQty(),
+                "productname" => $product->getProduct(),
+                "shortescription" => $product->getDescription(),
+                "comment" => $product->getComment(),
+                "option" => $product->getOption(),
+                "qty" => $product->getQty(),
                 "wholesale" => $adjWholesale,
                 "retail" => $adjRetail,
                 "overrideprice" => $adjOverrideprice,
-                "uom" => $item->getUom(),
-                "sku" => $item->getSku(),
-                "status" => strcmp(strval($item->getStatus()), "1") == 0 ? "Enabled" : "Disabled",
-                "saturdayenabled" => strcmp(strval($item->getSaturdayenabled()), "1") == 0 ? "Enabled" : "Disabled",
+                "uom" => $product->getUom(),
+                "sku" => $product->getSku(),
+                "status" => strcmp(strval($product->getStatus()), "1") == 0 ? "Enabled" : "Disabled",
+                "saturdayenabled" => strcmp(strval($product->getSaturdayenabled()), "1") == 0 ? "Enabled" : "Disabled",
             );
     }
 

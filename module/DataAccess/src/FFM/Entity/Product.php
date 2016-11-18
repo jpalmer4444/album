@@ -84,6 +84,35 @@ class Product {
      */
     protected $_updated;
     
+    /**
+     * @ORM\Column(name="status", type="boolean")
+     */
+    protected $status;
+    
+    /**
+     * @ORM\Column(name="saturdayenabled", type="boolean")
+     */
+    protected $saturdayenabled;
+    
+    public function exchangeArray($data) {
+        $this->sku = (isset($data['sku'])) ? $data['sku'] : null;
+        $this->comment = (isset($data['comment'])) ? $data['comment'] : null;
+        $this->description = (isset($data['description'])) ? $data['description'] : null;
+        $this->option = (isset($data['option'])) ? $data['option'] : null;
+        $this->product = (isset($data['product'])) ? $data['product'] : null;
+        $this->qty = (isset($data['qty'])) ? $data['qty'] : null;
+        $this->retail = (isset($data['retail'])) ? $data['retail'] : null;
+        $this->saturdayenabled = (isset($data['saturdayenabled'])) ? $data['saturdayenabled'] : null;
+        $this->status = (isset($data['status'])) ? $data['status'] : null;
+        $this->uom = (isset($data['uom'])) ? $data['uom'] : null;
+        $this->wholesale = (isset($data['wholesale'])) ? $data['wholesale'] : null;
+    }
+
+    // Add the following method:
+    public function getArrayCopy() {
+        return get_object_vars($this);
+    }
+    
     public function getId() {
         return $this->id;
     }
@@ -128,12 +157,20 @@ class Product {
         return $this->retail;
     }
 
-    public function getCreated() {
+    public function get_created() {
         return $this->_created;
     }
-    
-    public function getUpdated() {
+
+    public function get_updated() {
         return $this->_updated;
+    }
+
+    public function getStatus() {
+        return $this->status;
+    }
+
+    public function getSaturdayenabled() {
+        return $this->saturdayenabled;
     }
 
     public function setId($id) {
@@ -191,14 +228,26 @@ class Product {
         return $this;
     }
 
-    public function setCreated($_created) {
+    public function set_created($_created) {
         $this->_created = $_created;
         return $this;
     }
 
-    public function setUpdated($_updated) {
+    public function set_updated($_updated) {
         $this->_updated = $_updated;
         return $this;
     }
+
+    public function setStatus($status) {
+        $this->status = $status;
+        return $this;
+    }
+
+    public function setSaturdayenabled($saturdayenabled) {
+        $this->saturdayenabled = $saturdayenabled;
+        return $this;
+    }
+
+
     
 }

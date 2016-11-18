@@ -42,8 +42,8 @@ class CheckboxService implements CheckboxServiceInterface {
                 $record->setProduct($i);
                 $this->checkboxrepository->persist($record);
             }
-            $this->checkboxrepository->flush();
         }
+        $this->checkboxrepository->flush();
     }
 
     public function getRemovedIDS($customerid, $salespersonusername) {
