@@ -41,7 +41,7 @@ class ItemPriceOverride extends PostFormBinder {
      */
     protected $comment;
     /**
-     * @ORM\Column(name="option", type="string", length=255)
+     * @ORM\Column(name="`option`", type="string", length=255)
      */
     protected $option;
     /**

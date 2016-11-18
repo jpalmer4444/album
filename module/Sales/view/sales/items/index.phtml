@@ -455,7 +455,11 @@ $form->prepare();
                     "render": function (data, type, row, meta) {
                         if (data) {
                             var result = "$";
-                            return result + (data.toFixed(2));
+                            try{
+                                return result + (data.toFixed(2));
+                            }catch(e){
+                                return result + (data);
+                            }
                         } else {
                             return  '';
                         }
@@ -467,7 +471,11 @@ $form->prepare();
                         var hasOverride = row['overrideprice'];
                         if (enabled && data) {
                             var result = "$";
-                            return result + (data.toFixed(2));
+                            try{
+                                return result + (data.toFixed(2));
+                            }catch(e){
+                                return result + (data);
+                            }
                         } else if (!enabled && !hasOverride) {
                             return  'Call for availability';
                         }
@@ -478,7 +486,11 @@ $form->prepare();
                     "render": function (data, type, row, meta) {
                         if (data) {
                             var result = "$";
-                            return result + (data.toFixed(2));
+                            try{
+                                return result + (data.toFixed(2));
+                            }catch(e){
+                                return result + (data);
+                            }
                         } else {
                             return  data;
                         }

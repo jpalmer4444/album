@@ -35,17 +35,17 @@ class Product {
     protected $product;
     
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $description;
     
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $comment;
     
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(name="`option`", type="string", length=255, nullable=true)
      */
     protected $option;
     

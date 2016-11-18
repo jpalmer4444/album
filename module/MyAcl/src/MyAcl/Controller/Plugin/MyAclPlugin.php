@@ -43,6 +43,7 @@ class MyAclPlugin extends AbstractPlugin {
         
         $acl->addResource('login:Login\Controller\LoginController:authenticate');
         $acl->addResource('login:Login\Controller\LoginController:login');
+        $acl->addResource('login:Login\Controller\LoginController:login/authenticate');
         $acl->addResource('login:Login\Controller\LoginController:logout');
         
         //success route

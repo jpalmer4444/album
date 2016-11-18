@@ -1,0 +1,1396 @@
+[Sun Nov 13 03:23:01.318712 2016] [auth_digest:notice] [pid 8150] AH01757: generating secret for digest authentication ...
+[Sun Nov 13 03:23:01.319250 2016] [lbmethod_heartbeat:notice] [pid 8150] AH02282: No slotmem from mod_heartmonitor
+[Sun Nov 13 03:23:01.340407 2016] [mpm_prefork:notice] [pid 8150] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Sun Nov 13 03:23:01.340429 2016] [core:notice] [pid 8150] AH00094: Command line: '/usr/sbin/httpd'
+[Sun Nov 13 11:17:54.121834 2016] [:error] [pid 14878] [client 113.172.75.174:44565] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Sun Nov 13 11:37:15.665069 2016] [:error] [pid 14879] [client 187.134.162.181:51298] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Sun Nov 13 12:42:26.143636 2016] [:error] [pid 14876] [client 60.49.101.101:49776] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Sun Nov 13 14:09:34.316463 2016] [:error] [pid 14875] [client 176.125.149.72:45467] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Sun Nov 13 17:19:56.956198 2016] [:error] [pid 14897] [client 100.37.46.44:43657] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Sun Nov 13 17:26:27.768292 2016] [:error] [pid 14879] [client 66.215.20.190:36260] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Sun Nov 13 20:24:17.790790 2016] [access_compat:error] [pid 14875] [client 52.206.111.94:34834] AH01797: client denied by server configuration: /var/www/html/magento_ee/app/etc/local.xml
+[Sun Nov 13 20:34:04.587659 2016] [:error] [pid 14978] [client 148.101.231.72:53782] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 00:04:28.714908 2016] [:error] [pid 16488] [client 212.92.127.143:60000] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 00:09:39.035022 2016] [:error] [pid 15181] [client 64.16.214.100:57500] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 00:19:29.094445 2016] [:error] [pid 14876] [client 197.45.167.94:35887] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 00:19:29.128849 2016] [:error] [pid 14875] [client 197.45.167.94:35893] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+2016-11-14T00:50:56+00:00 INFO (6): ENV: staging
+2016-11-14T00:50:56+00:00 INFO (6): Allowed: 1
+2016-11-14T00:50:56+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T00:51:00+00:00 INFO (6): ENV: staging
+2016-11-14T00:51:00+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T00:51:00+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-14T00:51:00+00:00 INFO (6): No price overrides found!
+2016-11-14T00:51:00+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T00:54:49+00:00 INFO (6): ENV: staging
+2016-11-14T00:54:49+00:00 INFO (6): Allowed: 1
+2016-11-14T00:54:49+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T00:54:51+00:00 INFO (6): ENV: staging
+2016-11-14T00:54:51+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T00:54:51+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-14T00:54:51+00:00 INFO (6): No price overrides found!
+2016-11-14T00:54:51+00:00 INFO (6): Found 0 removedSKUs in Session!
+[Mon Nov 14 01:10:10.910748 2016] [access_compat:error] [pid 16488] [client 52.206.111.94:34902] AH01797: client denied by server configuration: /var/www/html/magento_ee/app/etc/local.xml
+[Mon Nov 14 06:22:17.671229 2016] [:error] [pid 14978] [client 2.226.154.79:49706] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 12:13:03.295826 2016] [mpm_prefork:notice] [pid 8150] AH00169: caught SIGTERM, shutting down
+[Mon Nov 14 12:13:03.409518 2016] [suexec:notice] [pid 18174] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Mon Nov 14 12:13:03.435645 2016] [auth_digest:notice] [pid 18175] AH01757: generating secret for digest authentication ...
+[Mon Nov 14 12:13:03.436245 2016] [lbmethod_heartbeat:notice] [pid 18175] AH02282: No slotmem from mod_heartmonitor
+[Mon Nov 14 12:13:03.459457 2016] [mpm_prefork:notice] [pid 18175] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Mon Nov 14 12:13:03.459481 2016] [core:notice] [pid 18175] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-14T12:13:13+00:00 INFO (6): ENV: staging
+2016-11-14T12:13:13+00:00 INFO (6): Allowed: 1
+2016-11-14T12:13:13+00:00 INFO (6): Checking for identity
+2016-11-14T12:13:13+00:00 INFO (6): Identity found.
+2016-11-14T12:13:13+00:00 INFO (6): ENV: staging
+2016-11-14T12:13:14+00:00 INFO (6): Allowed: 1
+2016-11-14T12:13:18+00:00 INFO (6): ENV: staging
+2016-11-14T12:13:18+00:00 INFO (6): Allowed: 1
+2016-11-14T12:13:18+00:00 INFO (6): ENV: staging
+2016-11-14T12:13:18+00:00 INFO (6): Allowed: 1
+2016-11-14T12:13:18+00:00 INFO (6): Checking for identity
+2016-11-14T12:13:18+00:00 INFO (6): Identity not found.
+2016-11-14T12:13:30+00:00 INFO (6): ENV: staging
+2016-11-14T12:13:30+00:00 INFO (6): Allowed: 1
+2016-11-14T12:13:30+00:00 INFO (6): AuthenticationAction called.
+2016-11-14T12:13:31+00:00 INFO (6): Username: jpalmer
+2016-11-14T12:13:31+00:00 INFO (6): ENV: staging
+2016-11-14T12:13:31+00:00 INFO (6): Allowed: 1
+2016-11-14T12:13:31+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-14T12:13:31+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:13:35+00:00 INFO (6): ENV: staging
+2016-11-14T12:13:35+00:00 INFO (6): Allowed: 1
+2016-11-14T12:13:35+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:13:38+00:00 INFO (6): ENV: staging
+2016-11-14T12:13:38+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:13:39+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-14T12:13:39+00:00 INFO (6): No price overrides found!
+2016-11-14T12:13:39+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T12:25:46+00:00 INFO (6): ENV: staging
+2016-11-14T12:25:50+00:00 INFO (6): ENV: staging
+2016-11-14T12:25:50+00:00 INFO (6): Allowed: 1
+2016-11-14T12:25:50+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-14T12:25:50+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:25:55+00:00 INFO (6): ENV: staging
+2016-11-14T12:25:55+00:00 INFO (6): Allowed: 1
+2016-11-14T12:25:55+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:25:56+00:00 INFO (6): ENV: staging
+2016-11-14T12:25:56+00:00 INFO (6): Retrieving customerlistitems.
+[Mon Nov 14 12:25:56.455091 2016] [:error] [pid 18203] [client 52.206.111.94:60546] PHP Notice:  Undefined variable: listItems in /vol01/svc/bySKU.php on line 1418
+2016-11-14T12:25:56+00:00 DEBUG (7): No customerlistitems items found.
+2016-11-14T12:25:59+00:00 INFO (6): ENV: staging
+2016-11-14T12:25:59+00:00 INFO (6): Allowed: 1
+2016-11-14T12:25:59+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-14T12:25:59+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:26:09+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:09+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:09+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:26:09+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:09+00:00 INFO (6): Retrieving customerlistitems.
+[Mon Nov 14 12:26:09.901399 2016] [:error] [pid 18177] [client 52.206.111.94:60554] PHP Notice:  Undefined variable: listItems in /vol01/svc/bySKU.php on line 1418
+2016-11-14T12:26:09+00:00 DEBUG (7): No customerlistitems items found.
+2016-11-14T12:26:12+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:12+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:12+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-14T12:26:12+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:26:14+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:14+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:14+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:26:16+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:16+00:00 INFO (6): Retrieving customerlistitems.
+[Mon Nov 14 12:26:16.970237 2016] [:error] [pid 18209] [client 52.206.111.94:60562] PHP Notice:  Undefined variable: listItems in /vol01/svc/bySKU.php on line 1418
+2016-11-14T12:26:16+00:00 DEBUG (7): No customerlistitems items found.
+2016-11-14T12:26:19+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:19+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:19+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-14T12:26:19+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:26:22+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:22+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:22+00:00 INFO (6): Retrieving salespeople.
+2016-11-14T12:26:22+00:00 DEBUG (7): Retrieved 4 salespeople.
+2016-11-14T12:26:25+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:25+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:25+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-14T12:26:25+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:26:27+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:27+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:27+00:00 INFO (6): Retrieving salespeople.
+2016-11-14T12:26:28+00:00 DEBUG (7): Retrieved 4 salespeople.
+2016-11-14T12:26:30+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:30+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:30+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-14T12:26:31+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:26:33+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:33+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:33+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:26:37+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:37+00:00 INFO (6): Retrieving customerlistitems.
+[Mon Nov 14 12:26:37.323382 2016] [:error] [pid 18213] [client 52.206.111.94:60586] PHP Notice:  Undefined variable: listItems in /vol01/svc/bySKU.php on line 1418
+2016-11-14T12:26:37+00:00 DEBUG (7): No customerlistitems items found.
+2016-11-14T12:26:39+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:39+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:39+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-14T12:26:39+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:26:41+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:41+00:00 INFO (6): Allowed: 1
+2016-11-14T12:26:41+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:26:42+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:42+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:26:42+00:00 DEBUG (7): Retrieved 15 customerlistitems.
+2016-11-14T12:26:42+00:00 INFO (6): No price overrides found!
+2016-11-14T12:26:42+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T12:26:47+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:48+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:49+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:50+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:51+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:52+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:57+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:58+00:00 INFO (6): ENV: staging
+2016-11-14T12:26:59+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:01+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:01+00:00 INFO (6): Allowed: 1
+2016-11-14T12:27:01+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-14T12:27:02+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:27:03+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:04+00:00 INFO (6): Allowed: 1
+2016-11-14T12:27:04+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:27:04+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:04+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:27:04+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-14T12:27:04+00:00 INFO (6): No price overrides found!
+2016-11-14T12:27:04+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T12:27:07+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:08+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:09+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:10+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:11+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:11+00:00 INFO (6): Allowed: 1
+2016-11-14T12:27:11+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-14T12:27:11+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:27:18+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:18+00:00 INFO (6): Allowed: 1
+2016-11-14T12:27:18+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:27:21+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:21+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:27:21+00:00 DEBUG (7): Retrieved 15 customerlistitems.
+2016-11-14T12:27:21+00:00 INFO (6): No price overrides found!
+2016-11-14T12:27:21+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T12:27:25+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:29+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:29+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:30+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:32+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:32+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:36+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:36+00:00 INFO (6): Allowed: 1
+2016-11-14T12:27:36+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-14T12:27:36+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:27:38+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:38+00:00 INFO (6): Allowed: 1
+2016-11-14T12:27:38+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:27:41+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:41+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:27:41+00:00 DEBUG (7): Retrieved 15 customerlistitems.
+2016-11-14T12:27:41+00:00 INFO (6): No price overrides found!
+2016-11-14T12:27:41+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T12:27:49+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:49+00:00 INFO (6): Allowed: 1
+2016-11-14T12:27:49+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-14T12:27:49+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:27:53+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:53+00:00 INFO (6): Allowed: 1
+2016-11-14T12:27:53+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:27:53+00:00 INFO (6): ENV: staging
+2016-11-14T12:27:54+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:27:54+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-14T12:27:54+00:00 INFO (6): No price overrides found!
+2016-11-14T12:27:54+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T12:28:02+00:00 INFO (6): ENV: staging
+2016-11-14T12:28:02+00:00 INFO (6): Allowed: 1
+2016-11-14T12:28:02+00:00 INFO (6): ENV: staging
+2016-11-14T12:28:02+00:00 INFO (6): Allowed: 1
+2016-11-14T12:28:02+00:00 INFO (6): Checking for identity
+2016-11-14T12:28:02+00:00 INFO (6): Identity not found.
+2016-11-14T12:28:07+00:00 INFO (6): ENV: staging
+2016-11-14T12:28:08+00:00 INFO (6): Allowed: 1
+2016-11-14T12:28:08+00:00 INFO (6): AuthenticationAction called.
+2016-11-14T12:28:08+00:00 INFO (6): Username: jpalmer
+2016-11-14T12:28:08+00:00 INFO (6): ENV: staging
+2016-11-14T12:28:08+00:00 INFO (6): Allowed: 1
+2016-11-14T12:28:08+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-14T12:28:08+00:00 INFO (6): Retrieved #1 customers.
+[Mon Nov 14 12:30:59.262582 2016] [:error] [pid 18177] [client 31.168.76.54:59029] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+2016-11-14T12:51:46+00:00 INFO (6): ENV: staging
+2016-11-14T12:51:46+00:00 INFO (6): Allowed: 1
+2016-11-14T12:51:46+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-14T12:51:46+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:51:50+00:00 INFO (6): ENV: staging
+2016-11-14T12:51:50+00:00 INFO (6): Allowed: 1
+2016-11-14T12:51:50+00:00 INFO (6): Retrieving salespeople.
+2016-11-14T12:51:50+00:00 DEBUG (7): Retrieved 4 salespeople.
+2016-11-14T12:51:56+00:00 INFO (6): ENV: staging
+2016-11-14T12:51:56+00:00 INFO (6): Allowed: 1
+2016-11-14T12:51:56+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-14T12:51:56+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:51:59+00:00 INFO (6): ENV: staging
+2016-11-14T12:51:59+00:00 INFO (6): Allowed: 1
+2016-11-14T12:51:59+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:52:00+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:00+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:52:00+00:00 DEBUG (7): Retrieved 15 customerlistitems.
+2016-11-14T12:52:00+00:00 INFO (6): No price overrides found!
+2016-11-14T12:52:00+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T12:52:02+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:06+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:07+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:09+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:09+00:00 INFO (6): Allowed: 1
+2016-11-14T12:52:09+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-14T12:52:09+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:52:11+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:11+00:00 INFO (6): Allowed: 1
+2016-11-14T12:52:11+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:52:14+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:14+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:52:14+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-14T12:52:14+00:00 INFO (6): No price overrides found!
+2016-11-14T12:52:14+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T12:52:18+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:19+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:20+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:20+00:00 INFO (6): Allowed: 1
+2016-11-14T12:52:20+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-14T12:52:20+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:52:26+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:26+00:00 INFO (6): Allowed: 1
+2016-11-14T12:52:26+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:52:27+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:27+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:52:27+00:00 DEBUG (7): Retrieved 15 customerlistitems.
+2016-11-14T12:52:27+00:00 INFO (6): No price overrides found!
+2016-11-14T12:52:27+00:00 INFO (6): Found 13 removedSKUs in Session!
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 7945404
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 10003
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 51
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 7987201
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 53
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 7986807
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 2874
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 899
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 103001
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 801001
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 2146
+2016-11-14T12:52:27+00:00 INFO (6): Setting checkbox for table row with SKU: 172423014
+2016-11-14T12:52:32+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:33+00:00 INFO (6): Allowed: 1
+2016-11-14T12:52:33+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-14T12:52:33+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T12:52:36+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:36+00:00 INFO (6): Allowed: 1
+2016-11-14T12:52:36+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:52:37+00:00 INFO (6): ENV: staging
+2016-11-14T12:52:37+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T12:52:37+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-14T12:52:37+00:00 INFO (6): No price overrides found!
+2016-11-14T12:52:37+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-14T12:52:37+00:00 INFO (6): Setting checkbox for table row with SKU: 7987201
+2016-11-14T12:52:37+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+[Mon Nov 14 15:12:22.737046 2016] [:error] [pid 18177] [client 65.129.86.149:35505] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 16:35:51.494659 2016] [:error] [pid 18185] [client 126.59.246.240:48648] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 16:37:29.844213 2016] [:error] [pid 18199] [client 114.32.44.176:57739] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 17:03:51.144973 2016] [:error] [pid 18178] [client 213.7.146.250:38641] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 17:04:19.994349 2016] [:error] [pid 18211] [client 2.137.31.241:52914] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 18:41:03.032726 2016] [:error] [pid 18213] [client 61.58.96.162:36942] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Mon Nov 14 21:27:39.569101 2016] [:error] [pid 18211] [client 220.133.22.86:44435] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+2016-11-14T22:49:21+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:21+00:00 INFO (6): Allowed: 1
+2016-11-14T22:49:21+00:00 INFO (6): Checking for identity
+2016-11-14T22:49:21+00:00 INFO (6): Identity not found.
+2016-11-14T22:49:24+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:25+00:00 INFO (6): Allowed: 1
+2016-11-14T22:49:25+00:00 INFO (6): AuthenticationAction called.
+2016-11-14T22:49:25+00:00 INFO (6): Username: jdowns
+2016-11-14T22:49:25+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:25+00:00 INFO (6): Allowed: 1
+2016-11-14T22:49:25+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-14T22:49:25+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T22:49:28+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:28+00:00 INFO (6): Allowed: 1
+2016-11-14T22:49:28+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T22:49:29+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:29+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T22:49:29+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-14T22:49:29+00:00 INFO (6): No price overrides found!
+2016-11-14T22:49:29+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T22:49:36+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:37+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:37+00:00 INFO (6): UnSelecting All.
+2016-11-14T22:49:38+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:39+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:41+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:41+00:00 INFO (6): UnSelecting All.
+2016-11-14T22:49:42+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:43+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:44+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:47+00:00 INFO (6): ENV: staging
+2016-11-14T22:49:47+00:00 INFO (6): UnSelecting All.
+2016-11-14T23:09:30+00:00 INFO (6): ENV: staging
+2016-11-14T23:09:31+00:00 INFO (6): ENV: staging
+2016-11-14T23:09:32+00:00 INFO (6): ENV: staging
+2016-11-14T23:09:32+00:00 INFO (6): UnSelecting All.
+2016-11-14T23:09:34+00:00 INFO (6): ENV: staging
+2016-11-14T23:09:35+00:00 INFO (6): ENV: staging
+2016-11-14T23:09:36+00:00 INFO (6): ENV: staging
+2016-11-14T23:09:44+00:00 INFO (6): ENV: staging
+2016-11-14T23:09:46+00:00 INFO (6): ENV: staging
+2016-11-14T23:09:46+00:00 INFO (6): UnSelecting All.
+2016-11-14T23:09:58+00:00 INFO (6): ENV: staging
+2016-11-14T23:11:57+00:00 INFO (6): ENV: staging
+2016-11-14T23:11:57+00:00 INFO (6): Allowed: 1
+2016-11-14T23:11:57+00:00 INFO (6): Retrieving salespeople.
+2016-11-14T23:11:58+00:00 DEBUG (7): Retrieved 4 salespeople.
+2016-11-14T23:12:00+00:00 INFO (6): ENV: staging
+2016-11-14T23:12:00+00:00 INFO (6): Allowed: 1
+2016-11-14T23:12:00+00:00 INFO (6): Retrieving Salespeople. ID: 206
+2016-11-14T23:12:01+00:00 INFO (6): Retrieved #1 customers.
+2016-11-14T23:12:06+00:00 INFO (6): ENV: staging
+2016-11-14T23:12:07+00:00 INFO (6): Allowed: 1
+2016-11-14T23:12:07+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T23:12:07+00:00 INFO (6): ENV: staging
+2016-11-14T23:12:07+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-14T23:12:07+00:00 DEBUG (7): Retrieved 6 customerlistitems.
+2016-11-14T23:12:07+00:00 INFO (6): No price overrides found!
+2016-11-14T23:12:07+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-14T23:12:13+00:00 INFO (6): ENV: staging
+2016-11-14T23:12:13+00:00 INFO (6): Allowed: 1
+2016-11-14T23:12:13+00:00 INFO (6): Retrieving salespeople.
+2016-11-14T23:12:13+00:00 DEBUG (7): Retrieved 4 salespeople.
+[Tue Nov 15 03:44:19.251745 2016] [:error] [pid 18177] [client 175.143.89.253:55912] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+2016-11-15T12:07:57+00:00 INFO (6): ENV: staging
+2016-11-15T12:07:57+00:00 INFO (6): Allowed: 1
+2016-11-15T12:07:57+00:00 INFO (6): Checking for identity
+2016-11-15T12:07:57+00:00 INFO (6): Identity found.
+2016-11-15T12:07:57+00:00 INFO (6): ENV: staging
+2016-11-15T12:07:57+00:00 INFO (6): Allowed: 1
+2016-11-15T12:08:00+00:00 INFO (6): ENV: staging
+2016-11-15T12:08:00+00:00 INFO (6): Allowed: 1
+2016-11-15T12:08:00+00:00 INFO (6): Retrieving salespeople.
+2016-11-15T12:08:00+00:00 DEBUG (7): Retrieved 4 salespeople.
+2016-11-15T12:08:03+00:00 INFO (6): ENV: staging
+2016-11-15T12:08:04+00:00 INFO (6): Allowed: 1
+2016-11-15T12:08:04+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-15T12:08:04+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T12:08:06+00:00 INFO (6): ENV: staging
+2016-11-15T12:08:06+00:00 INFO (6): Allowed: 1
+2016-11-15T12:08:06+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T12:08:07+00:00 INFO (6): ENV: staging
+2016-11-15T12:08:07+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T12:08:07+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-15T12:08:07+00:00 INFO (6): No price overrides found!
+2016-11-15T12:08:07+00:00 INFO (6): Found 0 removedSKUs in Session!
+[Tue Nov 15 13:49:47.269515 2016] [mpm_prefork:notice] [pid 18175] AH00169: caught SIGTERM, shutting down
+[Tue Nov 15 13:49:47.367275 2016] [suexec:notice] [pid 20825] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Tue Nov 15 13:49:47.393928 2016] [auth_digest:notice] [pid 20826] AH01757: generating secret for digest authentication ...
+[Tue Nov 15 13:49:47.394498 2016] [lbmethod_heartbeat:notice] [pid 20826] AH02282: No slotmem from mod_heartmonitor
+[Tue Nov 15 13:49:47.417742 2016] [mpm_prefork:notice] [pid 20826] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Tue Nov 15 13:49:47.417764 2016] [core:notice] [pid 20826] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-15T13:49:53+00:00 INFO (6): ENV: staging
+2016-11-15T13:49:53+00:00 INFO (6): Allowed: 1
+2016-11-15T13:49:53+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T13:49:55+00:00 INFO (6): ENV: staging
+2016-11-15T13:49:55+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T13:49:55+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-15T13:49:55+00:00 INFO (6): No price overrides found!
+2016-11-15T13:49:55+00:00 INFO (6): Found 1 removedSKUs in Session!
+2016-11-15T13:49:55+00:00 INFO (6): Setting checkbox for table row with SKU: 856
+2016-11-15T13:50:13+00:00 INFO (6): ENV: staging
+2016-11-15T13:50:13+00:00 INFO (6): Allowed: 1
+2016-11-15T13:50:13+00:00 INFO (6): ENV: staging
+2016-11-15T13:50:13+00:00 INFO (6): Allowed: 1
+2016-11-15T13:50:13+00:00 INFO (6): Checking for identity
+2016-11-15T13:50:13+00:00 INFO (6): Identity not found.
+2016-11-15T13:50:18+00:00 INFO (6): ENV: staging
+2016-11-15T13:50:18+00:00 INFO (6): Allowed: 1
+2016-11-15T13:50:18+00:00 INFO (6): AuthenticationAction called.
+2016-11-15T13:50:18+00:00 INFO (6): Username: jpalmer
+2016-11-15T13:50:19+00:00 INFO (6): ENV: staging
+2016-11-15T13:50:19+00:00 INFO (6): Allowed: 1
+2016-11-15T13:50:19+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-15T13:50:19+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T13:50:22+00:00 INFO (6): ENV: staging
+2016-11-15T13:50:22+00:00 INFO (6): Allowed: 1
+2016-11-15T13:50:22+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T13:50:22+00:00 INFO (6): ENV: staging
+2016-11-15T13:50:22+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T13:50:23+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-15T13:50:23+00:00 INFO (6): No price overrides found!
+2016-11-15T13:50:23+00:00 INFO (6): Found 3 removedSKUs in Session!
+2016-11-15T13:50:23+00:00 INFO (6): Setting checkbox for table row with SKU: Array
+2016-11-15T13:50:23+00:00 INFO (6): Setting checkbox for table row with SKU: 16768102
+2016-11-15T13:50:23+00:00 INFO (6): Setting checkbox for table row with SKU: 25401
+2016-11-15T19:14:13+00:00 INFO (6): ENV: staging
+2016-11-15T19:14:13+00:00 INFO (6): Allowed: 1
+2016-11-15T19:14:13+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:14:14+00:00 INFO (6): ENV: staging
+2016-11-15T19:14:14+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:14:15+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-15T19:14:15+00:00 INFO (6): No price overrides found!
+2016-11-15T19:14:15+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-15T19:14:27+00:00 INFO (6): ENV: staging
+2016-11-15T19:14:28+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 16768102 CUSTOMERID: 400 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:14:37+00:00 INFO (6): ENV: staging
+2016-11-15T19:14:37+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 2868 CUSTOMERID: 400 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:17:53+00:00 INFO (6): ENV: staging
+2016-11-15T19:17:53+00:00 INFO (6): Saving overrideprice: 2.59.
+2016-11-15T19:18:02+00:00 INFO (6): ENV: staging
+2016-11-15T19:18:03+00:00 INFO (6): Saving overrideprice: 2.59.
+2016-11-15T19:18:09+00:00 INFO (6): ENV: staging
+2016-11-15T19:18:10+00:00 INFO (6): ENV: staging
+2016-11-15T19:18:17+00:00 INFO (6): ENV: staging
+2016-11-15T19:18:17+00:00 INFO (6): Saving overrideprice: 2.59.
+2016-11-15T19:19:02+00:00 INFO (6): ENV: staging
+2016-11-15T19:19:03+00:00 INFO (6): Saving overrideprice: 2.59.
+2016-11-15T19:19:24+00:00 INFO (6): ENV: staging
+2016-11-15T19:19:24+00:00 INFO (6): Saving overrideprice: 2.57.
+2016-11-15T19:19:41+00:00 INFO (6): ENV: staging
+2016-11-15T19:19:42+00:00 INFO (6): Allowed: 1
+2016-11-15T19:19:42+00:00 INFO (6): Checking for identity
+2016-11-15T19:19:42+00:00 INFO (6): Identity found.
+2016-11-15T19:19:42+00:00 INFO (6): ENV: staging
+2016-11-15T19:19:42+00:00 INFO (6): Allowed: 1
+2016-11-15T19:19:47+00:00 INFO (6): ENV: staging
+2016-11-15T19:19:47+00:00 INFO (6): Allowed: 1
+2016-11-15T19:19:47+00:00 INFO (6): ENV: staging
+2016-11-15T19:19:48+00:00 INFO (6): Allowed: 1
+2016-11-15T19:19:48+00:00 INFO (6): Checking for identity
+2016-11-15T19:19:48+00:00 INFO (6): Identity not found.
+2016-11-15T19:19:49+00:00 INFO (6): ENV: staging
+2016-11-15T19:19:49+00:00 INFO (6): Allowed: 1
+2016-11-15T19:19:49+00:00 INFO (6): AuthenticationAction called.
+2016-11-15T19:19:50+00:00 INFO (6): Username: jdowns
+2016-11-15T19:19:50+00:00 INFO (6): ENV: staging
+2016-11-15T19:19:50+00:00 INFO (6): Allowed: 1
+2016-11-15T19:19:50+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-15T19:19:50+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T19:19:53+00:00 INFO (6): ENV: staging
+2016-11-15T19:19:53+00:00 INFO (6): Allowed: 1
+2016-11-15T19:19:53+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:19:54+00:00 INFO (6): ENV: staging
+2016-11-15T19:19:54+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:19:54+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-15T19:19:54+00:00 INFO (6): No price overrides found!
+2016-11-15T19:19:54+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-15T19:20:03+00:00 INFO (6): ENV: staging
+2016-11-15T19:20:03+00:00 INFO (6): Saving overrideprice: 5.31.
+2016-11-15T19:20:13+00:00 INFO (6): ENV: staging
+2016-11-15T19:20:13+00:00 INFO (6): Saving overrideprice: 5.31.
+2016-11-15T19:20:45+00:00 INFO (6): ENV: staging
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 16768101 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 856 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 1679 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 1200002 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 2564 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 1853 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 3141 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 1070 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 363 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 80 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 2882 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 2880 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 55157403 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 551682012 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 2199 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:45+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 1110 CUSTOMERID: 397 SALESPERSONUSERNAME: jdowns
+2016-11-15T19:20:47+00:00 INFO (6): ENV: staging
+2016-11-15T19:20:48+00:00 INFO (6): ENV: staging
+2016-11-15T19:20:48+00:00 INFO (6): UnSelecting All.
+2016-11-15T19:20:49+00:00 INFO (6): ENV: staging
+2016-11-15T19:20:49+00:00 INFO (6): Allowed: 1
+2016-11-15T19:20:49+00:00 INFO (6): Persisting PDF Report
+2016-11-15T19:21:00+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:01+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:02+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:04+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:06+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:06+00:00 INFO (6): Allowed: 1
+2016-11-15T19:21:06+00:00 INFO (6): Persisting PDF Report
+2016-11-15T19:21:06+00:00 INFO (6): 0: ID_457
+2016-11-15T19:21:06+00:00 INFO (6): 1: {"id":457,"sku":"1679","productname":"Cod - Atlantic, Frozen, Wild, China, Portions (10lb Case)","shortescription":"6oz Portions","comment":null,"qty":1,"wholesale":4.15,"retail":5.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+2016-11-15T19:21:23+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:23+00:00 INFO (6): UnSelecting All.
+2016-11-15T19:21:40+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:40+00:00 INFO (6): Allowed: 1
+2016-11-15T19:21:40+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-15T19:21:40+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T19:21:44+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:44+00:00 INFO (6): Allowed: 1
+2016-11-15T19:21:44+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:21:44+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:44+00:00 INFO (6): Retrieving customerlistitems.
+[Tue Nov 15 19:21:44.940435 2016] [:error] [pid 20849] [client 52.206.111.94:60994] PHP Notice:  Undefined variable: listItems in /vol01/svc/bySKU.php on line 1418
+2016-11-15T19:21:44+00:00 DEBUG (7): No customerlistitems items found.
+2016-11-15T19:21:47+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:47+00:00 INFO (6): Allowed: 1
+2016-11-15T19:21:47+00:00 INFO (6): Retrieving salespeople.
+2016-11-15T19:21:48+00:00 DEBUG (7): Retrieved 4 salespeople.
+2016-11-15T19:21:48+00:00 INFO (6): query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+2016-11-15T19:21:49+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:49+00:00 INFO (6): Allowed: 1
+2016-11-15T19:21:49+00:00 INFO (6): Retrieving Salespeople. ID: 180
+2016-11-15T19:21:49+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T19:21:51+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:51+00:00 INFO (6): Allowed: 1
+2016-11-15T19:21:51+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:21:51+00:00 INFO (6): ENV: staging
+2016-11-15T19:21:51+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:21:51+00:00 DEBUG (7): Retrieved 6 customerlistitems.
+2016-11-15T19:21:51+00:00 INFO (6): No price overrides found!
+2016-11-15T19:21:51+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-15T19:22:21+00:00 INFO (6): ENV: staging
+2016-11-15T19:22:21+00:00 INFO (6): Allowed: 1
+2016-11-15T19:22:21+00:00 INFO (6): Retrieving salespeople.
+2016-11-15T19:22:21+00:00 DEBUG (7): Retrieved 4 salespeople.
+2016-11-15T19:22:21+00:00 INFO (6): query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+2016-11-15T19:22:24+00:00 INFO (6): ENV: staging
+2016-11-15T19:22:24+00:00 INFO (6): Allowed: 1
+2016-11-15T19:22:24+00:00 INFO (6): Retrieving Salespeople. ID: 180
+2016-11-15T19:22:24+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T19:22:28+00:00 INFO (6): ENV: staging
+2016-11-15T19:22:28+00:00 INFO (6): Allowed: 1
+2016-11-15T19:22:28+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:22:28+00:00 INFO (6): ENV: staging
+2016-11-15T19:22:28+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:22:29+00:00 DEBUG (7): Retrieved 5 customerlistitems.
+2016-11-15T19:22:29+00:00 INFO (6): No price overrides found!
+2016-11-15T19:22:29+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-15T19:22:40+00:00 INFO (6): ENV: staging
+2016-11-15T19:22:41+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 61 CUSTOMERID: 972 SALESPERSONUSERNAME: jmeade
+2016-11-15T19:23:05+00:00 INFO (6): ENV: staging
+2016-11-15T19:23:05+00:00 INFO (6): Saving overrideprice: 7.89.
+2016-11-15T19:23:21+00:00 INFO (6): ENV: staging
+2016-11-15T19:23:23+00:00 INFO (6): ENV: staging
+2016-11-15T19:23:23+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 17273503 CUSTOMERID: 972 SALESPERSONUSERNAME: jmeade
+2016-11-15T19:24:27+00:00 INFO (6): ENV: staging
+2016-11-15T19:24:27+00:00 INFO (6): Allowed: 1
+2016-11-15T19:24:27+00:00 INFO (6): Retrieving Salespeople. ID: 180
+2016-11-15T19:24:27+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T19:24:34+00:00 INFO (6): ENV: staging
+2016-11-15T19:24:34+00:00 INFO (6): Allowed: 1
+2016-11-15T19:24:34+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:24:34+00:00 INFO (6): ENV: staging
+2016-11-15T19:24:34+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:24:34+00:00 DEBUG (7): Retrieved 12 customerlistitems.
+2016-11-15T19:24:34+00:00 INFO (6): No price overrides found!
+2016-11-15T19:24:34+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-15T19:24:41+00:00 INFO (6): ENV: staging
+2016-11-15T19:24:41+00:00 INFO (6): Allowed: 1
+2016-11-15T19:24:41+00:00 INFO (6): Retrieving Salespeople. ID: 180
+2016-11-15T19:24:41+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T19:24:50+00:00 INFO (6): ENV: staging
+2016-11-15T19:24:50+00:00 INFO (6): Allowed: 1
+2016-11-15T19:24:50+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:24:50+00:00 INFO (6): ENV: staging
+2016-11-15T19:24:50+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:24:50+00:00 DEBUG (7): Retrieved 9 customerlistitems.
+2016-11-15T19:24:50+00:00 INFO (6): No price overrides found!
+2016-11-15T19:24:50+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-15T19:24:54+00:00 INFO (6): ENV: staging
+2016-11-15T19:24:55+00:00 INFO (6): Allowed: 1
+2016-11-15T19:24:55+00:00 INFO (6): Retrieving Salespeople. ID: 180
+2016-11-15T19:24:55+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T19:25:05+00:00 INFO (6): ENV: staging
+2016-11-15T19:25:05+00:00 INFO (6): Allowed: 1
+2016-11-15T19:25:05+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:25:05+00:00 INFO (6): ENV: staging
+2016-11-15T19:25:05+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:25:05+00:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-11-15T19:25:05+00:00 INFO (6): No price overrides found!
+2016-11-15T19:25:05+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-15T19:25:08+00:00 INFO (6): ENV: staging
+2016-11-15T19:25:08+00:00 INFO (6): Allowed: 1
+2016-11-15T19:25:08+00:00 INFO (6): Retrieving Salespeople. ID: 180
+2016-11-15T19:25:09+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T19:25:17+00:00 INFO (6): ENV: staging
+2016-11-15T19:25:17+00:00 INFO (6): Allowed: 1
+2016-11-15T19:25:17+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:25:18+00:00 INFO (6): ENV: staging
+2016-11-15T19:25:18+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:25:18+00:00 DEBUG (7): Retrieved 2 customerlistitems.
+2016-11-15T19:25:18+00:00 INFO (6): No price overrides found!
+2016-11-15T19:25:18+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-15T19:25:21+00:00 INFO (6): ENV: staging
+2016-11-15T19:25:21+00:00 INFO (6): Allowed: 1
+2016-11-15T19:25:21+00:00 INFO (6): Retrieving Salespeople. ID: 180
+2016-11-15T19:25:21+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T19:25:30+00:00 INFO (6): ENV: staging
+2016-11-15T19:25:30+00:00 INFO (6): Allowed: 1
+2016-11-15T19:25:30+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:25:31+00:00 INFO (6): ENV: staging
+2016-11-15T19:25:31+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T19:25:31+00:00 DEBUG (7): Retrieved 9 customerlistitems.
+2016-11-15T19:25:31+00:00 INFO (6): No price overrides found!
+2016-11-15T19:25:31+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-15T19:25:55+00:00 INFO (6): ENV: staging
+2016-11-15T19:25:55+00:00 INFO (6): Saving overrideprice: 5.36.
+[Tue Nov 15 21:45:48.901262 2016] [mpm_prefork:notice] [pid 20826] AH00169: caught SIGTERM, shutting down
+[Tue Nov 15 21:45:48.992339 2016] [suexec:notice] [pid 21699] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Tue Nov 15 21:45:49.017276 2016] [auth_digest:notice] [pid 21700] AH01757: generating secret for digest authentication ...
+[Tue Nov 15 21:45:49.017843 2016] [lbmethod_heartbeat:notice] [pid 21700] AH02282: No slotmem from mod_heartmonitor
+[Tue Nov 15 21:45:49.040994 2016] [mpm_prefork:notice] [pid 21700] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Tue Nov 15 21:45:49.041019 2016] [core:notice] [pid 21700] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-15T21:45:57+00:00 INFO (6): ENV: staging
+2016-11-15T21:45:58+00:00 INFO (6): Allowed: 1
+2016-11-15T21:45:58+00:00 INFO (6): Checking for identity
+2016-11-15T21:45:58+00:00 INFO (6): Identity found.
+2016-11-15T21:45:58+00:00 INFO (6): ENV: staging
+2016-11-15T21:45:58+00:00 INFO (6): Allowed: 1
+2016-11-15T21:45:58+00:00 INFO (6): ENV: staging
+2016-11-15T21:46:01+00:00 INFO (6): ENV: staging
+2016-11-15T21:46:01+00:00 INFO (6): Allowed: 1
+2016-11-15T21:46:01+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-15T21:46:01+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T21:46:01+00:00 INFO (6): ENV: staging
+2016-11-15T21:46:02+00:00 INFO (6): ENV: staging
+2016-11-15T21:46:03+00:00 INFO (6): Allowed: 1
+2016-11-15T21:46:03+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T21:46:03+00:00 INFO (6): ENV: staging
+2016-11-15T21:46:03+00:00 INFO (6): ENV: staging
+2016-11-15T21:46:03+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T21:46:04+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-15T21:46:04+00:00 INFO (6): No price overrides found!
+2016-11-15T21:46:04+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-15T21:46:04+00:00 INFO (6): Setting checkbox for table row with SKU: 16768102
+2016-11-15T21:46:04+00:00 INFO (6): Setting checkbox for table row with SKU: 25401
+[Tue Nov 15 21:54:00.580969 2016] [mpm_prefork:notice] [pid 21700] AH00169: caught SIGTERM, shutting down
+[Tue Nov 15 21:54:00.645897 2016] [suexec:notice] [pid 21794] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Tue Nov 15 21:54:00.672456 2016] [auth_digest:notice] [pid 21795] AH01757: generating secret for digest authentication ...
+[Tue Nov 15 21:54:00.673106 2016] [lbmethod_heartbeat:notice] [pid 21795] AH02282: No slotmem from mod_heartmonitor
+[Tue Nov 15 21:54:00.696450 2016] [mpm_prefork:notice] [pid 21795] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Tue Nov 15 21:54:00.696470 2016] [core:notice] [pid 21795] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-15T21:54:04+00:00 INFO (6): ENV: staging
+2016-11-15T21:54:04+00:00 INFO (6): Allowed: 1
+2016-11-15T21:54:04+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T21:54:05+00:00 INFO (6): ENV: staging
+2016-11-15T21:54:05+00:00 INFO (6): ENV: staging
+2016-11-15T21:54:06+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T21:54:06+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-15T21:54:06+00:00 INFO (6): 9.99
+2016-11-15T21:54:06+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-15T21:54:06+00:00 INFO (6): Setting checkbox for table row with SKU: 16768102
+2016-11-15T21:54:06+00:00 INFO (6): Setting checkbox for table row with SKU: 25401
+2016-11-15T21:54:25+00:00 INFO (6): ENV: staging
+2016-11-15T21:54:25+00:00 INFO (6): Saving overrideprice: 3.29.
+2016-11-15T21:55:08+00:00 INFO (6): ENV: staging
+2016-11-15T21:55:08+00:00 INFO (6): Allowed: 1
+2016-11-15T21:55:08+00:00 INFO (6): Persisting PDF Report
+2016-11-15T21:55:08+00:00 INFO (6): 0: ID_799
+2016-11-15T21:55:08+00:00 INFO (6): 1: {"id":799,"sku":"25401","productname":"Bronzini - 400/600, Farmed, Turkey, Whole (1lb avg)","shortescription":null,"comment":null,"qty":1,"wholesale":5.1,"retail":7.29,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-11-15T22:01:37+00:00 INFO (6): ENV: staging
+2016-11-15T22:01:37+00:00 INFO (6): Allowed: 1
+2016-11-15T22:01:37+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T22:01:39+00:00 INFO (6): ENV: staging
+2016-11-15T22:01:40+00:00 INFO (6): ENV: staging
+2016-11-15T22:01:40+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T22:01:40+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-15T22:01:40+00:00 INFO (6): 3.29
+2016-11-15T22:01:40+00:00 INFO (6): 9.99
+2016-11-15T22:01:40+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-15T22:01:40+00:00 INFO (6): Setting checkbox for table row with SKU: 16768102
+2016-11-15T22:01:40+00:00 INFO (6): Setting checkbox for table row with SKU: 25401
+2016-11-15T22:04:08+00:00 INFO (6): ENV: staging
+2016-11-15T22:04:08+00:00 INFO (6): Allowed: 1
+2016-11-15T22:04:08+00:00 INFO (6): ENV: staging
+2016-11-15T22:04:08+00:00 INFO (6): Allowed: 1
+2016-11-15T22:04:08+00:00 INFO (6): Checking for identity
+2016-11-15T22:04:08+00:00 INFO (6): Identity not found.
+2016-11-15T22:04:11+00:00 INFO (6): ENV: staging
+2016-11-15T22:07:44+00:00 INFO (6): ENV: staging
+2016-11-15T22:07:44+00:00 INFO (6): Allowed: 1
+2016-11-15T22:07:44+00:00 INFO (6): AuthenticationAction called.
+2016-11-15T22:07:44+00:00 INFO (6): Username: iderfler
+2016-11-15T22:07:44+00:00 INFO (6): ENV: staging
+2016-11-15T22:07:44+00:00 INFO (6): Allowed: 1
+2016-11-15T22:07:44+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-15T22:07:45+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T22:07:45+00:00 INFO (6): ENV: staging
+2016-11-15T22:16:47+00:00 INFO (6): ENV: staging
+2016-11-15T22:16:47+00:00 INFO (6): Allowed: 1
+2016-11-15T22:16:47+00:00 INFO (6): ENV: staging
+2016-11-15T22:16:47+00:00 INFO (6): Allowed: 1
+2016-11-15T22:16:47+00:00 INFO (6): Checking for identity
+2016-11-15T22:16:47+00:00 INFO (6): Identity not found.
+2016-11-15T22:16:48+00:00 INFO (6): ENV: staging
+2016-11-15T22:16:52+00:00 INFO (6): ENV: staging
+2016-11-15T22:16:53+00:00 INFO (6): Allowed: 1
+2016-11-15T22:16:53+00:00 INFO (6): AuthenticationAction called.
+2016-11-15T22:16:53+00:00 INFO (6): Username: jpalmer
+2016-11-15T22:16:53+00:00 INFO (6): ENV: staging
+2016-11-15T22:16:53+00:00 INFO (6): Allowed: 1
+2016-11-15T22:16:53+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-15T22:16:53+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T22:16:53+00:00 INFO (6): ENV: staging
+2016-11-15T22:16:58+00:00 INFO (6): ENV: staging
+2016-11-15T22:16:58+00:00 INFO (6): Allowed: 1
+2016-11-15T22:16:58+00:00 INFO (6): Retrieving salespeople.
+2016-11-15T22:16:58+00:00 DEBUG (7): Retrieved 4 salespeople.
+2016-11-15T22:16:58+00:00 INFO (6): query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+2016-11-15T22:16:58+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:16+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:16+00:00 INFO (6): Allowed: 1
+2016-11-15T22:17:16+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-15T22:17:16+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T22:17:16+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:23+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:23+00:00 INFO (6): Allowed: 1
+2016-11-15T22:17:23+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T22:17:24+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:24+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:24+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T22:17:25+00:00 DEBUG (7): Retrieved 15 customerlistitems.
+2016-11-15T22:17:25+00:00 INFO (6): No price overrides found!
+2016-11-15T22:17:25+00:00 INFO (6): Found 3 removedSKUs in Session!
+2016-11-15T22:17:25+00:00 INFO (6): Setting checkbox for table row with SKU: 7987201
+2016-11-15T22:17:25+00:00 INFO (6): Setting checkbox for table row with SKU: 53
+2016-11-15T22:17:25+00:00 INFO (6): Setting checkbox for table row with SKU: 7986807
+2016-11-15T22:17:32+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:32+00:00 INFO (6): Allowed: 1
+2016-11-15T22:17:32+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-15T22:17:32+00:00 INFO (6): Retrieved #1 customers.
+2016-11-15T22:17:32+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:36+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:36+00:00 INFO (6): Allowed: 1
+2016-11-15T22:17:36+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T22:17:36+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:37+00:00 INFO (6): ENV: staging
+2016-11-15T22:17:37+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-15T22:17:37+00:00 DEBUG (7): Retrieved 15 customerlistitems.
+2016-11-15T22:17:37+00:00 INFO (6): No price overrides found!
+2016-11-15T22:17:37+00:00 INFO (6): Found 3 removedSKUs in Session!
+2016-11-15T22:17:37+00:00 INFO (6): Setting checkbox for table row with SKU: 7987201
+2016-11-15T22:17:37+00:00 INFO (6): Setting checkbox for table row with SKU: 53
+2016-11-15T22:17:37+00:00 INFO (6): Setting checkbox for table row with SKU: 7986807
+2016-11-15T22:18:22+00:00 INFO (6): ENV: staging
+2016-11-15T22:18:22+00:00 INFO (6): Saving overrideprice: 1.99.
+2016-11-15T22:18:31+00:00 INFO (6): ENV: staging
+2016-11-15T22:18:31+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 7945404 CUSTOMERID: 608 SALESPERSONUSERNAME: iderfler
+2016-11-15T22:18:42+00:00 INFO (6): ENV: staging
+2016-11-15T22:18:42+00:00 INFO (6): Allowed: 1
+2016-11-15T22:18:42+00:00 INFO (6): Persisting PDF Report
+2016-11-15T22:18:42+00:00 INFO (6): 0: ID_36
+2016-11-15T22:18:42+00:00 INFO (6): 1: {"id":36,"sku":"51","productname":"Oysters - East Coast, Blue Point, Wild, USA 100ct","shortescription":"Bushel, East Coast, Milford CT","comment":null,"qty":1,"wholesale":58,"retail":77.33,"uom":"bu","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+2016-11-15T22:18:51+00:00 INFO (6): ENV: staging
+2016-11-15T22:18:51+00:00 INFO (6): Allowed: 1
+2016-11-15T22:18:51+00:00 INFO (6): Persisting PDF Report
+2016-11-15T22:18:51+00:00 INFO (6): 0: ID_36
+2016-11-15T22:18:51+00:00 INFO (6): 1: {"id":36,"sku":"51","productname":"Oysters - East Coast, Blue Point, Wild, USA 100ct","shortescription":"Bushel, East Coast, Milford CT","comment":null,"qty":1,"wholesale":58,"retail":77.33,"uom":"bu","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+2016-11-15T22:19:29+00:00 INFO (6): ENV: staging
+2016-11-15T22:19:29+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 103001 CUSTOMERID: 608 SALESPERSONUSERNAME: iderfler
+2016-11-15T22:19:33+00:00 INFO (6): ENV: staging
+2016-11-15T22:19:33+00:00 INFO (6): Allowed: 1
+2016-11-15T22:19:33+00:00 INFO (6): Persisting PDF Report
+2016-11-15T22:19:33+00:00 INFO (6): 0: ID_36
+2016-11-15T22:19:33+00:00 INFO (6): 1: {"id":36,"sku":"51","productname":"Oysters - East Coast, Blue Point, Wild, USA 100ct","shortescription":"Bushel, East Coast, Milford CT","comment":null,"qty":1,"wholesale":58,"retail":77.33,"uom":"bu","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+[Tue Nov 15 22:37:06.179292 2016] [:error] [pid 21829] [client 42.118.73.75:42096] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Tue Nov 15 22:46:22.037495 2016] [:error] [pid 21832] [client 175.182.225.46:37179] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Wed Nov 16 01:19:46.794243 2016] [:error] [pid 21823] [client 61.61.224.237:2868] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Wed Nov 16 02:09:06.618183 2016] [mpm_prefork:notice] [pid 21795] AH00169: caught SIGTERM, shutting down
+[Wed Nov 16 02:09:06.723992 2016] [suexec:notice] [pid 22434] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Wed Nov 16 02:09:06.751010 2016] [auth_digest:notice] [pid 22435] AH01757: generating secret for digest authentication ...
+[Wed Nov 16 02:09:06.751626 2016] [lbmethod_heartbeat:notice] [pid 22435] AH02282: No slotmem from mod_heartmonitor
+[Wed Nov 16 02:09:06.775395 2016] [mpm_prefork:notice] [pid 22435] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Wed Nov 16 02:09:06.775419 2016] [core:notice] [pid 22435] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-16T02:10:05+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:05+00:00 INFO (6): Allowed: 1
+2016-11-16T02:10:05+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T02:10:05+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:06+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:06+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T02:10:07+00:00 DEBUG (7): Retrieved 15 customerlistitems.
+2016-11-16T02:10:16+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:16+00:00 INFO (6): Allowed: 1
+2016-11-16T02:10:16+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T02:10:17+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:17+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:18+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T02:10:18+00:00 DEBUG (7): Retrieved 15 customerlistitems.
+2016-11-16T02:10:21+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:21+00:00 INFO (6): Allowed: 1
+2016-11-16T02:10:21+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:22+00:00 INFO (6): Allowed: 1
+2016-11-16T02:10:22+00:00 INFO (6): Checking for identity
+2016-11-16T02:10:22+00:00 INFO (6): Identity not found.
+2016-11-16T02:10:22+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:26+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:26+00:00 INFO (6): Allowed: 1
+2016-11-16T02:10:26+00:00 INFO (6): AuthenticationAction called.
+2016-11-16T02:10:26+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:27+00:00 INFO (6): ENV: staging
+2016-11-16T02:10:27+00:00 INFO (6): ENV: staging
+2016-11-16T02:29:04+00:00 INFO (6): ENV: staging
+2016-11-16T02:29:05+00:00 INFO (6): Allowed: 1
+2016-11-16T02:29:05+00:00 INFO (6): AuthenticationAction called.
+2016-11-16T02:29:05+00:00 INFO (6): ENV: staging
+2016-11-16T02:29:05+00:00 INFO (6): ENV: staging
+2016-11-16T02:29:05+00:00 INFO (6): ENV: staging
+2016-11-16T02:32:09+00:00 INFO (6): ENV: staging
+2016-11-16T02:32:09+00:00 INFO (6): Allowed: 1
+2016-11-16T02:32:09+00:00 INFO (6): AuthenticationAction called.
+2016-11-16T02:32:09+00:00 INFO (6): ENV: staging
+2016-11-16T02:32:09+00:00 INFO (6): ENV: staging
+2016-11-16T02:32:10+00:00 INFO (6): ENV: staging
+2016-11-16T02:34:23+00:00 INFO (6): ENV: staging
+2016-11-16T02:34:24+00:00 INFO (6): Allowed:
+2016-11-16T02:34:24+00:00 INFO (6): ENV: staging
+2016-11-16T02:34:24+00:00 INFO (6): Allowed: 1
+2016-11-16T02:34:24+00:00 INFO (6): Checking for identity
+2016-11-16T02:34:24+00:00 INFO (6): Identity not found.
+2016-11-16T02:34:24+00:00 INFO (6): ENV: staging
+2016-11-16T02:34:30+00:00 INFO (6): ENV: staging
+2016-11-16T02:34:30+00:00 INFO (6): Allowed: 1
+2016-11-16T02:34:30+00:00 INFO (6): AuthenticationAction called.
+2016-11-16T02:34:31+00:00 INFO (6): ENV: staging
+2016-11-16T02:34:31+00:00 INFO (6): ENV: staging
+2016-11-16T02:34:31+00:00 INFO (6): ENV: staging
+[Wed Nov 16 03:18:44.692278 2016] [mpm_prefork:notice] [pid 22435] AH00169: caught SIGTERM, shutting down
+[Wed Nov 16 03:18:44.782057 2016] [suexec:notice] [pid 22828] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Wed Nov 16 03:18:44.808264 2016] [auth_digest:notice] [pid 22829] AH01757: generating secret for digest authentication ...
+[Wed Nov 16 03:18:44.808837 2016] [lbmethod_heartbeat:notice] [pid 22829] AH02282: No slotmem from mod_heartmonitor
+[Wed Nov 16 03:18:44.832145 2016] [mpm_prefork:notice] [pid 22829] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Wed Nov 16 03:18:44.832166 2016] [core:notice] [pid 22829] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-16T03:18:51+00:00 INFO (6): ENV: staging
+2016-11-16T03:18:51+00:00 INFO (6): Allowed: 1
+2016-11-16T03:18:51+00:00 INFO (6): AuthenticationAction called.
+2016-11-16T03:18:51+00:00 INFO (6): Username: jpalmer
+2016-11-16T03:18:51+00:00 INFO (6): ENV: staging
+2016-11-16T03:18:52+00:00 INFO (6): Allowed: 1
+2016-11-16T03:18:52+00:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-11-16T03:18:52+00:00 INFO (6): Retrieved #1 customers.
+2016-11-16T03:18:53+00:00 INFO (6): ENV: staging
+2016-11-16T03:19:05+00:00 INFO (6): ENV: staging
+2016-11-16T03:19:05+00:00 INFO (6): Allowed: 1
+2016-11-16T03:19:05+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T03:19:07+00:00 INFO (6): ENV: staging
+2016-11-16T03:19:10+00:00 INFO (6): ENV: staging
+2016-11-16T03:19:10+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T03:19:11+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-16T03:25:20+00:00 INFO (6): ENV: staging
+2016-11-16T03:25:20+00:00 INFO (6): Allowed: 1
+2016-11-16T03:25:20+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T03:25:22+00:00 INFO (6): ENV: staging
+2016-11-16T03:25:23+00:00 INFO (6): ENV: staging
+2016-11-16T03:25:23+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T03:25:24+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-16T03:25:24+00:00 INFO (6): No price overrides found!
+2016-11-16T03:25:24+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-16T03:25:24+00:00 INFO (6): Setting checkbox for table row with SKU: 16768102
+2016-11-16T03:25:24+00:00 INFO (6): Setting checkbox for table row with SKU: 25401
+2016-11-16T03:25:44+00:00 INFO (6): ENV: staging
+2016-11-16T03:25:44+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 81 CUSTOMERID: 400 SALESPERSONUSERNAME: jpalmer
+2016-11-16T03:25:47+00:00 INFO (6): ENV: staging
+2016-11-16T03:25:47+00:00 INFO (6): Allowed: 1
+2016-11-16T03:25:47+00:00 INFO (6): Persisting PDF Report
+2016-11-16T03:25:47+00:00 INFO (6): 0: ID_792
+2016-11-16T03:25:47+00:00 INFO (6): 1: {"id":792,"sku":"2868","productname":"Clams - Hard Shell, Littleneck, Southern, Farmed, USA, 100ct","shortescription":"Quarter Bushel<br/>\r\nVirginia, USA","comment":null,"qty":1,"wholesale":24.5,"retail":32.67,"uom":"Qtr Bushel","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+2016-11-16T03:25:47+00:00 INFO (6): 2: ID_121
+2016-11-16T03:25:47+00:00 INFO (6): 3: {"id":121,"sku":"69","productname":"Crabmeat - Jonah, Cooked, Wild, USA, Combo (16oz)","shortescription":"Tub","comment":null,"qty":1,"wholesale":12,"retail":16,"uom":"ea","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+2016-11-16T03:25:47+00:00 INFO (6): 4: ID_77
+2016-11-16T03:25:47+00:00 INFO (6): 5: {"id":77,"sku":"35500001","productname":"Lobster - Live, Cold Water, Wild, Canada, 1.5lb","shortescription":"Canadian Lobsters are currently Hardshell","comment":null,"qty":1,"wholesale":8.5,"retail":12.14,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+2016-11-16T03:47:03+00:00 INFO (6): ENV: staging
+2016-11-16T03:47:03+00:00 INFO (6): Allowed: 1
+2016-11-16T03:47:03+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T03:47:04+00:00 INFO (6): ENV: staging
+2016-11-16T03:47:06+00:00 INFO (6): ENV: staging
+2016-11-16T03:47:06+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T03:47:07+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-16T03:47:07+00:00 INFO (6): No price overrides found!
+2016-11-16T03:47:07+00:00 INFO (6): Found 3 removedSKUs in Session!
+2016-11-16T03:47:07+00:00 INFO (6): Setting checkbox for table row with SKU: 16768102
+2016-11-16T03:47:07+00:00 INFO (6): Setting checkbox for table row with SKU: 25401
+2016-11-16T03:47:07+00:00 INFO (6): Setting checkbox for table row with SKU: 81
+[Wed Nov 16 07:31:32.637447 2016] [:error] [pid 22860] [client 104.137.240.100:34204] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Wed Nov 16 09:38:47.108025 2016] [:error] [pid 22885] [client 108.38.69.44:57809] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Wed Nov 16 10:41:40.580054 2016] [:error] [pid 22868] [client 80.179.122.186:18492] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+2016-11-16T11:13:19+00:00 INFO (6): ENV: staging
+2016-11-16T11:13:19+00:00 INFO (6): Allowed: 1
+2016-11-16T11:13:19+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:13:20+00:00 INFO (6): ENV: staging
+2016-11-16T11:13:20+00:00 INFO (6): ENV: staging
+2016-11-16T11:13:20+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:13:21+00:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-11-16T11:13:21+00:00 INFO (6): No price overrides found!
+2016-11-16T11:13:21+00:00 INFO (6): Found 3 removedSKUs in Session!
+2016-11-16T11:13:21+00:00 INFO (6): Setting checkbox for table row with SKU: 16768102
+2016-11-16T11:13:21+00:00 INFO (6): Setting checkbox for table row with SKU: 25401
+2016-11-16T11:13:21+00:00 INFO (6): Setting checkbox for table row with SKU: 81
+2016-11-16T11:14:22+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:22+00:00 INFO (6): Allowed: 1
+2016-11-16T11:14:22+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:22+00:00 INFO (6): Allowed: 1
+2016-11-16T11:14:22+00:00 INFO (6): Checking for identity
+2016-11-16T11:14:22+00:00 INFO (6): Identity not found.
+2016-11-16T11:14:22+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:35+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:35+00:00 INFO (6): Allowed: 1
+2016-11-16T11:14:35+00:00 INFO (6): AuthenticationAction called.
+2016-11-16T11:14:35+00:00 INFO (6): Username: iderfler
+2016-11-16T11:14:35+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:35+00:00 INFO (6): Allowed: 1
+2016-11-16T11:14:35+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-16T11:14:35+00:00 INFO (6): Retrieved #1 customers.
+2016-11-16T11:14:36+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:44+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:44+00:00 INFO (6): Allowed: 1
+2016-11-16T11:14:44+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:14:45+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:45+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:45+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:14:45+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-16T11:14:45+00:00 INFO (6): No price overrides found!
+2016-11-16T11:14:45+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-16T11:14:54+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:54+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 2254 CUSTOMERID: 565 SALESPERSONUSERNAME: iderfler
+2016-11-16T11:14:56+00:00 INFO (6): ENV: staging
+2016-11-16T11:14:56+00:00 INFO (6): Allowed: 1
+2016-11-16T11:14:56+00:00 INFO (6): Persisting PDF Report
+2016-11-16T11:14:56+00:00 INFO (6): 0: ID_611
+2016-11-16T11:14:56+00:00 INFO (6): 1: {"id":611,"sku":"2254","productname":"Oysters - East Coast, Sewansecott, Farmed, USA 100ct","shortescription":"Bushel, Virginia","comment":null,"qty":1,"wholesale":52,"retail":69.33,"uom":"bu","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+2016-11-16T11:15:07+00:00 INFO (6): ENV: staging
+2016-11-16T11:15:07+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 2887 CUSTOMERID: 565 SALESPERSONUSERNAME: iderfler
+2016-11-16T11:15:13+00:00 INFO (6): ENV: staging
+2016-11-16T11:15:13+00:00 INFO (6): Allowed: 1
+2016-11-16T11:15:13+00:00 INFO (6): Persisting PDF Report
+2016-11-16T11:15:13+00:00 INFO (6): 0: ID_611
+2016-11-16T11:15:13+00:00 INFO (6): 1: {"id":611,"sku":"2254","productname":"Oysters - East Coast, Sewansecott, Farmed, USA 100ct","shortescription":"Bushel, Virginia","comment":null,"qty":1,"wholesale":52,"retail":69.33,"uom":"bu","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+2016-11-16T11:16:02+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:02+00:00 INFO (6): Allowed: 1
+2016-11-16T11:16:02+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-16T11:16:02+00:00 INFO (6): Retrieved #1 customers.
+2016-11-16T11:16:03+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:07+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:07+00:00 INFO (6): Allowed: 1
+2016-11-16T11:16:07+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:16:08+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:08+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:08+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:16:09+00:00 DEBUG (7): Retrieved 15 customerlistitems.
+2016-11-16T11:16:09+00:00 INFO (6): No price overrides found!
+2016-11-16T11:16:09+00:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-16T11:16:12+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:12+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 53 CUSTOMERID: 608 SALESPERSONUSERNAME: iderfler
+2016-11-16T11:16:14+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:14+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 103001 CUSTOMERID: 608 SALESPERSONUSERNAME: iderfler
+2016-11-16T11:16:19+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:19+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 172423014 CUSTOMERID: 608 SALESPERSONUSERNAME: iderfler
+2016-11-16T11:16:21+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:22+00:00 INFO (6): Allowed: 1
+2016-11-16T11:16:22+00:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-11-16T11:16:22+00:00 INFO (6): Retrieved #1 customers.
+2016-11-16T11:16:22+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:25+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:25+00:00 INFO (6): Allowed: 1
+2016-11-16T11:16:25+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:16:25+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:26+00:00 INFO (6): ENV: staging
+2016-11-16T11:16:26+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:16:26+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-16T11:16:26+00:00 INFO (6): No price overrides found!
+2016-11-16T11:16:26+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-16T11:16:26+00:00 INFO (6): Setting checkbox for table row with SKU: 2254
+2016-11-16T11:16:26+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+2016-11-16T11:17:23+00:00 INFO (6): ENV: staging
+2016-11-16T11:17:23+00:00 INFO (6): Allowed: 1
+2016-11-16T11:17:23+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:17:45+00:00 INFO (6): ENV: staging
+2016-11-16T11:17:45+00:00 INFO (6): Allowed: 1
+2016-11-16T11:17:45+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:17:45+00:00 INFO (6): ENV: staging
+2016-11-16T11:17:46+00:00 INFO (6): ENV: staging
+2016-11-16T11:17:46+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T11:17:46+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-16T11:17:46+00:00 INFO (6): No price overrides found!
+2016-11-16T11:17:46+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-16T11:17:46+00:00 INFO (6): Setting checkbox for table row with SKU: 2254
+2016-11-16T11:17:46+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+2016-11-16T11:23:29+00:00 INFO (6): ENV: staging
+2016-11-16T11:23:29+00:00 INFO (6): Allowed: 1
+2016-11-16T11:23:29+00:00 INFO (6): Retrieving customerlistitems.
+[Wed Nov 16 12:32:28.773910 2016] [mpm_prefork:notice] [pid 22829] AH00169: caught SIGTERM, shutting down
+[Wed Nov 16 12:32:28.859542 2016] [suexec:notice] [pid 24174] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Wed Nov 16 12:32:28.884747 2016] [auth_digest:notice] [pid 24175] AH01757: generating secret for digest authentication ...
+[Wed Nov 16 12:32:28.885296 2016] [lbmethod_heartbeat:notice] [pid 24175] AH02282: No slotmem from mod_heartmonitor
+[Wed Nov 16 12:32:28.908090 2016] [mpm_prefork:notice] [pid 24175] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Wed Nov 16 12:32:28.908112 2016] [core:notice] [pid 24175] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-16T12:32:49+00:00 INFO (6): ENV: staging
+2016-11-16T12:32:49+00:00 INFO (6): Allowed: 1
+2016-11-16T12:32:49+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T12:32:49+00:00 INFO (6): ENV: staging
+2016-11-16T12:32:50+00:00 INFO (6): ENV: staging
+2016-11-16T12:32:50+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T12:32:51+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-16T12:32:51+00:00 INFO (6): No price overrides found!
+2016-11-16T12:32:51+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-16T12:32:51+00:00 INFO (6): Setting checkbox for table row with SKU: 2254
+2016-11-16T12:32:51+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+2016-11-16T12:43:10+00:00 INFO (6): ENV: staging
+2016-11-16T12:43:10+00:00 INFO (6): Allowed: 1
+2016-11-16T12:43:10+00:00 INFO (6): Retrieving customerlistitems.
+[Wed Nov 16 12:54:35.393936 2016] [mpm_prefork:notice] [pid 24175] AH00169: caught SIGTERM, shutting down
+[Wed Nov 16 12:54:35.478160 2016] [suexec:notice] [pid 24330] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Wed Nov 16 12:54:35.504028 2016] [auth_digest:notice] [pid 24331] AH01757: generating secret for digest authentication ...
+[Wed Nov 16 12:54:35.504628 2016] [lbmethod_heartbeat:notice] [pid 24331] AH02282: No slotmem from mod_heartmonitor
+[Wed Nov 16 12:54:35.527874 2016] [mpm_prefork:notice] [pid 24331] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Wed Nov 16 12:54:35.527896 2016] [core:notice] [pid 24331] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-16T12:54:41+00:00 INFO (6): ENV: staging
+2016-11-16T12:54:41+00:00 INFO (6): Allowed: 1
+2016-11-16T12:54:41+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T12:54:42+00:00 INFO (6): ENV: staging
+2016-11-16T12:54:42+00:00 INFO (6): ENV: staging
+2016-11-16T12:54:42+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T12:54:42+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-16T12:54:42+00:00 INFO (6): No price overrides found!
+2016-11-16T12:54:42+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-16T12:54:42+00:00 INFO (6): Setting checkbox for table row with SKU: 2254
+2016-11-16T12:54:42+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+2016-11-16T12:55:13+00:00 INFO (6): ENV: staging
+2016-11-16T12:55:14+00:00 INFO (6): Allowed: 1
+2016-11-16T12:55:14+00:00 INFO (6): Retrieving customerlistitems.
+[Wed Nov 16 12:57:41.471822 2016] [mpm_prefork:notice] [pid 24331] AH00169: caught SIGTERM, shutting down
+[Wed Nov 16 12:57:41.567907 2016] [suexec:notice] [pid 24426] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Wed Nov 16 12:57:41.593526 2016] [auth_digest:notice] [pid 24427] AH01757: generating secret for digest authentication ...
+[Wed Nov 16 12:57:41.594094 2016] [lbmethod_heartbeat:notice] [pid 24427] AH02282: No slotmem from mod_heartmonitor
+[Wed Nov 16 12:57:41.617439 2016] [mpm_prefork:notice] [pid 24427] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Wed Nov 16 12:57:41.617465 2016] [core:notice] [pid 24427] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-16T12:57:46+00:00 INFO (6): ENV: staging
+2016-11-16T12:57:46+00:00 INFO (6): Allowed: 1
+2016-11-16T12:57:46+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T12:57:47+00:00 INFO (6): ENV: staging
+2016-11-16T12:57:47+00:00 INFO (6): ENV: staging
+2016-11-16T12:57:47+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T12:57:47+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-16T12:57:47+00:00 INFO (6): No price overrides found!
+2016-11-16T12:57:47+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-16T12:57:47+00:00 INFO (6): Setting checkbox for table row with SKU: 2254
+2016-11-16T12:57:47+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+2016-11-16T12:58:08+00:00 INFO (6): ENV: staging
+2016-11-16T12:58:08+00:00 INFO (6): Allowed: 1
+2016-11-16T12:58:08+00:00 INFO (6): Retrieving customerlistitems.
+[Wed Nov 16 13:05:13.076393 2016] [mpm_prefork:notice] [pid 24427] AH00169: caught SIGTERM, shutting down
+[Wed Nov 16 13:05:13.172210 2016] [suexec:notice] [pid 24534] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Wed Nov 16 13:05:13.198618 2016] [auth_digest:notice] [pid 24535] AH01757: generating secret for digest authentication ...
+[Wed Nov 16 13:05:13.203896 2016] [lbmethod_heartbeat:notice] [pid 24535] AH02282: No slotmem from mod_heartmonitor
+[Wed Nov 16 13:05:13.227765 2016] [mpm_prefork:notice] [pid 24535] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Wed Nov 16 13:05:13.227789 2016] [core:notice] [pid 24535] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-16T13:05:17+00:00 INFO (6): ENV: staging
+2016-11-16T13:05:17+00:00 INFO (6): Allowed: 1
+2016-11-16T13:05:17+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T13:05:18+00:00 INFO (6): ENV: staging
+2016-11-16T13:05:18+00:00 INFO (6): ENV: staging
+2016-11-16T13:05:18+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T13:05:19+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-16T13:05:19+00:00 INFO (6): No price overrides found!
+2016-11-16T13:05:19+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-16T13:05:19+00:00 INFO (6): Setting checkbox for table row with SKU: 2254
+2016-11-16T13:05:19+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+2016-11-16T13:05:50+00:00 INFO (6): ENV: staging
+2016-11-16T13:05:51+00:00 INFO (6): Allowed: 1
+2016-11-16T13:05:51+00:00 INFO (6): Retrieving customerlistitems.
+[Wed Nov 16 13:08:09.479992 2016] [mpm_prefork:notice] [pid 24535] AH00169: caught SIGTERM, shutting down
+[Wed Nov 16 13:08:09.575498 2016] [suexec:notice] [pid 24630] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Wed Nov 16 13:08:09.601462 2016] [auth_digest:notice] [pid 24631] AH01757: generating secret for digest authentication ...
+[Wed Nov 16 13:08:09.602038 2016] [lbmethod_heartbeat:notice] [pid 24631] AH02282: No slotmem from mod_heartmonitor
+[Wed Nov 16 13:08:09.624827 2016] [mpm_prefork:notice] [pid 24631] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Wed Nov 16 13:08:09.624850 2016] [core:notice] [pid 24631] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-16T13:08:13+00:00 INFO (6): ENV: staging
+2016-11-16T13:08:13+00:00 INFO (6): Allowed: 1
+2016-11-16T13:08:13+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T13:08:14+00:00 INFO (6): ENV: staging
+2016-11-16T13:08:14+00:00 INFO (6): ENV: staging
+2016-11-16T13:08:14+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T13:08:14+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-16T13:08:14+00:00 INFO (6): No price overrides found!
+2016-11-16T13:08:14+00:00 INFO (6): Found 2 removedSKUs in Session!
+2016-11-16T13:08:14+00:00 INFO (6): Setting checkbox for table row with SKU: 2254
+2016-11-16T13:08:14+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+2016-11-16T13:08:36+00:00 INFO (6): ENV: staging
+2016-11-16T13:08:36+00:00 INFO (6): Allowed: 1
+2016-11-16T13:08:36+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T13:08:36+00:00 INFO (6): Saved added row: 1
+[Wed Nov 16 13:08:39.009089 2016] [:error] [pid 24666] [client 144.140.230.77:35090] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+2016-11-16T13:08:55+00:00 INFO (6): ENV: staging
+2016-11-16T13:08:55+00:00 INFO (6): Creating and persisting Checkbox record. SKU: 551682012 CUSTOMERID: 565 SALESPERSONUSERNAME: iderfler
+2016-11-16T13:08:57+00:00 INFO (6): ENV: staging
+2016-11-16T13:08:57+00:00 INFO (6): Allowed: 1
+2016-11-16T13:08:57+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T13:08:58+00:00 INFO (6): ENV: staging
+2016-11-16T13:08:58+00:00 INFO (6): ENV: staging
+2016-11-16T13:08:58+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T13:08:58+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-16T13:08:58+00:00 INFO (6): No price overrides found!
+2016-11-16T13:08:58+00:00 INFO (6): Found 3 removedSKUs in Session!
+2016-11-16T13:08:58+00:00 INFO (6): Setting checkbox for table row with SKU: 2254
+2016-11-16T13:08:58+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+2016-11-16T13:08:58+00:00 INFO (6): Setting checkbox for table row with SKU: 551682012
+2016-11-16T14:15:22+00:00 INFO (6): ENV: staging
+2016-11-16T14:15:23+00:00 INFO (6): Allowed: 1
+2016-11-16T14:15:23+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T14:15:23+00:00 INFO (6): ENV: staging
+2016-11-16T14:15:23+00:00 INFO (6): ENV: staging
+2016-11-16T14:15:24+00:00 INFO (6): Retrieving customerlistitems.
+2016-11-16T14:15:24+00:00 DEBUG (7): Retrieved 7 customerlistitems.
+2016-11-16T14:15:24+00:00 INFO (6): No price overrides found!
+2016-11-16T14:15:24+00:00 INFO (6): Found 3 removedSKUs in Session!
+2016-11-16T14:15:24+00:00 INFO (6): Setting checkbox for table row with SKU: 2254
+2016-11-16T14:15:24+00:00 INFO (6): Setting checkbox for table row with SKU: 2887
+2016-11-16T14:15:24+00:00 INFO (6): Setting checkbox for table row with SKU: 551682012
+[Thu Nov 17 01:08:51.825807 2016] [:error] [pid 24793] [client 93.174.93.164:14257] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Thu Nov 17 06:59:20.733154 2016] [:error] [pid 24655] [client 73.194.81.124:37580] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Thu Nov 17 10:41:52.516180 2016] [:error] [pid 24633] [client 114.35.173.185:57661] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Thu Nov 17 12:22:19.277928 2016] [mpm_prefork:notice] [pid 24631] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 12:22:19.358380 2016] [suexec:notice] [pid 27128] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 12:22:19.384970 2016] [auth_digest:notice] [pid 27129] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 12:22:19.385551 2016] [lbmethod_heartbeat:notice] [pid 27129] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 12:22:19.409508 2016] [mpm_prefork:notice] [pid 27129] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 12:22:19.409534 2016] [core:notice] [pid 27129] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T12:26:19+00:00 INFO (6): ENV: staging
+2016-11-17T12:26:19+00:00 INFO (6): Allowed: 1
+2016-11-17T12:26:19+00:00 INFO (6): Checking for identity
+2016-11-17T12:26:19+00:00 INFO (6): Identity found.
+2016-11-17T12:26:31+00:00 INFO (6): ENV: staging
+2016-11-17T12:26:31+00:00 INFO (6): Allowed: 1
+2016-11-17T12:26:31+00:00 INFO (6): Checking for identity
+2016-11-17T12:26:31+00:00 INFO (6): Identity found.
+2016-11-17T12:26:58+00:00 INFO (6): ENV: staging
+2016-11-17T12:26:58+00:00 INFO (6): Allowed: 1
+2016-11-17T12:26:58+00:00 INFO (6): Checking for identity
+2016-11-17T12:26:58+00:00 INFO (6): Identity found.
+2016-11-17T12:28:59+00:00 INFO (6): ENV: staging
+2016-11-17T12:28:59+00:00 INFO (6): Allowed: 1
+2016-11-17T12:28:59+00:00 INFO (6): Checking for identity
+2016-11-17T12:28:59+00:00 INFO (6): Identity found.
+[Thu Nov 17 12:29:52.660748 2016] [mpm_prefork:notice] [pid 27129] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 12:29:53.724160 2016] [suexec:notice] [pid 27256] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 12:29:53.750945 2016] [auth_digest:notice] [pid 27257] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 12:29:53.751541 2016] [lbmethod_heartbeat:notice] [pid 27257] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 12:29:53.775432 2016] [mpm_prefork:notice] [pid 27257] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 12:29:53.775464 2016] [core:notice] [pid 27257] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T12:30:20+00:00 INFO (6): ENV: staging
+2016-11-17T12:30:20+00:00 INFO (6): Allowed: 1
+2016-11-17T12:30:20+00:00 INFO (6): Checking for identity
+2016-11-17T12:30:20+00:00 INFO (6): Identity not found.
+2016-11-17T12:32:13+00:00 INFO (6): ENV: staging
+2016-11-17T12:32:14+00:00 INFO (6): Allowed: 1
+2016-11-17T12:32:14+00:00 INFO (6): Checking for identity
+2016-11-17T12:32:14+00:00 INFO (6): Identity found.
+2016-11-17T12:33:07+00:00 INFO (6): ENV: staging
+2016-11-17T12:33:08+00:00 INFO (6): Allowed: 1
+2016-11-17T12:33:08+00:00 INFO (6): Checking for identity
+2016-11-17T12:33:08+00:00 INFO (6): Identity not found.
+2016-11-17T12:33:29+00:00 INFO (6): ENV: staging
+2016-11-17T12:33:29+00:00 INFO (6): Allowed: 1
+2016-11-17T12:33:29+00:00 INFO (6): Checking for identity
+2016-11-17T12:33:29+00:00 INFO (6): Identity not found.
+2016-11-17T12:33:42+00:00 INFO (6): ENV: staging
+2016-11-17T12:33:42+00:00 INFO (6): Allowed: 1
+2016-11-17T12:33:42+00:00 INFO (6): Checking for identity
+2016-11-17T12:33:42+00:00 INFO (6): Identity not found.
+2016-11-17T12:36:07+00:00 INFO (6): ENV: staging
+2016-11-17T12:36:07+00:00 INFO (6): Allowed: 1
+2016-11-17T12:36:07+00:00 INFO (6): Checking for identity
+2016-11-17T12:36:07+00:00 INFO (6): Identity not found.
+2016-11-17T12:36:12+00:00 INFO (6): ENV: staging
+2016-11-17T12:36:12+00:00 INFO (6): Allowed: 1
+2016-11-17T12:36:12+00:00 INFO (6): Checking for identity
+2016-11-17T12:36:12+00:00 INFO (6): Identity not found.
+2016-11-17T12:36:12+00:00 INFO (6): ENV: staging
+2016-11-17T12:36:12+00:00 INFO (6): Allowed: 1
+2016-11-17T12:36:12+00:00 INFO (6): Checking for identity
+2016-11-17T12:36:12+00:00 INFO (6): Identity not found.
+2016-11-17T12:36:19+00:00 INFO (6): ENV: staging
+2016-11-17T12:36:19+00:00 INFO (6): Allowed: 1
+2016-11-17T12:36:19+00:00 INFO (6): Checking for identity
+2016-11-17T12:36:19+00:00 INFO (6): Identity not found.
+2016-11-17T12:38:41+00:00 INFO (6): ENV: staging
+2016-11-17T12:38:41+00:00 INFO (6): Allowed: 1
+2016-11-17T12:38:41+00:00 INFO (6): Checking for identity
+2016-11-17T12:38:41+00:00 INFO (6): Identity not found.
+2016-11-17T12:38:50+00:00 INFO (6): ENV: staging
+2016-11-17T12:38:50+00:00 INFO (6): Allowed: 1
+2016-11-17T12:38:50+00:00 INFO (6): Checking for identity
+2016-11-17T12:38:50+00:00 INFO (6): Identity not found.
+2016-11-17T12:38:51+00:00 INFO (6): ENV: staging
+2016-11-17T12:38:51+00:00 INFO (6): Allowed: 1
+2016-11-17T12:38:51+00:00 INFO (6): Checking for identity
+2016-11-17T12:38:51+00:00 INFO (6): Identity not found.
+2016-11-17T12:40:07+00:00 INFO (6): ENV: staging
+2016-11-17T12:40:07+00:00 INFO (6): Allowed: 1
+2016-11-17T12:40:07+00:00 INFO (6): Checking for identity
+2016-11-17T12:40:07+00:00 INFO (6): Identity not found.
+2016-11-17T12:46:47+00:00 INFO (6): ENV: staging
+2016-11-17T12:46:48+00:00 INFO (6): Allowed: 1
+2016-11-17T12:46:48+00:00 INFO (6): Checking for identity
+2016-11-17T12:46:48+00:00 INFO (6): Identity found.
+2016-11-17T12:50:28+00:00 INFO (6): ENV: staging
+2016-11-17T12:50:28+00:00 INFO (6): Allowed: 1
+2016-11-17T12:50:28+00:00 INFO (6): Checking for identity
+2016-11-17T12:50:28+00:00 INFO (6): Identity found.
+2016-11-17T12:50:40+00:00 INFO (6): ENV: staging
+2016-11-17T12:50:40+00:00 INFO (6): Allowed: 1
+2016-11-17T12:50:40+00:00 INFO (6): Checking for identity
+2016-11-17T12:50:40+00:00 INFO (6): Identity found.
+2016-11-17T12:51:04+00:00 INFO (6): ENV: staging
+2016-11-17T12:51:04+00:00 INFO (6): Allowed: 1
+2016-11-17T12:51:04+00:00 INFO (6): Checking for identity
+2016-11-17T12:51:04+00:00 INFO (6): Identity not found.
+[Thu Nov 17 12:52:58.229907 2016] [mpm_prefork:notice] [pid 27257] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 12:52:58.317249 2016] [suexec:notice] [pid 27551] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 12:52:58.342936 2016] [auth_digest:notice] [pid 27552] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 12:52:58.343514 2016] [lbmethod_heartbeat:notice] [pid 27552] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 12:52:58.366971 2016] [mpm_prefork:notice] [pid 27552] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 12:52:58.366997 2016] [core:notice] [pid 27552] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T12:53:09+00:00 INFO (6): ENV: staging
+2016-11-17T12:53:09+00:00 INFO (6): Allowed: 1
+2016-11-17T12:53:09+00:00 INFO (6): Checking for identity
+2016-11-17T12:53:09+00:00 INFO (6): Identity not found.
+2016-11-17T12:53:20+00:00 INFO (6): ENV: staging
+2016-11-17T12:53:20+00:00 INFO (6): Allowed: 1
+2016-11-17T12:53:20+00:00 INFO (6): Checking for identity
+2016-11-17T12:53:20+00:00 INFO (6): Identity not found.
+2016-11-17T12:53:32+00:00 INFO (6): ENV: staging
+2016-11-17T12:53:32+00:00 INFO (6): Allowed: 1
+2016-11-17T12:53:32+00:00 INFO (6): Checking for identity
+2016-11-17T12:53:32+00:00 INFO (6): Identity not found.
+[Thu Nov 17 12:55:19.423309 2016] [mpm_prefork:notice] [pid 27552] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 12:55:19.514184 2016] [suexec:notice] [pid 27614] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 12:55:19.540505 2016] [auth_digest:notice] [pid 27615] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 12:55:19.541073 2016] [lbmethod_heartbeat:notice] [pid 27615] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 12:55:19.564405 2016] [mpm_prefork:notice] [pid 27615] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 12:55:19.564427 2016] [core:notice] [pid 27615] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T12:55:49+00:00 INFO (6): ENV: staging
+2016-11-17T12:55:50+00:00 INFO (6): Allowed: 1
+2016-11-17T12:55:50+00:00 INFO (6): Checking for identity
+2016-11-17T12:55:50+00:00 INFO (6): Identity not found.
+[Thu Nov 17 12:56:29.816832 2016] [mpm_prefork:notice] [pid 27615] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 12:56:29.880856 2016] [suexec:notice] [pid 27673] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 12:56:29.906197 2016] [auth_digest:notice] [pid 27674] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 12:56:29.906751 2016] [lbmethod_heartbeat:notice] [pid 27674] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 12:56:29.929672 2016] [mpm_prefork:notice] [pid 27674] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 12:56:29.929696 2016] [core:notice] [pid 27674] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T12:57:53+00:00 INFO (6): ENV: staging
+2016-11-17T12:57:53+00:00 INFO (6): Allowed: 1
+2016-11-17T12:57:53+00:00 INFO (6): Checking for identity
+2016-11-17T12:57:53+00:00 INFO (6): Identity not found.
+[Thu Nov 17 13:09:16.590641 2016] [mpm_prefork:notice] [pid 27674] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 13:09:16.683839 2016] [suexec:notice] [pid 27817] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 13:09:16.709503 2016] [auth_digest:notice] [pid 27818] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 13:09:16.710070 2016] [lbmethod_heartbeat:notice] [pid 27818] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 13:09:16.733434 2016] [mpm_prefork:notice] [pid 27818] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 13:09:16.733457 2016] [core:notice] [pid 27818] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T13:09:27+00:00 INFO (6): ENV: staging
+2016-11-17T13:09:27+00:00 INFO (6): Allowed: 1
+2016-11-17T13:09:27+00:00 INFO (6): Checking for identity
+2016-11-17T13:09:27+00:00 INFO (6): Identity not found.
+2016-11-17T13:11:49+00:00 INFO (6): ENV: staging
+2016-11-17T13:11:49+00:00 INFO (6): Allowed: 1
+2016-11-17T13:11:49+00:00 INFO (6): Checking for identity
+2016-11-17T13:11:49+00:00 INFO (6): Identity not found.
+[Thu Nov 17 13:19:57.589642 2016] [mpm_prefork:notice] [pid 27818] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 13:19:57.685493 2016] [suexec:notice] [pid 27968] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 13:19:57.710859 2016] [auth_digest:notice] [pid 27970] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 13:19:57.711405 2016] [lbmethod_heartbeat:notice] [pid 27970] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 13:19:57.734326 2016] [mpm_prefork:notice] [pid 27970] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 13:19:57.734345 2016] [core:notice] [pid 27970] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T13:20:19+00:00 INFO (6): ENV: staging
+2016-11-17T13:20:19+00:00 INFO (6): Allowed: 1
+2016-11-17T13:20:19+00:00 INFO (6): Checking for identity
+2016-11-17T13:20:19+00:00 INFO (6): Identity not found.
+2016-11-17T13:20:35+00:00 INFO (6): ENV: staging
+2016-11-17T13:20:36+00:00 INFO (6): Allowed: 1
+2016-11-17T13:20:36+00:00 INFO (6): Checking for identity
+2016-11-17T13:20:36+00:00 INFO (6): Identity not found.
+[Thu Nov 17 13:22:31.649812 2016] [mpm_prefork:notice] [pid 27970] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 13:22:31.739874 2016] [suexec:notice] [pid 28044] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 13:22:31.766354 2016] [auth_digest:notice] [pid 28045] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 13:22:31.766933 2016] [lbmethod_heartbeat:notice] [pid 28045] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 13:22:31.790498 2016] [mpm_prefork:notice] [pid 28045] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 13:22:31.790526 2016] [core:notice] [pid 28045] AH00094: Command line: '/usr/sbin/httpd'
+[Thu Nov 17 13:23:21.709041 2016] [mpm_prefork:notice] [pid 28045] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 13:23:21.784619 2016] [suexec:notice] [pid 28127] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 13:23:21.809270 2016] [auth_digest:notice] [pid 28128] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 13:23:21.809833 2016] [lbmethod_heartbeat:notice] [pid 28128] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 13:23:21.832408 2016] [mpm_prefork:notice] [pid 28128] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 13:23:21.832427 2016] [core:notice] [pid 28128] AH00094: Command line: '/usr/sbin/httpd'
+[Thu Nov 17 13:26:10.731916 2016] [mpm_prefork:notice] [pid 28128] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 13:26:10.805836 2016] [suexec:notice] [pid 28211] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 13:26:10.831905 2016] [auth_digest:notice] [pid 28212] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 13:26:10.832514 2016] [lbmethod_heartbeat:notice] [pid 28212] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 13:26:10.855856 2016] [mpm_prefork:notice] [pid 28212] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 13:26:10.855876 2016] [core:notice] [pid 28212] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T13:28:18+00:00 INFO (6): ENV: staging
+2016-11-17T13:28:18+00:00 INFO (6): Allowed: 1
+2016-11-17T13:28:18+00:00 INFO (6): Checking for identity
+2016-11-17T13:28:18+00:00 INFO (6): Identity not found.
+[Thu Nov 17 15:24:17.158383 2016] [:error] [pid 28292] [client 73.136.124.29:40663] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Thu Nov 17 16:32:13.734980 2016] [:error] [pid 28234] [client 185.100.87.191:58619] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Thu Nov 17 16:36:51.203185 2016] [:error] [pid 28292] [client 208.100.26.232:47771] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+2016-11-17T17:38:36+00:00 INFO (6): ENV: staging
+2016-11-17T17:38:36+00:00 INFO (6): Allowed: 1
+2016-11-17T17:38:36+00:00 INFO (6): Checking for identity
+2016-11-17T17:38:36+00:00 INFO (6): Identity not found.
+[Thu Nov 17 18:45:40.555888 2016] [:error] [pid 28792] [client 92.50.140.170:53532] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Thu Nov 17 20:03:57.774616 2016] [:error] [pid 28795] [client 201.137.252.20:53016] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Thu Nov 17 20:44:33.067193 2016] [:error] [pid 28792] [client 220.135.68.152:43849] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+[Thu Nov 17 20:45:27.777259 2016] [:error] [pid 28214] [client 122.117.93.66:33909] PHP Notice:  Undefined index: HTTP_HOST in /vol01/me_v1.2.4/index.php on line 89
+2016-11-17T21:38:59+00:00 INFO (6): ENV: staging
+2016-11-17T21:38:59+00:00 INFO (6): Allowed: 1
+2016-11-17T21:38:59+00:00 INFO (6): Checking for identity
+2016-11-17T21:38:59+00:00 INFO (6): Identity not found.
+[Thu Nov 17 22:35:14.260049 2016] [mpm_prefork:notice] [pid 28212] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 22:35:14.356733 2016] [suexec:notice] [pid 29295] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 22:35:14.382825 2016] [auth_digest:notice] [pid 29296] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 22:35:14.383411 2016] [lbmethod_heartbeat:notice] [pid 29296] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 22:35:14.407165 2016] [mpm_prefork:notice] [pid 29296] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 22:35:14.407190 2016] [core:notice] [pid 29296] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T22:35:25+00:00 INFO (6): ENV: staging
+2016-11-17T22:35:25+00:00 INFO (6): Allowed: 1
+2016-11-17T22:35:25+00:00 INFO (6): Checking for identity
+2016-11-17T22:35:25+00:00 INFO (6): Identity not found.
+[Thu Nov 17 22:41:26.033043 2016] [mpm_prefork:notice] [pid 29296] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 22:41:26.098727 2016] [suexec:notice] [pid 29354] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 22:41:26.124760 2016] [auth_digest:notice] [pid 29355] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 22:41:26.125323 2016] [lbmethod_heartbeat:notice] [pid 29355] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 22:41:26.148302 2016] [mpm_prefork:notice] [pid 29355] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 22:41:26.148321 2016] [core:notice] [pid 29355] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T22:41:35+00:00 INFO (6): ENV: staging
+2016-11-17T22:41:35+00:00 INFO (6): Allowed: 1
+2016-11-17T22:41:35+00:00 INFO (6): Checking for identity
+2016-11-17T22:41:35+00:00 INFO (6): Identity not found.
+[Thu Nov 17 22:55:56.489325 2016] [mpm_prefork:notice] [pid 29355] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 22:55:56.581172 2016] [suexec:notice] [pid 29481] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 22:55:56.607417 2016] [auth_digest:notice] [pid 29482] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 22:55:56.607988 2016] [lbmethod_heartbeat:notice] [pid 29482] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 22:55:56.631396 2016] [mpm_prefork:notice] [pid 29482] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 22:55:56.631416 2016] [core:notice] [pid 29482] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T22:56:31+00:00 INFO (6): ENV: staging
+2016-11-17T22:56:31+00:00 INFO (6): Allowed: 1
+2016-11-17T22:56:31+00:00 INFO (6): Checking for identity
+2016-11-17T22:56:31+00:00 INFO (6): Identity not found.
+2016-11-17T23:00:17+00:00 INFO (6): ENV: staging
+2016-11-17T23:00:17+00:00 INFO (6): Allowed: 1
+2016-11-17T23:00:17+00:00 INFO (6): Checking for identity
+2016-11-17T23:00:17+00:00 INFO (6): Identity not found.
+[Thu Nov 17 23:10:36.627999 2016] [mpm_prefork:notice] [pid 29482] AH00169: caught SIGTERM, shutting down
+[Thu Nov 17 23:10:36.713365 2016] [suexec:notice] [pid 29590] AH01232: suEXEC mechanism enabled (wrapper: /usr/sbin/suexec)
+[Thu Nov 17 23:10:36.740039 2016] [auth_digest:notice] [pid 29591] AH01757: generating secret for digest authentication ...
+[Thu Nov 17 23:10:36.740657 2016] [lbmethod_heartbeat:notice] [pid 29591] AH02282: No slotmem from mod_heartmonitor
+[Thu Nov 17 23:10:36.764802 2016] [mpm_prefork:notice] [pid 29591] AH00163: Apache/2.4.23 (Amazon) OpenSSL/1.0.1k-fips PHP/5.6.26 configured -- resuming normal operations
+[Thu Nov 17 23:10:36.764827 2016] [core:notice] [pid 29591] AH00094: Command line: '/usr/sbin/httpd'
+2016-11-17T23:10:50+00:00 INFO (6): ENV: staging
+2016-11-17T23:10:50+00:00 INFO (6): Allowed: 1
+2016-11-17T23:10:50+00:00 INFO (6): Checking for identity
+2016-11-17T23:10:50+00:00 INFO (6): Identity not found.
+2016-11-18T00:03:14+00:00 INFO (6): ENV: staging
+2016-11-18T00:03:14+00:00 INFO (6): Allowed: 1
+2016-11-18T00:03:14+00:00 INFO (6): Checking for identity
+2016-11-18T00:03:14+00:00 INFO (6): Identity not found.

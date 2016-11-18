@@ -29,9 +29,9 @@ CREATE TABLE `users` (
     `email` varchar(100) NOT NULL,
     `phone1` varchar(100) NOT NULL,
     `sales_attr_id` integer NOT NULL,
-    `last_login` TIMESTAMP DEFAULT NULL,
+    `last_login` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated` TIMESTAMP DEFAULT NULL
+    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE INDEX index_users_salespersonname
@@ -118,7 +118,7 @@ CREATE TABLE `products` (
     `status` BOOLEAN,
     `saturdayenabled` BOOLEAN,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated` TIMESTAMP DEFAULT NULL
+    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE INDEX index_products_sku
@@ -134,7 +134,7 @@ CREATE TABLE `customers` (
     `name` VARCHAR(100) NOT NULL,
     `company` VARCHAR(255) NOT NULL,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated` TIMESTAMP DEFAULT NULL
+    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
 CREATE INDEX index_customers_email
@@ -162,7 +162,7 @@ CREATE TABLE `row_plus_items_page` (
     `status` BOOLEAN,
     `active` BOOLEAN,
     `saturdayenabled` BOOLEAN,
-    `created` TIMESTAMP,
+    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
      FOREIGN KEY(salesperson) REFERENCES users(username)
@@ -182,7 +182,7 @@ CREATE TABLE `item_price_override` (
     `active` BOOLEAN,
     `comment` VARCHAR(255),
     `option` VARCHAR(255),
-    `created` TIMESTAMP,
+    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
      FOREIGN KEY(salesperson) REFERENCES users(username)
@@ -204,7 +204,7 @@ CREATE TABLE `pricing_override_report` (
     `retail` INTEGER,
     `overrideprice` INTEGER,
     `uom` VARCHAR(100),
-    `created` TIMESTAMP,
+    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
      FOREIGN KEY(salesperson) REFERENCES users(username)
@@ -224,7 +224,7 @@ CREATE TABLE `item_table_checkbox` (
     `checked` BOOLEAN DEFAULT 0,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
-    `created` TIMESTAMP,
+    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
      FOREIGN KEY(salesperson) REFERENCES users(username)
 );
 

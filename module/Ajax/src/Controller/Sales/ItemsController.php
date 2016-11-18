@@ -215,7 +215,6 @@ class ItemsController extends AbstractRestfulController {
                     }
                     $cdb->setUom($product['uom']);
                     $cdb->setOption($product['option']);
-                    $cdb->setCreated(new DateTime());
                     $this->productrepository->persist($cdb);
                     $some = true;
                 }

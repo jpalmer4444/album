@@ -22,7 +22,10 @@ class ItemTableCheckboxRepositoryImpl extends FFMRepository {
         $query->setParameter("customerid", $customerid);
         $query->setParameter("sku", $sku);
         try {
-            return $query->getResult();
+            $arr = $query->getResult();
+            if(!empty(count($arr))){
+                return arr[0];
+            }
         } catch (Exception $exc) {
             $this->logger->info($exc->getTraceAsString());
         }

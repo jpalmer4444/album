@@ -1,3 +1,11 @@
 jjpalmer:pricing_app:739509CD0F95CB4C4E818E1CE7523A05
 dtanzer:pricing_app:2AC9CB7DC02B3C0083EB70898E549B63
 jdowns:pricing_app:2AC9CB7DC02B3C0083EB70898E549B63
+
+-rw-r--r-- 1 root root   107127 Nov 17 13:09 access_log
+-rw-r--r-- 1 root root    90435 Nov 17 13:11 error_log
+-rw-r--r-- 1 root root    80030 Nov 17 13:12 pricing-custom.log
+-rw-r--r-- 1 root root     1656 Nov 17 12:40 ssl_access_log
+-rw-r--r-- 1 root root     8110 Nov 17 13:09 ssl_error_log
+-rw-r--r-- 1 root root     2187 Nov 17 12:40 ssl_request_log
+
