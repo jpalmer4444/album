@@ -403,7 +403,7 @@ $form->prepare();
     $(document).ready(function () {
         //initialize page tool tips.
         $('[data-toggle="tooltip"]').tooltip();
-        
+
         $API = $('#customerlisttable').DataTable({
             "ajax": '/ajax/items?action=customerlisttableget&customerid=' + _customer_id,
             //#############################################################
@@ -441,9 +441,9 @@ $form->prepare();
                     "render": function (data, type, row, meta) {
                         if (data) {
                             var result = "$";
-                            try{
+                            try {
                                 return result + (data.toFixed(2));
-                            }catch(e){
+                            } catch (e) {
                                 return result + (data);
                             }
                         } else {
@@ -457,9 +457,9 @@ $form->prepare();
                         var hasOverride = row['overrideprice'];
                         if (enabled && data) {
                             var result = "$";
-                            try{
+                            try {
                                 return result + (data.toFixed(2));
-                            }catch(e){
+                            } catch (e) {
                                 return result + (data);
                             }
                         } else if (!enabled && !hasOverride) {
@@ -472,9 +472,9 @@ $form->prepare();
                     "render": function (data, type, row, meta) {
                         if (data) {
                             var result = "$";
-                            try{
+                            try {
                                 return result + (data.toFixed(2));
-                            }catch(e){
+                            } catch (e) {
                                 return result + (data);
                             }
                         } else {
@@ -533,21 +533,7 @@ $form->prepare();
             //##
             //#############################################################
             //#############################################################
-            responsive: {
-                details: {
-                    display: $.fn.dataTable.Responsive.display.modal({
-                        header: function (row) {
-                            return generateDetailsModalHeader(row);
-                        }
-                    }),
-                    renderer: function (api, rowIdx, columns) {
-                        //handle case where item is disabled!
-                        return generateDetailsModalBody(rowIdx, columns, false);
-                    },
-                    type: 'column',
-                    target: 'none'
-                }
-            },
+            responsive: false,
             dom: 'Bfrtip',
             select: {
                 style: 'multi',
@@ -778,17 +764,17 @@ $form->prepare();
                         $(this).attr('title', 'Add Product. Please call or lookup the correct SKU.');
                         $(this).attr('data-placement', 'bottom');
                         $(this).tooltip();
-                    }else if($(this).hasClass('buttons-pdf')){
+                    } else if ($(this).hasClass('buttons-pdf')) {
                         //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
                         $(this).attr('title', 'Click to generate PDF. Disabled rows with no override price and unchecked Product rows will not be included.');
                         $(this).attr('data-placement', 'top');
                         $(this).tooltip();
-                    }else if(index === 0){
+                    } else if (index === 0) {
                         //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
                         $(this).attr('title', 'Click to select all rows.');
                         $(this).attr('data-placement', 'top');
                         $(this).tooltip();
-                    }else if(index === 1){
+                    } else if (index === 1) {
                         //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
                         $(this).attr('title', 'Click to unselect all rows.');
                         $(this).attr('data-placement', 'bottom');
@@ -1030,7 +1016,7 @@ $form->prepare();
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="ffm-table-padding" >
+                <div class="ffm-table-padding" style="overflow-y: auto">
                     <table id="customerlisttable" class="table table-striped table-bordered nowrap" width="100%" cellspacing="0">
                         <thead>
                             <tr>
