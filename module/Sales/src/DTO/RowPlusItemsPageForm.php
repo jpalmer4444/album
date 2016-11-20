@@ -62,72 +62,6 @@ class RowPlusItemsPageForm extends Form {
             ),
         ]);
         $this->add([
-            'name' => 'option',
-            'type' => 'text',
-            'options' => [
-                'label' => 'Option',
-                'label_attributes' => array(
-                    'for' => 'option'
-                ),
-            ],
-            'attributes' => array(
-                'class' => 'form-control',
-                'data-rule-maxlength' => '255',
-                'data-msg-maxlength' => 'At most 255 chars for Option',
-            ),
-        ]);
-        $this->add([
-            'name' => 'qty',
-            'type' => 'text',
-            'options' => [
-                'label' => 'Qty',
-                'label_attributes' => array(
-                    'for' => 'qty'
-                ),
-            ],
-            'attributes' => array(
-                'class' => 'form-control',
-                'required' => true,
-                'data-msg' => 'Qty is required',
-                'data-rule-digits' => true,
-                'data-msg-digits' => 'Qty must be a whole number'
-            ),
-        ]);
-        $this->add([
-            'name' => 'wholesale',
-            'type' => 'text',
-            'options' => [
-                'label' => 'Wholesale',
-                'label_attributes' => array(
-                    'for' => 'wholesale'
-                ),
-            ],
-            'attributes' => array(
-                'class' => 'form-control',
-                'required' => true,
-                'data-msg' => 'Wholesale is required',
-                'data-rule-number' => true,
-                'data-msg-number' => 'Wholesale must be a valid dollar amount'
-            ),
-        ]);
-        $this->add([
-            'name' => 'retail',
-            'type' => 'text',
-            'options' => [
-                'label' => 'Retail',
-                'label_attributes' => array(
-                    'for' => 'retail'
-                ),
-            ],
-            'attributes' => array(
-                'class' => 'form-control',
-                'required' => true,
-                'data-msg' => 'Retail is required',
-                'data-rule-number' => true,
-                'data-msg-number' => 'Retail must be a valid dollar amount'
-            ),
-        ]);
-        $this->add([
             'name' => 'overrideprice',
             'type' => 'text',
             'options' => [
@@ -172,37 +106,8 @@ class RowPlusItemsPageForm extends Form {
             ],
             'attributes' => array(
                 'class' => 'form-control',
-                'required' => true,
-                'data-msg' => 'SKU is required',
                 'data-rule-digits' => true,
                 'data-msg-digits' => 'SKU must be a valid number'
-            ),
-        ]);
-        $this->add([
-            'name' => 'status',
-            'type' => 'checkbox',
-            'options' => [
-                'label' => 'Status',
-                'label_attributes' => array(
-                    'for' => 'status'
-                ),
-            ],
-            'attributes' => array(
-                'class' => 'form-control',
-                'checked' => 'checked',
-            ),
-        ]);
-        $this->add([
-            'name' => 'saturdayenabled',
-            'type' => 'checkbox',
-            'options' => [
-                'label' => 'Saturday Enabled',
-                'label_attributes' => array(
-                    'for' => 'saturdayenabled'
-                ),
-            ],
-            'attributes' => array(
-                'class' => 'form-control'
             ),
         ]);
     }

@@ -17,11 +17,15 @@ class CheckboxService implements CheckboxServiceInterface {
     protected $logger;
     protected $checkboxrepository;
     protected $userrepository;
+    protected $customerrepository;
+    protected $productrepository;
 
     public function __construct(LoggingServiceInterface $logger, FFMEntityManagerServiceInterface $ffmEntityManagerService) {
         $this->logger = $logger;
         $this->checkboxrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\ItemTableCheckbox');
         $this->userrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
+        $this->customerrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\Customer');
+        $this->productrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\Product');
     }
 
     public function addRemovedID($id, $customerid, $salespersonusername) {
@@ -36,10 +40,12 @@ class CheckboxService implements CheckboxServiceInterface {
                 $this->logger->info("Creating and persisting Checkbox record. ID: " . $i . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
                 $record = new ItemTableCheckbox();
                 $user = $this->findUser($salespersonusername);
-                $record->setSalesperson($user->getUsername());
+                $customer = $this->findCustomer($customerid);
+                $product = $this->findProduct($i);
+                $record->setSalesperson($user);
                 $record->setChecked(true);
-                $record->setCustomerid($customerid);
-                $record->setProduct($i);
+                $record->setCustomer($customer);
+                $record->setProduct($product);
                 $this->checkboxrepository->persist($record);
             }
         }
@@ -77,6 +83,14 @@ class CheckboxService implements CheckboxServiceInterface {
 
     protected function findUser($username) {
         return $this->userrepository->findUser($username);
+    }
+    
+    protected function findCustomer($customerid) {
+        return $this->customerrepository->findCustomer($customerid);
+    }
+    
+    protected function findProduct($productid) {
+        return $this->productrepository->findProduct($productid);
     }
 
 }

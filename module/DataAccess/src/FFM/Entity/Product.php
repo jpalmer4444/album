@@ -32,7 +32,7 @@ class Product {
     /**
      * @ORM\Column(type="string", length=255)
      */
-    protected $product;
+    protected $productname;
     
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -99,7 +99,7 @@ class Product {
         $this->comment = (isset($data['comment'])) ? $data['comment'] : null;
         $this->description = (isset($data['description'])) ? $data['description'] : null;
         $this->option = (isset($data['option'])) ? $data['option'] : null;
-        $this->product = (isset($data['product'])) ? $data['product'] : null;
+        $this->productname = (isset($data['product'])) ? $data['product'] : null;
         $this->qty = (isset($data['qty'])) ? $data['qty'] : null;
         $this->retail = (isset($data['retail'])) ? $data['retail'] : null;
         $this->saturdayenabled = (isset($data['saturdayenabled'])) ? $data['saturdayenabled'] : null;
@@ -121,8 +121,8 @@ class Product {
         return $this->version;
     }
 
-    public function getProduct() {
-        return $this->product;
+    public function getProductname() {
+        return $this->productname;
     }
 
     public function getDescription() {
@@ -183,8 +183,8 @@ class Product {
         return $this;
     }
 
-    public function setProduct($product) {
-        $this->product = $product;
+    public function setProductname($productname) {
+        $this->productname = $productname;
         return $this;
     }
 

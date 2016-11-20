@@ -10,6 +10,6 @@ use Zend\Form\Form;
  */
 interface PostFormBinderInterface{
     
-    public function bind(Form $form, $postData);
+    public function bind(Form $form, $postData, $instance);
     
 }

@@ -10,7 +10,7 @@ return array(
                 'options' => array(
                     'route'    => '/ajax/items',
                     'defaults' => array(
-                        'controller' => ItemsController::class,
+                        'controller' => 'Ajax\Controller\Sales\ItemsController',
                     ),
                 ),
             ),

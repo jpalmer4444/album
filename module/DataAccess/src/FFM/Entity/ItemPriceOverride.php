@@ -33,17 +33,10 @@ class ItemPriceOverride extends PostFormBinder {
     private $version;
 
     /**
-     * @ORM\Column(name="sku", type="string", length=25)
+     * @ORM\ManyToOne(targetEntity="Product", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="product", referencedColumnName="id")
      */
-    protected $sku;
-    /**
-     * @ORM\Column(name="comment", type="string", length=255)
-     */
-    protected $comment;
-    /**
-     * @ORM\Column(name="`option`", type="string", length=255)
-     */
-    protected $option;
+    protected $product;
     /**
      * @ORM\Column(type="integer")
      */
@@ -76,10 +69,7 @@ class ItemPriceOverride extends PostFormBinder {
      */
 
     public function exchangeArray($data) {
-        $this->sku = (isset($data['sku'])) ? $data['sku'] : null;
         $this->overrideprice = (isset($data['overrideprice'])) ? $data['overrideprice'] : null;
-        $this->overrideprice = (isset($data['option'])) ? $data['option'] : null;
-        $this->overrideprice = (isset($data['comment'])) ? $data['comment'] : null;
     }
 
     // Add the following method:
@@ -94,20 +84,12 @@ class ItemPriceOverride extends PostFormBinder {
     public function getId() {
         return $this->id;
     }
-    
-    public function getOption() {
-        return $this->option;
-    }
-    
-    public function getComment() {
-        return $this->comment;
+
+    public function getProduct() {
+        return $this->product;
     }
 
-    public function getSku() {
-        return $this->sku;
-    }
-
-    public function getCustomerid() {
+    public function getCustomer() {
         return $this->_customerid;
     }
 
@@ -131,19 +113,9 @@ class ItemPriceOverride extends PostFormBinder {
         $this->id = $id;
         return $this;
     }
-    
-    public function setOption($option) {
-        $this->option = $option;
-        return $this;
-    }
-    
-    public function setComment($comment) {
-        $this->comment = $comment;
-        return $this;
-    }
 
-    public function setSku($sku) {
-        $this->sku = $sku;
+    public function setProduct($product) {
+        $this->product = $product;
         return $this;
     }
 

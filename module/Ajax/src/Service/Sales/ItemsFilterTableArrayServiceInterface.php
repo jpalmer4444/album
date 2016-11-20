@@ -18,7 +18,7 @@ interface ItemsFilterTableArrayServiceInterface {
                 . "override._created >= :created AND "
                 . "override._active = 1 AND "
                 . "override._customerid = :customerid AND override._salesperson = :salesperson "
-                . "GROUP BY override.sku ORDER BY override._created DESC";
+                . "GROUP BY override.id ORDER BY override._created DESC";
     
     public function _filter($restcallitems, $customerid);
 }

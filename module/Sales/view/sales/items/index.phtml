@@ -67,11 +67,11 @@ $form->prepare();
     //##
     //#############################################################
     //#############################################################
-    var submitOverride = function (rowIdx, sku) {
+    var submitOverride = function (rowIdx, id) {
         var overrideprice = $('#overrideprice').val();
-        var comment = $('[name="comment"]').val();
-        $.getJSON("ajax/items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>&action=overridePrice&index=" + rowIdx + "&sku=" + sku + "&overrideprice=" + overrideprice + "&comment=" + comment, function (data) {
-            overrideCallback(data);
+        var data = $(this).serialize();
+        $.getJSON("ajax/items?myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername=<?= $this->customername ?>&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
+            return overrideCallback(data);
         });
         return false;
     };
@@ -90,8 +90,8 @@ $form->prepare();
             $("#override_form").validate({
                 submitHandler: function (form) {
                     var rowIdx = $('#override_form_submit').attr('data-ffm-row-index');
-                    var sku = $('#override_form_submit').attr('data-ffm-sku');
-                    submitOverride(rowIdx, sku);
+                    var id = $('#override_form_submit').attr('data-ffm-id');
+                    submitOverride(rowIdx, id);
                     return false;
                 }
             });
@@ -128,19 +128,10 @@ $form->prepare();
             $('[name="product"]').val('');
             $('[name="description"]').val('');
             $('[name="comment"]').val('');
-            $('[name="option"]').val('');
-            $('[name="qty"]').val('');
             $('[name="wholesale"]').val('');
-            $('[name="retail"]').val('');
             $('[name="overrideprice"]').val('');
             $('[name="uom"]').val('');
             $('[name="sku"]').val('');
-            //default status to true
-            $('[name="status"] [type="hidden"]').val('1');
-            $('[name="status"] [type="checkbox"]').val('1').attr('checked', 'checked');
-            //default saturdayenabled to false
-            $('[name="saturdayenabled"] [type="checkbox"]').removeAttr('checked');
-            $('[name="saturdayenabled"] [type="checkbox"]').val('0');
             $('.modal').modal('hide');
             return false;
         } else {
@@ -202,7 +193,7 @@ $form->prepare();
         var retail = columns.retail;
         var overrideprice = columns.overrideprice ? columns.overrideprice : '';
         var uom = columns.uom;
-        var sku = columns.sku;
+        var id = columns.id;
         var status = columns.status;
         var saturdayenabled = columns.saturdayenabled;
         var data = '';
@@ -320,20 +311,6 @@ $form->prepare();
                                                         <small id="priceHelpInline" class="text-muted"> -- Enter Price Override.</small>\n\
                                                     </div>\n\
                                                 </div>';
-        data += '               <div class="row form-group">\n\
-                                                    <div class="col-md-4">\n\
-                                                        <label for="comment">\n\
-                                                            Comments\n\
-                                                        </label>\n\
-                                                    </div>\n\
-                                                    <div class="col-md-4">\n\
-                                                        <input type="textarea" class="form-control" name="comment" value="' + comment + '" aria-describedby="commentHelpInline" data-rule-maxlength="255" data-msg-maxlength="At most 255 chars for Comment" placeholder="Comments">\n\
-                                                    </div>\n\
-                                                    \n\
-                                                    <div class="col-md-4">\n\
-                                                        <small id="commentHelpInline" class="text-muted"> -- Enter/Edit Comment.</small>\n\
-                                                    </div>\n\
-                                                </div>';
         data += '               <div class="row form-group">';
         data += '                       <div class="col-md-4 col-md-offset-4">\n\
                                                             <span class="pull-right">';
@@ -351,7 +328,7 @@ $form->prepare();
                                                         </div>\n\
                                                         <div class="col-md-4">\n\
                                                             <span class="pull-left">\n\
-                                                                <button id="override_form_submit" onclick="initForm()" type="submit" data-ffm-row-index="' + rowIdx + '" data-ffm-sku="' + sku + '" \n\
+                                                                <button id="override_form_submit" onclick="initForm()" type="submit" data-ffm-row-index="' + rowIdx + '" data-ffm-id="' + id + '" \n\
                                                                         data-toggle="tooltip" title="Submit Price Override" class="btn btn-default">\n\
                                                                     Override\n\
                                                                 </button>\n\
@@ -384,7 +361,6 @@ $form->prepare();
             var rowIdx = data.index;
             var rowData = $API.row(rowIdx).data();
             rowData['overrideprice'] = data.overrideprice;
-            rowData['comment'] = data.comment;
             $API.row(rowIdx).data(rowData);
             $API.draw(false);
             $('.modal').modal('hide');
@@ -405,7 +381,7 @@ $form->prepare();
         $('[data-toggle="tooltip"]').tooltip();
 
         $API = $('#customerlisttable').DataTable({
-            "ajax": '/ajax/items?action=customerlisttableget&customerid=' + _customer_id,
+            "ajax": '/ajax/items?myaction=customerlisttableget&customerid=' + _customer_id,
             //#############################################################
             //#############################################################
             //##
@@ -557,7 +533,7 @@ $form->prepare();
                     action: function () {
                         $API.rows({page: 'all'}).select();
                         //now manually select all checkboxes and redraw table.
-                        var url = 'ajax/items?action=select';
+                        var url = 'ajax/items?myaction=select';
                         $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
                             $('#selected_row_' + rowIdx).attr('checked', 'checked');
                             url += '&ids[]=' + $API.row(rowIdx).data()['id'];
@@ -584,7 +560,7 @@ $form->prepare();
                             $API.row(rowIdx).invalidate();
                         });
                         //send notify to items REST controller to un-select all items in result set.
-                        $.getJSON('ajax/items?action=unselect&customerid=' + _customer_id, function () {
+                        $.getJSON('ajax/items?myaction=unselect&customerid=' + _customer_id, function () {
                         }).done(function () {
                             console.log('Unselected All');
                         }).fail(function () {
@@ -619,28 +595,33 @@ $form->prepare();
                                         var head = JSON.parse('[{"text": "Product","style": "tableHeader"}, {"text": "Description","style": "tableHeader"}, {"text": "Comment","style": "tableHeader"}, {"text": "Price","style": "tableHeader"}, {"text": "UOM","style": "tableHeader"}, {"text": "SKU","style": "tableHeader"}]');
                                         newRowData.push(head);
                                     } else {
-                                        var tablerow = $API.row(idx).data();
-                                        if (tablerow)
-                                            form_data.push('ID_' + tablerow['id'], JSON.stringify(tablerow));
-                                        var row = [];
-                                        row.push(rowdata[1]);
-                                        row.push(rowdata[2]);
-                                        row.push(rowdata[3]);
-                                        var override = rowdata[8].text;
-                                        if (override) {
-                                            row.push(rowdata[8]);
-                                        } else {
-                                            row.push(rowdata[7]);
-                                        }
-                                        row.push(rowdata[9]);
-                                        row.push(rowdata[12]);
-                                        //ignore
-                                        //rowdata[13] (product.id)
+                                        try {
+                                            var tablerow = $API.row(idx).data();
+                                            if (tablerow)
+                                                form_data.push('ID_' + tablerow['id'], JSON.stringify(tablerow));
+                                            var row = [];
+                                            row.push(rowdata[1]);
+                                            row.push(rowdata[2]);
+                                            row.push(rowdata[3]);
+                                            var override = rowdata[8].text;
+                                            if (override) {
+                                                row.push(rowdata[8]);
+                                            } else {
+                                                row.push(rowdata[7]);
+                                            }
+                                            row.push(rowdata[9]);
+                                            row.push(rowdata[12]);
+                                            //ignore
+                                            //rowdata[13] (product.id)
 
-                                        //only add this row if Price
-                                        if (override || rowdata[8].text.indexOf('Call') === -1) {
-                                            newRowData.push(row);
+                                            //only add this row if Price
+                                            if (override || rowdata[8].text.indexOf('Call') === -1) {
+                                                newRowData.push(row);
+                                            }
+                                        } catch (e) {
+                                            alert(JSON.stringify(e));
                                         }
+
                                     }
                                 });
                                 row['table']['body'] = newRowData;
@@ -674,7 +655,7 @@ $form->prepare();
                             success: function (data) {
                                 console.log('Successful response from server at items/report');
                                 console.log(JSON.stringify(data));
-                                return false;
+                                $API.draw(true);
                             },
                             error: function (xhr, ajaxOptions, thrownError) {
                                 alert(xhr.status);
@@ -725,11 +706,15 @@ $form->prepare();
             var checked = forCheck.checked;
             var rowObj = $API.row(rowIdx).data();
             var id = rowObj['id'];
-            var url = 'ajax/items?action=';
+            var url = 'ajax/items?myaction=';
             if (checked) {
                 url += 'select';
+                $API.row(rowIdx).data()['selected'] = true;
+                $API.row(rowIdx).select().invalidate().draw(false);
             } else {
                 url += 'unselect';
+                $API.row(rowIdx).data()['selected'] = false;
+                $API.row(rowIdx).deselect().invalidate().draw(false);
             }
             url += '&ids[]=' + id;
             //send notify to items REST controller to select all items in result set.
@@ -784,6 +769,29 @@ $form->prepare();
                 });
             }
             //##########  END Custom Datatables Buttons Impl ##############
+            //init column search input fields
+            // Setup - add a text input to each footer cell
+            $('#customerlisttable tfoot th').each(function (index, element) {
+                if (index !== 0) {
+                    var title = $(this).text();
+                    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+                }
+            });
+
+            // Apply the search
+            $API.columns().every(function () {
+                var that = this;
+                var hasInput = $('input', this.footer());
+                if (hasInput.length) {
+                    $('input', this.footer()).on('keyup change', function () {
+                        if (that.search() !== this.value) {
+                            that
+                                    .search(this.value)
+                                    .draw();
+                        }
+                    });
+                }
+            });
         });
 
         //#############################################################
@@ -895,50 +903,6 @@ $form->prepare();
                             </div>
                             <div class="row form-group">
                                 <div class="col-md-4">
-                                    <?= $this->formlabel($form->get('option')) ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <?= $this->formElement($form->get('option')) ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <small id="optionHelpInline" class="text-muted"> -- Enter Option.</small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-md-4">
-                                    <?= $this->formlabel($form->get('qty')) ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <?= $this->formElement($form->get('qty')) ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <small id="qtyHelpInline" class="text-muted"> -- Enter Quantity.</small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-md-4">
-                                    <?= $this->formlabel($form->get('wholesale')) ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <?= $this->formElement($form->get('wholesale')) ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <small id="wholesaleHelpInline" class="text-muted"> -- Enter Wholesale Price.</small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-md-4">
-                                    <?= $this->formlabel($form->get('retail')) ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <?= $this->formElement($form->get('retail')) ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <small id="retailHelpInline" class="text-muted"> -- Enter Retail Price.</small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-md-4">
                                     <?= $this->formlabel($form->get('overrideprice')) ?>
                                 </div>
                                 <div class="col-md-4">
@@ -968,36 +932,6 @@ $form->prepare();
                                 </div>
                                 <div class="col-md-4">
                                     <small id="skuHelpInline" class="text-muted"> -- Enter SKU.</small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-md-4">
-                                    <?= $this->formlabel($form->get('status')) ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-3 col-md-offset-9">
-                                            <?= $this->formElement($form->get('status')) ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <small id="statusHelpInline" class="text-muted"> -- Check Status.</small>
-                                </div>
-                            </div>
-                            <div class="row form-group">
-                                <div class="col-md-4">
-                                    <?= $this->formlabel($form->get('saturdayenabled')) ?>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="row">
-                                        <div class="col-md-3 col-md-offset-9">
-                                            <?= $this->formElement($form->get('saturdayenabled')) ?>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <small id="saturdayenabledHelpInline" class="text-muted"> -- Check Saturday Enabled.</small>
                                 </div>
                             </div>
                             <?= $this->form()->closeTag(); ?> 

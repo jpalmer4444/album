@@ -2,6 +2,7 @@
 
 namespace Ajax\Service\Sales;
 
+use DataAccess\FFM\Entity\Product;
 use DateTime;
 use DateTimeZone;
 
@@ -64,8 +65,9 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
 
         foreach ($itemPriceOverrides as $price) {
             $override = number_format($price->getOverrideprice() / 100, 2);
-            $this->logger->info('Found saved overrideprice: ' + $override);
-            $overrideMap[strval($price->getSku())] = $override;
+            $pid = strval($price->getProduct()->getId());
+            $this->logger->info('Found saved overrideprice: ' . $override . ' with productID: ' . $pid);
+            $overrideMap[$pid] = $override;
             $foundSomeOverrides = true;
         }
 
@@ -79,17 +81,19 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         $map = array();
         //first add all items from DB to results
         foreach ($rowPlusItemPages as &$item) {
-            $adjWholesale = number_format($item->getWholesale() / 100, 2);
-            $adjRetail = number_format($item->getRetail() / 100, 2);
+            //has no wholesale or retail must get related entity
+            $adjWholesale = number_format($item->getProduct()->getWholesale() / 100, 2);
+            $adjRetail = number_format($item->getProduct()->getRetail() / 100, 2);
             $adjOverrideprice = number_format($item->getOverrideprice() / 100, 2);
             //if override exists - then graphed it in.
-            if (array_key_exists(strval($item->getSku()), $overrideMap)) {
-                $adjOverrideprice = $overrideMap[strval($item->getSku())];
+            if (array_key_exists(strval($item->getProduct()->getId()), $overrideMap)) {
+                $adjOverrideprice = $overrideMap[strval($item->getProduct()->getId())];
+                $this->logger->info("ItemsFilterTableArrayService: Found Override in map: " . $adjOverrideprice);
             }
-            $this->logger->info("ItemsFilterTableArrayService: ProductID: " . $item->getProduct());
+            $this->logger->info("ItemsFilterTableArrayService: ProductID: " . $item->getProduct()->getId());
             $merged[] = $this->addItem($item->getProduct(), $adjWholesale, $adjRetail, $adjOverrideprice);
             //add to the map
-            $map[$item->getSku()] = $item;
+            $map[$item->getProduct()->getId()] = $item;
         }
 
         //get a reference to Session scope SKUs that have been removed from the table.
@@ -102,10 +106,14 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         //}
 
         //create a selected field for each REST call item based on removed SKUs.
+        $removedIDS = array();
+        foreach($removedSKUS as $product){
+            $removedIDS [] = $product->getId();
+        }
 
         foreach ($restcallitems as &$item) {
             //add checkbox
-            if (!in_array($item['id'], $removedSKUS)) {
+            if (!in_array($item['id'], $removedIDS)) {
                 $item['selected'] = false;
             } else {
                 $item['selected'] = true;
@@ -145,9 +153,10 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 [];
     }
     
-    private function addItem(\DataAccess\FFM\Entity\Product $product, $adjWholesale, $adjRetail, $adjOverrideprice){
+    private function addItem(Product $product, $adjWholesale, $adjRetail, $adjOverrideprice){
         return array(
-                "productname" => $product->getProduct(),
+                "id" => $product->getId(),
+                "productname" => $product->getProductname(),
                 "shortescription" => $product->getDescription(),
                 "comment" => $product->getComment(),
                 "option" => $product->getOption(),
@@ -199,8 +208,8 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
     }
 
     protected function applyOverride($overrideMap, $item, $merged) {
-        if (array_key_exists(strval($item['sku']), $overrideMap)) {
-            $item['overrideprice'] = $overrideMap[strval($item['sku'])];
+        if (array_key_exists(strval($item['id']), $overrideMap)) {
+            $item['overrideprice'] = $overrideMap[strval($item['id'])];
         }
         $merged[] = $item;
         return $merged;

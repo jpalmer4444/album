@@ -107,7 +107,7 @@ CREATE TABLE `products` (
     `id` INTEGER PRIMARY KEY,
     `version` INTEGER DEFAULT 1,
     `sku` VARCHAR(25),
-    `product` VARCHAR(255),
+    `productname` VARCHAR(255),
     `description` VARCHAR(255),
     `comment` VARCHAR(255),
     `option` VARCHAR(255),
@@ -124,8 +124,8 @@ CREATE TABLE `products` (
 CREATE INDEX index_products_sku
 ON `products` (`sku`);
 
-CREATE INDEX index_products_product
-ON `products` (`product`);
+CREATE INDEX index_products_productname
+ON `products` (`productname`);
 
 CREATE TABLE `customers` (
     `id` INTEGER PRIMARY KEY,
@@ -155,12 +155,10 @@ CREATE TABLE `row_plus_items_page` (
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
+    FOREIGN KEY(product) REFERENCES products(id),
      FOREIGN KEY(salesperson) REFERENCES users(username),
      FOREIGN KEY(customerid) REFERENCES customers(id)
 );
-
-CREATE INDEX index_row_plus_items_page_sku
-ON row_plus_items_page (sku);
 
 CREATE INDEX index_row_plus_items_page_customer_id
 ON row_plus_items_page (customerid);
@@ -168,23 +166,16 @@ ON row_plus_items_page (customerid);
 CREATE TABLE `item_price_override` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
     `version` INTEGER DEFAULT 1,
-    `sku` VARCHAR(25),
+    `product` INTEGER,
     `overrideprice` INTEGER,
     `active` BOOLEAN,
-    `comment` VARCHAR(255),
-    `option` VARCHAR(255),
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
      FOREIGN KEY(salesperson) REFERENCES users(username),
+     FOREIGN KEY(product) REFERENCES products(id),
      FOREIGN KEY(customerid) REFERENCES customers(id)
 );
-
-CREATE INDEX index_item_price_override_sku
-ON item_price_override (sku);
-
-CREATE INDEX index_item_price_override_customer_id
-ON item_price_override (customerid);
 
 CREATE TABLE `pricing_override_report` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
@@ -218,6 +209,3 @@ CREATE TABLE `item_table_checkbox` (
     FOREIGN KEY(salesperson) REFERENCES users(username),
     FOREIGN KEY(customerid) REFERENCES customers(id)
 );
-
-CREATE INDEX cmp_index_item_table_checkbox_salesperson_customerid_product
-ON `item_table_checkbox` (`salesperson`, `customerid`, `product`);

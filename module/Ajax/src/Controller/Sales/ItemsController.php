@@ -30,8 +30,21 @@ class ItemsController extends AbstractRestfulController {
     protected $productrepository;
     protected $customerrepository;
     protected $qb;
+    
+    public function onDispatch(\Zend\Mvc\MvcEvent $e) {
+        $this->logger->info("AjaxItemController found! ");
+        //if(stringContains("myaction=overridePrice")){
+            //var_dump($e->getRequest());
+        //}
+        $this->logger->info("" . $e->getParam("request")->getRequestUri());
+        try {
+            return parent::onDispatch($e);
+        } catch (Exception $exc) {
+            $this->logger->info($exc->getTraceAsString());
+        }
+        }
 
-    public function __construct($container) {
+        public function __construct($container) {
         $this->restService = $container->get('RestService');
         $this->checkboxService = $container->get('CheckboxService');
         $this->logger = $container->get('LoggingService');
@@ -49,11 +62,11 @@ class ItemsController extends AbstractRestfulController {
                         getEntityManager()->createQueryBuilder();
     }
 
+    //framework calls get when an id parameter is not found in request
     public function getList() {
-        switch ($this->params()->fromQuery("action")) {
-            case "overridePrice" : {
-                    return $this->overridePrice();
-                }
+        $this->logger->info('ItemsController Ajax called.');
+        
+        switch ($this->params()->fromQuery("myaction")) {
             case "select" : {
                     return $this->select();
                 }
@@ -66,19 +79,29 @@ class ItemsController extends AbstractRestfulController {
                 }
         }
     }
+    
+    //framework calls get when an id parameter is found in request
+    public function get($id) {
+        $this->logger->info('ItemsController Ajax called.');
+        
+        switch ($this->params()->fromQuery("myaction")) {
+            case "overridePrice" : 
+            
+            default : {
+                    return $this->overridePrice($id);
+                }
+        }
+    }
 
     public function rest($url, $method = "GET", $params = []) {
         return $this->restService->rest($url, $method, $params);
     }
 
-    protected function overridePrice() {
+    protected function overridePrice($id) {
         $customerid = $this->params()->fromQuery('customerid');
         $rowIndex = $this->params()->fromQuery('index');
         $overrideprice = $this->params()->fromQuery('overrideprice');
-        $sku = $this->params()->fromQuery('sku');
-        $comment = $this->params()->fromQuery('comment');
         $this->logger->info('Saving overrideprice: ' . $overrideprice . '.');
-
         //save overridePrice in DB
         $record = new ItemPriceOverride();
         $created = new DateTime("now");
@@ -86,13 +109,11 @@ class ItemsController extends AbstractRestfulController {
         $record->setActive(true);
         $customer = $this->customerrepository->findCustomer($customerid);
         $record->setCustomer($customer);
-        $record->setSku($sku);
+        $product = $this->productrepository->findProduct($id);
+        $record->setProduct($product);
         if (!empty($overrideprice)) {
             $int2 = filter_var($overrideprice, FILTER_SANITIZE_NUMBER_INT);
             $record->setOverrideprice($int2);
-        }
-        if (!empty($comment)) {
-            $record->setComment($comment);
         }
         $this->entityManager->getConnection()->beginTransaction(); // suspend auto-commit
         try {
@@ -100,7 +121,6 @@ class ItemsController extends AbstractRestfulController {
             $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->myauthstorage->getSalespersonInPlay()) ?
                     $this->myauthstorage->getUser()->getUsername() :
                     $this->myauthstorage->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
-
             $record->setSalesperson($salesperson);
             $this->entityManager->persist($record);
             $this->entityManager->flush();
@@ -108,16 +128,15 @@ class ItemsController extends AbstractRestfulController {
             return new JsonModel(array(
                 'success' => true,
                 'index' => $rowIndex,
-                'overrideprice' => number_format($record->getOverrideprice() / 100, 2),
-                'comment' => $record->getComment(),
+                'overrideprice' => number_format($record->getOverrideprice() / 100, 2)
             ));
         } catch (Exception $e) {
             $this->entityManager->getConnection()->rollBack();
-            throw $e;
+            $this->logger->error(strval($e));
+            return new JsonModel(array(
+                'success' => false,
+            ));
         }
-        return new JsonModel(array(
-            'success' => false,
-        ));
     }
 
     protected function getTable() {
@@ -129,15 +148,11 @@ class ItemsController extends AbstractRestfulController {
         $json = $this->rest($this->pricingconfig['by_sku_base_url'], $method, $params);
         $restcallitemsmerged = [];
         if ($json && array_key_exists($this->pricingconfig['by_sku_object_items_controller'], $json)) {
-
             //iterate
             //$json[$this->pricingconfig['by_sku_object_items_controller']]
             //and find corresponding rows in DB and insert or update as appropriate.
             $this->sync($json);
-            
             $restcallitemsmerged = $this->itemsFilterService->_filter($json[$this->pricingconfig['by_sku_object_items_controller']], $customerid);
-        
-            
         } else {
             $this->logger->debug('No ' . $this->pricingconfig['by_sku_object_items_controller'] . ' items found.');
         }
@@ -158,7 +173,7 @@ class ItemsController extends AbstractRestfulController {
         $this->qb->add('where', $this->qb->expr()->orX(
                                 implode(" OR ", $arr)
                 ))
-                ->add('orderBy', new OrderBy('u.product', 'ASC'));
+                ->add('orderBy', new OrderBy('u.productname', 'ASC'));
         $query = $this->qb->getQuery();
         $dbcustomers = $query->getResult();
         $this->logger->info('Found ' . count($dbcustomers) . ' customers in db.');
@@ -175,7 +190,7 @@ class ItemsController extends AbstractRestfulController {
                 if (!empty($cdb)) {
                     //update existing record
                     $cdb->setSku($product['sku']);
-                    $cdb->setProduct($product['productname']);
+                    $cdb->setProductname($product['productname']);
                     $cdb->setDescription($product['shortescription']);
                     $cdb->setComment($product['comment']);
                     $cdb->setQty($product['qty']);
@@ -189,7 +204,6 @@ class ItemsController extends AbstractRestfulController {
                     }
                     $cdb->setUom($product['uom']);
                     $cdb->setOption($product['option']);
-                    $cdb->setUpdated(new DateTime());
                     $this->productrepository->merge($cdb);
                     $some = true;
                 } else {
@@ -197,7 +211,7 @@ class ItemsController extends AbstractRestfulController {
                     $cdb = new Product();
                     $cdb->setId($product['id']);
                     $cdb->setSku($product['sku']);
-                    $cdb->setProduct($product['productname']);
+                    $cdb->setProductname($product['productname']);
                     $cdb->setDescription($product['shortescription']);
                     $cdb->setComment($product['comment']);
                     $cdb->setQty($product['qty']);
@@ -224,12 +238,16 @@ class ItemsController extends AbstractRestfulController {
     protected function select() {
         $ids = $this->params()->fromQuery('ids');
         $customerid = $this->params()->fromQuery('customerid');
-        //$this->logger->info('Selecting ' . $skus);
+        
         $userinplay = $this->myauthstorage->getSalespersonInPlay();
         if (empty($userinplay)) {
             $userinplay = $this->myauthstorage->getUser();
         }
+        if(empty($userinplay)){
+            $this->logger->info("UserinPlay is null!");
+        }
         foreach ($ids as $id) {
+            $this->logger->info('Selecting ' . $id);
             $this->checkboxService->addRemovedID($id, $customerid, $userinplay->getUsername());
         }
         return new JsonModel(array(

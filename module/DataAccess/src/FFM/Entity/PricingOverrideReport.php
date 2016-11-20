@@ -10,7 +10,7 @@ use DateTime;
  * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\PricingOverrideReportRepositoryImpl")
  * @ORM\Table(name="pricing_override_report")
  */
-class PricingOverrideReport {
+class PricingOverrideReport extends PostFormBinder{
     
     public function __construct()
     {
