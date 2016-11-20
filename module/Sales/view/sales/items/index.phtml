@@ -726,7 +726,6 @@ $form->prepare();
             });
         });
 
-
         //#############################################################
         //#############################################################
         //##
@@ -777,7 +776,6 @@ $form->prepare();
                     $(this).html('<input type="text" placeholder="Search ' + title + '" />');
                 }
             });
-
             // Apply the search
             $API.columns().every(function () {
                 var that = this;
@@ -785,9 +783,7 @@ $form->prepare();
                 if (hasInput.length) {
                     $('input', this.footer()).on('keyup change', function () {
                         if (that.search() !== this.value) {
-                            that
-                                    .search(this.value)
-                                    .draw();
+                            that.search(this.value).draw();
                         }
                     });
                 }

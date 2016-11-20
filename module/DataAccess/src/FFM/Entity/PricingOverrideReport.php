@@ -32,34 +32,10 @@ class PricingOverrideReport extends PostFormBinder{
     private $version;
     
     /**
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="Product", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="product", referencedColumnName="id")
      */
     protected $product;
-    
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $description;
-    
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $comment;
-    
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $uom;
-    
-    /**
-     * @ORM\Column(type="string")
-     */
-    protected $sku;
-    
-    /**
-     * @ORM\Column(type="integer")
-     */
-    protected $retail;
     
     /**
      * @ORM\Column(type="integer")
@@ -87,10 +63,6 @@ class PricingOverrideReport extends PostFormBinder{
         return $this->id;
     }
 
-    public function getSku() {
-        return $this->sku;
-    }
-
     public function getProduct() {
         return $this->product;
     }
@@ -99,24 +71,8 @@ class PricingOverrideReport extends PostFormBinder{
         return $this->_customerid;
     }
 
-    public function getDescription() {
-        return $this->description;
-    }
-
-    public function getComment() {
-        return $this->comment;
-    }
-
-    public function getRetail() {
-        return $this->retail;
-    }
-
     public function getOverrideprice() {
         return $this->overrideprice;
-    }
-
-    public function getUom() {
-        return $this->uom;
     }
 
     public function getCreated() {
@@ -131,11 +87,6 @@ class PricingOverrideReport extends PostFormBinder{
         $this->id = $id;
         return $this;
     }
-
-    public function setSku($sku) {
-        $this->sku = $sku;
-        return $this;
-    }
     
     public function setCustomer($customer) {
         $this->_customerid = $customer;
@@ -147,31 +98,11 @@ class PricingOverrideReport extends PostFormBinder{
         return $this;
     }
 
-    public function setDescription($description) {
-        $this->description = $description;
-        return $this;
-    }
-
-    public function setComment($comment) {
-        $this->comment = $comment;
-        return $this;
-    }
-
-    public function setRetail($retail) {
-        $this->retail = $retail;
-        return $this;
-    }
-
     public function setOverrideprice($overrideprice) {
         $this->overrideprice = $overrideprice;
         return $this;
     }
-
-    public function setUom($uom) {
-        $this->uom = $uom;
-        return $this;
-    }
-
+    
     public function setCreated($created) {
         $this->_created = $created;
         return $this;

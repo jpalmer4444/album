@@ -79,24 +79,8 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         //should override the array from svc when ACTIVE
         //create HashMap of keys - then override
         $map = array();
-        //first add all items from DB to results
-        foreach ($rowPlusItemPages as &$item) {
-            //has no wholesale or retail must get related entity
-            $adjWholesale = number_format($item->getProduct()->getWholesale() / 100, 2);
-            $adjRetail = number_format($item->getProduct()->getRetail() / 100, 2);
-            $adjOverrideprice = number_format($item->getOverrideprice() / 100, 2);
-            //if override exists - then graphed it in.
-            if (array_key_exists(strval($item->getProduct()->getId()), $overrideMap)) {
-                $adjOverrideprice = $overrideMap[strval($item->getProduct()->getId())];
-                $this->logger->info("ItemsFilterTableArrayService: Found Override in map: " . $adjOverrideprice);
-            }
-            $this->logger->info("ItemsFilterTableArrayService: ProductID: " . $item->getProduct()->getId());
-            $merged[] = $this->addItem($item->getProduct(), $adjWholesale, $adjRetail, $adjOverrideprice);
-            //add to the map
-            $map[$item->getProduct()->getId()] = $item;
-        }
-
-        //get a reference to Session scope SKUs that have been removed from the table.
+        
+                //get a reference to IDS that have been selected from the table.
         $removedSKUS = $this->retrieveRemovedSkus($customerid);
 
         $this->logger->info('Found ' . count($removedSKUS) . ' removedSKUs in Session!');
@@ -109,6 +93,29 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         $removedIDS = array();
         foreach($removedSKUS as $product){
             $removedIDS [] = $product->getId();
+        }
+        
+        //first add all items from DB to results
+        foreach ($rowPlusItemPages as &$item) {
+            //has no wholesale or retail must get related entity
+            $adjWholesale = number_format($item->getProduct()->getWholesale() / 100, 2);
+            $adjRetail = number_format($item->getProduct()->getRetail() / 100, 2);
+            $adjOverrideprice = number_format($item->getOverrideprice() / 100, 2);
+            //if override exists - then graph it in.
+            if (array_key_exists(strval($item->getProduct()->getId()), $overrideMap)) {
+                $adjOverrideprice = $overrideMap[strval($item->getProduct()->getId())];
+                $this->logger->info("ItemsFilterTableArrayService: Found Override in map: " . $adjOverrideprice);
+            }
+            $this->logger->info("ItemsFilterTableArrayService: ProductID: " . $item->getProduct()->getId());
+            
+            $addSelected = false;
+            if (in_array($item->getProduct()->getId(), $removedIDS)) {
+                $addSelected = true;
+            }
+            
+            $merged[] = $this->addItem($item->getProduct(), $adjWholesale, $adjRetail, $adjOverrideprice, $addSelected);
+            //add to the map
+            $map[$item->getProduct()->getId()] = $item;
         }
 
         foreach ($restcallitems as &$item) {
@@ -153,7 +160,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 [];
     }
     
-    private function addItem(Product $product, $adjWholesale, $adjRetail, $adjOverrideprice){
+    private function addItem(Product $product, $adjWholesale, $adjRetail, $adjOverrideprice, $addSelected){
         return array(
                 "id" => $product->getId(),
                 "productname" => $product->getProductname(),
@@ -166,6 +173,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 "overrideprice" => $adjOverrideprice,
                 "uom" => $product->getUom(),
                 "sku" => $product->getSku(),
+                "selected" => $addSelected,
                 "status" => strcmp(strval($product->getStatus()), "1") == 0 ? "Enabled" : "Disabled",
                 "saturdayenabled" => strcmp(strval($product->getSaturdayenabled()), "1") == 0 ? "Enabled" : "Disabled",
             );

@@ -156,12 +156,9 @@ CREATE TABLE `row_plus_items_page` (
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
     FOREIGN KEY(product) REFERENCES products(id),
-     FOREIGN KEY(salesperson) REFERENCES users(username),
-     FOREIGN KEY(customerid) REFERENCES customers(id)
+    FOREIGN KEY(salesperson) REFERENCES users(username),
+    FOREIGN KEY(customerid) REFERENCES customers(id)
 );
-
-CREATE INDEX index_row_plus_items_page_customer_id
-ON row_plus_items_page (customerid);
 
 CREATE TABLE `item_price_override` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
@@ -180,22 +177,15 @@ CREATE TABLE `item_price_override` (
 CREATE TABLE `pricing_override_report` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
     `version` INTEGER DEFAULT 1,
-    `sku` VARCHAR(25),
-    `product` VARCHAR(255),
-    `description` VARCHAR(255),
-    `comment` TEXT,
-    `retail` INTEGER,
+    `product` INTEGER,
     `overrideprice` INTEGER,
-    `uom` VARCHAR(100),
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),
      FOREIGN KEY(salesperson) REFERENCES users(username),
+     FOREIGN KEY(product) REFERENCES products(id),
      FOREIGN KEY(customerid) REFERENCES customers(id)
 );
-
-CREATE INDEX index_pricing_override_report_sku
-ON pricing_override_report (sku);
 
 CREATE TABLE `item_table_checkbox` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 

@@ -217,37 +217,22 @@ class ItemsController extends AbstractActionController {
                     //  "saturdayenabled":1,"overrideprice":""};
 
                     $obj = json_decode($value, true);
-                    $por = new PricingOverrideReport();
-                    if (array_key_exists("sku", $obj)) {
-                        $por->setSku($obj['sku']);
-                    }
-                    if (array_key_exists("comment", $obj)) {
-                        $por->setComment($obj['comment']);
-                    }
-                    if (array_key_exists("shortescription", $obj)) {
-                        $por->setDescription($obj['shortescription']);
-                    }
-                    if (array_key_exists("uom", $obj)) {
-                        $por->setUom($obj['uom']);
-                    }
+                    $pricingOverrideReport = new PricingOverrideReport();
+                    
                     if (array_key_exists("overrideprice", $obj)) {
                         $int1 = filter_var($obj["overrideprice"], FILTER_SANITIZE_NUMBER_INT);
-                        $por->setOverrideprice($int1);
+                        $pricingOverrideReport->setOverrideprice($int1);
                     }
-                    if (array_key_exists("productname", $obj)) {
-                        $por->setProduct($obj['productname']);
-                    }
-                    if (array_key_exists("retail", $obj)) {
-                        $int2 = filter_var($obj["retail"], FILTER_SANITIZE_NUMBER_INT);
-                        $por->setRetail($int2);
-                    }
+                    
                     $created = new DateTime("now");
-                    $por->setCreated($created);
+                    $pricingOverrideReport->setCreated($created);
                     $customer = $this->customerrepository->findCustomer($this->customerid);
-                    $por->setCustomer($customer);
+                    $pricingOverrideReport->setCustomer($customer);
                     $salesperson = $this->userrepository->findUser($this->myauthstorage->getUser()->getUsername());
-                    $por->setSalesperson($salesperson);
-                    $this->rowplusitemspagerepository->persistAndFlush($por);
+                    $pricingOverrideReport->setSalesperson($salesperson);
+                    $product = $this->productrepository->findProduct(obj['id']);
+                    $pricingOverrideReport->setProduct($product);
+                    $this->rowplusitemspagerepository->persistAndFlush($pricingOverrideReport);
                 }
                 $counter++;
             }
