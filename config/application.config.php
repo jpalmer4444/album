@@ -53,7 +53,7 @@ return [
 // that weren't loaded.
         'check_dependencies' => ($env != 'production'),
     ],
-    // Used to create an own service manager. May contain one or more child arrays.
+        // Used to create an own service manager. May contain one or more child arrays.
 // 'service_listener_options' => [
 //     [
 //         'service_manager' => $stringServiceManagerName,

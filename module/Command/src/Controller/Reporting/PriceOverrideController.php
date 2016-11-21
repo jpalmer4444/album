@@ -82,15 +82,15 @@ class PriceOverrideController extends AbstractActionController {
         if ($answer == 'y') {
             //$console->write(strval($rows));
             foreach($rows as $key => $value){
-                $console->writeLine($value->getProduct() .
-                        " | " . $value->getDescription() .
-                        " | " . $value->getComment() .
-                        " | " . $value->getUom() .
-                        " | " . $value->getSku() .
-                        " | " . $value->getRetail() .
+                $console->writeLine($value->getProduct()->getProductname() .
+                        " | " . $value->getProduct()->getDescription() .
+                        " | " . $value->getProduct()->getComment() .
+                        " | " . $value->getProduct()->getUom() .
+                        " | " . $value->getProduct()->getSku() .
+                        " | " . $value->getProduct()->getRetail() .
                         " | " . $value->getOverrideprice() .
                         " | " . strval($value->getCreated()) . 
-                        " | " . $value->getCustomerid() . 
+                        " | " . $value->getCustomerid()->getName() . 
                         " | " . $value->getSalesperson()->getUsername());
             }
         } else {

@@ -2,6 +2,7 @@
 
 namespace Ajax\Service\Sales;
 
+use Application\Utility\DateUtils;
 use DataAccess\FFM\Entity\Product;
 use DateTime;
 use DateTimeZone;
@@ -135,7 +136,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         //needs to be aware of admin role because if the User is an admin - they need to see the Products for the selected salesperson.
         return $this->entityManager->getEntityManager()->
                         createQuery($q)->setParameter("customerid", $customerid)->
-                        setParameter("created", $this->getDailyCutoff())->
+                        setParameter("created", DateUtils::getDailyCutoff())->
                         setParameter("salesperson", $this->myauthstorage->admin() && !empty($this->myauthstorage->getSalespersonInPlay()) ?
                                 $this->myauthstorage->getSalespersonInPlay()->getUsername() :
                                 $this->myauthstorage->getUser()->getUsername())
@@ -177,42 +178,6 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 "status" => strcmp(strval($product->getStatus()), "1") == 0 ? "Enabled" : "Disabled",
                 "saturdayenabled" => strcmp(strval($product->getSaturdayenabled()), "1") == 0 ? "Enabled" : "Disabled",
             );
-    }
-
-    private function getDailyCutoff() {
-        $pre1pm = false;
-        if (date('H') < 13) {
-            $pre1pm = true;
-        }
-        if ($pre1pm) {
-            //it is before 1:00PM UTC now - so set the query to retrieve all rows since yesterday at 1:00PM
-            return $this->fromOneToOne();
-        } else {
-            //it is after 1:00PM UTC now - so set the query to retrieve all rows since today at 1:00PM
-            return $this->fromOne();
-        }
-    }
-    
-    private function fromOne(){
-        $date = strtotime('today');
-            $time = "13:00:00"; //overwrite time to 1:00 if it is after 1:00.
-            $tz_string = "US/Samoa"; // Use one from list of TZ names http://php.net/manual/en/timezones.php UTC?
-            $tz_object = new DateTimeZone($tz_string);
-            $datetime = new DateTime();
-            $datetime->setTimestamp($date);
-            $datetime->setTimezone($tz_object);
-            return $datetime;
-    }
-
-    private function fromOneToOne() {
-        $date = strtotime('today -1 day');
-        $time = "13:00:00"; //overwrite time to 1:00 if it is after 1:00.
-        $tz_string = "US/Samoa"; // Use one from list of TZ names http://php.net/manual/en/timezones.php UTC?
-        $tz_object = new DateTimeZone($tz_string);
-        $datetime = new DateTime();
-        $datetime->setTimestamp($date);
-        $datetime->setTimezone($tz_object);
-        return $datetime;
     }
 
     protected function applyOverride($overrideMap, $item, $merged) {

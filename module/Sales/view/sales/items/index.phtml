@@ -369,6 +369,47 @@ $form->prepare();
         }
     };
 
+    //renderers for datatables
+    $.fn.dataTable.render.ellipsis = function (cutoff, wordbreak, escapeHtml) {
+        var esc = function (t) {
+            return t
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+        };
+        return function (d, type, row) {
+            // Order, search and type get the original data
+            if (type !== 'display') {
+                return d;
+            }
+
+            if (typeof d !== 'number' && typeof d !== 'string') {
+                return d;
+            }
+
+            d = d.toString(); // cast numbers
+
+            if (d.length < cutoff) {
+                return d;
+            }
+
+            var shortened = d.substr(0, cutoff - 1);
+
+            // Find the last white space character in the string
+            if (wordbreak) {
+                shortened = shortened.replace(/\s([^\s]*)$/, '');
+            }
+
+            // Protect against uncontrolled HTML input
+            if (escapeHtml) {
+                shortened = esc(shortened);
+            }
+
+            return '<span class="ellipsis" title="' + esc(d) + '">' + shortened + '&#8230;</span>';
+        };
+    };
+
     //#############################################################
     //#############################################################
     //##
@@ -408,10 +449,10 @@ $form->prepare();
                         }
                     }
                 },
-                {"data": "productname"},
-                {"data": "shortescription"},
-                {"data": "comment"},
-                {"data": "option"},
+                {"data": "productname", render: $.fn.dataTable.render.ellipsis(150)},
+                {"data": "shortescription", render: $.fn.dataTable.render.ellipsis(30)},
+                {"data": "comment", render: $.fn.dataTable.render.ellipsis(35)},
+                {"data": "option", render: $.fn.dataTable.render.ellipsis(35)},
                 {"data": "qty", visible: false},
                 {"data": "wholesale", type: "currency",
                     "render": function (data, type, row, meta) {
@@ -459,7 +500,7 @@ $form->prepare();
                         return data;
                     }
                 },
-                {"data": "uom"},
+                {"data": "uom", render: $.fn.dataTable.render.ellipsis(10)},
                 {"data": "status",
                     "render": function (data, type, row, meta) {
                         var result = "";
@@ -768,26 +809,6 @@ $form->prepare();
                 });
             }
             //##########  END Custom Datatables Buttons Impl ##############
-            //init column search input fields
-            // Setup - add a text input to each footer cell
-            $('#customerlisttable tfoot th').each(function (index, element) {
-                if (index !== 0) {
-                    var title = $(this).text();
-                    $(this).html('<input type="text" placeholder="Search ' + title + '" />');
-                }
-            });
-            // Apply the search
-            $API.columns().every(function () {
-                var that = this;
-                var hasInput = $('input', this.footer());
-                if (hasInput.length) {
-                    $('input', this.footer()).on('keyup change', function () {
-                        if (that.search() !== this.value) {
-                            that.search(this.value).draw();
-                        }
-                    });
-                }
-            });
         });
 
         //#############################################################
@@ -959,10 +980,10 @@ $form->prepare();
                                 <th data-priority="1">Qty</th>
                                 <th data-priority="1">Wholesale</th>
                                 <th data-priority="1">Retail</th>
-                                <th data-priority="1">Override Price</th>
+                                <th data-priority="1">Override</th>
                                 <th data-priority="1">UOM</th>
                                 <th data-priority="1">Status</th>
-                                <th data-priority="1">Saturday Enabled</th>
+                                <th data-priority="1">Saturday</th>
                                 <th data-priority="1">SKU</th>
                                 <th >ID</th>
                             </tr>
@@ -977,10 +998,10 @@ $form->prepare();
                                 <th data-priority="1">Qty</th>
                                 <th data-priority="1">Wholesale</th>
                                 <th data-priority="1">Retail</th>
-                                <th data-priority="1">Override Price</th>
+                                <th data-priority="1">Override</th>
                                 <th data-priority="1">UOM</th>
                                 <th data-priority="1">Status</th>
-                                <th data-priority="1">Saturday Enabled</th>
+                                <th data-priority="1">Saturday</th>
                                 <th data-priority="1">SKU</th>
                                 <th >ID</th>
                             </tr>

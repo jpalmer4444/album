@@ -1,6 +1,4 @@
 use jpalmer_ffmalpha;
-
-
 DROP TABLE IF EXISTS album;
 CREATE TABLE album (
     id INTEGER PRIMARY KEY AUTO_INCREMENT, 
@@ -165,6 +163,7 @@ CREATE TABLE `item_price_override` (
     `version` INTEGER DEFAULT 1,
     `product` INTEGER,
     `overrideprice` INTEGER,
+    `retail` INTEGER,
     `active` BOOLEAN,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
@@ -179,6 +178,7 @@ CREATE TABLE `pricing_override_report` (
     `version` INTEGER DEFAULT 1,
     `product` INTEGER,
     `overrideprice` INTEGER,
+    `retail` INTEGER,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER,
     `salesperson` VARCHAR(100),

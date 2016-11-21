@@ -224,6 +224,11 @@ class ItemsController extends AbstractActionController {
                         $pricingOverrideReport->setOverrideprice($int1);
                     }
                     
+                    if (array_key_exists("retail", $obj)) {
+                        $int2 = filter_var($obj["retail"], FILTER_SANITIZE_NUMBER_INT);
+                        $pricingOverrideReport->setOverrideprice($int2);
+                    }
+                    
                     $created = new DateTime("now");
                     $pricingOverrideReport->setCreated($created);
                     $customer = $this->customerrepository->findCustomer($this->customerid);

@@ -40,6 +40,11 @@ class PricingOverrideReport extends PostFormBinder{
     /**
      * @ORM\Column(type="integer")
      */
+    protected $retail;
+    
+    /**
+     * @ORM\Column(type="integer")
+     */
     protected $overrideprice;
     
     /**
@@ -67,6 +72,10 @@ class PricingOverrideReport extends PostFormBinder{
         return $this->product;
     }
     
+    public function getRetail() {
+        return $this->retail;
+    }
+    
     public function getCustomerid() {
         return $this->_customerid;
     }
@@ -90,6 +99,11 @@ class PricingOverrideReport extends PostFormBinder{
     
     public function setCustomer($customer) {
         $this->_customerid = $customer;
+        return $this;
+    }
+    
+    public function setRetail($retail) {
+        $this->retail = $retail;
         return $this;
     }
 

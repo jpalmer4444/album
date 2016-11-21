@@ -10,6 +10,7 @@ namespace Application;
 
 use Application\Controller\IndexController;
 use Application\Service\LoggingService;
+use Application\Service\ReportService;
 use Application\Service\RestService;
 use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -45,6 +46,9 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface {
                 },
                 'RestService' => function($sm) {
                     return new RestService($sm);
+                },
+                'ReportService' => function($sm) {
+                    return new ReportService($sm);
                 },
                 'FFMEntityManager' => function($sm) {
                     return new Service\FFMEntityManagerService($sm->get('Doctrine\ORM\EntityManager'));
