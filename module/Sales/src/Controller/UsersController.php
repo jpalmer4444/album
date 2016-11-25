@@ -79,7 +79,7 @@ class UsersController extends AbstractActionController {
                 ->add('from', new From('DataAccess\FFM\Entity\Customer', 'u'));
         $arr = [];
         foreach ($json['customers'] as $customer) {
-
+            //$this->logger->info(json_encode($customer));
             $arr [] = $this->qb->expr()->eq('u.email', "'" . utf8_encode($customer['email']) . "'");
         }
 

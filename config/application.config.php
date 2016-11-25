@@ -14,7 +14,7 @@ $env = getenv('APPLICATION_ENV') ?: 'development';
 $writer = new Stream('php://stderr');
 $logger = new Logger();
 $logger->addWriter($writer);
-$logger->info("ENV: " . $env);
+$logger->info("application.config.php ENV: " . $env);
 return [
 // Retrieve list of modules used in this application.
     'modules' => require __DIR__ . '/modules.config.php',
@@ -37,13 +37,13 @@ return [
         // Whether or not to enable a configuration cache.
 // If enabled, the merged configuration will be cached and used in
 // subsequent requests.
-        'config_cache_enabled' => ($env == 'production'),
+        'config_cache_enabled' => ($env == 'production' || $env == 'staging'),
         // The key used to create the configuration cache file name.
         'config_cache_key' => 'application.config.cache',
         // Whether or not to enable a module class map cache.
 // If enabled, creates a module class map cache which will be used
 // by in future requests, to reduce the autoloading process.
-        'module_map_cache_enabled' => ($env == 'production'),
+        'module_map_cache_enabled' => ($env == 'production' || $env == 'staging'),
         // The key used to create the class map cache file name.
         'module_map_cache_key' => 'application.module.cache',
         // The path in which to cache merged configuration.
@@ -51,7 +51,7 @@ return [
         // Whether or not to enable modules dependency checking.
 // Enabled by default, prevents usage of modules that depend on other modules
 // that weren't loaded.
-        'check_dependencies' => ($env != 'production'),
+        'check_dependencies' => ($env != 'production' || $env == 'staging'),
     ],
         // Used to create an own service manager. May contain one or more child arrays.
 // 'service_listener_options' => [

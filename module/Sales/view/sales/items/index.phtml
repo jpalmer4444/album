@@ -34,26 +34,26 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var getPrettyTime = function () {
-        var objToday = new Date(),
-                weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
-                dayOfWeek = weekday[objToday.getDay()],
-                domEnder = function () {
-                    var a = objToday;
-                    if (/1/.test(parseInt((a + "").charAt(0))))
-                        return "th";
-                    a = parseInt((a + "").charAt(1));
-                    return 1 === a ? "st" : 2 === a ? "nd" : 3 === a ? "rd" : "th"
-                }(),
-                dayOfMonth = today + (objToday.getDate() < 10) ? '0' + objToday.getDate() + domEnder : objToday.getDate() + domEnder,
-                months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
-                curMonth = months[objToday.getMonth()],
-                curYear = objToday.getFullYear(),
-                curHour = objToday.getHours() > 12 ? objToday.getHours() - 12 : (objToday.getHours() < 10 ? "0" + objToday.getHours() : objToday.getHours()),
-                curMinute = objToday.getMinutes() < 10 ? "0" + objToday.getMinutes() : objToday.getMinutes(),
-                curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
-                curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
-        var today = curHour + ":" + curMinute + "." + curSeconds + curMeridiem + " " + dayOfWeek + " " + dayOfMonth + ", " + curMonth + " " + curYear;
-        return today;
+      var objToday = new Date(),
+              weekday = new Array('Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'),
+              dayOfWeek = weekday[objToday.getDay()],
+              domEnder = function () {
+                var a = objToday;
+                if (/1/.test(parseInt((a + "").charAt(0))))
+                  return "th";
+                a = parseInt((a + "").charAt(1));
+                return 1 === a ? "st" : 2 === a ? "nd" : 3 === a ? "rd" : "th"
+              }(),
+              dayOfMonth = today + (objToday.getDate() < 10) ? '0' + objToday.getDate() + domEnder : objToday.getDate() + domEnder,
+              months = new Array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+              curMonth = months[objToday.getMonth()],
+              curYear = objToday.getFullYear(),
+              curHour = objToday.getHours() > 12 ? objToday.getHours() - 12 : (objToday.getHours() < 10 ? "0" + objToday.getHours() : objToday.getHours()),
+              curMinute = objToday.getMinutes() < 10 ? "0" + objToday.getMinutes() : objToday.getMinutes(),
+              curSeconds = objToday.getSeconds() < 10 ? "0" + objToday.getSeconds() : objToday.getSeconds(),
+              curMeridiem = objToday.getHours() > 12 ? "PM" : "AM";
+      var today = curHour + ":" + curMinute + "." + curSeconds + curMeridiem + " " + dayOfWeek + " " + dayOfMonth + ", " + curMonth + " " + curYear;
+      return today;
     };
 
     //#############################################################
@@ -68,12 +68,12 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var submitOverride = function (rowIdx, id) {
-        var overrideprice = $('#overrideprice').val();
-        var data = $(this).serialize();
-        $.getJSON("ajax/items?myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername=<?= $this->customername ?>&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
-            return overrideCallback(data);
-        });
-        return false;
+      var overrideprice = $('#overrideprice').val();
+      var data = $(this).serialize();
+      $.getJSON("ajax/items?myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername=<?= $this->customername ?>&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
+        return overrideCallback(data);
+      });
+      return false;
     };
 
     //#############################################################
@@ -84,20 +84,20 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var initForm = function () {
-        if ($("#override_form").length) {
-            console.log('Initializing override_form validation.');
-            $('[data-toggle="tooltip"]').tooltip();
-            $("#override_form").validate({
-                submitHandler: function (form) {
-                    var rowIdx = $('#override_form_submit').attr('data-ffm-row-index');
-                    var id = $('#override_form_submit').attr('data-ffm-id');
-                    submitOverride(rowIdx, id);
-                    return false;
-                }
-            });
-        } else {
-            console.log('No DIV!');
-        }
+      if ($("#override_form").length) {
+        console.log('Initializing override_form validation.');
+        $('[data-toggle="tooltip"]').tooltip();
+        $("#override_form").validate({
+          submitHandler: function (form) {
+            var rowIdx = $('#override_form_submit').attr('data-ffm-row-index');
+            var id = $('#override_form_submit').attr('data-ffm-id');
+            submitOverride(rowIdx, id);
+            return false;
+          }
+        });
+      } else {
+        console.log('No DIV!');
+      }
     };
 
     //#############################################################
@@ -108,35 +108,35 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var appendRowToTable = function (data) {
-        if (data.success) {
-            $API.row.add({
-                "id": data['id'],
-                "productname": data['productname'],
-                "shortescription": data['shortescription'],
-                "comment": data['comment'],
-                "option": data['option'],
-                "qty": data['qty'],
-                "wholesale": data['wholesale'],
-                "retail": data['retail'],
-                "overrideprice": data['overrideprice'],
-                "uom": data['uom'],
-                "sku": data['sku'],
-                "status": data['status'] === '1' ? 'Enabled' : 'Disabled',
-                "saturdayenabled": data['saturdayenabled'] === '1' ? 'Enabled' : 'Disabled'
-            }).draw(false);
-            //remove values from the form.
-            $('[name="product"]').val('');
-            $('[name="description"]').val('');
-            $('[name="comment"]').val('');
-            $('[name="wholesale"]').val('');
-            $('[name="overrideprice"]').val('');
-            $('[name="uom"]').val('');
-            $('[name="sku"]').val('');
-            $('.modal').modal('hide');
-            return false;
-        } else {
-            console.log('Row NOT added response: ' + JSON.stringify(data));
-        }
+      if (data.success) {
+        $API.row.add({
+          "id": data['id'],
+          "productname": data['productname'],
+          "shortescription": data['shortescription'],
+          "comment": data['comment'],
+          "option": data['option'],
+          "qty": data['qty'],
+          "wholesale": data['wholesale'],
+          "retail": data['retail'],
+          "overrideprice": data['overrideprice'],
+          "uom": data['uom'],
+          "sku": data['sku'],
+          "status": data['status'] === '1' ? 'Enabled' : 'Disabled',
+          "saturdayenabled": data['saturdayenabled'] === '1' ? 'Enabled' : 'Disabled'
+        }).draw(false);
+        //remove values from the form.
+        $('[name="product"]').val('');
+        $('[name="description"]').val('');
+        $('[name="comment"]').val('');
+        $('[name="wholesale"]').val('');
+        $('[name="overrideprice"]').val('');
+        $('[name="uom"]').val('');
+        $('[name="sku"]').val('');
+        $('.modal').modal('hide');
+        return false;
+      } else {
+        console.log('Row NOT added response: ' + JSON.stringify(data));
+      }
     };
 
     //#############################################################
@@ -148,7 +148,7 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var wrapModal = function (row) {
-        var wrapper = ' <div id="detailRowModal" class="modal fade dtr-bs-modal in" role="dialog" style="display: block; padding-left: 0px;">\n\
+      var wrapper = ' <div id="detailRowModal" class="modal fade dtr-bs-modal in" role="dialog" style="display: block; padding-left: 0px;">\n\
                             <div class="modal-dialog" role="document">\n\
                                 <div class="modal-content">\n\
                                     <div class="modal-header">\n\
@@ -161,7 +161,7 @@ $form->prepare();
                                 </div>\n\
                             </div>\n\
                         </div>';
-        return wrapper;
+      return wrapper;
     };
 
     //#############################################################
@@ -173,8 +173,8 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var generateDetailsModalHeader = function (row) {
-        var data = row.data();
-        return data['productname'] + ' <div class="pull-right"><small ><span class="glyphicon glyphicon-barcode" aria-hidden="true"></span> <span >' + data['sku'] + '</span></small><span><button type="button" class="close" data-dismiss="modal">&times;</button></span></div>';
+      var data = row.data();
+      return data['productname'] + ' <div class="pull-right"><small ><span class="glyphicon glyphicon-barcode" aria-hidden="true"></span> <span >' + data['sku'] + '</span></small><span><button type="button" class="close" data-dismiss="modal">&times;</button></span></div>';
     };
 
     //#############################################################
@@ -186,25 +186,25 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var generateDetailsModalBody = function (rowIdx, columns) {
-        var comment = columns.comment ? columns.comment : '';
-        var option = columns.option;
-        var qty = columns.qty;
-        var wholesale = columns.wholesale;
-        var retail = columns.retail;
-        var overrideprice = columns.overrideprice ? columns.overrideprice : '';
-        var uom = columns.uom;
-        var id = columns.id;
-        var status = columns.status;
-        var saturdayenabled = columns.saturdayenabled;
-        var data = '';
-        var copy = '<div class="row">\n\
+      var comment = columns.comment ? columns.comment : '';
+      var option = columns.option;
+      var qty = columns.qty;
+      var wholesale = columns.wholesale;
+      var retail = columns.retail;
+      var overrideprice = columns.overrideprice ? columns.overrideprice : '';
+      var uom = columns.uom;
+      var id = columns.id;
+      var status = columns.status;
+      var saturdayenabled = columns.saturdayenabled;
+      var data = '';
+      var copy = '<div class="row">\n\
                                         <div class="col-md-12">\n\
                                             <hr/>\n\
                                         </div>\n\
                                     </div>';
-        if ((comment && comment.length) ||
-                (option && option.length)) {
-            copy += '   <div class="row">\n\
+      if ((comment && comment.length) ||
+              (option && option.length)) {
+        copy += '   <div class="row">\n\
                                         <div class="col-md-12">\n\
                                             <div class="table-responsive">\n\
                                                 <table class="table">\n\
@@ -224,8 +224,8 @@ $form->prepare();
                                             </div>\n\
                                         </div>\n\
                                     </div>';
-        }
-        copy += '   <div class="row">\n\
+      }
+      copy += '   <div class="row">\n\
                                         <div class="col-md-12">\n\
                                             <div class="table-responsive">\n\
                                                 <table class="table">\n\
@@ -248,7 +248,7 @@ $form->prepare();
                                         </div>\n\
                                     </div>';
 
-        copy += '   <div class="row">\n\
+      copy += '   <div class="row">\n\
                                         <div class="col-md-12">\n\
                                             <div class="table-responsive">\n\
                                                 <table class="table">\n\
@@ -270,31 +270,31 @@ $form->prepare();
                                             </div>\n\
                                         </div>\n\
                                     </div>';
-        //#############################################################
-        //#############################################################
-        //##
-        //##    IF row.status = Disabled
-        //##    Allow Price Override, but warn the Salesperson.
-        //##
-        //#############################################################
-        //#############################################################
-        if (status && status === 'Disabled') {
-            data += '<div class="row">';
-            data += '       <div class="col-md-12">';
-            data += '           <div class="ffm-callout ffm-callout-error">\n\
+      //#############################################################
+      //#############################################################
+      //##
+      //##    IF row.status = Disabled
+      //##    Allow Price Override, but warn the Salesperson.
+      //##
+      //#############################################################
+      //#############################################################
+      if (status && status === 'Disabled') {
+        data += '<div class="row">';
+        data += '       <div class="col-md-12">';
+        data += '           <div class="ffm-callout ffm-callout-error">\n\
                                                     <h4 >Notice <small class="pull-right">You must call first.</small></h4>\n\
                                                     <hr/>\n\
                                                     <p>\n\
                                                         This item is marked Out Of Stock. Please call for availability.\n\
                                                     </p>\n\
                                                 </div>';
-            data += '       </div>';
-            data += '</div>';
-        }
-        data += '   <div class="row">';
-        data += '       <div class="col-md-12">';
-        data += '           <form id="override_form" class="form" novalidate="novalidate">';
-        data += '               <div class="row form-group">\n\
+        data += '       </div>';
+        data += '</div>';
+      }
+      data += '   <div class="row">';
+      data += '       <div class="col-md-12">';
+      data += '           <form id="override_form" class="form" novalidate="novalidate">';
+      data += '               <div class="row form-group">\n\
                                                     <div class="col-md-4">\n\
                                                         <label for="overrideprice">\n\
                                                             <i>Override Price</i>&nbsp;<span style="color:red;">*</span> \n\
@@ -311,17 +311,17 @@ $form->prepare();
                                                         <small id="priceHelpInline" class="text-muted"> -- Enter Price Override.</small>\n\
                                                     </div>\n\
                                                 </div>';
-        data += '               <div class="row form-group">';
-        data += '                       <div class="col-md-4 col-md-offset-4">\n\
+      data += '               <div class="row form-group">';
+      data += '                       <div class="col-md-4 col-md-offset-4">\n\
                                                             <span class="pull-right">';
-        //#############################################################
-        //#############################################################
-        //##
-        //##    Override Price Click Handler.
-        //##
-        //#############################################################
-        //#############################################################
-        data += '                                       <button data-toggle="tooltip" data-dismiss="modal" title="Press To Cancel" class="btn btn-danger" >\n\
+      //#############################################################
+      //#############################################################
+      //##
+      //##    Override Price Click Handler.
+      //##
+      //#############################################################
+      //#############################################################
+      data += '                                       <button data-toggle="tooltip" data-dismiss="modal" title="Press To Cancel" class="btn btn-danger" >\n\
                                                                     Close\n\
                                                                 </button>\n\
                                                             </span>\n\
@@ -335,13 +335,13 @@ $form->prepare();
                                                             </span>\n\
                                                         </div>\n\
                                                 </div>';
-        data += '           </form>';
-        data += '       </div>';
-        data += '   </div>';
+      data += '           </form>';
+      data += '       </div>';
+      data += '   </div>';
 
 
-        //data =+ '';
-        return data + copy;
+      //data =+ '';
+      return data + copy;
     };
 
     //#############################################################
@@ -352,62 +352,62 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var overrideCallback = function (data) {
-        if (data.success) {
-            //price has been successfully overridden into DB
-            //now update the values in the table to reflect the override.
-            //set the overrideprice on the selected row - then redraw
-            //the table to cause the appropriate renderers to handle
-            //the override display.
-            var rowIdx = data.index;
-            var rowData = $API.row(rowIdx).data();
-            rowData['overrideprice'] = data.overrideprice;
-            $API.row(rowIdx).data(rowData);
-            $API.draw(false);
-            $('.modal').modal('hide');
-        } else {
-            console.log('Error occurred trying to overrideprice: ' + JSON.stringify(data));
-        }
+      if (data.success) {
+        //price has been successfully overridden into DB
+        //now update the values in the table to reflect the override.
+        //set the overrideprice on the selected row - then redraw
+        //the table to cause the appropriate renderers to handle
+        //the override display.
+        var rowIdx = data.index;
+        var rowData = $API.row(rowIdx).data();
+        rowData['overrideprice'] = data.overrideprice;
+        $API.row(rowIdx).data(rowData);
+        $API.draw(false);
+        $('.modal').modal('hide');
+      } else {
+        console.log('Error occurred trying to overrideprice: ' + JSON.stringify(data));
+      }
     };
 
     //renderers for datatables
     $.fn.dataTable.render.ellipsis = function (cutoff, wordbreak, escapeHtml) {
-        var esc = function (t) {
-            return t
-                    .replace(/&/g, '&amp;')
-                    .replace(/</g, '&lt;')
-                    .replace(/>/g, '&gt;')
-                    .replace(/"/g, '&quot;');
-        };
-        return function (d, type, row) {
-            // Order, search and type get the original data
-            if (type !== 'display') {
-                return d;
-            }
+      var esc = function (t) {
+        return t
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;');
+      };
+      return function (d, type, row) {
+        // Order, search and type get the original data
+        if (type !== 'display') {
+          return d;
+        }
 
-            if (typeof d !== 'number' && typeof d !== 'string') {
-                return d;
-            }
+        if (typeof d !== 'number' && typeof d !== 'string') {
+          return d;
+        }
 
-            d = d.toString(); // cast numbers
+        d = d.toString(); // cast numbers
 
-            if (d.length < cutoff) {
-                return d;
-            }
+        if (d.length < cutoff) {
+          return d;
+        }
 
-            var shortened = d.substr(0, cutoff - 1);
+        var shortened = d.substr(0, cutoff - 1);
 
-            // Find the last white space character in the string
-            if (wordbreak) {
-                shortened = shortened.replace(/\s([^\s]*)$/, '');
-            }
+        // Find the last white space character in the string
+        if (wordbreak) {
+          shortened = shortened.replace(/\s([^\s]*)$/, '');
+        }
 
-            // Protect against uncontrolled HTML input
-            if (escapeHtml) {
-                shortened = esc(shortened);
-            }
+        // Protect against uncontrolled HTML input
+        if (escapeHtml) {
+          shortened = esc(shortened);
+        }
 
-            return '<span class="ellipsis" title="' + esc(d) + '">' + shortened + '&#8230;</span>';
-        };
+        return '<span class="ellipsis" title="' + esc(d) + '">' + shortened + '&#8230;</span>';
+      };
     };
 
     //#############################################################
@@ -418,423 +418,423 @@ $form->prepare();
     //#############################################################
     //#############################################################
     $(document).ready(function () {
-        //initialize page tool tips.
-        $('[data-toggle="tooltip"]').tooltip();
+      //initialize page tool tips.
+      $('[data-toggle="tooltip"]').tooltip();
 
-        $API = $('#customerlisttable').DataTable({
-            "ajax": '/ajax/items?myaction=customerlisttableget&customerid=' + _customer_id,
-            //#############################################################
-            //#############################################################
-            //##
-            //##    Datatables columnDefs with appropriate renderers.
-            //##
-            //#############################################################
-            //#############################################################
-            "columns": [
-                {
-                    'data': 'selected',
-                    'targets': 0,
-                    'searchable': false,
-                    'orderable': false,
-                    'width': '1%',
-                    'className': 'dt-body-center',
-                    'render': function (data, type, row, meta) {
-                        if (data) {
-                            //inform select plugin of selected state.
-                            $API.row(meta.row).select();
-                            return '<input class="row_checkbox" id="selected_row_' + meta.row + '" type="checkbox" checked>';
-                        } else {
-                            $API.row(meta.row).deselect();
-                            return '<input class="row_checkbox" id="selected_row_' + meta.row + '" type="checkbox" >';
-                        }
-                    }
-                },
-                {"data": "productname", render: $.fn.dataTable.render.ellipsis(150)},
-                {"data": "shortescription", render: $.fn.dataTable.render.ellipsis(30)},
-                {"data": "comment", render: $.fn.dataTable.render.ellipsis(35)},
-                {"data": "option", render: $.fn.dataTable.render.ellipsis(35)},
-                {"data": "qty", visible: false},
-                {"data": "wholesale", type: "currency",
-                    "render": function (data, type, row, meta) {
-                        if (data) {
-                            var result = "$";
-                            try {
-                                return result + (data.toFixed(2));
-                            } catch (e) {
-                                return result + (data);
-                            }
-                        } else {
-                            return  '';
-                        }
-                    }
-                },
-                {"data": "retail", type: "currency",
-                    "render": function (data, type, row, meta) {
-                        var enabled = row['status'] === 'Enabled';
-                        var hasOverride = row['overrideprice'];
-                        if (enabled && data) {
-                            var result = "$";
-                            try {
-                                return result + (data.toFixed(2));
-                            } catch (e) {
-                                return result + (data);
-                            }
-                        } else if (!enabled && !hasOverride) {
-                            return  'Call for availability';
-                        }
-                        return data;
-                    }
-                },
-                {"data": "overrideprice", type: "currency",
-                    "render": function (data, type, row, meta) {
-                        if (data) {
-                            var result = "$";
-                            try {
-                                return result + (data.toFixed(2));
-                            } catch (e) {
-                                return result + (data);
-                            }
-                        } else {
-                            return  data;
-                        }
-                        return data;
-                    }
-                },
-                {"data": "uom", render: $.fn.dataTable.render.ellipsis(10)},
-                {"data": "status",
-                    "render": function (data, type, row, meta) {
-                        var result = "";
-                        if (row['status']) {
-                            result = data;
-                        } else {
-                            result = '<p class="bg-warning">Out of Stock</p>';
-                        }
-                        return result;
-                    }},
-                {"data": "saturdayenabled",
-                    "render": function (data, type, row, meta) {
-                        var result = "";
-                        if (row['saturdayenabled']) {
-                            result = 'On';
-                        } else {
-                            result = 'Off';
-                        }
-                        return result;
-                    }
-                },
-                {"data": "sku"},
-                {"data": "id", visible: false},
-            ],
-            //#############################################################
-            //#############################################################
-            //##
-            //##    Datables RowCallback executed on every row.
-            //##    Checks if row.status = Enabled OR if 
-            //##    row.overrideprice is set - in which case, we
-            //##    lift the requirement whereby we grey out every 
-            //##    Disabled row because if the overrideprice has a
-            //##    value - then the Salesperson has called in and 
-            //##    overridden it.
-            //##
-            //#############################################################
-            //#############################################################
-            rowCallback: function (row, data, index) {
-                if (data.status !== 'Enabled' && !data.overrideprice) {
-                    $(row).attr('class', 'ffm-table-disabled');
+      $API = $('#customerlisttable').DataTable({
+        "ajax": '/ajax/items?myaction=customerlisttableget&customerid=' + _customer_id,
+        //#############################################################
+        //#############################################################
+        //##
+        //##    Datatables columnDefs with appropriate renderers.
+        //##
+        //#############################################################
+        //#############################################################
+        "columns": [
+          {
+            'data': 'selected',
+            'targets': 0,
+            'searchable': false,
+            'orderable': false,
+            'width': '1%',
+            'className': 'dt-body-center',
+            'render': function (data, type, row, meta) {
+              if (data) {
+                //inform select plugin of selected state.
+                $API.row(meta.row).select();
+                return '<input class="row_checkbox" id="selected_row_' + meta.row + '" type="checkbox" checked>';
+              } else {
+                $API.row(meta.row).deselect();
+                return '<input class="row_checkbox" id="selected_row_' + meta.row + '" type="checkbox" >';
+              }
+            }
+          },
+          {"data": "productname", render: $.fn.dataTable.render.ellipsis(150)},
+          {"data": "shortescription", render: $.fn.dataTable.render.ellipsis(30)},
+          {"data": "comment", render: $.fn.dataTable.render.ellipsis(35)},
+          {"data": "option", render: $.fn.dataTable.render.ellipsis(35)},
+          {"data": "qty", visible: false},
+          {"data": "wholesale", type: "currency",
+            "render": function (data, type, row, meta) {
+              if (data) {
+                var result = "$";
+                try {
+                  return result + (data.toFixed(2));
+                } catch (e) {
+                  return result + (data);
                 }
-            },
-            //#############################################################
-            //#############################################################
-            //##
-            //##    Datatables Responsive Plugin
-            //##
-            //#############################################################
-            //#############################################################
-            responsive: false,
-            dom: 'Bfrtip',
-            select: {
-                style: 'multi',
-                selector: 'td:first-child'
-            },
-            rowId: 'extn',
-            order: [[1, 'asc']],
-            //#############################################################
-            //#############################################################
-            //##
-            //##    Datatables Buttons Plugin.
-            //##    pdfHtml5 Button creates PDF.
-            //##    add-row Button allows Salesperson to add a row to 
-            //##    the table.
-            //##
-            //#############################################################
-            //#############################################################
-            buttons: [
-                {
-                    text: 'Select all',
-                    action: function () {
-                        $API.rows({page: 'all'}).select();
-                        //now manually select all checkboxes and redraw table.
-                        var url = 'ajax/items?myaction=select';
-                        $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
-                            $('#selected_row_' + rowIdx).attr('checked', 'checked');
-                            url += '&ids[]=' + $API.row(rowIdx).data()['id'];
-                            $API.row(rowIdx).data()['selected'] = true;
-                            $API.row(rowIdx).invalidate();
-                        }).draw(true);
-                        //send notify to items REST controller to select all items in result set.
-                        $.getJSON(url + '&customerid=' + _customer_id, function () {
-                        }).done(function () {
-                            console.log('Selected All');
-                        }).fail(function () {
-                            console.log("select REST Call failed.");
-                        });
-
-                    }
-                },
-                {
-                    text: 'Select none',
-                    action: function () {
-                        $API.rows({page: 'all'}).deselect();
-                        $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
-                            $('#selected_row_' + rowIdx).removeAttr('checked');
-                            $API.row(rowIdx).data()['selected'] = false;
-                            $API.row(rowIdx).invalidate();
-                        });
-                        //send notify to items REST controller to un-select all items in result set.
-                        $.getJSON('ajax/items?myaction=unselect&customerid=' + _customer_id, function () {
-                        }).done(function () {
-                            console.log('Unselected All');
-                        }).fail(function () {
-                            console.log("unselect REST Call failed.");
-                        });
-                    }
-                },
-                {
-                    text: 'Add Product',
-                    className: 'ffm-custom-append'
-                },
-                {
-                    extend: 'pdfHtml5',
-                    orientation: 'landscape',
-                    pageSize: 'LEGAL',
-                    exportOptions: {
-                        rows: {
-                            selected: true
-                        }
-                    },
-                    customize: function (doc) {
-                        var form_data = new Array();
-                        doc.content.forEach(function (row) {
-                            if (row['table'] && row['table']['body']) {
-                                var newRowData = [];
-                                var idx = 0;
-                                row['table']['body'].forEach(function (rowdata) {
-                                    //product,  description, comments, UOM, SKU, Retail price or Inserted price.
-                                    //remove idx: 3-7
-                                    if (idx++ === 0) {
-                                        //add our customized Header Row.
-                                        var head = JSON.parse('[{"text": "Product","style": "tableHeader"}, {"text": "Description","style": "tableHeader"}, {"text": "Comment","style": "tableHeader"}, {"text": "Price","style": "tableHeader"}, {"text": "UOM","style": "tableHeader"}, {"text": "SKU","style": "tableHeader"}]');
-                                        newRowData.push(head);
-                                    } else {
-                                        try {
-                                            var tablerow = $API.row(idx).data();
-                                            if (tablerow)
-                                                form_data.push('ID_' + tablerow['id'], JSON.stringify(tablerow));
-                                            var row = [];
-                                            row.push(rowdata[1]);
-                                            row.push(rowdata[2]);
-                                            row.push(rowdata[3]);
-                                            var override = rowdata[8].text;
-                                            if (override) {
-                                                row.push(rowdata[8]);
-                                            } else {
-                                                row.push(rowdata[7]);
-                                            }
-                                            row.push(rowdata[9]);
-                                            row.push(rowdata[12]);
-                                            //ignore
-                                            //rowdata[13] (product.id)
-
-                                            //only add this row if Price
-                                            if (override || rowdata[8].text.indexOf('Call') === -1) {
-                                                newRowData.push(row);
-                                            }
-                                        } catch (e) {
-                                            alert(JSON.stringify(e));
-                                        }
-
-                                    }
-                                });
-                                row['table']['body'] = newRowData;
-                            }
-                        });
-                        //doc.content.body.table.widths = [ '*', 'auto', 100, '*' ];
-
-                        var today = getPrettyTime();
-                        doc.content.splice(1, 0, {
-                            margin: [0, 0, 0, 20],
-                            alignment: 'center',
-                            //add User's name to report.
-                            text: 'Creator: <?= $this->salesperson ?> (<?= $this->salespersonid ?>)     Customer: <?= $this->customername ?> (<?= $this->customerid ?>)      ' + today
-                        });
-
-                        var rep = '*';
-                        doc.content[2].table.widths = [rep, rep, rep, rep, rep, rep];
-                        //alert(JSON.stringify(doc.styles));
-                        doc.styles.tableHeader.alignment = 'left';
-                        //doc.content[2].table.widths = [ '100%'];
-                        var out = new Array();
-                        for (var key in form_data) {
-                            out.push(key + '=' + encodeURIComponent(form_data[key]));
-                        }
-                        var outdata = out.join('&');
-                        $.ajax({
-                            url: 'items/report?customerid=' + _customer_id,
-                            type: 'POST',
-                            data: outdata,
-                            contentType: 'application/x-www-form-urlencoded',
-                            success: function (data) {
-                                console.log('Successful response from server at items/report');
-                                console.log(JSON.stringify(data));
-                                $API.draw(true);
-                            },
-                            error: function (xhr, ajaxOptions, thrownError) {
-                                alert(xhr.status);
-                                alert(thrownError);
-                            }
-                        });
-                    }
+              } else {
+                return  '';
+              }
+            }
+          },
+          {"data": "retail", type: "currency",
+            "render": function (data, type, row, meta) {
+              var enabled = row['status'] === 'Enabled';
+              var hasOverride = row['overrideprice'];
+              if (enabled && data) {
+                var result = "$";
+                try {
+                  return result + (data.toFixed(2));
+                } catch (e) {
+                  return result + (data);
                 }
-            ]
-        });
-
+              } else if (!enabled && !hasOverride) {
+                return  'Call for availability';
+              }
+              return data;
+            }
+          },
+          {"data": "overrideprice", type: "currency",
+            "render": function (data, type, row, meta) {
+              if (data) {
+                var result = "$";
+                try {
+                  return result + (data.toFixed(2));
+                } catch (e) {
+                  return result + (data);
+                }
+              } else {
+                return  data;
+              }
+              return data;
+            }
+          },
+          {"data": "uom", render: $.fn.dataTable.render.ellipsis(10)},
+          {"data": "status",
+            "render": function (data, type, row, meta) {
+              var result = "";
+              if (row['status']) {
+                result = data;
+              } else {
+                result = '<p class="bg-warning">Out of Stock</p>';
+              }
+              return result;
+            }},
+          {"data": "saturdayenabled",
+            "render": function (data, type, row, meta) {
+              var result = "";
+              if (row['saturdayenabled']) {
+                result = 'On';
+              } else {
+                result = 'Off';
+              }
+              return result;
+            }
+          },
+          {"data": "sku"},
+          {"data": "id", visible: false},
+        ],
         //#############################################################
         //#############################################################
         //##
-        //##    Click Handler for row clicks (price override form)
+        //##    Datables RowCallback executed on every row.
+        //##    Checks if row.status = Enabled OR if 
+        //##    row.overrideprice is set - in which case, we
+        //##    lift the requirement whereby we grey out every 
+        //##    Disabled row because if the overrideprice has a
+        //##    value - then the Salesperson has called in and 
+        //##    overridden it.
         //##
         //#############################################################
         //#############################################################
-        $("#customerlisttable").on('click', 'tbody tr td:nth-child(2), tbody tr td:nth-child(3), tbody tr td:nth-child(4), tbody tr td:nth-child(5), tbody tr td:nth-child(6), tbody tr td:nth-child(7), tbody tr td:nth-child(8), tbody tr td:nth-child(9), tbody tr td:nth-child(10), tbody tr td:nth-child(11), tbody tr td:nth-child(12)', function (e) {
-            var row = $API.row($(this).parent());
-            //alert(JSON.stringify(row.data()));
-            var modal = wrapModal(row);
-            console.log('Showing Modal!');
-            $('#detailRowModal').remove();
-            $('footer').after($(modal).modal('show'));
-        });
-
-        //row_checkbox
+        rowCallback: function (row, data, index) {
+          if (data.status !== 'Enabled' && !data.overrideprice) {
+            $(row).attr('class', 'ffm-table-disabled');
+          }
+        },
         //#############################################################
         //#############################################################
         //##
-        //##    Click Handler for checkbox. Triggered by click anywhere
-        //##    on first child column (then filter to see if checkbox 
-        //##    is source to know whether or not to set property 
-        //##    checked on the input)
+        //##    Datatables Responsive Plugin
         //##
         //#############################################################
         //#############################################################
-        $("#customerlisttable").on('click', 'tbody tr td:first-child', function (e) {
-            //id looks like
-            //id="selected_row_${rowIdx}
-            var $input = $(this).children('input');
-            var forCheck = $input[0];
-            if (e.target.id !== $input.attr('id'))
-                $input.prop('checked', !$input.prop('checked'));
-            var rowIdx = new Number($input.attr('id').replace('selected_row_', ''));
-            //console.log('Idx: '+rowIdx);
-            var checked = forCheck.checked;
-            var rowObj = $API.row(rowIdx).data();
-            var id = rowObj['id'];
-            var url = 'ajax/items?myaction=';
-            if (checked) {
-                url += 'select';
+        responsive: false,
+        dom: 'Bfrtip',
+        select: {
+          style: 'multi',
+          selector: 'td:first-child'
+        },
+        rowId: 'extn',
+        order: [[1, 'asc']],
+        //#############################################################
+        //#############################################################
+        //##
+        //##    Datatables Buttons Plugin.
+        //##    pdfHtml5 Button creates PDF.
+        //##    add-row Button allows Salesperson to add a row to 
+        //##    the table.
+        //##
+        //#############################################################
+        //#############################################################
+        buttons: [
+          {
+            text: 'Select all',
+            action: function () {
+              $API.rows({page: 'all'}).select();
+              //now manually select all checkboxes and redraw table.
+              var url = 'ajax/items?myaction=select';
+              $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
+                $('#selected_row_' + rowIdx).attr('checked', 'checked');
+                url += '&ids[]=' + $API.row(rowIdx).data()['id'];
                 $API.row(rowIdx).data()['selected'] = true;
-                $API.row(rowIdx).select().invalidate().draw(false);
-            } else {
-                url += 'unselect';
+                $API.row(rowIdx).invalidate();
+              }).draw(true);
+              //send notify to items REST controller to select all items in result set.
+              $.getJSON(url + '&customerid=' + _customer_id, function () {
+              }).done(function () {
+                console.log('Selected All');
+              }).fail(function () {
+                console.log("select REST Call failed.");
+              });
+
+            }
+          },
+          {
+            text: 'Select none',
+            action: function () {
+              $API.rows({page: 'all'}).deselect();
+              $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
+                $('#selected_row_' + rowIdx).removeAttr('checked');
                 $API.row(rowIdx).data()['selected'] = false;
-                $API.row(rowIdx).deselect().invalidate().draw(false);
+                $API.row(rowIdx).invalidate();
+              });
+              //send notify to items REST controller to un-select all items in result set.
+              $.getJSON('ajax/items?myaction=unselect&customerid=' + _customer_id, function () {
+              }).done(function () {
+                console.log('Unselected All');
+              }).fail(function () {
+                console.log("unselect REST Call failed.");
+              });
             }
-            url += '&ids[]=' + id;
-            //send notify to items REST controller to select all items in result set.
-            $.getJSON(url + '&customerid=' + _customer_id, function () {
-            }).done(function () {
-                console.log(checked ? 'Selected ' + id : 'Unselected ' + id);
-            }).fail(function () {
-                console.log("select/unselect REST Call failed.");
-            });
-        });
+          },
+          {
+            text: 'Add Product',
+            className: 'ffm-custom-append'
+          },
+          {
+            extend: 'pdfHtml5',
+            title: "<?= $this->companyname ?>_<?= $this->reporttime ?>".split(' ').join('').split('-').join('_'), 
+            orientation: 'landscape',
+            message: '<?= $this->companyname ?> \r\n Salesperson: <?= $this->salespersonname ?> \r\n Email: <?= $escaper->escapeHtml($this->salespersonemail) ?> \r\n Phone: <?= $escaper->escapeHtml($this->salespersonphone1) ?> \r\n Customer: <?= $this->customername ?> \r\n Prices valid as of ' + getPrettyTime() + '.  Prices and availability subject to change.',
+            pageSize: 'LEGAL',
+            exportOptions: {
+              rows: {
+                selected: true
+              }
+            },
+            customize: function (doc) {
+              var form_data = new Array();
+              doc.content.forEach(function (row) {
+                if (row['table'] && row['table']['body']) {
+                  var newRowData = [];
+                  var idx = 0;
+                  row['table']['body'].forEach(function (rowdata) {
+                    //product,  description, comments, UOM, SKU, Retail price or Inserted price.
+                    //remove idx: 3-7
+                    if (idx++ === 0) {
+                      //add our customized Header Row.
+                      var head = JSON.parse('[{"text": "Product","style": "tableHeader"}, {"text": "Description","style": "tableHeader"}, {"text": "Comment","style": "tableHeader"}, {"text": "Price","style": "tableHeader"}, {"text": "UOM","style": "tableHeader"}, {"text": "SKU","style": "tableHeader"}]');
+                      newRowData.push(head);
+                    } else {
+                      try {
+                        var tablerow = $API.row(idx).data();
+                        if (tablerow)
+                          form_data.push('ID_' + tablerow['id'], JSON.stringify(tablerow));
+                        var row = [];
 
-        //#############################################################
-        //#############################################################
-        //##
-        //##    INIT Function called after itemsTable.draw();
-        //##    This will add necessary data-*-attr's for the
-        //##    ffm-custom-append Button added to the Datatables
-        //##    options.
-        //##
-        //#############################################################
-        //#############################################################
-        $API.on('init.dt', function (e, settings, json) {
-            //##########  Custom Datatables Buttons Impl ##############
-            //this is used to add data-* attributes to datatables buttons.
-            //the button is initialized
-            var api = new $.fn.dataTable.Api(settings);
-            if (api.buttons().length > 0) {
-                $("a", api.buttons().container(0)).each(function (index) {
-                    if ($(this).hasClass('ffm-custom-append')) {
-                        $(this).attr('data-target', '#addProductModal');
-                        $(this).attr('data-toggle', 'modal');
-                        $(this).attr('title', 'Add Product. Please call or lookup the correct SKU.');
-                        $(this).attr('data-placement', 'bottom');
-                        $(this).tooltip();
-                    } else if ($(this).hasClass('buttons-pdf')) {
-                        //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
-                        $(this).attr('title', 'Click to generate PDF. Disabled rows with no override price and unchecked Product rows will not be included.');
-                        $(this).attr('data-placement', 'top');
-                        $(this).tooltip();
-                    } else if (index === 0) {
-                        //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
-                        $(this).attr('title', 'Click to select all rows.');
-                        $(this).attr('data-placement', 'top');
-                        $(this).tooltip();
-                    } else if (index === 1) {
-                        //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
-                        $(this).attr('title', 'Click to unselect all rows.');
-                        $(this).attr('data-placement', 'bottom');
-                        $(this).tooltip();
+                        row.push(rowdata[1]);
+                        row.push(rowdata[2]);
+                        row.push(rowdata[3]);
+                        var override = rowdata[8].text;
+                        if (override) {
+                          row.push(rowdata[8]);
+                        } else {
+                          row.push(rowdata[7]);
+                        }
+                        row.push(rowdata[9]);
+                        row.push(rowdata[12]);
+                        //ignore
+                        //rowdata[13] (product.id)
+
+                        //only add this row if Price
+                        if (override || rowdata[8].text.indexOf('Call') === -1) {
+                          newRowData.push(row);
+                        }
+                      } catch (e) {
+                        alert(JSON.stringify(e));
+                      }
+
                     }
-                });
-            }
-            //##########  END Custom Datatables Buttons Impl ##############
-        });
+                  });
+                  row['table']['body'] = newRowData;
+                }
+              });
+              //doc.content.body.table.widths = [ '*', 'auto', 100, '*' ];
 
-        //#############################################################
-        //#############################################################
-        //##
-        //##    JQuery Validate Plugin. Validates the add row form.
-        //##
-        //#############################################################
-        //#############################################################
-        $("[name='addRowItemsForm']").validate({
-            submitHandler: function (form) {
-                $.ajax({
-                    type: 'POST',
-                    url: "items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>",
-                    data: $(form).serialize()
-                })
-                        .done(function (response) {
-                            if (response.success) {
-                                appendRowToTable(response);
-                            } else {
-                                alert('Error - Please contact IT.');
-                            }
-                        });
-                return false;
+              doc.content.splice(1, 0, {
+                margin: [0, 0, 0, 12],
+                alignment: 'left',
+                image: 'data:image/png;base64,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'
+              });
+              var rep = '*';
+              doc.content[3].table.widths = [rep, rep, rep, rep, rep, rep];
+              //alert(JSON.stringify(doc.styles));
+              doc.styles.tableHeader.alignment = 'left';
+              //doc.content[2].table.widths = [ '100%'];
+              var out = new Array();
+              for (var key in form_data) {
+                out.push(key + '=' + encodeURIComponent(form_data[key]));
+              }
+              var outdata = out.join('&');
+              $.ajax({
+                url: 'items/report?customerid=' + _customer_id,
+                type: 'POST',
+                data: outdata,
+                contentType: 'application/x-www-form-urlencoded',
+                success: function (data) {
+                  console.log('Successful response from server at items/report');
+                  console.log(JSON.stringify(data));
+                  $API.draw(true);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                  alert(xhr.status);
+                  alert(thrownError);
+                }
+              });
             }
+          }
+        ]
+      });
+
+      //#############################################################
+      //#############################################################
+      //##
+      //##    Click Handler for row clicks (price override form)
+      //##
+      //#############################################################
+      //#############################################################
+      $("#customerlisttable").on('click', 'tbody tr td:nth-child(2), tbody tr td:nth-child(3), tbody tr td:nth-child(4), tbody tr td:nth-child(5), tbody tr td:nth-child(6), tbody tr td:nth-child(7), tbody tr td:nth-child(8), tbody tr td:nth-child(9), tbody tr td:nth-child(10), tbody tr td:nth-child(11), tbody tr td:nth-child(12)', function (e) {
+        var row = $API.row($(this).parent());
+        //alert(JSON.stringify(row.data()));
+        var modal = wrapModal(row);
+        console.log('Showing Modal!');
+        $('#detailRowModal').remove();
+        $('footer').after($(modal).modal('show'));
+      });
+
+      //row_checkbox
+      //#############################################################
+      //#############################################################
+      //##
+      //##    Click Handler for checkbox. Triggered by click anywhere
+      //##    on first child column (then filter to see if checkbox 
+      //##    is source to know whether or not to set property 
+      //##    checked on the input)
+      //##
+      //#############################################################
+      //#############################################################
+      $("#customerlisttable").on('click', 'tbody tr td:first-child', function (e) {
+        //id looks like
+        //id="selected_row_${rowIdx}
+        var $input = $(this).children('input');
+        var forCheck = $input[0];
+        if (e.target.id !== $input.attr('id'))
+          $input.prop('checked', !$input.prop('checked'));
+        var rowIdx = new Number($input.attr('id').replace('selected_row_', ''));
+        //console.log('Idx: '+rowIdx);
+        var checked = forCheck.checked;
+        var rowObj = $API.row(rowIdx).data();
+        var id = rowObj['id'];
+        var url = 'ajax/items?myaction=';
+        if (checked) {
+          url += 'select';
+          $API.row(rowIdx).data()['selected'] = true;
+          $API.row(rowIdx).select().invalidate().draw(false);
+        } else {
+          url += 'unselect';
+          $API.row(rowIdx).data()['selected'] = false;
+          $API.row(rowIdx).deselect().invalidate().draw(false);
+        }
+        url += '&ids[]=' + id;
+        //send notify to items REST controller to select all items in result set.
+        $.getJSON(url + '&customerid=' + _customer_id, function () {
+        }).done(function () {
+          console.log(checked ? 'Selected ' + id : 'Unselected ' + id);
+        }).fail(function () {
+          console.log("select/unselect REST Call failed.");
         });
+      });
+
+      //#############################################################
+      //#############################################################
+      //##
+      //##    INIT Function called after itemsTable.draw();
+      //##    This will add necessary data-*-attr's for the
+      //##    ffm-custom-append Button added to the Datatables
+      //##    options.
+      //##
+      //#############################################################
+      //#############################################################
+      $API.on('init.dt', function (e, settings, json) {
+        //##########  Custom Datatables Buttons Impl ##############
+        //this is used to add data-* attributes to datatables buttons.
+        //the button is initialized
+        var api = new $.fn.dataTable.Api(settings);
+        if (api.buttons().length > 0) {
+          $("a", api.buttons().container(0)).each(function (index) {
+            if ($(this).hasClass('ffm-custom-append')) {
+              $(this).attr('data-target', '#addProductModal');
+              $(this).attr('data-toggle', 'modal');
+              $(this).attr('title', 'Add Product. Please call or lookup the correct SKU.');
+              $(this).attr('data-placement', 'bottom');
+              $(this).tooltip();
+            } else if ($(this).hasClass('buttons-pdf')) {
+              //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
+              $(this).attr('title', 'Click to generate PDF. Disabled rows with no override price and unchecked Product rows will not be included.');
+              $(this).attr('data-placement', 'top');
+              $(this).tooltip();
+            } else if (index === 0) {
+              //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
+              $(this).attr('title', 'Click to select all rows.');
+              $(this).attr('data-placement', 'top');
+              $(this).tooltip();
+            } else if (index === 1) {
+              //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
+              $(this).attr('title', 'Click to unselect all rows.');
+              $(this).attr('data-placement', 'bottom');
+              $(this).tooltip();
+            }
+          });
+        }
+        //##########  END Custom Datatables Buttons Impl ##############
+      });
+
+      //#############################################################
+      //#############################################################
+      //##
+      //##    JQuery Validate Plugin. Validates the add row form.
+      //##
+      //#############################################################
+      //#############################################################
+      $("[name='addRowItemsForm']").validate({
+        submitHandler: function (form) {
+          $.ajax({
+            type: 'POST',
+            url: "items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>",
+            data: $(form).serialize()
+          })
+                  .done(function (response) {
+                    if (response.success) {
+                      appendRowToTable(response);
+                    } else {
+                      alert('Error - Please contact IT.');
+                    }
+                  });
+          return false;
+        }
+      });
 
     });
 

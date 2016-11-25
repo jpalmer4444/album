@@ -4,11 +4,7 @@ return array(
         // added for Acl   ###################################
         'controller_plugins' => array(
             'factories' => array(
-                'MyAclPlugin' => function($sm) {
-                    $loggingService = $sm->get('LoggingService');
-                    $authService = $sm->get('AuthService');
-                    return new \MyAcl\Controller\Plugin\MyAclPlugin($loggingService, $authService);
-                },
+                'MyAclPlugin' => 'MyAcl\Controller\Factory\MyAclPluginFactory',
             ),
          ),
         // end: added for Acl   ###################################    

@@ -1,9 +1,7 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Handles login
  */
 
 namespace Login\Controller;
@@ -57,17 +55,16 @@ class LoginController extends AbstractActionController {
         //if already login, redirect to success page 
         $this->logger->info('Checking for identity');
         if ($this->getAuthService()->hasIdentity()) {
-            
             $this->logger->info('Identity found.');
-            
-            return $this->redirect()->toRoute('success');
-            
+            if($this->getSessionStorage()->admin()){
+                return $this->redirect()->toRoute('sales');
+            }else{
+                return $this->redirect()->toRoute('users');
+            }
         }else{
             $this->logger->info('Identity not found.');
         }
-
         $form = $this->getForm();
-
         return array(
             'form' => $form,
             'messages' => $this->plugin('flashmessenger')->getMessages()
@@ -92,9 +89,12 @@ class LoginController extends AbstractActionController {
                     $this->plugin('flashmessenger')->addMessage($message);
                 }
                 if ($result->isValid()) {
-                    $redirect = 'users';
+                    $redirect = $this->getSessionStorage()->admin() ? 'sales' : 'users';
                     if(null !== $this->getSessionStorage()->getRequestedRoute()){
-                        $redirect = $this->getSessionStorage()->getRequestedRoute();
+                        //always force admin to salesperson selection at context sales!
+                        $redirect = $this->getSessionStorage()->admin() ? 
+                                'sales' : 
+                                $this->getSessionStorage()->getRequestedRoute();
                     }
                     //set roles
                     $user = $this->entityManager->find('DataAccess\FFM\Entity\User', $request->getPost('username'));

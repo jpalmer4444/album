@@ -15,16 +15,17 @@ class PricingOverrideReportRepositoryImpl extends FFMRepository {
     public function reportBetween(DateTime $from, DateTime $to) {
         $localFrom = !empty($from) ? $from : DateUtils::getDailyCutoff();
         $localTo = !empty($to) ? $to : new DateTime();
-        $rows = $this->getEntityManager()->createQueryBuilder()
-                        ->select(array('pricingOverrideReport'))
-                        ->from('PricingOverrideReport', 'pricingOverrideReport')
+        $qb = $this->getEntityManager()->createQueryBuilder();
+        $rows = $qb->select(array('pricingOverrideReport'))
+                        ->from('DataAccess\FFM\Entity\PricingOverrideReport', 'pricingOverrideReport')
                         ->where($qb->expr()->between(
-                                        'pricingOverrideReport.created', $localFrom, $localTo
-                        ))->orderBy('pricingOverrideReport.salesperson', 'ASC')->getQuery()->getResult();
-        
-        
-        
-        
+                                        'pricingOverrideReport._created', ":from", ":to"
+                        ))
+                ->setParameter("from", $localFrom->format('Y-m-d H:i:s'))
+                ->setParameter("to", $localTo->format('Y-m-d H:i:s'))
+                ->orderBy('pricingOverrideReport._salesperson', 'ASC')
+                ->getQuery()->getResult();
+        return $rows;  
     }
 
 }

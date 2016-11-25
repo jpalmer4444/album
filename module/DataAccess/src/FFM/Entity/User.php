@@ -103,6 +103,10 @@ class User
         $this->phone1 = $phone1;
     }
     
+    public function setPassword($password) {
+        $this->password = $password;
+    }
+    
     public function setLastlogin($lastlogin) {
         $this->lastlogin = $lastlogin;
     }

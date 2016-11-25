@@ -2,8 +2,8 @@
 
 namespace DataAccess\FFM\Entity;
 
-use Doctrine\ORM\Mapping as ORM;
 use DateTime;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="DataAccess\FFM\Entity\Repository\Impl\ProductRepositoryImpl")
@@ -14,6 +14,7 @@ class Product {
     public function __construct()
     {
         $this->_created=new DateTime();
+        $this->userProducts = new \Doctrine\Common\Collections\ArrayCollection();
     }
     
     /**
@@ -38,16 +39,6 @@ class Product {
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $description;
-    
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $comment;
-    
-    /**
-     * @ORM\Column(name="`option`", type="string", length=255, nullable=true)
-     */
-    protected $option;
     
     /** 
      * @ORM\Column(type="integer")
@@ -94,27 +85,22 @@ class Product {
      */
     protected $saturdayenabled;
     
-    public function exchangeArray($data) {
-        $this->sku = (isset($data['sku'])) ? $data['sku'] : null;
-        $this->comment = (isset($data['comment'])) ? $data['comment'] : null;
-        $this->description = (isset($data['description'])) ? $data['description'] : null;
-        $this->option = (isset($data['option'])) ? $data['option'] : null;
-        $this->productname = (isset($data['product'])) ? $data['product'] : null;
-        $this->qty = (isset($data['qty'])) ? $data['qty'] : null;
-        $this->retail = (isset($data['retail'])) ? $data['retail'] : null;
-        $this->saturdayenabled = (isset($data['saturdayenabled'])) ? $data['saturdayenabled'] : null;
-        $this->status = (isset($data['status'])) ? $data['status'] : null;
-        $this->uom = (isset($data['uom'])) ? $data['uom'] : null;
-        $this->wholesale = (isset($data['wholesale'])) ? $data['wholesale'] : null;
-    }
+    /**
+     * @ORM\OneToMany(targetEntity="UserProduct", mappedBy="product")
+     */
+    private $userProducts;
 
-    // Add the following method:
-    public function getArrayCopy() {
-        return get_object_vars($this);
-    }
     
     public function getId() {
         return $this->id;
+    }
+    
+    public function getCustomerUserProduct($customer) {
+        foreach($this->userProducts as $userproduct){
+            if($userproduct->getCustomer()->getId() == $customer->getId()){
+                return $userproduct;
+            }
+        }
     }
 
     public function getVersion() {
@@ -127,14 +113,6 @@ class Product {
 
     public function getDescription() {
         return $this->description;
-    }
-
-    public function getComment() {
-        return $this->comment;
-    }
-
-    public function getOption() {
-        return $this->option;
     }
 
     public function getQty() {
@@ -172,6 +150,10 @@ class Product {
     public function getSaturdayenabled() {
         return $this->saturdayenabled;
     }
+    
+    public function getUserProducts() {
+        return $this->userProducts;
+    }
 
     public function setId($id) {
         $this->id = $id;
@@ -190,16 +172,6 @@ class Product {
 
     public function setDescription($description) {
         $this->description = $description;
-        return $this;
-    }
-
-    public function setComment($comment) {
-        $this->comment = $comment;
-        return $this;
-    }
-
-    public function setOption($option) {
-        $this->option = $option;
         return $this;
     }
 
@@ -247,7 +219,10 @@ class Product {
         $this->saturdayenabled = $saturdayenabled;
         return $this;
     }
-
-
+    
+    public function setUserProducts($userProducts) {
+        $this->userProducts = $userProducts;
+        return $this;
+    }
     
 }

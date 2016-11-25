@@ -64,10 +64,10 @@ class Product extends \DataAccess\FFM\Entity\Product implements \Doctrine\ORM\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'id', '' . "\0" . 'DataAccess\\FFM\\Entity\\Product' . "\0" . 'version', 'productname', 'description', 'comment', 'option', '' . "\0" . 'DataAccess\\FFM\\Entity\\Product' . "\0" . 'qty', 'wholesale', 'uom', 'sku', 'retail', '_created', '_updated', 'status', 'saturdayenabled'];
+            return ['__isInitialized__', 'id', '' . "\0" . 'DataAccess\\FFM\\Entity\\Product' . "\0" . 'version', 'productname', 'description', '' . "\0" . 'DataAccess\\FFM\\Entity\\Product' . "\0" . 'qty', 'wholesale', 'uom', 'sku', 'retail', '_created', '_updated', 'status', 'saturdayenabled', '' . "\0" . 'DataAccess\\FFM\\Entity\\Product' . "\0" . 'userProducts'];
         }
 
-        return ['__isInitialized__', 'id', '' . "\0" . 'DataAccess\\FFM\\Entity\\Product' . "\0" . 'version', 'productname', 'description', 'comment', 'option', '' . "\0" . 'DataAccess\\FFM\\Entity\\Product' . "\0" . 'qty', 'wholesale', 'uom', 'sku', 'retail', '_created', '_updated', 'status', 'saturdayenabled'];
+        return ['__isInitialized__', 'id', '' . "\0" . 'DataAccess\\FFM\\Entity\\Product' . "\0" . 'version', 'productname', 'description', '' . "\0" . 'DataAccess\\FFM\\Entity\\Product' . "\0" . 'qty', 'wholesale', 'uom', 'sku', 'retail', '_created', '_updated', 'status', 'saturdayenabled', '' . "\0" . 'DataAccess\\FFM\\Entity\\Product' . "\0" . 'userProducts'];
     }
 
     /**
@@ -176,28 +176,6 @@ class Product extends \DataAccess\FFM\Entity\Product implements \Doctrine\ORM\Pr
     /**
      * {@inheritDoc}
      */
-    public function exchangeArray($data)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'exchangeArray', [$data]);
-
-        return parent::exchangeArray($data);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getArrayCopy()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getArrayCopy', []);
-
-        return parent::getArrayCopy();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     public function getId()
     {
         if ($this->__isInitialized__ === false) {
@@ -208,6 +186,17 @@ class Product extends \DataAccess\FFM\Entity\Product implements \Doctrine\ORM\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getId', []);
 
         return parent::getId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getCustomerUserProduct($customer)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getCustomerUserProduct', [$customer]);
+
+        return parent::getCustomerUserProduct($customer);
     }
 
     /**
@@ -241,28 +230,6 @@ class Product extends \DataAccess\FFM\Entity\Product implements \Doctrine\ORM\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getDescription', []);
 
         return parent::getDescription();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getComment()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getComment', []);
-
-        return parent::getComment();
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function getOption()
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getOption', []);
-
-        return parent::getOption();
     }
 
     /**
@@ -367,6 +334,17 @@ class Product extends \DataAccess\FFM\Entity\Product implements \Doctrine\ORM\Pr
     /**
      * {@inheritDoc}
      */
+    public function getUserProducts()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getUserProducts', []);
+
+        return parent::getUserProducts();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function setId($id)
     {
 
@@ -406,28 +384,6 @@ class Product extends \DataAccess\FFM\Entity\Product implements \Doctrine\ORM\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setDescription', [$description]);
 
         return parent::setDescription($description);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setComment($comment)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setComment', [$comment]);
-
-        return parent::setComment($comment);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    public function setOption($option)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setOption', [$option]);
-
-        return parent::setOption($option);
     }
 
     /**
@@ -527,6 +483,17 @@ class Product extends \DataAccess\FFM\Entity\Product implements \Doctrine\ORM\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSaturdayenabled', [$saturdayenabled]);
 
         return parent::setSaturdayenabled($saturdayenabled);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setUserProducts($userProducts)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setUserProducts', [$userProducts]);
+
+        return parent::setUserProducts($userProducts);
     }
 
 }

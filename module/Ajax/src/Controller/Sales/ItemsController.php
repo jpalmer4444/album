@@ -4,6 +4,7 @@ namespace Ajax\Controller\Sales;
 
 use DataAccess\FFM\Entity\ItemPriceOverride;
 use DataAccess\FFM\Entity\Product;
+use DataAccess\FFM\Entity\UserProduct;
 use DateTime;
 use Doctrine\DBAL\LockMode;
 use Doctrine\ORM\Query\Expr\From;
@@ -11,6 +12,7 @@ use Doctrine\ORM\Query\Expr\OrderBy;
 use Doctrine\ORM\Query\Expr\Select;
 use Exception;
 use Zend\Mvc\Controller\AbstractRestfulController;
+use Zend\Mvc\MvcEvent;
 use Zend\View\Model\JsonModel;
 
 /**
@@ -28,13 +30,15 @@ class ItemsController extends AbstractRestfulController {
     protected $itemsFilterService;
     protected $checkboxService;
     protected $productrepository;
+    protected $userproductrepository;
     protected $customerrepository;
+    protected $customerid;
     protected $qb;
-    
-    public function onDispatch(\Zend\Mvc\MvcEvent $e) {
+
+    public function onDispatch(MvcEvent $e) {
         $this->logger->info("AjaxItemController found! ");
         //if(stringContains("myaction=overridePrice")){
-            //var_dump($e->getRequest());
+        //var_dump($e->getRequest());
         //}
         $this->logger->info("" . $e->getParam("request")->getRequestUri());
         try {
@@ -42,9 +46,9 @@ class ItemsController extends AbstractRestfulController {
         } catch (Exception $exc) {
             $this->logger->info($exc->getTraceAsString());
         }
-        }
+    }
 
-        public function __construct($container) {
+    public function __construct($container) {
         $this->restService = $container->get('RestService');
         $this->checkboxService = $container->get('CheckboxService');
         $this->logger = $container->get('LoggingService');
@@ -58,6 +62,9 @@ class ItemsController extends AbstractRestfulController {
         $this->customerrepository = $container->get('FFMEntityManager')->
                 getEntityManager()->
                 getRepository('DataAccess\FFM\Entity\Customer');
+        $this->userproductrepository = $container->get('FFMEntityManager')->
+                getEntityManager()->
+                getRepository('DataAccess\FFM\Entity\UserProduct');
         $this->qb = $container->get('FFMEntityManager')->
                         getEntityManager()->createQueryBuilder();
     }
@@ -65,7 +72,7 @@ class ItemsController extends AbstractRestfulController {
     //framework calls get when an id parameter is not found in request
     public function getList() {
         $this->logger->info('ItemsController Ajax called.');
-        
+
         switch ($this->params()->fromQuery("myaction")) {
             case "select" : {
                     return $this->select();
@@ -79,14 +86,14 @@ class ItemsController extends AbstractRestfulController {
                 }
         }
     }
-    
+
     //framework calls get when an id parameter is found in request
     public function get($id) {
         $this->logger->info('ItemsController Ajax called.');
-        
+
         switch ($this->params()->fromQuery("myaction")) {
-            case "overridePrice" : 
-            
+            case "overridePrice" :
+
             default : {
                     return $this->overridePrice($id);
                 }
@@ -142,6 +149,7 @@ class ItemsController extends AbstractRestfulController {
     protected function getTable() {
         $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
         $customerid = $this->params()->fromQuery('customerid');
+        $this->customerid = $customerid;
         $params = $this->getBaseBySkuParams();
         $params["customerid"] = $customerid;
         $method = $this->pricingconfig['by_sku_method'];
@@ -184,53 +192,67 @@ class ItemsController extends AbstractRestfulController {
             //remove every matching row in DB and rewrite them all to guarantee we have latest data
             //in theory this should flush everything out and keep records up-to-date over time.
             $some = false;
-            foreach ($json[$this->pricingconfig['by_sku_object_items_controller']] as $product) {
-                //lookup item with id
-                $cdb = $this->productrepository->find($product['id']);
-                if (!empty($cdb)) {
-                    //update existing record
-                    $cdb->setSku($product['sku']);
-                    $cdb->setProductname($product['productname']);
-                    $cdb->setDescription($product['shortescription']);
-                    $cdb->setComment($product['comment']);
-                    $cdb->setQty($product['qty']);
-                    if (!empty($product['wholesale'])) {
-                        $int1 = $product['wholesale'] * 100;
-                        $cdb->setWholesale($int1);
+            try {
+                foreach ($json[$this->pricingconfig['by_sku_object_items_controller']] as $product) {
+                    //lookup item with id
+                    $cdb = $this->productrepository->find($product['id']);
+                    if (!empty($cdb)) {
+                        //update existing record
+                        $cdb->setSku($product['sku']);
+                        $cdb->setProductname($product['productname']);
+                        $cdb->setDescription($product['shortescription']);
+                        $userproduct = $this->userproductrepository->findUserProduct($this->customerid, $product['id']);
+                        $userproduct->setComment($product['comment']);
+                        $userproduct->setOption($product['option']);
+                        $cdb->setQty($product['qty']);
+                        if (!empty($product['wholesale'])) {
+                            $int1 = $product['wholesale'] * 100;
+                            $cdb->setWholesale($int1);
+                        }
+                        if (!empty($product['retail'])) {
+                            $int2 = $product['retail'] * 100;
+                            $cdb->setRetail($int2);
+                        }
+                        $cdb->setUom($product['uom']);
+                        $this->userproductrepository->merge($userproduct);
+                        $some = true;
+                    } else {
+                        //insert record because it doesn't exist.
+                        $cdb = new Product();
+                        $cdb->setId($product['id']);
+                        $userproduct = new UserProduct();
+                        $userproduct->setComment($product['comment']);
+                        $userproduct->setOption($product['option']);
+                        $userProducts = $cdb->getUserProducts();
+                        $userProducts->add($userproduct);
+                        //lookup salesperson
+                        $customer = $this->customerrepository->findCustomer($this->customerid);
+                        $userproduct->setCustomer($customer);
+                        $userproduct->setProduct($cdb);
+                        $cdb->setSku($product['sku']);
+                        $cdb->setStatus($product['status'] ? true : false);
+                        $cdb->setSaturdayenabled($product['saturdayenabled'] ? true : false);
+                        $cdb->setProductname($product['productname']);
+                        $cdb->setDescription($product['shortescription']);
+                        $cdb->setQty($product['qty']);
+                        if (!empty($product['wholesale'])) {
+                            $int1 = $product['wholesale'] * 100;
+                            $cdb->setWholesale($int1);
+                        }
+                        if (!empty($product['retail'])) {
+                            $int2 = $product['retail'] * 100;
+                            $cdb->setRetail($int2);
+                        }
+                        $cdb->setUom($product['uom']);
+                        $this->userproductrepository->persist($userproduct);
+                        $some = true;
                     }
-                    if (!empty($product['retail'])) {
-                        $int2 = $product['retail'] * 100;
-                        $cdb->setRetail($int2);
-                    }
-                    $cdb->setUom($product['uom']);
-                    $cdb->setOption($product['option']);
-                    $this->productrepository->merge($cdb);
-                    $some = true;
-                } else {
-                    //insert record because it doesn't exist.
-                    $cdb = new Product();
-                    $cdb->setId($product['id']);
-                    $cdb->setSku($product['sku']);
-                    $cdb->setProductname($product['productname']);
-                    $cdb->setDescription($product['shortescription']);
-                    $cdb->setComment($product['comment']);
-                    $cdb->setQty($product['qty']);
-                    if (!empty($product['wholesale'])) {
-                        $int1 = $product['wholesale'] * 100;
-                        $cdb->setWholesale($int1);
-                    }
-                    if (!empty($product['retail'])) {
-                        $int2 = $product['retail'] * 100;
-                        $cdb->setRetail($int2);
-                    }
-                    $cdb->setUom($product['uom']);
-                    $cdb->setOption($product['option']);
-                    $this->productrepository->persist($cdb);
-                    $some = true;
                 }
-            }
-            if ($some) {
-                $this->productrepository->flush();
+                if ($some) {
+                    $this->userproductrepository->flush();
+                }
+            } catch (Exception $exc) {
+                var_dump($exc);
             }
         }
     }
@@ -238,12 +260,11 @@ class ItemsController extends AbstractRestfulController {
     protected function select() {
         $ids = $this->params()->fromQuery('ids');
         $customerid = $this->params()->fromQuery('customerid');
-        
         $userinplay = $this->myauthstorage->getSalespersonInPlay();
         if (empty($userinplay)) {
             $userinplay = $this->myauthstorage->getUser();
         }
-        if(empty($userinplay)){
+        if (empty($userinplay)) {
             $this->logger->info("UserinPlay is null!");
         }
         foreach ($ids as $id) {

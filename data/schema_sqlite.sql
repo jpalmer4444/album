@@ -1,8 +1,6 @@
-use jpalmer_ffmalpha;
-
 DROP TABLE IF EXISTS album;
 CREATE TABLE album (
-    id INTEGER PRIMARY KEY AUTO_INCREMENT, 
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
     artist varchar(100) NOT NULL, 
     title varchar(100) NOT NULL
 );
@@ -17,7 +15,6 @@ DROP TABLE IF EXISTS row_plus_items_page;
 DROP TABLE IF EXISTS item_price_override;
 DROP TABLE IF EXISTS pricing_override_report;
 DROP TABLE IF EXISTS item_table_checkbox;
-DROP TABLE IF EXISTS user_products;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS users;
@@ -31,8 +28,13 @@ CREATE TABLE `users` (
     `sales_attr_id` integer NOT NULL,
     `last_login` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TRIGGER update_users_trigger UPDATE OF version ON `users` 
+BEGIN
+UPDATE `users` SET created = CURRENT_TIMESTAMP WHERE username = old.username;
+END;
 
 CREATE INDEX index_users_salespersonname
 ON users (salespersonname);
@@ -109,6 +111,8 @@ CREATE TABLE `products` (
     `sku` VARCHAR(25),
     `productname` VARCHAR(255) NOT NULL,
     `description` VARCHAR(255),
+    `comment` VARCHAR(255),
+    `option` VARCHAR(255),
     `qty` INTEGER,
     `wholesale` INTEGER,
     `retail` INTEGER,
@@ -116,8 +120,13 @@ CREATE TABLE `products` (
     `status` BOOLEAN,
     `saturdayenabled` BOOLEAN,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TRIGGER update_products_trigger UPDATE OF version ON `products` 
+BEGIN
+UPDATE `products` SET created = CURRENT_TIMESTAMP WHERE id = old.id;
+END;
 
 CREATE INDEX index_products_sku
 ON `products` (`sku`);
@@ -132,8 +141,13 @@ CREATE TABLE `customers` (
     `name` VARCHAR(100) NOT NULL,
     `company` VARCHAR(255) NOT NULL,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
+CREATE TRIGGER update_customers_trigger UPDATE OF version ON `customers` 
+BEGIN
+UPDATE `customers` SET created = CURRENT_TIMESTAMP WHERE id = old.id;
+END;
 
 CREATE INDEX index_customers_email
 ON `customers` (`email`);
@@ -144,21 +158,8 @@ ON `customers` (`name`);
 CREATE INDEX index_customers_company
 ON `customers` (`company`);
 
-CREATE TABLE `user_products` (
-    `customer` INTEGER,
-    `product` INTEGER,
-    `version` INTEGER DEFAULT 1,
-    `comment` VARCHAR(255) DEFAULT NULL,
-    `option` VARCHAR(255) DEFAULT NULL,
-    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    PRIMARY KEY(`customer`, `product`),
-    FOREIGN KEY(product) REFERENCES products(id),
-    FOREIGN KEY(customer) REFERENCES customers(id)
-);
-
 CREATE TABLE `row_plus_items_page` (
-    `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
     `version` INTEGER DEFAULT 1,
     `product` INTEGER NOT NULL,
     `overrideprice` INTEGER,
@@ -172,7 +173,7 @@ CREATE TABLE `row_plus_items_page` (
 );
 
 CREATE TABLE `item_price_override` (
-    `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
     `version` INTEGER DEFAULT 1,
     `product` INTEGER NOT NULL,
     `overrideprice` INTEGER,
@@ -187,7 +188,7 @@ CREATE TABLE `item_price_override` (
 );
 
 CREATE TABLE `pricing_override_report` (
-    `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
     `version` INTEGER DEFAULT 1,
     `product` INTEGER NOT NULL,
     `overrideprice` INTEGER,
@@ -201,7 +202,7 @@ CREATE TABLE `pricing_override_report` (
 );
 
 CREATE TABLE `item_table_checkbox` (
-    `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
+    `id` INTEGER PRIMARY KEY AUTOINCREMENT, 
     `version` INTEGER DEFAULT 1,
     `product` INTEGER NOT NULL,
     `checked` BOOLEAN DEFAULT 0,

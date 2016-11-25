@@ -2,6 +2,10 @@
 
 namespace DataAccess\FFM\Entity\Repository\Impl;
 
+use DataAccess\FFM\Entity\Product;
+use Doctrine\DBAL\LockMode;
+use Exception;
+
 /**
  * Description of ProductRepository
  *
@@ -13,7 +17,20 @@ class ProductRepositoryImpl extends FFMRepository {
         return $this->getEntityManager()->find("DataAccess\FFM\Entity\Product", $id);
     }
 
-    public function findMaxNegative() {
+    public function addedProduct() {
+        $this->getEntityManager()->getConnection()->beginTransaction();
+        try {
+            $product = new Product();
+            $product->setId($this->findMaxNegative());
+            $this->getEntityManager()->getConnection()->commit();
+            return $product;
+        } catch (Exception $exc) {
+            $this->getEntityManager()->getConnection()->rollBack();
+            throw $exc;
+        }
+    }
+
+    private function findMaxNegative() {
         $leastID = -1;
         $leastIDRecord = $this
                 ->getEntityManager()
@@ -23,6 +40,7 @@ class ProductRepositoryImpl extends FFMRepository {
                 ->orderBy('product.id', 'ASC')
                 ->setMaxResults(1)
                 ->getQuery()
+                ->setLockMode(LockMode::OPTIMISTIC)
                 ->getOneOrNullResult();
         if (empty($leastIDRecord) || $leastIDRecord->getId() > -1) {
             $leastID = -1;

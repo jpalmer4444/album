@@ -3,7 +3,7 @@
 namespace Command\Controller\Reporting;
 
 use Application\Service\LoggingServiceInterface;
-use Command\Query\ORMQuery;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use RuntimeException;
 use Zend\Console\Console;
@@ -27,6 +27,8 @@ class PriceOverrideController extends AbstractActionController {
         $this->logger = $logger;
         $this->pricingconfig = $array;
         $this->entityManager = $entityManager;
+        $this->pricingoverridereportrepository = $this->entityManager->
+                getRepository('DataAccess\FFM\Entity\PricingOverrideReport');
     }
 
     protected function priceoverridereportAction() {
@@ -55,13 +57,13 @@ class PriceOverrideController extends AbstractActionController {
                         'Enter from date (nothing=this morning)?', true, 100
         );
 
-        $fromDate = empty($from) ? date("Y-m-d H:i:s", strval(strtotime('midnight'))) : date("Y-m-d H:i:s", strval(strtotime($from)));
+        $fromDate = empty($from) ? new DateTime(date("Y-m-d H:i:s", strval(strtotime('midnight')))) : new DateTime(date("Y-m-d H:i:s", strval(strtotime($from))));
 
         $to = Line::prompt(
                         'Enter to date (nothing=now)?', true, 100
         );
 
-        $toDate = empty($to) ? date("Y-m-d H:i:s", strval(strtotime('now'))) : date("Y-m-d H:i:s", strval(strtotime($to)));
+        $toDate = empty($to) ? new DateTime(date("Y-m-d H:i:s", strval(strtotime('now')))) : new DateTime(date("Y-m-d H:i:s", strval(strtotime($to))));
 
         if ($verbose) {
             $console->writeLine("<-v|--verbose> Output Enabled.");
@@ -69,19 +71,16 @@ class PriceOverrideController extends AbstractActionController {
 
         //var_dump($message);
 
-        $rows = $this->entityManager->
-                createQuery(ORMQuery::QUERY_ALL_PRICING_OVERRIDES)->
-                setParameter("from", $fromDate)->
-                setParameter("to", $toDate)->
-                getResult();
+        $rows = $this->pricingoverridereportrepository->reportBetween($fromDate, $toDate);
 
-        $message = "Queried Pricing Reports for date range from: $fromDate to: $toDate and found: " . count(array_keys($rows)) . " rows. Would you like to see them?";
+        $message = "Queried Pricing Reports for date range from: " . $fromDate->format('Y-m-d H:i:s') . " to: " . $toDate->format('Y-m-d H:i:s') . "and found: " . count(array_keys($rows)) . " rows. Would you like to see them?";
         $answer = Char::prompt(
                         $message, 'yn', true, false, true
         );
         if ($answer == 'y') {
             //$console->write(strval($rows));
-            foreach($rows as $key => $value){
+            
+            foreach($rows as $value){
                 $console->writeLine($value->getProduct()->getProductname() .
                         " | " . $value->getProduct()->getDescription() .
                         " | " . $value->getProduct()->getComment() .

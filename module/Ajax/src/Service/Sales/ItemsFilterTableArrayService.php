@@ -2,10 +2,11 @@
 
 namespace Ajax\Service\Sales;
 
+use Ajax\Service\Sales\ItemsFilterTableArrayService;
+use Ajax\Service\Sales\ItemsFilterTableArrayServiceInterface;
 use Application\Utility\DateUtils;
+use DataAccess\FFM\Entity\Customer;
 use DataAccess\FFM\Entity\Product;
-use DateTime;
-use DateTimeZone;
 
 /**
  * Description of ItemsFilterTableArrayService
@@ -20,6 +21,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
     protected $entityManager;
     protected $checkboxService;
     protected $productrepository;
+    protected $customerrepository;
 
     public function __construct($sm) {
         $this->logger = $sm->get('LoggingService');
@@ -30,6 +32,9 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         $this->productrepository = $sm->get('FFMEntityManager')->
                 getEntityManager()->
                 getRepository('DataAccess\FFM\Entity\Product');
+        $this->customerrepository = $sm->get('FFMEntityManager')->
+                getEntityManager()->
+                getRepository('DataAccess\FFM\Entity\Customer');
     }
 
     /**
@@ -45,6 +50,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         //iterate items
         $this->logger->debug('Retrieved ' . count($restcallitems) . ' ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
         $merged = array();
+        $customer = $this->customerrepository->findCustomer($customerid);
 
         //add override column for override price
         foreach ($restcallitems as &$item) {
@@ -114,7 +120,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 $addSelected = true;
             }
             
-            $merged[] = $this->addItem($item->getProduct(), $adjWholesale, $adjRetail, $adjOverrideprice, $addSelected);
+            $merged[] = $this->addItem($customer, $item->getProduct(), $adjWholesale, $adjRetail, $adjOverrideprice, $addSelected);
             //add to the map
             $map[$item->getProduct()->getId()] = $item;
         }
@@ -161,13 +167,14 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
                 [];
     }
     
-    private function addItem(Product $product, $adjWholesale, $adjRetail, $adjOverrideprice, $addSelected){
+    private function addItem(Customer $customer, Product $product, $adjWholesale, $adjRetail, $adjOverrideprice, $addSelected){
+        $userproduct = $product->getCustomerUserProduct($customer);
         return array(
                 "id" => $product->getId(),
                 "productname" => $product->getProductname(),
                 "shortescription" => $product->getDescription(),
-                "comment" => $product->getComment(),
-                "option" => $product->getOption(),
+                "comment" => $userproduct->getComment(),
+                "option" => $userproduct->getOption(),
                 "qty" => $product->getQty(),
                 "wholesale" => $adjWholesale,
                 "retail" => $adjRetail,

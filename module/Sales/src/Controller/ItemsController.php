@@ -7,16 +7,18 @@ namespace Sales\Controller;
 
 use Application\Service\LoggingServiceInterface;
 use DataAccess\FFM\Entity\PricingOverrideReport;
-use DataAccess\FFM\Entity\Product;
 use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\ProductRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
+use DataAccess\FFM\Entity\Repository\Impl\UserProductRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
+use DataAccess\FFM\Entity\UserProduct;
 use DateTime;
 use Login\Model\MyAuthStorage;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\AbstractPluginManager;
+use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
@@ -35,6 +37,12 @@ class ItemsController extends AbstractActionController {
     protected $userrepository;
     protected $customerrepository;
     protected $productrepository;
+    protected $userproductrepository;
+    protected $serviceLocator;
+    
+    public function setServiceLocator(ServiceLocatorInterface $serviceLocator) {
+        $this->serviceLocator = $serviceLocator;
+    }
 
     /**
      * 
@@ -51,6 +59,7 @@ class ItemsController extends AbstractActionController {
             RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository,
             CustomerRepositoryImpl $customerrepository,
             ProductRepositoryImpl $productrepository, 
+            UserProductRepositoryImpl $userproductrepository, 
             $config = NULL
     ) {
         $this->logger = $logger;
@@ -61,15 +70,16 @@ class ItemsController extends AbstractActionController {
         $this->rowplusitemspagerepository = $rowplusitemspagerepository;
         $this->customerrepository = $customerrepository;
         $this->productrepository = $productrepository;
+        $this->userproductrepository = $userproductrepository;
     }
 
     public function indexAction() {
         $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
         $this->customerid = $this->params()->fromQuery('customerid');
         $this->customername = $this->params()->fromQuery('customername');
-
-        if (empty($this->customerid) ||
-                empty($this->customername)) {
+        $this->companyname = $this->params()->fromQuery('companyname');
+        //redirect if any of the needed parameters are missing!
+        if (empty($this->customerid) || empty($this->customername) || empty($this->companyname)) {
             //must have customerid and customername params or redirect back to /users to retrieve
             //correct params to render this page.
             $params = [
@@ -83,27 +93,18 @@ class ItemsController extends AbstractActionController {
         if ($request->isPost()) {
             $jsonModelArr = array();
             $postData = $request->getPost();
-            //manually set required properties not in the form.
-            
             $form->setData($postData);
-            
             if ($form->isValid()) {
                 $success = true;
                 //create a row_plus_items_page_row and create a Product with negative ID in Products table.
-                $product = new Product();
-                $product->setId($this->productrepository->findMaxNegative());
+                $product = $this->productrepository->addedProduct();
+                $userproduct = new UserProduct();
+                $userproduct->setCustomer($this->customerrepository->findCustomer($this->customerid));
+                $userproduct->setProduct($product);
                 $jsonModelArr["id"] = $product->getId();
-                
                 $record = new RowPlusItemsPage();
                 $record->setLogger($this->logger);
-                //not used but was supposed to do all the if work below
-                //$record->bind($form, $jsonModelArr);
-                
                 $record->setProduct($product);
-                
-                //$jsonModelArr = $record->bind($form, $jsonModelArr, $record);
-                //$this->logger->info("Override Price passed: " . $record->getOverrideprice());
-                
                 $jsonModelArr["sku"] = empty($form->getData()['sku']) ? '' : $form->getData()['sku'];
                 if (array_key_exists("sku", $jsonModelArr)) {
                     $product->setSku($jsonModelArr["sku"]);
@@ -116,28 +117,16 @@ class ItemsController extends AbstractActionController {
                 if (array_key_exists("shortescription", $jsonModelArr)) {
                     $product->setDescription($jsonModelArr["shortescription"]);
                 }
+                
                 $jsonModelArr["comment"] = empty($form->getData()['comment']) ? '' : $form->getData()['comment'];
                 if (array_key_exists("comment", $jsonModelArr)) {
-                    $product->setComment($jsonModelArr["comment"]);
+                    $userproduct->setComment($jsonModelArr["comment"]);
                 }
-                $jsonModelArr["option"] = '';
-                /*if (array_key_exists("option", $jsonModelArr)) {
-                    $product->setOption($jsonModelArr["option"]);
-                }*/
+                
                 $jsonModelArr["qty"] = '';
-                /*if (array_key_exists("qty", $jsonModelArr)) {
-                    $product->setQty($jsonModelArr["qty"]);
-                }*/
+                $jsonModelArr["option"] = '';
                 $jsonModelArr["wholesale"] = '';
-                /*if (array_key_exists("wholesale", $jsonModelArr)) {
-                    $int = filter_var($jsonModelArr["wholesale"], FILTER_SANITIZE_NUMBER_INT);
-                    $product->setWholesale($int);
-                }*/
                 $jsonModelArr["retail"] = '';
-                /*if (array_key_exists("retail", $jsonModelArr)) {
-                    $int2 = filter_var($jsonModelArr["retail"], FILTER_SANITIZE_NUMBER_INT);
-                    $product->setRetail($int2);
-                }*/
                 $jsonModelArr["overrideprice"] = empty($form->getData()['overrideprice']) ? '' : $form->getData()['overrideprice'];
                 if (array_key_exists("overrideprice", $jsonModelArr)) {
                     $int3 = filter_var($jsonModelArr["overrideprice"], FILTER_SANITIZE_NUMBER_INT);
@@ -148,28 +137,21 @@ class ItemsController extends AbstractActionController {
                     $product->setUom($jsonModelArr["uom"]);
                 }
                 $jsonModelArr["status"] = "1";
-                /*if (array_key_exists("status", $jsonModelArr)) {
-                    $status = $jsonModelArr["status"] == "1";
-                    $product->setStatus($status);
-                }*/
                 $product->setStatus(true);
                 $jsonModelArr["saturdayenabled"] = "0";
-                /*if (array_key_exists("saturdayenabled", $jsonModelArr)) {
-                    $saturdayenabled = $jsonModelArr["saturdayenabled"] == "1";
-                    $product->setSaturdayenabled($saturdayenabled);
-                }*/
                 $created = new DateTime("now");
                 $record->setCreated($created);
                 $record->setActive(true);
                 $customer = $this->customerrepository->findCustomer($this->customerid);
                 $record->setCustomer($customer);
-                
                 $salesperson = $this->userrepository->findUser(empty($this->myauthstorage->getSalespersonInPlay()) ? $this->myauthstorage->getUser()->getUsername() : $this->myauthstorage->getSalespersonInPlay()->getUsername());
                 
                 $record->setSalesperson($salesperson);
                 //var_dump($record);
                 $this->rowplusitemspagerepository->persistAndFlush($record);
-                $this->productrepository->persistAndFlush($product);
+                //$this->productrepository->persistAndFlush($product);
+                $userproduct->setProduct($product);
+                $this->userproductrepository->persistAndFlush($userproduct);
                 $this->logger->info('Saved added row: ' . $record->getId());
                 $this->logger->info('Saved added product with negative PK: ' . $product->getId());
                 $jsonModelArr["success"] = $success;
@@ -187,11 +169,30 @@ class ItemsController extends AbstractActionController {
         //this might need to be changed if we want the report to always render the 
         //selected salesperson instead of the logged-in salesperson as is the case when
         //an admin is using the app.
+        
+        $customer = $this->customerrepository->findCustomer($this->customerid);
+        
+        if(empty($customer)){
+            $params = [
+                'controller' => 'UsersController',
+                'action' => 'index',
+            ];
+            $this->logger->info("Redirecting to users page because customer was not found!");
+            return $this->redirect()->toRoute('users', $params, array());
+        }
+        
+        $time = new DateTime();
+        $reporttime = $time->format('Y_m_d');
 
         return new ViewModel(array(
             "customerid" => $this->customerid,
+            "reporttime" => $reporttime,
             "customername" => $this->customername,
             "salesperson" => $this->myauthstorage->getUser()->getUsername(),
+            "salespersonname" => $this->myauthstorage->getUser()->getSalespersonname(),
+            "salespersonemail" => $this->myauthstorage->getUser()->getEmail(),
+            "companyname" => $customer->getCompany(),
+            "salespersonphone1" => $this->myauthstorage->getUser()->getPhone1(),
             "salespersonid" => $this->myauthstorage->getUser()->getSales_attr_id(),
             "form" => $form
         ));
@@ -235,7 +236,7 @@ class ItemsController extends AbstractActionController {
                     $pricingOverrideReport->setCustomer($customer);
                     $salesperson = $this->userrepository->findUser($this->myauthstorage->getUser()->getUsername());
                     $pricingOverrideReport->setSalesperson($salesperson);
-                    $product = $this->productrepository->findProduct(obj['id']);
+                    $product = $this->productrepository->findProduct($obj['id']);
                     $pricingOverrideReport->setProduct($product);
                     $this->rowplusitemspagerepository->persistAndFlush($pricingOverrideReport);
                 }
