@@ -202,6 +202,15 @@ class ItemsController extends AbstractRestfulController {
                         $cdb->setProductname($product['productname']);
                         $cdb->setDescription($product['shortescription']);
                         $userproduct = $this->userproductrepository->findUserProduct($this->customerid, $product['id']);
+                        if (empty($userproduct)) {
+                            $userproduct = new UserProduct();
+                            $userProducts = $cdb->getUserProducts();
+                            $userProducts->add($userproduct);
+                            $customer = $this->customerrepository->findCustomer($this->customerid);
+                            $userproduct->setCustomer($customer);
+                            $userproduct->setProduct($cdb);
+                            $this->userproductrepository->persist($userproduct);
+                        }
                         $userproduct->setComment($product['comment']);
                         $userproduct->setOption($product['option']);
                         $cdb->setQty($product['qty']);

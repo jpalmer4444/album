@@ -61,4 +61,17 @@ return [
             __DIR__ . '/../view',
         ],
     ],
+    'log' => array(
+    'Log\App' => array(
+        'writers' => array(
+            array(
+                'name' => 'stream',
+                'priority' => 1000,
+                'options' => array(
+                    'stream' => __DIR__ . '/../../../data/logs/log.out'
+                )
+            )
+        )
+    )
+)
 ];

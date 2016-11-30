@@ -146,6 +146,8 @@ class UsersController extends AbstractActionController {
             "json" => $json
         ));
     }
+    
+    
 
     public function rest($url, $method = "GET", $params = []) {
         return $this->restService->rest($url, $method, $params);

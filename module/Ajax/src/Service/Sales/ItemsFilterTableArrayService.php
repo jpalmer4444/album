@@ -168,7 +168,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
     }
     
     private function addItem(Customer $customer, Product $product, $adjWholesale, $adjRetail, $adjOverrideprice, $addSelected){
-        $userproduct = $product->getCustomerUserProduct($customer);
+        $userproduct = $product->getCustomerUserProduct($customer)->first();
         return array(
                 "id" => $product->getId(),
                 "productname" => $product->getProductname(),

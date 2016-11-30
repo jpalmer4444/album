@@ -4,7 +4,6 @@ namespace Application\Service;
 
 use Application\Service\LoggingServiceInterface;
 use Zend\Log\Logger;
-use Zend\Log\Writer\Stream;
 
 /**
  * Description of LoggingService
@@ -15,11 +14,9 @@ class LoggingService implements LoggingServiceInterface {
     
     protected $logger;
     
-    public function __construct(){
-        $writer = new Stream('php://stderr');
-        $logger = new Logger();
-        $logger->addWriter($writer);
+    public function __construct(Logger $logger){
         $this->logger = $logger;
+        
     }
     
     public function debug($message) {

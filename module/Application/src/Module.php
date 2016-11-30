@@ -9,16 +9,17 @@
 namespace Application;
 
 use Application\Controller\IndexController;
+use Application\Factory\FFMEntityManagerServiceFactory;
+use Application\Factory\LoggingServiceFactory;
+use Application\Factory\ReportServiceFactory;
+use Application\Factory\RestServiceFactory;
+use Application\Factory\SessionManagerFactory;
 use Application\Service\LoggingService;
 use Application\Service\ReportService;
 use Application\Service\RestService;
-use Zend\Db\TableGateway\TableGateway;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ServiceManager\Factory\InvokableFactory;
-use Zend\Session\Container;
-use Zend\Session\SaveHandler\DbTableGateway;
-use Zend\Session\SaveHandler\DbTableGatewayOptions;
 use Zend\Session\SessionManager;
 
 class Module implements ConfigProviderInterface, ServiceProviderInterface {
@@ -41,42 +42,11 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface {
     public function getServiceConfig() {
         return array(
             'factories' => array(
-                'LoggingService' => function($sm) {
-                    return new LoggingService();
-                },
-                'RestService' => function($sm) {
-                    return new RestService($sm);
-                },
-                'ReportService' => function($sm) {
-                    return new ReportService($sm);
-                },
-                'FFMEntityManager' => function($sm) {
-                    return new Service\FFMEntityManagerService($sm->get('Doctrine\ORM\EntityManager'));
-                },
-                'Zend\Session\SessionManager' => function ($sm) {
-                    $config = $sm->get('config');
-                    $session = $config['session'];
-                    $sessionConfig = null;
-                    if (isset($session['config'])) {
-                        $class = isset($session['config']['class']) ? $session['config']['class'] : 'Zend\Session\Config\SessionConfig';
-                        $options = isset($session['config']['options']) ? $session['config']['options'] : array();
-                        $sessionConfig = new $class();
-                        $sessionConfig->setOptions($options);
-                    }
-                    $sessionStorage = null;
-                    if (isset($session['storage'])) {
-                        $class = $session['storage'];
-                        $sessionStorage = new $class();
-                    }
-                    $adapter = $sm->get('Zend\Db\Adapter\Adapter');
-                    $tableGateway = new TableGateway('session', $adapter);
-                    $saveHandler = new DbTableGateway($tableGateway, new DbTableGatewayOptions());
-                    $manager = new SessionManager();
-                    $manager->setSaveHandler($saveHandler);
-                    $sessionManager = new SessionManager($sessionConfig, $sessionStorage, $saveHandler);
-                    Container::setDefaultManager($sessionManager);
-                    return $sessionManager;
-                },
+                'LoggingService' => LoggingServiceFactory::class,
+                'RestService' => RestServiceFactory::class,
+                'ReportService' => ReportServiceFactory::class,
+                'FFMEntityManager' => FFMEntityManagerServiceFactory::class,
+                'SessionManager' => SessionManagerFactory::class,
             ),
         );
     }

@@ -18,7 +18,8 @@ class UserRoleXref
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="string")
+     * @ORM\ManyToOne(targetEntity="User", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="username", referencedColumnName="username")
      */
     protected $username;
     

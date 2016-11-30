@@ -1,0 +1,17 @@
+2016-11-30T06:20:30-06:00 INFO (6): Allowed: 1
+2016-11-30T06:20:30-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-11-30T06:20:31-06:00 INFO (6): AjaxItemController found!
+2016-11-30T06:20:31-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1122&_=1480508431197
+2016-11-30T06:20:31-06:00 INFO (6): ItemsController Ajax called.
+2016-11-30T06:20:31-06:00 INFO (6): Retrieving customerlistitems.
+2016-11-30T06:20:33-06:00 INFO (6): Found 13 customers in db.
+2016-11-30T06:20:33-06:00 INFO (6): Found 48 items in svc and 13 in DB.
+2016-11-30T06:20:33-06:00 DEBUG (7): Retrieved 48 customerlistitems.
+2016-11-30T06:20:33-06:00 INFO (6): No price overrides found!
+2016-11-30T06:20:33-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-11-30T06:40:20-06:00 INFO (6): Allowed: 1
+2016-11-30T06:40:20-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-11-30T06:40:20-06:00 INFO (6): ItemsController 87: Posting...
+2016-11-30T06:40:20-06:00 INFO (6): ItemsController 122: Sanitizing...
+2016-11-30T06:40:20-06:00 INFO (6): Saved added row: 6
+2016-11-30T06:40:20-06:00 INFO (6): Saved added product with negative PK: -6

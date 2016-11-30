@@ -1,4 +1,15 @@
 DROP TABLE IF EXISTS album;
+DROP TABLE IF EXISTS roles;
+DROP TABLE IF EXISTS row_plus_items_page;
+DROP TABLE IF EXISTS item_price_override;
+DROP TABLE IF EXISTS pricing_override_report;
+DROP TABLE IF EXISTS item_table_checkbox;
+DROP TABLE IF EXISTS user_products;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS session;
+
 CREATE TABLE album (
     id INTEGER PRIMARY KEY AUTOINCREMENT, 
     artist varchar(100) NOT NULL, 
@@ -11,13 +22,7 @@ INSERT INTO album (artist, title) VALUES ('Bruce Springsteen', 'Wrecking Ball (D
 INSERT INTO album (artist, title) VALUES ('Lana Del Rey', 'Born To Die');
 INSERT INTO album (artist, title) VALUES ('Gotye', 'Making Mirrors');
 
-DROP TABLE IF EXISTS row_plus_items_page;
-DROP TABLE IF EXISTS item_price_override;
-DROP TABLE IF EXISTS pricing_override_report;
-DROP TABLE IF EXISTS item_table_checkbox;
-DROP TABLE IF EXISTS products;
-DROP TABLE IF EXISTS customers;
-DROP TABLE IF EXISTS users;
+
 CREATE TABLE `users` (
     `username` varchar(100) PRIMARY KEY,
     `version` INTEGER DEFAULT 1,
@@ -65,7 +70,6 @@ VALUES('iderfler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('jmeade', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Jody Meade', 180, 'jody@fultonfishmarket.com', '570-335-6484');
 
-DROP TABLE IF EXISTS roles;
 CREATE TABLE roles (
     role varchar(25) PRIMARY KEY,
     description varchar(100) NOT NULL
@@ -94,8 +98,6 @@ INSERT INTO user_role_xref VALUES('sales', 'bzakrinski');
 INSERT INTO user_role_xref VALUES('sales', 'iderfler');
 INSERT INTO user_role_xref VALUES('sales', 'jmeade');
 
-
-DROP TABLE IF EXISTS session;
 CREATE TABLE `session` (
     `id` char(32),
     `name` char(32),
@@ -111,8 +113,6 @@ CREATE TABLE `products` (
     `sku` VARCHAR(25),
     `productname` VARCHAR(255) NOT NULL,
     `description` VARCHAR(255),
-    `comment` VARCHAR(255),
-    `option` VARCHAR(255),
     `qty` INTEGER,
     `wholesale` INTEGER,
     `retail` INTEGER,
@@ -157,6 +157,24 @@ ON `customers` (`name`);
 
 CREATE INDEX index_customers_company
 ON `customers` (`company`);
+
+CREATE TABLE `user_products` (
+    `customer` INTEGER,
+    `product` INTEGER,
+    `version` INTEGER DEFAULT 1,
+    `comment` VARCHAR(255) DEFAULT NULL,
+    `option` VARCHAR(255) DEFAULT NULL,
+    `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    `updated` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY(`customer`, `product`),
+    FOREIGN KEY(product) REFERENCES products(id),
+    FOREIGN KEY(customer) REFERENCES customers(id)
+);
+
+CREATE TRIGGER update_user_products_trigger UPDATE OF version ON `user_products` 
+BEGIN
+UPDATE `user_products` SET created = CURRENT_TIMESTAMP WHERE id = old.id;
+END;
 
 CREATE TABLE `row_plus_items_page` (
     `id` INTEGER PRIMARY KEY AUTOINCREMENT, 

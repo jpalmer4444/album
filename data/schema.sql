@@ -49,6 +49,8 @@ ON users (username, salespersonname, sales_attr_id);
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
+VALUES('foobarx', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Foo Bar X', 247, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
@@ -79,7 +81,8 @@ DROP TABLE IF EXISTS user_role_xref;
 CREATE TABLE user_role_xref (
     role varchar(25) NOT NULL,
     username varchar(100) NOT NULL,
-    PRIMARY KEY(role, username)
+    PRIMARY KEY(role, username),
+    FOREIGN KEY(username) REFERENCES users(username)
 );
 
 
@@ -89,6 +92,7 @@ INSERT INTO user_role_xref VALUES('admin', 'jdowns');
 INSERT INTO user_role_xref VALUES('admin', 'mspindler');
 INSERT INTO user_role_xref VALUES('admin', 'cmetallo');
 INSERT INTO user_role_xref VALUES('sales', 'bzakrinski');
+INSERT INTO user_role_xref VALUES('sales', 'foobarx');
 INSERT INTO user_role_xref VALUES('sales', 'iderfler');
 INSERT INTO user_role_xref VALUES('sales', 'jmeade');
 

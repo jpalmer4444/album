@@ -3,6 +3,8 @@
 namespace DataAccess\FFM\Entity;
 
 use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,97 +12,92 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="products")
  */
 class Product {
-    
-    public function __construct()
-    {
-        $this->_created=new DateTime();
-        $this->userProducts = new \Doctrine\Common\Collections\ArrayCollection();
+
+    public function __construct() {
+        $this->_created = new DateTime();
+        $this->userProducts = new ArrayCollection();
     }
-    
+
     /**
      * @ORM\Id
      * @ORM\Column(name="id", type="integer")
      */
     protected $id;
-    
-    /** 
+
+    /**
      * Used internally by Doctrine - Do not touch or manipulate.
      * @ORM\Column(type="integer") 
      * @ORM\Version 
      */
     private $version;
-    
+
     /**
      * @ORM\Column(type="string", length=255)
      */
     protected $productname;
-    
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     protected $description;
-    
-    /** 
+
+    /**
      * @ORM\Column(type="integer")
      */
     private $qty;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     protected $wholesale;
-    
+
     /**
      * @ORM\Column(type="string", length=100)
      */
     protected $uom;
-    
+
     /**
      * @ORM\Column(type="string", length=25)
      */
     protected $sku;
-    
+
     /**
      * @ORM\Column(type="integer")
      */
     protected $retail;
-    
+
     /**
      * @ORM\Column(name="created", type="datetime", nullable=true)
      */
     protected $_created;
-    
+
     /**
      * @ORM\Column(name="updated", type="datetime", nullable=true)
      */
     protected $_updated;
-    
+
     /**
      * @ORM\Column(name="status", type="boolean")
      */
     protected $status;
-    
+
     /**
      * @ORM\Column(name="saturdayenabled", type="boolean")
      */
     protected $saturdayenabled;
-    
+
     /**
      * @ORM\OneToMany(targetEntity="UserProduct", mappedBy="product")
      */
     private $userProducts;
 
-    
     public function getId() {
         return $this->id;
     }
-    
+
     public function getCustomerUserProduct($customer) {
-        foreach($this->userProducts as $userproduct){
-            if($userproduct->getCustomer()->getId() == $customer->getId()){
-                return $userproduct;
-            }
-        }
+        $criteria = Criteria::create()->where(Criteria::expr()->eq("customer", $customer));
+        return $this->getUserProducts()->matching($criteria);
     }
 
     public function getVersion() {
@@ -150,7 +147,7 @@ class Product {
     public function getSaturdayenabled() {
         return $this->saturdayenabled;
     }
-    
+
     public function getUserProducts() {
         return $this->userProducts;
     }
@@ -219,10 +216,10 @@ class Product {
         $this->saturdayenabled = $saturdayenabled;
         return $this;
     }
-    
+
     public function setUserProducts($userProducts) {
         $this->userProducts = $userProducts;
         return $this;
     }
-    
+
 }

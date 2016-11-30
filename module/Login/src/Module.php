@@ -1,15 +1,11 @@
 <?php
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 namespace Login;
 
 use Login\Controller\LoginController;
 use Login\Controller\SuccessController;
+use Login\Factory\LoginControllerFactory;
+use Login\Factory\SuccessControllerFactory;
 use Login\Model\MyAuthStorage;
 use Zend\Authentication\Adapter\DbTable\CallbackCheckAdapter as AuthAdapter;
 use Zend\Authentication\AuthenticationService;
@@ -39,20 +35,8 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
 
         return [
             'factories' => [
-                LoginController::class => function($container) {
-                    return new LoginController(
-                            $container->get('AuthService'), 
-                            $container->get('Login\Model\MyAuthStorage'),
-                            $container->get('LoggingService'),
-                            $container->get('FFMEntityManager')
-                    );
-                },
-                SuccessController::class => function($container) {
-                    return new SuccessController(
-                            $container->get('AuthService'),
-                            $container->get('LoggingService')
-                    );
-                },
+                LoginController::class => LoginControllerFactory::class,
+                SuccessController::class => SuccessControllerFactory::class,
             ],
         ];
     }

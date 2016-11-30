@@ -39,7 +39,7 @@ class ItemsController extends AbstractActionController {
     protected $productrepository;
     protected $userproductrepository;
     protected $serviceLocator;
-    
+
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator) {
         $this->serviceLocator = $serviceLocator;
     }
@@ -51,17 +51,11 @@ class ItemsController extends AbstractActionController {
      * @param \Sales\Controller\FormElementManager $formManager
      * @param type $config simple array of environment specific properties
      */
-    public function __construct(
-            LoggingServiceInterface $logger, 
-            MyAuthStorage $myauthstorage, 
-            AbstractPluginManager $formManager, 
-            UserRepositoryImpl $userrepository, 
-            RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository,
-            CustomerRepositoryImpl $customerrepository,
-            ProductRepositoryImpl $productrepository, 
-            UserProductRepositoryImpl $userproductrepository, 
-            $config = NULL
-    ) {
+    public function __construct(LoggingServiceInterface $logger, MyAuthStorage $myauthstorage, 
+            AbstractPluginManager $formManager, UserRepositoryImpl $userrepository, 
+            RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, CustomerRepositoryImpl $customerrepository, 
+            ProductRepositoryImpl $productrepository, UserProductRepositoryImpl $userproductrepository, 
+            $config = NULL) {
         $this->logger = $logger;
         $this->myauthstorage = $myauthstorage;
         $this->pricingconfig = $config;
@@ -74,11 +68,14 @@ class ItemsController extends AbstractActionController {
     }
 
     public function indexAction() {
-        $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
-        $this->customerid = $this->params()->fromQuery('customerid');
-        $this->customername = $this->params()->fromQuery('customername');
-        $this->companyname = $this->params()->fromQuery('companyname');
+        
+        $this->logger->info('ItemsController 69: Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
+        $this->customerid = urldecode($this->params()->fromQuery('customerid'));
+        $this->customername = urldecode($this->params()->fromQuery('customername'));
+        $this->companyname = urldecode($this->params()->fromQuery('companyname'));
+        
         //redirect if any of the needed parameters are missing!
+        
         if (empty($this->customerid) || empty($this->customername) || empty($this->companyname)) {
             //must have customerid and customername params or redirect back to /users to retrieve
             //correct params to render this page.
@@ -88,10 +85,12 @@ class ItemsController extends AbstractActionController {
             ];
             return $this->redirect()->toRoute('users', $params, array());
         }
+        
         $form = $this->formManager->get('RowPlusItemsPageForm');
         $request = $this->getRequest();
         if ($request->isPost()) {
             $jsonModelArr = array();
+            $this->logger->info('ItemsController 87: Posting...');
             $postData = $request->getPost();
             $form->setData($postData);
             if ($form->isValid()) {
@@ -109,24 +108,27 @@ class ItemsController extends AbstractActionController {
                 if (array_key_exists("sku", $jsonModelArr)) {
                     $product->setSku($jsonModelArr["sku"]);
                 }
+                
                 $jsonModelArr["productname"] = empty($form->getData()['product']) ? '' : $form->getData()['product'];
                 if (array_key_exists("productname", $jsonModelArr)) {
                     $product->setProductname($jsonModelArr["productname"]);
                 }
+                
                 $jsonModelArr["shortescription"] = empty($form->getData()['description']) ? '' : $form->getData()['description'];
                 if (array_key_exists("shortescription", $jsonModelArr)) {
                     $product->setDescription($jsonModelArr["shortescription"]);
                 }
-                
+
                 $jsonModelArr["comment"] = empty($form->getData()['comment']) ? '' : $form->getData()['comment'];
                 if (array_key_exists("comment", $jsonModelArr)) {
                     $userproduct->setComment($jsonModelArr["comment"]);
                 }
-                
+
                 $jsonModelArr["qty"] = '';
                 $jsonModelArr["option"] = '';
                 $jsonModelArr["wholesale"] = '';
                 $jsonModelArr["retail"] = '';
+                $this->logger->info('ItemsController 122: Sanitizing...');
                 $jsonModelArr["overrideprice"] = empty($form->getData()['overrideprice']) ? '' : $form->getData()['overrideprice'];
                 if (array_key_exists("overrideprice", $jsonModelArr)) {
                     $int3 = filter_var($jsonModelArr["overrideprice"], FILTER_SANITIZE_NUMBER_INT);
@@ -145,7 +147,7 @@ class ItemsController extends AbstractActionController {
                 $customer = $this->customerrepository->findCustomer($this->customerid);
                 $record->setCustomer($customer);
                 $salesperson = $this->userrepository->findUser(empty($this->myauthstorage->getSalespersonInPlay()) ? $this->myauthstorage->getUser()->getUsername() : $this->myauthstorage->getSalespersonInPlay()->getUsername());
-                
+
                 $record->setSalesperson($salesperson);
                 //var_dump($record);
                 $this->rowplusitemspagerepository->persistAndFlush($record);
@@ -169,10 +171,10 @@ class ItemsController extends AbstractActionController {
         //this might need to be changed if we want the report to always render the 
         //selected salesperson instead of the logged-in salesperson as is the case when
         //an admin is using the app.
-        
+
         $customer = $this->customerrepository->findCustomer($this->customerid);
-        
-        if(empty($customer)){
+
+        if (empty($customer)) {
             $params = [
                 'controller' => 'UsersController',
                 'action' => 'index',
@@ -180,7 +182,7 @@ class ItemsController extends AbstractActionController {
             $this->logger->info("Redirecting to users page because customer was not found!");
             return $this->redirect()->toRoute('users', $params, array());
         }
-        
+
         $time = new DateTime();
         $reporttime = $time->format('Y_m_d');
 
@@ -191,13 +193,13 @@ class ItemsController extends AbstractActionController {
             "salesperson" => $this->myauthstorage->getUser()->getUsername(),
             "salespersonname" => $this->myauthstorage->getUser()->getSalespersonname(),
             "salespersonemail" => $this->myauthstorage->getUser()->getEmail(),
-            "companyname" => $customer->getCompany(),
+            "companyname" => urlencode($customer->getCompany()),
             "salespersonphone1" => $this->myauthstorage->getUser()->getPhone1(),
             "salespersonid" => $this->myauthstorage->getUser()->getSales_attr_id(),
             "form" => $form
         ));
     }
-    
+
     public function reportAction() {
         $this->logger->info('Persisting PDF Report ');
         $this->customerid = $this->params()->fromQuery('customerid');
@@ -219,17 +221,21 @@ class ItemsController extends AbstractActionController {
 
                     $obj = json_decode($value, true);
                     $pricingOverrideReport = new PricingOverrideReport();
-                    
+                    $overrideSet = false;
                     if (array_key_exists("overrideprice", $obj)) {
-                        $int1 = filter_var($obj["overrideprice"], FILTER_SANITIZE_NUMBER_INT);
+                        $int1 = $obj['overrideprice'] * 100;
                         $pricingOverrideReport->setOverrideprice($int1);
+                        $overrideSet = true;
                     }
-                    
+
                     if (array_key_exists("retail", $obj)) {
-                        $int2 = filter_var($obj["retail"], FILTER_SANITIZE_NUMBER_INT);
-                        $pricingOverrideReport->setOverrideprice($int2);
+                        $int2 = $obj['retail'] * 100;
+                        $pricingOverrideReport->setRetail($int2);
+                        if (!$overrideSet) {
+                            $pricingOverrideReport->setOverrideprice($int2);
+                        }
                     }
-                    
+
                     $created = new DateTime("now");
                     $pricingOverrideReport->setCreated($created);
                     $customer = $this->customerrepository->findCustomer($this->customerid);

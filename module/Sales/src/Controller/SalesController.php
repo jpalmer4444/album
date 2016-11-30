@@ -3,7 +3,11 @@
 namespace Sales\Controller;
 
 use Application\Service\FFMEntityManagerServiceInterface;
+use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
+use DataAccess\FFM\Entity\User;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\ServiceManager\AbstractPluginManager;
+use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
 class SalesController extends AbstractActionController {
@@ -15,16 +19,43 @@ class SalesController extends AbstractActionController {
     //environment specifics properties/values
     protected $pricingconfig;
     protected $entityManager;
+    protected $userrepository;
+    protected $userForm;
 
-    public function __construct($container, FFMEntityManagerServiceInterface $ffmEntityManagerService) {
+    public function __construct($container, FFMEntityManagerServiceInterface $ffmEntityManagerService, AbstractPluginManager $formManager, UserRepositoryImpl $userrepository) {
         $this->restService = $container->get('RestService');
         $this->logger = $container->get('LoggingService');
         $this->myauthstorage = $container->get('Login\Model\MyAuthStorage');
         $this->pricingconfig = $container->get('config')['pricing_config'];
         $this->entityManager = $ffmEntityManagerService->getEntityManager();
+        $this->formManager = $formManager;
+        $this->userrepository = $userrepository;
     }
 
     public function indexAction() {
+        $request = $this->getRequest();
+        $this->userForm = $this->formManager->get('DataAccess\FFM\Entity\Form\UserForm');
+        if ($request->isPost()) {
+            //for adding a new User/Salesperson - submit POST with salesattrid and fullname query parameters.
+            //for editing an existing User/Salesperson submit POST with User/Salesperson existing username only.
+            $salespersonusername = $this->params()->fromQuery('username');
+            $salesattrid = $this->params()->fromQuery('salesattrid');
+            $fullname = $this->params()->fromQuery('fullname');
+            $salesperson = !empty($salespersonusername) ? $this->userrepository->findUser($salespersonusername) : new User();
+            if (!empty($salesattrid) && !empty($fullname)) {
+                $salesperson->setSales_attr_id($salesattrid);
+                $salesperson->setSalespersonname($fullname);
+            }
+            $this->userForm->bind($salesperson);
+            $this->userForm->setData($request->getPost());
+            if ($this->userForm->isValid()) {
+                if (empty($salespersonusername)) {
+                    $this->entityManager->persist($salesperson);
+                }
+                $this->entityManager->flush();
+            }
+            return new JsonModel(array("success" => true));
+        }
         $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_sales_controller'] . '.');
         $params = [
             "id" => $this->pricingconfig['by_sku_userid'],
@@ -39,7 +70,6 @@ class SalesController extends AbstractActionController {
         } else {
             $this->logger->debug('No ' . $this->pricingconfig['by_sku_object_sales_controller'] . ' items found! Error!');
         }
-
         //lookup salesperson in DB for every one in REST call.
         if (!empty($json)) {
             //build query for salespeople to retrieve email and phone number
@@ -48,15 +78,27 @@ class SalesController extends AbstractActionController {
             $idx = 0;
             foreach ($json["salespeople"] as $salesperson) {
                 $q .= "'" . $salesperson['salesperson'] . "'";
-                if(++$idx != $cnt){
+                if (++$idx != $cnt) {
                     $q .= ", ";
                 }
             }
             $q .= ") ORDER BY user.username DESC";
             $this->logger->info("query: " . $q);
             $users = $this->entityManager->createQuery($q)->getResult();
-            if(!empty($users)){
-                foreach($users as $user){
+            if (!empty($users)) {
+
+                $usersInSvc = count($json[$this->pricingconfig['by_sku_object_sales_controller']]);
+                if ($usersInSvc > count($users)) {
+
+                    //must add any Salespeople not found in DB
+                    foreach ($json[$this->pricingconfig['by_sku_object_sales_controller']] as $restsalesperson) {
+
+                        $salespersonid = $restsalesperson['id'];
+                        $salespersonname = $restsalesperson['salesperson'];
+                    }
+                }
+
+                foreach ($users as $user) {
                     //$this->logger->info(var_dump($user));
                     //here we want to iterate $json['salespeople'] and find associated salesperson
                     //and then we want to add email and phone to that salesperson
@@ -65,7 +107,8 @@ class SalesController extends AbstractActionController {
         }
 
         return new ViewModel(array(
-            "json" => $json
+            "json" => $json,
+            "form" => $this->userForm
         ));
     }
 
