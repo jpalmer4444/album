@@ -16,8 +16,24 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var _customer_id = "<?= $escaper->escapeHtml($this->customerid) ?>";
-    var __company_name = "<?= $this->companyname ?>";
-    var _company_name = decodeURIComponent(__company_name).replace(new RegExp("\\+", "g"), ' ');
+    var __company_name = "<?= $escaper->escapeHtml($this->companyname) ?>";
+    var _company_name = __company_name;
+    var __customername = "<?= $escaper->escapeHtml($this->customername) ?>";
+    var _customername = __customername;
+    try {
+      _company_name = decodeURIComponent(__company_name).replace(new RegExp("\\+", "g"), ' ');
+      //replace &#039; with '
+      _customername = decodeURIComponent(__customername).replace(new RegExp("\\&#039;", "g"), '\'');
+      _company_name = decodeURIComponent(_company_name).replace(new RegExp("\\&#039;", "g"), '\'');
+      //&#x00027;
+      _customername = decodeURIComponent(_customername).replace(new RegExp("\\&#x00027;", "g"), '\'');
+      _company_name = decodeURIComponent(_company_name).replace(new RegExp("\\&#x00027;", "g"), '\'');
+      //&apos;
+      _customername = decodeURIComponent(_customername).replace(new RegExp("\\&apos;", "g"), '\'');
+      _company_name = decodeURIComponent(_company_name).replace(new RegExp("\\&apos;", "g"), '\'');
+    } catch (e) {
+      console.log(JSON.stringify(e));
+    }
 
     //#############################################################
     //#############################################################
@@ -53,7 +69,7 @@ $form->prepare();
     var submitOverride = function (rowIdx, id) {
       var overrideprice = $('#overrideprice').val();
       var data = $(this).serialize();
-      $.getJSON("ajax/items?myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername=<?= $this->customername ?>&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
+      $.getJSON("ajax/items?myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
         return overrideCallback(data);
       });
       return false;
@@ -159,6 +175,8 @@ $form->prepare();
       var data = row.data();
       return data['productname'] + ' <div class="pull-right"><small ><span class="glyphicon glyphicon-barcode" aria-hidden="true"></span> <span >' + data['sku'] + '</span></small><span><button type="button" class="close" data-dismiss="modal">&times;</button></span></div>';
     };
+    
+    console.log('parsed generateDetailsModalHeader');
 
     //#############################################################
     //#############################################################
@@ -392,26 +410,10 @@ $form->prepare();
         return '<span class="ellipsis" title="' + esc(d) + '">' + shortened + '&#8230;</span>';
       };
     };
-
-    var pdfAvailableFn = function (dt, config) {
+    
+    var anySelected = function () {
       var selectedRows = $API.rows({selected: true}).count();
       return selectedRows > 0;
-    };
-    var noPdfAvailable = function (dt, config) {
-      var selectedRows = $API.rows({selected: true}).count();
-      return selectedRows === 0;
-    };
-
-    var triggerSelect = function () {
-      var selectedRows = $API.rows({selected: true}).count();
-      var someSelected = selectedRows > 0;
-      $API.button(3).enable(someSelected);
-      var $pdfButton = $('.dt-buttons').find('a').last();
-      if (someSelected) {
-        $pdfButton.text('PDF');
-      } else {
-        $pdfButton.text('Please Make Selections');
-      }
     };
 
     //#############################################################
@@ -424,7 +426,7 @@ $form->prepare();
     $(document).ready(function () {
       //initialize page tool tips.
       $('[data-toggle="tooltip"]').tooltip();
-
+      console.log("Making datatables AJAX call with url: " + '/ajax/items?myaction=customerlisttableget&customerid=' + _customer_id);
       $API = $('#customerlisttable').DataTable({
         "ajax": '/ajax/items?myaction=customerlisttableget&customerid=' + _customer_id,
         //#############################################################
@@ -589,7 +591,6 @@ $form->prepare();
               $.getJSON(url + '&customerid=' + _customer_id, function () {
               }).done(function () {
                 console.log('Selected All');
-                triggerSelect();
               }).fail(function () {
                 console.log("select REST Call failed.");
               });
@@ -609,7 +610,6 @@ $form->prepare();
               $.getJSON('ajax/items?myaction=unselect&customerid=' + _customer_id, function () {
               }).done(function () {
                 console.log('Unselected All');
-                triggerSelect();
               }).fail(function () {
                 console.log("unselect REST Call failed.");
               });
@@ -623,8 +623,9 @@ $form->prepare();
             extend: 'pdfHtml5',
             title: _company_name + "_<?= $this->reporttime ?>".split(' ').join('').split('-').join('_'),
             orientation: 'landscape',
-            message: _company_name + '\r\n Salesperson: <?= $this->salespersonname ?> \r\n Email: <?= $escaper->escapeHtml($this->salespersonemail) ?> \r\n Phone: <?= $escaper->escapeHtml($this->salespersonphone1) ?> \r\n Customer: <?= $this->customername ?> \r\n Prices valid as of ' + getPrettyTime() + '.  Prices and availability subject to change.',
+            message: _company_name + '\r\n Salesperson: <?= $this->salespersonname ?> \r\n Email: <?= $escaper->escapeHtml($this->salespersonemail) ?> \r\n Phone: <?= $escaper->escapeHtml($this->salespersonphone1) ?> \r\n Customer: ' + _customername + ' \r\n Prices valid as of ' + getPrettyTime() + '.  Prices and availability subject to change.',
             pageSize: 'LEGAL',
+            className: 'hide',
             exportOptions: {
               rows: {
                 selected: true
@@ -710,6 +711,28 @@ $form->prepare();
                 }
               });
             }
+          },
+          {
+            text: 'PDF',
+            action: function (e, dt, node, config) {
+              if (anySelected()) {
+                $API.button(3).trigger();
+              } else {
+                BootstrapDialog.show({
+                  type: BootstrapDialog.TYPE_DEFAULT,
+                  title: 'No Rows Selected',
+                  message: 'You have clicked "PDF" button, but you haven\'t selected any Products. Please select some and try again.',
+                  buttons: [
+                    {
+                      label: 'Close',
+                      action: function (dialogRef) {
+                        dialogRef.close();
+                      }
+                    }
+                  ]
+                });
+              }
+            }
           }
         ]
       });
@@ -728,10 +751,6 @@ $form->prepare();
         console.log('Showing Modal!');
         $('#detailRowModal').remove();
         $('footer').after($(modal).modal('show'));
-      });
-
-      $("#customerlisttable").on('select', function () {
-        triggerSelect();
       });
 
       //row_checkbox
@@ -772,7 +791,6 @@ $form->prepare();
         $.getJSON(url + '&customerid=' + _customer_id, function () {
         }).done(function () {
           console.log(checked ? 'Selected ' + id : 'Unselected ' + id);
-          triggerSelect();
         }).fail(function () {
           console.log("select/unselect REST Call failed.");
         });
@@ -820,7 +838,6 @@ $form->prepare();
           });
         }
         //##########  END Custom Datatables Buttons Impl ##############
-        triggerSelect();
       });
 
       //#############################################################

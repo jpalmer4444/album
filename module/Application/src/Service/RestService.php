@@ -55,8 +55,13 @@ class RestService implements RestServiceInterface {
         if(array_key_exists("sslcert", $this->pricingconfig)){
             $options['sslcert'] = $this->pricingconfig['sslcert'];
         }else{
-            $options['sslcapath'] = $this->pricingconfig['sslcapath'];
-            $options['sslcafile'] = $this->pricingconfig['sslcafile'];
+            if(array_key_exists("sslcapath", $this->pricingconfig)){
+                $options['sslcapath'] = $this->pricingconfig['sslcapath'];
+            }
+            //$options['sslcapath'] = $this->pricingconfig['sslcapath'];
+            if(array_key_exists("sslcafile", $this->pricingconfig)){
+                $options['sslcafile'] = $this->pricingconfig['sslcafile'];
+            }
         }
 
         $client->setOptions($options);

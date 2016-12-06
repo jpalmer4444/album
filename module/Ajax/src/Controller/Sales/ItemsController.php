@@ -4,7 +4,6 @@ namespace Ajax\Controller\Sales;
 
 use DataAccess\FFM\Entity\ItemPriceOverride;
 use DataAccess\FFM\Entity\Product;
-use DataAccess\FFM\Entity\RowPlusItemsPage;
 use DataAccess\FFM\Entity\UserProduct;
 use DateTime;
 use Doctrine\DBAL\LockMode;
@@ -190,10 +189,18 @@ class ItemsController extends AbstractRestfulController {
     }
 
     protected function getTable() {
-        $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
+        $this->logger->info('AjaxItemsController:192: Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
         $customerid = $this->params()->fromQuery('customerid');
         $this->customerid = $customerid;
         $params = $this->getBaseBySkuParams();
+        /*
+         * access_log
+         * error_log
+         * pricing-custom.log
+         * pricing-error.log
+         * ssl_error_log
+         * ssl_request_log
+         */
         $params["customerid"] = $customerid;
         $method = $this->pricingconfig['by_sku_method'];
         $json = $this->rest($this->pricingconfig['by_sku_base_url'], $method, $params);
@@ -345,14 +352,18 @@ class ItemsController extends AbstractRestfulController {
 
     protected function unselectAll() {
         $customerid = $this->params()->fromQuery('customerid');
-        $this->logger->info('UnSelecting All.');
+
         $userinplay = $this->myauthstorage->getSalespersonInPlay();
         if (empty($userinplay)) {
             $userinplay = $this->myauthstorage->getUser();
         }
         $removedIDS = $this->checkboxService->getRemovedIDS($customerid, $userinplay->getUsername());
         foreach ($removedIDS as $id) {
-            $this->checkboxService->removeRemovedID($id, $customerid, $userinplay->getUsername());
+            if (strpos(get_class($id), 'RowPlusItemsPage') !== false) {
+                $this->checkboxService->removeRemovedID("A" . $id->getId(), $customerid, $userinplay->getUsername());
+            } else {
+                $this->checkboxService->removeRemovedID("P" . $id->getId(), $customerid, $userinplay->getUsername());
+            }
         }
         return new JsonModel(array(
             "success" => true

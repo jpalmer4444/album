@@ -71,7 +71,7 @@ class ItemsController extends AbstractActionController {
 
     public function indexAction() {
         
-        $this->logger->info('ItemsController 69: Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
+        $this->logger->info('ItemsController 74: Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
         $this->customerid = urldecode($this->params()->fromQuery('customerid'));
         $this->customername = urldecode($this->params()->fromQuery('customername'));
         $this->companyname = urldecode($this->params()->fromQuery('companyname'));
@@ -176,6 +176,7 @@ class ItemsController extends AbstractActionController {
         //an admin is using the app.
 
         $customer = $this->customerrepository->findCustomer($this->customerid);
+        $this->logger->info('ItemsController 179: Found customer ' . $customer->getName());
 
         if (empty($customer)) {
             $params = [
@@ -188,18 +189,20 @@ class ItemsController extends AbstractActionController {
 
         $time = new DateTime();
         $reporttime = $time->format('Y_m_d');
+        
+        $salespersoninplay = $this->myauthstorage->getSalespersonInPlay();
 
         return new ViewModel(array(
             "customerid" => $this->customerid,
             "reporttime" => $reporttime,
             "customername" => $this->customername,
-            "salesperson" => $this->myauthstorage->getUser()->getUsername(),
-            "salespersonname" => $this->myauthstorage->getUser()->getSalespersonname(),
-            "salespersonemail" => $this->myauthstorage->getUser()->getEmail(),
+            "salesperson" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getUsername() : $salespersoninplay->getUsername(),
+            "salespersonname" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getSalespersonname() : $salespersoninplay->getSalespersonname(),
+            "salespersonemail" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getEmail() : $salespersoninplay->getEmail(),
             "companyname" => urlencode($customer->getCompany()),
             "companynamehtml" => $customer->getCompany(),
-            "salespersonphone1" => $this->myauthstorage->getUser()->getPhone1(),
-            "salespersonid" => $this->myauthstorage->getUser()->getSales_attr_id(),
+            "salespersonphone1" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getPhone1() : $salespersoninplay->getPhone1(),
+            "salespersonid" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getSales_attr_id() : $salespersoninplay->getSales_attr_id(),
             "form" => $form
         ));
     }

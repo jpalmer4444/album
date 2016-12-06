@@ -47,6 +47,7 @@ class ItemTableCheckboxRepositoryImpl extends FFMRepository {
         }else{
             $record = $this->findCheckbox(substr($id, 1), null, $customerid, $salespersonusername);
         }
+        //error_log("Record: " . $record, 0);
         $record->setChecked(false);
         $this->getEntityManager()->persist($record);
         $this->getEntityManager()->flush();

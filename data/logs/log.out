@@ -1825,3 +1825,1440 @@ Stack trace:
 2016-12-06T05:35:14-06:00 INFO (6): MyAuthStorage:50: admin
 2016-12-06T05:35:14-06:00 INFO (6): No price overrides found!
 2016-12-06T05:35:14-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T05:48:16-06:00 INFO (6): Allowed: 1
+2016-12-06T05:48:16-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:48:17-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:48:17-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481024896860
+2016-12-06T05:48:17-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:48:17-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:48:18-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T05:48:18-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T05:48:18-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T05:48:18-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:48:18-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:48:18-06:00 INFO (6): No price overrides found!
+2016-12-06T05:48:18-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T05:48:23-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:48:23-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P751&customerid=686
+2016-12-06T05:48:23-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:48:23-06:00 INFO (6): Selecting P751
+2016-12-06T05:48:23-06:00 INFO (6): Creating and persisting Checkbox record. ID: P751 CUSTOMERID: 686 SALESPERSONUSERNAME: iderfler
+2016-12-06T05:48:25-06:00 INFO (6): Allowed: 1
+2016-12-06T05:48:25-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:48:26-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:48:26-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481024905989
+2016-12-06T05:48:26-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:48:26-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:48:27-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T05:48:27-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T05:48:27-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T05:48:27-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:48:27-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:48:27-06:00 INFO (6): No price overrides found!
+2016-12-06T05:48:27-06:00 INFO (6): Found 1 removedSKUs in Session!
+2016-12-06T05:48:29-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:48:29-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P751&customerid=686
+2016-12-06T05:48:29-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:48:32-06:00 INFO (6): Allowed: 1
+2016-12-06T05:48:32-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:48:33-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:48:33-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481024912754
+2016-12-06T05:48:33-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:48:33-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:48:34-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T05:48:34-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T05:48:34-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T05:48:34-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:48:34-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:48:34-06:00 INFO (6): No price overrides found!
+2016-12-06T05:48:34-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T05:48:37-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:48:37-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P751&customerid=686
+2016-12-06T05:48:37-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:48:37-06:00 INFO (6): Selecting P751
+2016-12-06T05:48:39-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:48:39-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P751&customerid=686
+2016-12-06T05:48:39-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:48:43-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:48:43-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P751&customerid=686
+2016-12-06T05:48:43-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:48:43-06:00 INFO (6): Selecting P751
+2016-12-06T05:48:46-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:48:46-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P751&customerid=686
+2016-12-06T05:48:46-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:53:38-06:00 INFO (6): Allowed: 1
+2016-12-06T05:53:38-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:53:39-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:53:39-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481025218829
+2016-12-06T05:53:39-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:53:39-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:53:40-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T05:53:40-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T05:53:40-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T05:53:40-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:53:40-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:53:40-06:00 INFO (6): No price overrides found!
+2016-12-06T05:53:40-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T05:53:51-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:53:51-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P751&customerid=686
+2016-12-06T05:53:51-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:53:51-06:00 INFO (6): Selecting P751
+2016-12-06T05:53:54-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:53:54-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P751&customerid=686
+2016-12-06T05:53:54-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:54:16-06:00 INFO (6): Allowed: 1
+2016-12-06T05:54:16-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:54:17-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:54:17-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481025256416
+2016-12-06T05:54:17-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:54:17-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:54:17-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T05:54:17-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T05:54:17-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T05:54:17-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:54:17-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:54:18-06:00 INFO (6): No price overrides found!
+2016-12-06T05:54:18-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T05:54:21-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:54:21-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P751&customerid=686
+2016-12-06T05:54:21-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:54:21-06:00 INFO (6): Selecting P751
+2016-12-06T05:54:23-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:54:23-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P751&customerid=686
+2016-12-06T05:54:23-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:57:34-06:00 INFO (6): Allowed: 1
+2016-12-06T05:57:34-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:57:35-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:57:35-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481025454812
+2016-12-06T05:57:35-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:57:35-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:57:36-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T05:57:36-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T05:57:36-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T05:57:36-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:57:36-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:57:36-06:00 INFO (6): No price overrides found!
+2016-12-06T05:57:36-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T05:57:41-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:57:41-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P751&customerid=686
+2016-12-06T05:57:41-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:57:41-06:00 INFO (6): Selecting P751
+2016-12-06T05:57:45-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:57:45-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P751&customerid=686
+2016-12-06T05:57:45-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:59:14-06:00 INFO (6): Allowed: 1
+2016-12-06T05:59:14-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:59:15-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:59:15-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481025554657
+2016-12-06T05:59:15-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:59:15-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:59:16-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T05:59:16-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T05:59:16-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T05:59:16-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:59:16-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:59:16-06:00 INFO (6): No price overrides found!
+2016-12-06T05:59:16-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T06:03:48-06:00 INFO (6): AjaxItemController found!
+2016-12-06T06:03:48-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P751&customerid=686
+2016-12-06T06:03:48-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T06:03:48-06:00 INFO (6): Selecting P751
+2016-12-06T06:03:55-06:00 INFO (6): AjaxItemController found!
+2016-12-06T06:03:55-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P751&customerid=686
+2016-12-06T06:03:55-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T07:08:15-06:00 INFO (6): Allowed: 1
+2016-12-06T07:08:15-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T07:08:16-06:00 INFO (6): AjaxItemController found!
+2016-12-06T07:08:16-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481029695666
+2016-12-06T07:08:16-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T07:08:16-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T07:08:17-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T07:08:17-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T07:08:17-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T07:08:17-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T07:08:17-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T07:08:17-06:00 INFO (6): No price overrides found!
+2016-12-06T07:08:17-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T07:08:30-06:00 INFO (6): AjaxItemController found!
+2016-12-06T07:08:30-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P751&customerid=686
+2016-12-06T07:08:30-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T07:08:30-06:00 INFO (6): Selecting P751
+2016-12-06T07:08:33-06:00 INFO (6): Allowed: 1
+2016-12-06T07:08:33-06:00 INFO (6): Persisting PDF Report
+2016-12-06T07:22:55-06:00 INFO (6): Allowed: 1
+2016-12-06T07:22:55-06:00 INFO (6): Checking for identity
+2016-12-06T07:22:55-06:00 INFO (6): Identity found.
+2016-12-06T07:22:55-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T07:22:56-06:00 INFO (6): Allowed: 1
+2016-12-06T07:22:56-06:00 INFO (6): Retrieving salespeople.
+2016-12-06T07:22:56-06:00 DEBUG (7): Retrieved 5 salespeople.
+2016-12-06T07:22:56-06:00 INFO (6): query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'Foo Bar X', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+2016-12-06T07:22:59-06:00 INFO (6): Allowed: 1
+2016-12-06T07:22:59-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T07:22:59-06:00 INFO (6): Retrieving Salespeople. ID: 206
+2016-12-06T07:23:00-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T07:23:00-06:00 INFO (6): Found 0 users in db.
+2016-12-06T07:23:02-06:00 INFO (6): Allowed: 1
+2016-12-06T07:23:02-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T07:23:03-06:00 INFO (6): AjaxItemController found!
+2016-12-06T07:23:03-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1153&_=1481030582692
+2016-12-06T07:23:03-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T07:23:03-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T07:23:04-06:00 INFO (6): Found 0 customers in db.
+2016-12-06T07:23:04-06:00 INFO (6): Found 6 items in svc and 0 in DB.
+2016-12-06T07:23:04-06:00 DEBUG (7): Retrieved 6 customerlistitems.
+2016-12-06T07:23:04-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T07:23:04-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T07:23:04-06:00 INFO (6): No price overrides found!
+2016-12-06T07:23:04-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T07:23:06-06:00 INFO (6): AjaxItemController found!
+2016-12-06T07:23:06-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P80&customerid=1153
+2016-12-06T07:23:06-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T07:23:06-06:00 INFO (6): Selecting P80
+2016-12-06T07:23:06-06:00 INFO (6): Creating and persisting Checkbox record. ID: P80 CUSTOMERID: 1153 SALESPERSONUSERNAME: bzakrinski
+2016-12-06T07:23:07-06:00 INFO (6): AjaxItemController found!
+2016-12-06T07:23:07-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P449&customerid=1153
+2016-12-06T07:23:07-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T07:23:07-06:00 INFO (6): Selecting P449
+2016-12-06T07:23:07-06:00 INFO (6): Creating and persisting Checkbox record. ID: P449 CUSTOMERID: 1153 SALESPERSONUSERNAME: bzakrinski
+2016-12-06T07:23:11-06:00 INFO (6): Allowed: 1
+2016-12-06T07:23:11-06:00 INFO (6): Persisting PDF Report
+2016-12-06T07:23:11-06:00 INFO (6): 0: ID_P969
+2016-12-06T07:23:11-06:00 INFO (6): 1: {"id":"P969","sku":"584001","productname":"Salmon - Atlantic, Farmed, Norway, Fillets (11lb Pair)","shortescription":"Two (5.5lb avg) Sides","comment":null,"qty":4,"wholesale":6.95,"retail":9.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+2016-12-06T07:23:11-06:00 INFO (6): 2: ID_P1207
+2016-12-06T07:23:11-06:00 INFO (6): 3: {"id":"P1207","sku":"2200","productname":"Shrimp - Frozen, 21/25, Farmed, P&D Tail On, India (10lb)","shortescription":null,"comment":null,"qty":2,"wholesale":6.01,"retail":8.01,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":false}
+2016-12-06T07:23:30-06:00 INFO (6): AjaxItemController found!
+2016-12-06T07:23:30-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P80&customerid=1153
+2016-12-06T07:23:30-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T07:23:31-06:00 INFO (6): AjaxItemController found!
+2016-12-06T07:23:31-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P449&customerid=1153
+2016-12-06T07:23:31-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:08:57-06:00 INFO (6): Allowed: 1
+2016-12-06T10:08:57-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:08:57-06:00 INFO (6): ItemsController 179: Found customer Sue Kim
+2016-12-06T10:08:58-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:08:58-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481040538079
+2016-12-06T10:08:58-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:08:58-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:09:00-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T10:09:00-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T10:09:00-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T10:09:00-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:09:00-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:09:00-06:00 INFO (6): No price overrides found!
+2016-12-06T10:09:00-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T10:09:12-06:00 INFO (6): Allowed: 1
+2016-12-06T10:09:12-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:09:12-06:00 INFO (6): Retrieving Salespeople. ID: 206
+2016-12-06T10:09:12-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:09:12-06:00 INFO (6): Found 35 users in db.
+2016-12-06T10:09:41-06:00 INFO (6): Allowed: 1
+2016-12-06T10:09:41-06:00 INFO (6): Retrieving salespeople.
+2016-12-06T10:09:42-06:00 DEBUG (7): Retrieved 5 salespeople.
+2016-12-06T10:09:42-06:00 INFO (6): query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'Foo Bar X', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+2016-12-06T10:09:56-06:00 INFO (6): Allowed: 1
+2016-12-06T10:09:56-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:09:56-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T10:09:56-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:09:57-06:00 INFO (6): Found 126 users in db.
+2016-12-06T10:10:04-06:00 INFO (6): Allowed: 1
+2016-12-06T10:10:04-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:10:04-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T10:10:40-06:00 INFO (6): Allowed: 1
+2016-12-06T10:10:40-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:10:41-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T10:10:53-06:00 INFO (6): Allowed: 1
+2016-12-06T10:10:53-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:10:53-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T10:10:54-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:10:54-06:00 INFO (6): Found 126 users in db.
+2016-12-06T10:10:59-06:00 INFO (6): Allowed: 1
+2016-12-06T10:10:59-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:10:59-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T10:13:20-06:00 INFO (6): Allowed: 1
+2016-12-06T10:13:20-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:13:20-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T10:13:28-06:00 INFO (6): Allowed: 1
+2016-12-06T10:13:28-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:13:28-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T10:13:59-06:00 INFO (6): Allowed: 1
+2016-12-06T10:13:59-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:13:59-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T10:14:00-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:14:00-06:00 INFO (6): Found 126 users in db.
+2016-12-06T10:14:04-06:00 INFO (6): Allowed: 1
+2016-12-06T10:14:04-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:14:04-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T10:14:18-06:00 INFO (6): Allowed: 1
+2016-12-06T10:14:18-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:14:18-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T10:14:19-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:14:19-06:00 INFO (6): Found 126 users in db.
+2016-12-06T10:14:37-06:00 INFO (6): Allowed: 1
+2016-12-06T10:14:37-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:14:37-06:00 INFO (6): ItemsController 179: Found customer Robert Gadsby
+2016-12-06T10:14:38-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:14:38-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1417&_=1481040878146
+2016-12-06T10:14:38-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:14:38-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:14:39-06:00 DEBUG (7): No customerlistitems items found.
+2016-12-06T10:14:42-06:00 INFO (6): Allowed: 1
+2016-12-06T10:14:42-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:14:42-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T10:14:42-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:14:42-06:00 INFO (6): Found 126 users in db.
+2016-12-06T10:14:45-06:00 INFO (6): Allowed: 1
+2016-12-06T10:14:45-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:14:45-06:00 INFO (6): ItemsController 179: Found customer Sue Kim
+2016-12-06T10:15:17-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:15:17-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481040916594
+2016-12-06T10:15:17-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:15:17-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:15:18-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T10:15:18-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T10:15:18-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T10:15:18-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:15:18-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:15:18-06:00 INFO (6): No price overrides found!
+2016-12-06T10:15:18-06:00 INFO (6): Found 1 removedSKUs in Session!
+2016-12-06T10:15:53-06:00 INFO (6): Allowed: 1
+2016-12-06T10:15:53-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:15:53-06:00 INFO (6): ItemsController 179: Found customer Sue Kim
+2016-12-06T10:15:55-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:15:55-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481040954906
+2016-12-06T10:15:55-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:15:55-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:15:56-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T10:15:56-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T10:15:56-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T10:15:56-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:15:56-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:15:56-06:00 INFO (6): No price overrides found!
+2016-12-06T10:15:56-06:00 INFO (6): Found 1 removedSKUs in Session!
+2016-12-06T10:16:00-06:00 INFO (6): Allowed: 1
+2016-12-06T10:16:00-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:16:00-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T10:16:01-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:16:01-06:00 INFO (6): Found 126 users in db.
+2016-12-06T10:20:55-06:00 INFO (6): Allowed: 1
+2016-12-06T10:20:55-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:20:55-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T10:20:56-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:20:56-06:00 INFO (6): Found 126 users in db.
+2016-12-06T10:21:32-06:00 INFO (6): Allowed: 1
+2016-12-06T10:21:32-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:21:32-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T10:21:57-06:00 INFO (6): Allowed: 1
+2016-12-06T10:21:57-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:21:57-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T10:21:58-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:21:58-06:00 INFO (6): Found 126 users in db.
+2016-12-06T10:22:26-06:00 INFO (6): Allowed: 1
+2016-12-06T10:22:26-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:22:26-06:00 INFO (6): ItemsController 179: Found customer Sue Kim
+2016-12-06T10:22:27-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:22:27-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481041346865
+2016-12-06T10:22:27-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:22:27-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:22:28-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T10:22:28-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T10:22:28-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T10:22:28-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:22:28-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:22:28-06:00 INFO (6): No price overrides found!
+2016-12-06T10:22:28-06:00 INFO (6): Found 1 removedSKUs in Session!
+2016-12-06T10:24:00-06:00 INFO (6): Allowed: 1
+2016-12-06T10:24:00-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:24:00-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T10:24:01-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:24:01-06:00 INFO (6): Found 126 users in db.
+2016-12-06T10:24:07-06:00 INFO (6): Allowed: 1
+2016-12-06T10:24:07-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:24:07-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T10:24:37-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:24:37-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1054&_=1481041476497
+2016-12-06T10:24:37-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:24:37-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:24:38-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T10:24:38-06:00 INFO (6): Found 11 items in svc and 1 in DB.
+2016-12-06T10:24:38-06:00 DEBUG (7): Retrieved 11 customerlistitems.
+2016-12-06T10:24:38-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:24:38-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:24:38-06:00 INFO (6): No price overrides found!
+2016-12-06T10:24:38-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T10:28:37-06:00 INFO (6): Allowed: 1
+2016-12-06T10:28:37-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:28:38-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T10:28:39-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:28:39-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1054&_=1481041718765
+2016-12-06T10:28:39-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:28:39-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:28:40-06:00 INFO (6): Found 11 customers in db.
+2016-12-06T10:28:40-06:00 INFO (6): Found 11 items in svc and 11 in DB.
+2016-12-06T10:28:40-06:00 DEBUG (7): Retrieved 11 customerlistitems.
+2016-12-06T10:28:40-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:28:40-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:28:40-06:00 INFO (6): No price overrides found!
+2016-12-06T10:28:40-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T10:28:47-06:00 INFO (6): Allowed: 1
+2016-12-06T10:28:47-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:28:47-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T10:28:48-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:28:48-06:00 INFO (6): Found 126 users in db.
+2016-12-06T10:29:09-06:00 INFO (6): Allowed: 1
+2016-12-06T10:29:09-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:29:09-06:00 INFO (6): ItemsController 179: Found customer Sue Kim
+2016-12-06T10:29:10-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:29:10-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=686&_=1481041749984
+2016-12-06T10:29:10-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:29:10-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:29:11-06:00 INFO (6): Found 1 customers in db.
+2016-12-06T10:29:11-06:00 INFO (6): Found 1 items in svc and 1 in DB.
+2016-12-06T10:29:11-06:00 DEBUG (7): Retrieved 1 customerlistitems.
+2016-12-06T10:29:11-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:29:11-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:29:11-06:00 INFO (6): No price overrides found!
+2016-12-06T10:29:11-06:00 INFO (6): Found 1 removedSKUs in Session!
+2016-12-06T10:29:15-06:00 INFO (6): Allowed: 1
+2016-12-06T10:29:15-06:00 INFO (6): Persisting PDF Report
+2016-12-06T10:39:48-06:00 INFO (6): Allowed: 1
+2016-12-06T10:39:48-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:40:56-06:00 INFO (6): Allowed: 1
+2016-12-06T10:40:56-06:00 INFO (6): Checking for identity
+2016-12-06T10:40:56-06:00 INFO (6): Identity found.
+2016-12-06T10:40:56-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:40:57-06:00 INFO (6): Allowed: 1
+2016-12-06T10:40:57-06:00 INFO (6): Retrieving salespeople.
+2016-12-06T10:40:58-06:00 DEBUG (7): Retrieved 5 salespeople.
+2016-12-06T10:40:58-06:00 INFO (6): query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'Foo Bar X', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+2016-12-06T10:41:17-06:00 INFO (6): Allowed: 1
+2016-12-06T10:41:17-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:41:17-06:00 INFO (6): Retrieving Salespeople. ID: 206
+2016-12-06T10:41:18-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:41:18-06:00 INFO (6): Found 35 users in db.
+2016-12-06T10:41:20-06:00 INFO (6): Allowed: 1
+2016-12-06T10:41:20-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:41:20-06:00 INFO (6): ItemsController 179: Found customer al chef
+2016-12-06T10:41:49-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:41:49-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1153&_=1481042509159
+2016-12-06T10:41:49-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:41:49-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:41:50-06:00 INFO (6): Found 6 customers in db.
+2016-12-06T10:41:50-06:00 INFO (6): Found 6 items in svc and 6 in DB.
+2016-12-06T10:41:50-06:00 DEBUG (7): Retrieved 6 customerlistitems.
+2016-12-06T10:41:50-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:41:50-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:41:50-06:00 INFO (6): No price overrides found!
+2016-12-06T10:41:50-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T10:41:54-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:41:54-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P80&customerid=1153
+2016-12-06T10:41:54-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:41:54-06:00 INFO (6): Selecting P80
+2016-12-06T10:41:58-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:41:58-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P449&customerid=1153
+2016-12-06T10:41:58-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:41:58-06:00 INFO (6): Selecting P449
+2016-12-06T10:42:01-06:00 INFO (6): Allowed: 1
+2016-12-06T10:42:01-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:42:01-06:00 INFO (6): ItemsController 179: Found customer al chef
+2016-12-06T10:42:03-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:42:03-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1153&_=1481042522615
+2016-12-06T10:42:03-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:42:03-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:42:04-06:00 INFO (6): Found 6 customers in db.
+2016-12-06T10:42:04-06:00 INFO (6): Found 6 items in svc and 6 in DB.
+2016-12-06T10:42:04-06:00 DEBUG (7): Retrieved 6 customerlistitems.
+2016-12-06T10:42:04-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:42:04-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:42:04-06:00 INFO (6): No price overrides found!
+2016-12-06T10:42:04-06:00 INFO (6): Found 2 removedSKUs in Session!
+2016-12-06T10:42:08-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:42:08-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P449&customerid=1153
+2016-12-06T10:42:08-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:42:14-06:00 INFO (6): Allowed: 1
+2016-12-06T10:42:14-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:42:14-06:00 INFO (6): ItemsController 179: Found customer al chef
+2016-12-06T10:42:39-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:42:39-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1153&_=1481042558503
+2016-12-06T10:42:39-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:42:39-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:42:40-06:00 INFO (6): Found 6 customers in db.
+2016-12-06T10:42:40-06:00 INFO (6): Found 6 items in svc and 6 in DB.
+2016-12-06T10:42:40-06:00 DEBUG (7): Retrieved 6 customerlistitems.
+2016-12-06T10:42:40-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:42:40-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:42:40-06:00 INFO (6): No price overrides found!
+2016-12-06T10:42:40-06:00 INFO (6): Found 1 removedSKUs in Session!
+2016-12-06T10:44:32-06:00 INFO (6): Allowed: 1
+2016-12-06T10:44:32-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:44:46-06:00 INFO (6): Allowed: 1
+2016-12-06T10:44:46-06:00 INFO (6): Checking for identity
+2016-12-06T10:44:46-06:00 INFO (6): Identity found.
+2016-12-06T10:44:46-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:44:46-06:00 INFO (6): Allowed: 1
+2016-12-06T10:44:46-06:00 INFO (6): Retrieving salespeople.
+2016-12-06T10:44:47-06:00 DEBUG (7): Retrieved 5 salespeople.
+2016-12-06T10:44:47-06:00 INFO (6): query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'Foo Bar X', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+2016-12-06T10:44:51-06:00 INFO (6): Allowed: 1
+2016-12-06T10:44:51-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:44:51-06:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-12-06T10:44:52-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T10:44:52-06:00 INFO (6): Found 0 users in db.
+2016-12-06T10:44:54-06:00 INFO (6): Allowed: 1
+2016-12-06T10:44:54-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:44:54-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T10:45:14-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:45:14-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481042713664
+2016-12-06T10:45:14-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:45:14-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:45:15-06:00 INFO (6): Found 0 customers in db.
+2016-12-06T10:45:15-06:00 INFO (6): Found 16 items in svc and 0 in DB.
+2016-12-06T10:45:15-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T10:45:15-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:45:15-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:45:15-06:00 INFO (6): No price overrides found!
+2016-12-06T10:45:15-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T10:45:20-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:45:20-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P873&ids[]=P134&ids[]=P648&ids[]=P91&ids[]=P77&ids[]=P73&ids[]=P253&ids[]=P817&ids[]=P95&ids[]=P37&ids[]=P603&ids[]=P173&ids[]=P343&ids[]=P575&ids[]=P564&ids[]=P566&customerid=398
+2016-12-06T10:45:20-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:45:20-06:00 INFO (6): Selecting P873
+2016-12-06T10:45:20-06:00 INFO (6): Creating and persisting Checkbox record. ID: P873 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:20-06:00 INFO (6): Selecting P134
+2016-12-06T10:45:20-06:00 INFO (6): Creating and persisting Checkbox record. ID: P134 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:20-06:00 INFO (6): Selecting P648
+2016-12-06T10:45:20-06:00 INFO (6): Creating and persisting Checkbox record. ID: P648 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:20-06:00 INFO (6): Selecting P91
+2016-12-06T10:45:20-06:00 INFO (6): Creating and persisting Checkbox record. ID: P91 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:20-06:00 INFO (6): Selecting P77
+2016-12-06T10:45:20-06:00 INFO (6): Creating and persisting Checkbox record. ID: P77 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:20-06:00 INFO (6): Selecting P73
+2016-12-06T10:45:20-06:00 INFO (6): Creating and persisting Checkbox record. ID: P73 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:20-06:00 INFO (6): Selecting P253
+2016-12-06T10:45:20-06:00 INFO (6): Creating and persisting Checkbox record. ID: P253 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:21-06:00 INFO (6): Selecting P817
+2016-12-06T10:45:21-06:00 INFO (6): Creating and persisting Checkbox record. ID: P817 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:21-06:00 INFO (6): Selecting P95
+2016-12-06T10:45:21-06:00 INFO (6): Creating and persisting Checkbox record. ID: P95 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:21-06:00 INFO (6): Selecting P37
+2016-12-06T10:45:21-06:00 INFO (6): Creating and persisting Checkbox record. ID: P37 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:21-06:00 INFO (6): Selecting P603
+2016-12-06T10:45:21-06:00 INFO (6): Creating and persisting Checkbox record. ID: P603 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:21-06:00 INFO (6): Selecting P173
+2016-12-06T10:45:21-06:00 INFO (6): Creating and persisting Checkbox record. ID: P173 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:21-06:00 INFO (6): Selecting P343
+2016-12-06T10:45:21-06:00 INFO (6): Creating and persisting Checkbox record. ID: P343 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:21-06:00 INFO (6): Selecting P575
+2016-12-06T10:45:21-06:00 INFO (6): Creating and persisting Checkbox record. ID: P575 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:21-06:00 INFO (6): Selecting P564
+2016-12-06T10:45:21-06:00 INFO (6): Creating and persisting Checkbox record. ID: P564 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:21-06:00 INFO (6): Selecting P566
+2016-12-06T10:45:21-06:00 INFO (6): Creating and persisting Checkbox record. ID: P566 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:45:27-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:45:27-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T10:45:27-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:45:27-06:00 INFO (6): UnSelecting All.
+2016-12-06T10:49:10-06:00 INFO (6): Allowed: 1
+2016-12-06T10:49:10-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:49:10-06:00 INFO (6): ItemsController 87: Posting...
+2016-12-06T10:49:10-06:00 INFO (6): ItemsController 122: Sanitizing...
+2016-12-06T10:49:10-06:00 INFO (6): Saved added row: 1
+2016-12-06T10:49:13-06:00 INFO (6): Allowed: 1
+2016-12-06T10:49:13-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:49:13-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T10:49:14-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:49:14-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481042953917
+2016-12-06T10:49:14-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:49:14-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:49:15-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T10:49:15-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T10:49:15-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T10:49:15-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:49:15-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:49:15-06:00 INFO (6): No price overrides found!
+2016-12-06T10:49:15-06:00 INFO (6): Found 16 removedSKUs in Session!
+2016-12-06T10:49:15-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T10:53:02-06:00 INFO (6): Allowed: 1
+2016-12-06T10:53:02-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:53:02-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T10:53:04-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:53:04-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481043183650
+2016-12-06T10:53:04-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:53:04-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:53:05-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T10:53:05-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T10:53:05-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T10:53:05-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:53:05-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:53:05-06:00 INFO (6): No price overrides found!
+2016-12-06T10:53:05-06:00 INFO (6): Found 16 removedSKUs in Session!
+2016-12-06T10:53:05-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T10:53:13-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:53:13-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T10:53:13-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:53:13-06:00 INFO (6): UnSelecting All.
+2016-12-06T10:53:13-06:00 INFO (6): Checkbox record not found to remove. ID: 873 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T10:56:38-06:00 INFO (6): Allowed: 1
+2016-12-06T10:56:38-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T10:56:38-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T10:56:56-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:56:56-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481043415402
+2016-12-06T10:56:56-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:56:56-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T10:56:58-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T10:56:58-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T10:56:58-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T10:56:58-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:56:58-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T10:56:58-06:00 INFO (6): No price overrides found!
+2016-12-06T10:56:58-06:00 INFO (6): Found 16 removedSKUs in Session!
+2016-12-06T10:56:58-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T10:57:03-06:00 INFO (6): AjaxItemController found!
+2016-12-06T10:57:03-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T10:57:03-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T10:57:03-06:00 INFO (6): UnSelecting All.
+2016-12-06T11:00:18-06:00 INFO (6): Allowed: 1
+2016-12-06T11:00:18-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:00:18-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:00:20-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:00:20-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481043619328
+2016-12-06T11:00:20-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:00:20-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:00:21-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:00:21-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:00:21-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:00:21-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:00:21-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:00:21-06:00 INFO (6): No price overrides found!
+2016-12-06T11:00:21-06:00 INFO (6): Found 16 removedSKUs in Session!
+2016-12-06T11:00:21-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:00:24-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:00:24-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T11:00:24-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:00:24-06:00 INFO (6): UnSelecting All.
+2016-12-06T11:00:28-06:00 INFO (6): Allowed: 1
+2016-12-06T11:00:28-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:00:28-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:00:43-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:00:43-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481043643040
+2016-12-06T11:00:43-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:00:43-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:00:44-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:00:44-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:00:44-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:00:44-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:00:44-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:00:44-06:00 INFO (6): No price overrides found!
+2016-12-06T11:00:44-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T11:00:44-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:00:48-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:00:48-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&customerid=398
+2016-12-06T11:00:48-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:00:48-06:00 INFO (6): Selecting A1
+2016-12-06T11:00:48-06:00 INFO (6): Creating and persisting Checkbox record. ID: A1 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T11:00:52-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:00:52-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P873&customerid=398
+2016-12-06T11:00:52-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:00:52-06:00 INFO (6): Selecting P873
+2016-12-06T11:00:53-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:00:53-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P648&customerid=398
+2016-12-06T11:00:53-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:00:53-06:00 INFO (6): Selecting P648
+2016-12-06T11:00:54-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:00:54-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P91&customerid=398
+2016-12-06T11:00:54-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:00:54-06:00 INFO (6): Selecting P91
+2016-12-06T11:00:59-06:00 INFO (6): Allowed: 1
+2016-12-06T11:00:59-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:00:59-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:01:18-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:01:18-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481043677769
+2016-12-06T11:01:18-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:01:18-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:01:19-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:01:19-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:01:19-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:01:19-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:01:19-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:01:19-06:00 INFO (6): No price overrides found!
+2016-12-06T11:01:19-06:00 INFO (6): Found 4 removedSKUs in Session!
+2016-12-06T11:01:19-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:01:23-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:01:23-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&ids[]=P873&ids[]=P134&ids[]=P648&ids[]=P91&ids[]=P77&ids[]=P73&ids[]=P253&ids[]=P817&ids[]=P95&ids[]=P37&ids[]=P603&ids[]=P173&ids[]=P343&ids[]=P575&ids[]=P564&ids[]=P566&customerid=398
+2016-12-06T11:01:23-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:01:23-06:00 INFO (6): Selecting A1
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P873
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P134
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P648
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P91
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P77
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P73
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P253
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P817
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P95
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P37
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P603
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P173
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P343
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P575
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P564
+2016-12-06T11:01:23-06:00 INFO (6): Selecting P566
+2016-12-06T11:01:27-06:00 INFO (6): Allowed: 1
+2016-12-06T11:01:27-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:01:27-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:01:44-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:01:44-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481043703751
+2016-12-06T11:01:44-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:01:44-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:01:45-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:01:45-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:01:45-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:01:45-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:01:45-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:01:45-06:00 INFO (6): No price overrides found!
+2016-12-06T11:01:45-06:00 INFO (6): Found 17 removedSKUs in Session!
+2016-12-06T11:01:45-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:01:57-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:01:57-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T11:01:57-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:01:57-06:00 INFO (6): UnSelecting All.
+2016-12-06T11:01:58-06:00 INFO (6): Checkbox record not found to remove. ID: P1 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T11:02:01-06:00 INFO (6): Allowed: 1
+2016-12-06T11:02:01-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:02:01-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:02:21-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:02:21-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481043740360
+2016-12-06T11:02:21-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:02:21-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:02:22-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:02:22-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:02:22-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:02:22-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:02:22-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:02:22-06:00 INFO (6): No price overrides found!
+2016-12-06T11:02:22-06:00 INFO (6): Found 1 removedSKUs in Session!
+2016-12-06T11:02:22-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:03:14-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:03:14-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=A1&customerid=398
+2016-12-06T11:03:14-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:03:17-06:00 INFO (6): Allowed: 1
+2016-12-06T11:03:17-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:03:17-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:03:19-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:03:19-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481043798785
+2016-12-06T11:03:19-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:03:19-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:03:20-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:03:20-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:03:20-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:03:20-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:03:20-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:03:20-06:00 INFO (6): No price overrides found!
+2016-12-06T11:03:20-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T11:03:20-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:03:26-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:03:26-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&ids[]=P873&ids[]=P134&ids[]=P648&ids[]=P91&ids[]=P77&ids[]=P73&ids[]=P253&ids[]=P817&ids[]=P95&ids[]=P37&ids[]=P603&ids[]=P173&ids[]=P343&ids[]=P575&ids[]=P564&ids[]=P566&customerid=398
+2016-12-06T11:03:26-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:03:26-06:00 INFO (6): Selecting A1
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P873
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P134
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P648
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P91
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P77
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P73
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P253
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P817
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P95
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P37
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P603
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P173
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P343
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P575
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P564
+2016-12-06T11:03:26-06:00 INFO (6): Selecting P566
+2016-12-06T11:03:30-06:00 INFO (6): Allowed: 1
+2016-12-06T11:03:30-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:03:31-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:03:56-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:03:56-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481043835463
+2016-12-06T11:03:56-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:03:56-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:03:57-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:03:57-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:03:57-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:03:57-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:03:57-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:03:57-06:00 INFO (6): No price overrides found!
+2016-12-06T11:03:57-06:00 INFO (6): Found 17 removedSKUs in Session!
+2016-12-06T11:03:57-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:04:00-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:04:00-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T11:04:00-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:04:00-06:00 INFO (6): UnSelecting All.
+2016-12-06T11:04:01-06:00 INFO (6): Checkbox record not found to remove. ID: P1 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T11:15:45-06:00 INFO (6): Allowed: 1
+2016-12-06T11:15:45-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:15:45-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:15:47-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:15:47-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481044547005
+2016-12-06T11:15:47-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:15:47-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:15:48-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:15:48-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:15:48-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:15:48-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:15:48-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:15:48-06:00 INFO (6): No price overrides found!
+2016-12-06T11:15:48-06:00 INFO (6): Found 1 removedSKUs in Session!
+2016-12-06T11:15:48-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:15:57-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:15:57-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T11:15:57-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:15:57-06:00 INFO (6): UnSelecting All.
+2016-12-06T11:15:57-06:00 INFO (6): Checkbox record not found to remove. ID: P1 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T11:25:01-06:00 INFO (6): Allowed: 1
+2016-12-06T11:25:01-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:25:01-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:25:02-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:25:02-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481045102230
+2016-12-06T11:25:02-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:25:02-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:25:03-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:25:03-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:25:03-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:25:03-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:25:03-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:25:03-06:00 INFO (6): No price overrides found!
+2016-12-06T11:25:03-06:00 INFO (6): Found 1 removedSKUs in Session!
+2016-12-06T11:25:03-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:25:12-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:25:12-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=A1&customerid=398
+2016-12-06T11:25:12-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:27:17-06:00 INFO (6): Allowed: 1
+2016-12-06T11:27:17-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:27:17-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:27:44-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:27:44-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481045263941
+2016-12-06T11:27:44-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:27:44-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:27:45-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:27:45-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:27:45-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:27:45-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:27:45-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:27:45-06:00 INFO (6): No price overrides found!
+2016-12-06T11:27:45-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T11:27:45-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:27:49-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:27:49-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&ids[]=P873&ids[]=P134&ids[]=P648&ids[]=P91&ids[]=P77&ids[]=P73&ids[]=P253&ids[]=P817&ids[]=P95&ids[]=P37&ids[]=P603&ids[]=P173&ids[]=P343&ids[]=P575&ids[]=P564&ids[]=P566&customerid=398
+2016-12-06T11:27:49-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:27:49-06:00 INFO (6): Selecting A1
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P873
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P134
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P648
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P91
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P77
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P73
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P253
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P817
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P95
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P37
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P603
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P173
+2016-12-06T11:27:49-06:00 INFO (6): Selecting P343
+2016-12-06T11:27:50-06:00 INFO (6): Selecting P575
+2016-12-06T11:27:50-06:00 INFO (6): Selecting P564
+2016-12-06T11:27:50-06:00 INFO (6): Selecting P566
+2016-12-06T11:27:57-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:27:57-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=A1&customerid=398
+2016-12-06T11:27:57-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:28:00-06:00 INFO (6): Allowed: 1
+2016-12-06T11:28:00-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:28:00-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:28:21-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:28:21-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481045301196
+2016-12-06T11:28:21-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:28:21-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:28:22-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:28:22-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:28:22-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:28:22-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:28:22-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:28:22-06:00 INFO (6): No price overrides found!
+2016-12-06T11:28:22-06:00 INFO (6): Found 16 removedSKUs in Session!
+2016-12-06T11:28:22-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:28:26-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:28:26-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&ids[]=P873&ids[]=P134&ids[]=P648&ids[]=P91&ids[]=P77&ids[]=P73&ids[]=P253&ids[]=P817&ids[]=P95&ids[]=P37&ids[]=P603&ids[]=P173&ids[]=P343&ids[]=P575&ids[]=P564&ids[]=P566&customerid=398
+2016-12-06T11:28:26-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:28:26-06:00 INFO (6): Selecting A1
+2016-12-06T11:28:26-06:00 INFO (6): Selecting P873
+2016-12-06T11:28:26-06:00 INFO (6): Selecting P134
+2016-12-06T11:28:26-06:00 INFO (6): Selecting P648
+2016-12-06T11:28:26-06:00 INFO (6): Selecting P91
+2016-12-06T11:28:26-06:00 INFO (6): Selecting P77
+2016-12-06T11:28:26-06:00 INFO (6): Selecting P73
+2016-12-06T11:28:27-06:00 INFO (6): Selecting P253
+2016-12-06T11:28:27-06:00 INFO (6): Selecting P817
+2016-12-06T11:28:27-06:00 INFO (6): Selecting P95
+2016-12-06T11:28:27-06:00 INFO (6): Selecting P37
+2016-12-06T11:28:27-06:00 INFO (6): Selecting P603
+2016-12-06T11:28:27-06:00 INFO (6): Selecting P173
+2016-12-06T11:28:27-06:00 INFO (6): Selecting P343
+2016-12-06T11:28:27-06:00 INFO (6): Selecting P575
+2016-12-06T11:28:27-06:00 INFO (6): Selecting P564
+2016-12-06T11:28:27-06:00 INFO (6): Selecting P566
+2016-12-06T11:28:31-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:28:31-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T11:28:31-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:28:31-06:00 INFO (6): UnSelecting All.
+2016-12-06T11:28:31-06:00 INFO (6): Checkbox record not found to remove. ID: P1 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T11:30:24-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:30:24-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&customerid=398
+2016-12-06T11:30:24-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:30:24-06:00 INFO (6): Selecting A1
+2016-12-06T11:30:25-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:30:25-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P873&customerid=398
+2016-12-06T11:30:25-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:30:25-06:00 INFO (6): Selecting P873
+2016-12-06T11:30:27-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:30:27-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=A1&customerid=398
+2016-12-06T11:30:27-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:30:44-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:30:44-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P873&customerid=398
+2016-12-06T11:30:44-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:31:01-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:31:01-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&ids[]=P873&ids[]=P134&ids[]=P648&ids[]=P91&ids[]=P77&ids[]=P73&ids[]=P253&ids[]=P817&ids[]=P95&ids[]=P37&ids[]=P603&ids[]=P173&ids[]=P343&ids[]=P575&ids[]=P564&ids[]=P566&customerid=398
+2016-12-06T11:31:01-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:31:01-06:00 INFO (6): Selecting A1
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P873
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P134
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P648
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P91
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P77
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P73
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P253
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P817
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P95
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P37
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P603
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P173
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P343
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P575
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P564
+2016-12-06T11:31:01-06:00 INFO (6): Selecting P566
+2016-12-06T11:31:03-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:31:03-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T11:31:03-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:31:03-06:00 INFO (6): UnSelecting All.
+2016-12-06T11:31:04-06:00 INFO (6): Checkbox record not found to remove. ID: P1 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T11:32:27-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:32:27-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&ids[]=P873&ids[]=P134&ids[]=P648&ids[]=P91&ids[]=P77&ids[]=P73&ids[]=P253&ids[]=P817&ids[]=P95&ids[]=P37&ids[]=P603&ids[]=P173&ids[]=P343&ids[]=P575&ids[]=P564&ids[]=P566&customerid=398
+2016-12-06T11:32:27-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:32:27-06:00 INFO (6): Selecting A1
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P873
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P134
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P648
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P91
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P77
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P73
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P253
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P817
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P95
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P37
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P603
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P173
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P343
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P575
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P564
+2016-12-06T11:32:27-06:00 INFO (6): Selecting P566
+2016-12-06T11:32:32-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:32:32-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T11:32:32-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): UnSelecting All. RowPlusItemsPage:
+2016-12-06T11:32:32-06:00 INFO (6): Checkbox record not found to remove. ID: P1 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T11:34:59-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:34:59-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&ids[]=P873&ids[]=P134&ids[]=P648&ids[]=P91&ids[]=P77&ids[]=P73&ids[]=P253&ids[]=P817&ids[]=P95&ids[]=P37&ids[]=P603&ids[]=P173&ids[]=P343&ids[]=P575&ids[]=P564&ids[]=P566&customerid=398
+2016-12-06T11:34:59-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:34:59-06:00 INFO (6): Selecting A1
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P873
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P134
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P648
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P91
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P77
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P73
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P253
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P817
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P95
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P37
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P603
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P173
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P343
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P575
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P564
+2016-12-06T11:35:00-06:00 INFO (6): Selecting P566
+2016-12-06T11:35:02-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:35:02-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T11:35:02-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\Product
+2016-12-06T11:35:02-06:00 INFO (6): UnSelecting All. RowPlusItemsPage: DoctrineORMModule\Proxy\__CG__\DataAccess\FFM\Entity\RowPlusItemsPage
+2016-12-06T11:35:02-06:00 INFO (6): Checkbox record not found to remove. ID: P1 CUSTOMERID: 398 SALESPERSONUSERNAME: cmetallo
+2016-12-06T11:37:30-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:37:30-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&ids[]=P873&ids[]=P134&ids[]=P648&ids[]=P91&ids[]=P77&ids[]=P73&ids[]=P253&ids[]=P817&ids[]=P95&ids[]=P37&ids[]=P603&ids[]=P173&ids[]=P343&ids[]=P575&ids[]=P564&ids[]=P566&customerid=398
+2016-12-06T11:37:30-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:37:30-06:00 INFO (6): Selecting A1
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P873
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P134
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P648
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P91
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P77
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P73
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P253
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P817
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P95
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P37
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P603
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P173
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P343
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P575
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P564
+2016-12-06T11:37:30-06:00 INFO (6): Selecting P566
+2016-12-06T11:37:34-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:37:34-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T11:37:34-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:37:38-06:00 INFO (6): Allowed: 1
+2016-12-06T11:37:38-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:37:38-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:37:40-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:37:40-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481045859713
+2016-12-06T11:37:40-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:37:40-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:37:41-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:37:41-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:37:41-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:37:41-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:37:41-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:37:41-06:00 INFO (6): No price overrides found!
+2016-12-06T11:37:41-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T11:37:41-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:37:44-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:37:44-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&ids[]=P873&ids[]=P134&ids[]=P648&ids[]=P91&ids[]=P77&ids[]=P73&ids[]=P253&ids[]=P817&ids[]=P95&ids[]=P37&ids[]=P603&ids[]=P173&ids[]=P343&ids[]=P575&ids[]=P564&ids[]=P566&customerid=398
+2016-12-06T11:37:44-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:37:44-06:00 INFO (6): Selecting A1
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P873
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P134
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P648
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P91
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P77
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P73
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P253
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P817
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P95
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P37
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P603
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P173
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P343
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P575
+2016-12-06T11:37:44-06:00 INFO (6): Selecting P564
+2016-12-06T11:37:45-06:00 INFO (6): Selecting P566
+2016-12-06T11:37:46-06:00 INFO (6): Allowed: 1
+2016-12-06T11:37:46-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:37:46-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:38:18-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:38:18-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481045897682
+2016-12-06T11:38:18-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:38:18-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:38:19-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:38:19-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:38:19-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:38:19-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:38:19-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:38:19-06:00 INFO (6): No price overrides found!
+2016-12-06T11:38:19-06:00 INFO (6): Found 17 removedSKUs in Session!
+2016-12-06T11:38:19-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:38:22-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:38:22-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=398
+2016-12-06T11:38:22-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:38:30-06:00 INFO (6): Allowed: 1
+2016-12-06T11:38:30-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:38:30-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:38:55-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:38:55-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481045934998
+2016-12-06T11:38:55-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:38:55-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:38:56-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:38:56-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:38:56-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:38:56-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:38:56-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:38:56-06:00 INFO (6): No price overrides found!
+2016-12-06T11:38:56-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T11:38:56-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T11:39:00-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:39:00-06:00 INFO (6): /ajax/items?myaction=select&ids[]=A1&customerid=398
+2016-12-06T11:39:00-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:39:00-06:00 INFO (6): Selecting A1
+2016-12-06T11:39:04-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:39:04-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P91&customerid=398
+2016-12-06T11:39:04-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:39:04-06:00 INFO (6): Selecting P91
+2016-12-06T11:39:06-06:00 INFO (6): Allowed: 1
+2016-12-06T11:39:06-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T11:39:06-06:00 INFO (6): ItemsController 179: Found customer Josh North
+2016-12-06T11:39:32-06:00 INFO (6): AjaxItemController found!
+2016-12-06T11:39:32-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481045972110
+2016-12-06T11:39:32-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T11:39:32-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T11:39:33-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T11:39:33-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T11:39:33-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T11:39:33-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:39:33-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T11:39:33-06:00 INFO (6): No price overrides found!
+2016-12-06T11:39:33-06:00 INFO (6): Found 2 removedSKUs in Session!
+2016-12-06T11:39:33-06:00 INFO (6): ItemsFilterTableArrayService: RowPlusItemPage.Id: 1
+2016-12-06T13:37:54-06:00 INFO (6): Allowed: 1
+2016-12-06T13:37:54-06:00 INFO (6): Checking for identity
+2016-12-06T13:37:54-06:00 INFO (6): Identity found.
+2016-12-06T13:37:54-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:37:54-06:00 INFO (6): Allowed: 1
+2016-12-06T13:37:54-06:00 INFO (6): Retrieving salespeople.
+2016-12-06T13:37:55-06:00 DEBUG (7): Retrieved 5 salespeople.
+2016-12-06T13:37:55-06:00 INFO (6): query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'Foo Bar X', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+2016-12-06T13:38:01-06:00 INFO (6): Allowed: 1
+2016-12-06T13:38:01-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:38:01-06:00 INFO (6): Retrieving Salespeople. ID: 181
+2016-12-06T13:38:02-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T13:38:02-06:00 INFO (6): Found 126 users in db.
+2016-12-06T13:38:13-06:00 INFO (6): Allowed: 1
+2016-12-06T13:38:13-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T13:38:13-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T13:38:34-06:00 INFO (6): AjaxItemController found!
+2016-12-06T13:38:34-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1054&_=1481053114332
+2016-12-06T13:38:34-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T13:38:34-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T13:38:35-06:00 INFO (6): Found 11 customers in db.
+2016-12-06T13:38:35-06:00 INFO (6): Found 11 items in svc and 11 in DB.
+2016-12-06T13:38:35-06:00 DEBUG (7): Retrieved 11 customerlistitems.
+2016-12-06T13:38:35-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:38:35-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:38:35-06:00 INFO (6): No price overrides found!
+2016-12-06T13:38:36-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T13:38:45-06:00 INFO (6): AjaxItemController found!
+2016-12-06T13:38:45-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P457&ids[]=P1277&ids[]=P707&ids[]=P644&ids[]=P516&ids[]=P1046&ids[]=P105&ids[]=P596&ids[]=P203&ids[]=P66&ids[]=P685&customerid=1054
+2016-12-06T13:38:45-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T13:38:45-06:00 INFO (6): Selecting P457
+2016-12-06T13:38:45-06:00 INFO (6): Creating and persisting Checkbox record. ID: P457 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:46-06:00 INFO (6): Selecting P1277
+2016-12-06T13:38:46-06:00 INFO (6): Creating and persisting Checkbox record. ID: P1277 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:46-06:00 INFO (6): Selecting P707
+2016-12-06T13:38:46-06:00 INFO (6): Creating and persisting Checkbox record. ID: P707 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:46-06:00 INFO (6): Selecting P644
+2016-12-06T13:38:46-06:00 INFO (6): Creating and persisting Checkbox record. ID: P644 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:46-06:00 INFO (6): Selecting P516
+2016-12-06T13:38:46-06:00 INFO (6): Creating and persisting Checkbox record. ID: P516 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:46-06:00 INFO (6): Selecting P1046
+2016-12-06T13:38:46-06:00 INFO (6): Creating and persisting Checkbox record. ID: P1046 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:46-06:00 INFO (6): Selecting P105
+2016-12-06T13:38:46-06:00 INFO (6): Creating and persisting Checkbox record. ID: P105 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:46-06:00 INFO (6): Selecting P596
+2016-12-06T13:38:46-06:00 INFO (6): Creating and persisting Checkbox record. ID: P596 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:46-06:00 INFO (6): Selecting P203
+2016-12-06T13:38:46-06:00 INFO (6): Creating and persisting Checkbox record. ID: P203 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:46-06:00 INFO (6): Selecting P66
+2016-12-06T13:38:46-06:00 INFO (6): Creating and persisting Checkbox record. ID: P66 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:46-06:00 INFO (6): Selecting P685
+2016-12-06T13:38:46-06:00 INFO (6): Creating and persisting Checkbox record. ID: P685 CUSTOMERID: 1054 SALESPERSONUSERNAME: iderfler
+2016-12-06T13:38:49-06:00 INFO (6): Allowed: 1
+2016-12-06T13:38:49-06:00 INFO (6): Persisting PDF Report
+2016-12-06T13:38:49-06:00 INFO (6): 0: ID_P707
+2016-12-06T13:38:49-06:00 INFO (6): 1: {"id":"P707","sku":"2564","productname":"Cod - Frozen, Wild, USA, Loins (10lb Case)","shortescription":"5oz Loins","comment":null,"qty":1,"wholesale":4.15,"retail":5.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:38:49-06:00 INFO (6): 2: ID_P644
+2016-12-06T13:38:49-06:00 INFO (6): 3: {"id":"P644","sku":"2345","productname":"Crab - Live, Soft Shell, Hotel, Wild, USA 60ct","shortescription":"About 5 Dozen per Tray<br/>\r\nSeason newly opened. Cannot break tray.","comment":null,"qty":1,"wholesale":"N/A","retail":25.71,"uom":"dz","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:38:49-06:00 INFO (6): 4: ID_P516
+2016-12-06T13:38:49-06:00 INFO (6): 5: {"id":"P516","sku":"1977","productname":"Mahi Mahi - Frozen, Wild, Ecuador, Portions, 10lb box","shortescription":"8oz Fillet Portions","comment":null,"qty":1,"wholesale":7.5,"retail":10,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:38:49-06:00 INFO (6): 6: ID_P1046
+2016-12-06T13:38:49-06:00 INFO (6): 7: {"id":"P1046","sku":"164","productname":"Mahi Mahi - Wild, Ecuador, Head Off  (6lb avg)","shortescription":null,"comment":"Please fillet","qty":1,"wholesale":"N/A","retail":9.67,"uom":"lb","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:38:49-06:00 INFO (6): 8: ID_P105
+2016-12-06T13:38:49-06:00 INFO (6): 9: {"id":"P105","sku":"55168201","productname":"Shrimp - Frozen, 21/25, Farmed, P&D Tail Off, India (2lb Bag)","shortescription":null,"comment":null,"qty":1,"wholesale":6.5,"retail":8.67,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:38:49-06:00 INFO (6): 10: ID_P596
+2016-12-06T13:38:49-06:00 INFO (6): 11: {"id":"P596","sku":"2183","productname":"Shrimp - Frozen, 26/30, Farmed, P&D Tail Off, India (10lb)","shortescription":"Blue Sea","comment":null,"qty":1,"wholesale":6,"retail":8,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:38:49-06:00 INFO (6): 12: ID_P203
+2016-12-06T13:38:49-06:00 INFO (6): 13: {"id":"P203","sku":"1106","productname":"Tilapia - Frozen, Farmed, China, 5-7oz Fillets (10lb box)","shortescription":"","comment":null,"qty":1,"wholesale":2,"retail":2.86,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:38:49-06:00 INFO (6): 14: ID_P66
+2016-12-06T13:38:49-06:00 INFO (6): 15: {"id":"P66","sku":"2800100","productname":"Tuna - Yellowfin #2+, Wild, USA, Loin","shortescription":"","comment":null,"qty":1,"wholesale":12,"retail":15.5,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:38:49-06:00 INFO (6): 16: ID_P685
+2016-12-06T13:38:49-06:00 INFO (6): 17: {"id":"P685","sku":"16194101","productname":"Whitefish - Large, Wild, USA, Head On (3lb avg)","shortescription":"Lake Huron, USA<br/>\r\nAvailable most Mondays and Thursdays\r\n","comment":"Please fillet","qty":1,"wholesale":3,"retail":4.29,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:39:16-06:00 INFO (6): Allowed: 1
+2016-12-06T13:39:16-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T13:39:16-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T13:39:18-06:00 INFO (6): AjaxItemController found!
+2016-12-06T13:39:18-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1054&_=1481053158318
+2016-12-06T13:39:18-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T13:39:18-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T13:39:19-06:00 INFO (6): Found 11 customers in db.
+2016-12-06T13:39:19-06:00 INFO (6): Found 11 items in svc and 11 in DB.
+2016-12-06T13:39:19-06:00 DEBUG (7): Retrieved 11 customerlistitems.
+2016-12-06T13:39:19-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:39:19-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:39:19-06:00 INFO (6): No price overrides found!
+2016-12-06T13:39:19-06:00 INFO (6): Found 11 removedSKUs in Session!
+2016-12-06T13:39:22-06:00 INFO (6): Allowed: 1
+2016-12-06T13:39:22-06:00 INFO (6): Persisting PDF Report
+2016-12-06T13:39:22-06:00 INFO (6): 0: ID_P707
+2016-12-06T13:39:22-06:00 INFO (6): 1: {"id":"P707","sku":"2564","productname":"Cod - Frozen, Wild, USA, Loins (10lb Case)","shortescription":"5oz Loins","comment":null,"qty":1,"wholesale":4.15,"retail":5.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:39:22-06:00 INFO (6): 2: ID_P644
+2016-12-06T13:39:22-06:00 INFO (6): 3: {"id":"P644","sku":"2345","productname":"Crab - Live, Soft Shell, Hotel, Wild, USA 60ct","shortescription":"About 5 Dozen per Tray<br/>\r\nSeason newly opened. Cannot break tray.","comment":null,"qty":1,"wholesale":"N/A","retail":25.71,"uom":"dz","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:39:22-06:00 INFO (6): 4: ID_P516
+2016-12-06T13:39:22-06:00 INFO (6): 5: {"id":"P516","sku":"1977","productname":"Mahi Mahi - Frozen, Wild, Ecuador, Portions, 10lb box","shortescription":"8oz Fillet Portions","comment":null,"qty":1,"wholesale":7.5,"retail":10,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:39:22-06:00 INFO (6): 6: ID_P1046
+2016-12-06T13:39:22-06:00 INFO (6): 7: {"id":"P1046","sku":"164","productname":"Mahi Mahi - Wild, Ecuador, Head Off  (6lb avg)","shortescription":null,"comment":"Please fillet","qty":1,"wholesale":"N/A","retail":9.67,"uom":"lb","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:39:22-06:00 INFO (6): 8: ID_P105
+2016-12-06T13:39:22-06:00 INFO (6): 9: {"id":"P105","sku":"55168201","productname":"Shrimp - Frozen, 21/25, Farmed, P&D Tail Off, India (2lb Bag)","shortescription":null,"comment":null,"qty":1,"wholesale":6.5,"retail":8.67,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:39:22-06:00 INFO (6): 10: ID_P596
+2016-12-06T13:39:22-06:00 INFO (6): 11: {"id":"P596","sku":"2183","productname":"Shrimp - Frozen, 26/30, Farmed, P&D Tail Off, India (10lb)","shortescription":"Blue Sea","comment":null,"qty":1,"wholesale":6,"retail":8,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:39:22-06:00 INFO (6): 12: ID_P203
+2016-12-06T13:39:22-06:00 INFO (6): 13: {"id":"P203","sku":"1106","productname":"Tilapia - Frozen, Farmed, China, 5-7oz Fillets (10lb box)","shortescription":"","comment":null,"qty":1,"wholesale":2,"retail":2.86,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:39:22-06:00 INFO (6): 14: ID_P66
+2016-12-06T13:39:22-06:00 INFO (6): 15: {"id":"P66","sku":"2800100","productname":"Tuna - Yellowfin #2+, Wild, USA, Loin","shortescription":"","comment":null,"qty":1,"wholesale":12,"retail":15.5,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:39:22-06:00 INFO (6): 16: ID_P685
+2016-12-06T13:39:22-06:00 INFO (6): 17: {"id":"P685","sku":"16194101","productname":"Whitefish - Large, Wild, USA, Head On (3lb avg)","shortescription":"Lake Huron, USA<br/>\r\nAvailable most Mondays and Thursdays\r\n","comment":"Please fillet","qty":1,"wholesale":3,"retail":4.29,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:44:56-06:00 INFO (6): Allowed: 1
+2016-12-06T13:44:56-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T13:44:56-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T13:44:58-06:00 INFO (6): AjaxItemController found!
+2016-12-06T13:44:58-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1054&_=1481053497509
+2016-12-06T13:44:58-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T13:44:58-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T13:44:59-06:00 INFO (6): Found 11 customers in db.
+2016-12-06T13:44:59-06:00 INFO (6): Found 11 items in svc and 11 in DB.
+2016-12-06T13:44:59-06:00 DEBUG (7): Retrieved 11 customerlistitems.
+2016-12-06T13:44:59-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:44:59-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:44:59-06:00 INFO (6): No price overrides found!
+2016-12-06T13:44:59-06:00 INFO (6): Found 11 removedSKUs in Session!
+2016-12-06T13:45:01-06:00 INFO (6): Allowed: 1
+2016-12-06T13:45:01-06:00 INFO (6): Persisting PDF Report
+2016-12-06T13:45:01-06:00 INFO (6): 0: ID_P707
+2016-12-06T13:45:01-06:00 INFO (6): 1: {"id":"P707","sku":"2564","productname":"Cod - Frozen, Wild, USA, Loins (10lb Case)","shortescription":"5oz Loins","comment":null,"qty":1,"wholesale":4.15,"retail":5.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:45:01-06:00 INFO (6): 2: ID_P644
+2016-12-06T13:45:01-06:00 INFO (6): 3: {"id":"P644","sku":"2345","productname":"Crab - Live, Soft Shell, Hotel, Wild, USA 60ct","shortescription":"About 5 Dozen per Tray<br/>\r\nSeason newly opened. Cannot break tray.","comment":null,"qty":1,"wholesale":"N/A","retail":25.71,"uom":"dz","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:45:01-06:00 INFO (6): 4: ID_P516
+2016-12-06T13:45:01-06:00 INFO (6): 5: {"id":"P516","sku":"1977","productname":"Mahi Mahi - Frozen, Wild, Ecuador, Portions, 10lb box","shortescription":"8oz Fillet Portions","comment":null,"qty":1,"wholesale":7.5,"retail":10,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:45:01-06:00 INFO (6): 6: ID_P1046
+2016-12-06T13:45:01-06:00 INFO (6): 7: {"id":"P1046","sku":"164","productname":"Mahi Mahi - Wild, Ecuador, Head Off  (6lb avg)","shortescription":null,"comment":"Please fillet","qty":1,"wholesale":"N/A","retail":9.67,"uom":"lb","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:45:01-06:00 INFO (6): 8: ID_P105
+2016-12-06T13:45:01-06:00 INFO (6): 9: {"id":"P105","sku":"55168201","productname":"Shrimp - Frozen, 21/25, Farmed, P&D Tail Off, India (2lb Bag)","shortescription":null,"comment":null,"qty":1,"wholesale":6.5,"retail":8.67,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:45:01-06:00 INFO (6): 10: ID_P596
+2016-12-06T13:45:01-06:00 INFO (6): 11: {"id":"P596","sku":"2183","productname":"Shrimp - Frozen, 26/30, Farmed, P&D Tail Off, India (10lb)","shortescription":"Blue Sea","comment":null,"qty":1,"wholesale":6,"retail":8,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:45:01-06:00 INFO (6): 12: ID_P203
+2016-12-06T13:45:01-06:00 INFO (6): 13: {"id":"P203","sku":"1106","productname":"Tilapia - Frozen, Farmed, China, 5-7oz Fillets (10lb box)","shortescription":"","comment":null,"qty":1,"wholesale":2,"retail":2.86,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:45:01-06:00 INFO (6): 14: ID_P66
+2016-12-06T13:45:01-06:00 INFO (6): 15: {"id":"P66","sku":"2800100","productname":"Tuna - Yellowfin #2+, Wild, USA, Loin","shortescription":"","comment":null,"qty":1,"wholesale":12,"retail":15.5,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:45:01-06:00 INFO (6): 16: ID_P685
+2016-12-06T13:45:01-06:00 INFO (6): 17: {"id":"P685","sku":"16194101","productname":"Whitefish - Large, Wild, USA, Head On (3lb avg)","shortescription":"Lake Huron, USA<br/>\r\nAvailable most Mondays and Thursdays\r\n","comment":"Please fillet","qty":1,"wholesale":3,"retail":4.29,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:46:23-06:00 INFO (6): Allowed: 1
+2016-12-06T13:46:23-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T13:46:23-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T13:46:24-06:00 INFO (6): AjaxItemController found!
+2016-12-06T13:46:24-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1054&_=1481053584085
+2016-12-06T13:46:24-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T13:46:24-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T13:46:25-06:00 INFO (6): Found 11 customers in db.
+2016-12-06T13:46:25-06:00 INFO (6): Found 11 items in svc and 11 in DB.
+2016-12-06T13:46:25-06:00 DEBUG (7): Retrieved 11 customerlistitems.
+2016-12-06T13:46:25-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:46:25-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:46:25-06:00 INFO (6): No price overrides found!
+2016-12-06T13:46:25-06:00 INFO (6): Found 11 removedSKUs in Session!
+2016-12-06T13:46:28-06:00 INFO (6): Allowed: 1
+2016-12-06T13:46:28-06:00 INFO (6): Persisting PDF Report
+2016-12-06T13:46:28-06:00 INFO (6): 0: ID_P707
+2016-12-06T13:46:28-06:00 INFO (6): 1: {"id":"P707","sku":"2564","productname":"Cod - Frozen, Wild, USA, Loins (10lb Case)","shortescription":"5oz Loins","comment":null,"qty":1,"wholesale":4.15,"retail":5.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:46:28-06:00 INFO (6): 2: ID_P644
+2016-12-06T13:46:28-06:00 INFO (6): 3: {"id":"P644","sku":"2345","productname":"Crab - Live, Soft Shell, Hotel, Wild, USA 60ct","shortescription":"About 5 Dozen per Tray<br/>\r\nSeason newly opened. Cannot break tray.","comment":null,"qty":1,"wholesale":"N/A","retail":25.71,"uom":"dz","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:46:28-06:00 INFO (6): 4: ID_P516
+2016-12-06T13:46:28-06:00 INFO (6): 5: {"id":"P516","sku":"1977","productname":"Mahi Mahi - Frozen, Wild, Ecuador, Portions, 10lb box","shortescription":"8oz Fillet Portions","comment":null,"qty":1,"wholesale":7.5,"retail":10,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:46:28-06:00 INFO (6): 6: ID_P1046
+2016-12-06T13:46:28-06:00 INFO (6): 7: {"id":"P1046","sku":"164","productname":"Mahi Mahi - Wild, Ecuador, Head Off  (6lb avg)","shortescription":null,"comment":"Please fillet","qty":1,"wholesale":"N/A","retail":9.67,"uom":"lb","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:46:28-06:00 INFO (6): 8: ID_P105
+2016-12-06T13:46:28-06:00 INFO (6): 9: {"id":"P105","sku":"55168201","productname":"Shrimp - Frozen, 21/25, Farmed, P&D Tail Off, India (2lb Bag)","shortescription":null,"comment":null,"qty":1,"wholesale":6.5,"retail":8.67,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:46:28-06:00 INFO (6): 10: ID_P596
+2016-12-06T13:46:28-06:00 INFO (6): 11: {"id":"P596","sku":"2183","productname":"Shrimp - Frozen, 26/30, Farmed, P&D Tail Off, India (10lb)","shortescription":"Blue Sea","comment":null,"qty":1,"wholesale":6,"retail":8,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:46:28-06:00 INFO (6): 12: ID_P203
+2016-12-06T13:46:28-06:00 INFO (6): 13: {"id":"P203","sku":"1106","productname":"Tilapia - Frozen, Farmed, China, 5-7oz Fillets (10lb box)","shortescription":"","comment":null,"qty":1,"wholesale":2,"retail":2.86,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:46:28-06:00 INFO (6): 14: ID_P66
+2016-12-06T13:46:28-06:00 INFO (6): 15: {"id":"P66","sku":"2800100","productname":"Tuna - Yellowfin #2+, Wild, USA, Loin","shortescription":"","comment":null,"qty":1,"wholesale":12,"retail":15.5,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:46:28-06:00 INFO (6): 16: ID_P685
+2016-12-06T13:46:28-06:00 INFO (6): 17: {"id":"P685","sku":"16194101","productname":"Whitefish - Large, Wild, USA, Head On (3lb avg)","shortescription":"Lake Huron, USA<br/>\r\nAvailable most Mondays and Thursdays\r\n","comment":"Please fillet","qty":1,"wholesale":3,"retail":4.29,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:50:49-06:00 INFO (6): Allowed: 1
+2016-12-06T13:50:49-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T13:50:49-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T13:50:51-06:00 INFO (6): AjaxItemController found!
+2016-12-06T13:50:51-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1054&_=1481053850383
+2016-12-06T13:50:51-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T13:50:51-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T13:50:52-06:00 INFO (6): Found 11 customers in db.
+2016-12-06T13:50:52-06:00 INFO (6): Found 11 items in svc and 11 in DB.
+2016-12-06T13:50:52-06:00 DEBUG (7): Retrieved 11 customerlistitems.
+2016-12-06T13:50:52-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:50:52-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:50:52-06:00 INFO (6): No price overrides found!
+2016-12-06T13:50:52-06:00 INFO (6): Found 11 removedSKUs in Session!
+2016-12-06T13:50:53-06:00 INFO (6): Allowed: 1
+2016-12-06T13:50:53-06:00 INFO (6): Persisting PDF Report
+2016-12-06T13:50:53-06:00 INFO (6): 0: ID_P707
+2016-12-06T13:50:53-06:00 INFO (6): 1: {"id":"P707","sku":"2564","productname":"Cod - Frozen, Wild, USA, Loins (10lb Case)","shortescription":"5oz Loins","comment":null,"qty":1,"wholesale":4.15,"retail":5.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:50:53-06:00 INFO (6): 2: ID_P644
+2016-12-06T13:50:53-06:00 INFO (6): 3: {"id":"P644","sku":"2345","productname":"Crab - Live, Soft Shell, Hotel, Wild, USA 60ct","shortescription":"About 5 Dozen per Tray<br/>\r\nSeason newly opened. Cannot break tray.","comment":null,"qty":1,"wholesale":"N/A","retail":25.71,"uom":"dz","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:50:53-06:00 INFO (6): 4: ID_P516
+2016-12-06T13:50:53-06:00 INFO (6): 5: {"id":"P516","sku":"1977","productname":"Mahi Mahi - Frozen, Wild, Ecuador, Portions, 10lb box","shortescription":"8oz Fillet Portions","comment":null,"qty":1,"wholesale":7.5,"retail":10,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:50:53-06:00 INFO (6): 6: ID_P1046
+2016-12-06T13:50:53-06:00 INFO (6): 7: {"id":"P1046","sku":"164","productname":"Mahi Mahi - Wild, Ecuador, Head Off  (6lb avg)","shortescription":null,"comment":"Please fillet","qty":1,"wholesale":"N/A","retail":9.67,"uom":"lb","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:50:53-06:00 INFO (6): 8: ID_P105
+2016-12-06T13:50:53-06:00 INFO (6): 9: {"id":"P105","sku":"55168201","productname":"Shrimp - Frozen, 21/25, Farmed, P&D Tail Off, India (2lb Bag)","shortescription":null,"comment":null,"qty":1,"wholesale":6.5,"retail":8.67,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:50:53-06:00 INFO (6): 10: ID_P596
+2016-12-06T13:50:53-06:00 INFO (6): 11: {"id":"P596","sku":"2183","productname":"Shrimp - Frozen, 26/30, Farmed, P&D Tail Off, India (10lb)","shortescription":"Blue Sea","comment":null,"qty":1,"wholesale":6,"retail":8,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:50:53-06:00 INFO (6): 12: ID_P203
+2016-12-06T13:50:53-06:00 INFO (6): 13: {"id":"P203","sku":"1106","productname":"Tilapia - Frozen, Farmed, China, 5-7oz Fillets (10lb box)","shortescription":"","comment":null,"qty":1,"wholesale":2,"retail":2.86,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:50:53-06:00 INFO (6): 14: ID_P66
+2016-12-06T13:50:53-06:00 INFO (6): 15: {"id":"P66","sku":"2800100","productname":"Tuna - Yellowfin #2+, Wild, USA, Loin","shortescription":"","comment":null,"qty":1,"wholesale":12,"retail":15.5,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:50:53-06:00 INFO (6): 16: ID_P685
+2016-12-06T13:50:53-06:00 INFO (6): 17: {"id":"P685","sku":"16194101","productname":"Whitefish - Large, Wild, USA, Head On (3lb avg)","shortescription":"Lake Huron, USA<br/>\r\nAvailable most Mondays and Thursdays\r\n","comment":"Please fillet","qty":1,"wholesale":3,"retail":4.29,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:51:14-06:00 INFO (6): Allowed: 1
+2016-12-06T13:51:14-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T13:51:14-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T13:51:28-06:00 INFO (6): AjaxItemController found!
+2016-12-06T13:51:28-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1054&_=1481053888255
+2016-12-06T13:51:28-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T13:51:28-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T13:51:29-06:00 INFO (6): Found 11 customers in db.
+2016-12-06T13:51:29-06:00 INFO (6): Found 11 items in svc and 11 in DB.
+2016-12-06T13:51:29-06:00 DEBUG (7): Retrieved 11 customerlistitems.
+2016-12-06T13:51:29-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:51:29-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:51:29-06:00 INFO (6): No price overrides found!
+2016-12-06T13:51:29-06:00 INFO (6): Found 11 removedSKUs in Session!
+2016-12-06T13:51:31-06:00 INFO (6): Allowed: 1
+2016-12-06T13:51:31-06:00 INFO (6): Persisting PDF Report
+2016-12-06T13:51:31-06:00 INFO (6): 0: ID_P707
+2016-12-06T13:51:31-06:00 INFO (6): 1: {"id":"P707","sku":"2564","productname":"Cod - Frozen, Wild, USA, Loins (10lb Case)","shortescription":"5oz Loins","comment":null,"qty":1,"wholesale":4.15,"retail":5.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:51:31-06:00 INFO (6): 2: ID_P644
+2016-12-06T13:51:31-06:00 INFO (6): 3: {"id":"P644","sku":"2345","productname":"Crab - Live, Soft Shell, Hotel, Wild, USA 60ct","shortescription":"About 5 Dozen per Tray<br/>\r\nSeason newly opened. Cannot break tray.","comment":null,"qty":1,"wholesale":"N/A","retail":25.71,"uom":"dz","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:51:31-06:00 INFO (6): 4: ID_P516
+2016-12-06T13:51:31-06:00 INFO (6): 5: {"id":"P516","sku":"1977","productname":"Mahi Mahi - Frozen, Wild, Ecuador, Portions, 10lb box","shortescription":"8oz Fillet Portions","comment":null,"qty":1,"wholesale":7.5,"retail":10,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:51:31-06:00 INFO (6): 6: ID_P1046
+2016-12-06T13:51:31-06:00 INFO (6): 7: {"id":"P1046","sku":"164","productname":"Mahi Mahi - Wild, Ecuador, Head Off  (6lb avg)","shortescription":null,"comment":"Please fillet","qty":1,"wholesale":"N/A","retail":9.67,"uom":"lb","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:51:31-06:00 INFO (6): 8: ID_P105
+2016-12-06T13:51:31-06:00 INFO (6): 9: {"id":"P105","sku":"55168201","productname":"Shrimp - Frozen, 21/25, Farmed, P&D Tail Off, India (2lb Bag)","shortescription":null,"comment":null,"qty":1,"wholesale":6.5,"retail":8.67,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:51:31-06:00 INFO (6): 10: ID_P596
+2016-12-06T13:51:31-06:00 INFO (6): 11: {"id":"P596","sku":"2183","productname":"Shrimp - Frozen, 26/30, Farmed, P&D Tail Off, India (10lb)","shortescription":"Blue Sea","comment":null,"qty":1,"wholesale":6,"retail":8,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:51:31-06:00 INFO (6): 12: ID_P203
+2016-12-06T13:51:31-06:00 INFO (6): 13: {"id":"P203","sku":"1106","productname":"Tilapia - Frozen, Farmed, China, 5-7oz Fillets (10lb box)","shortescription":"","comment":null,"qty":1,"wholesale":2,"retail":2.86,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:51:31-06:00 INFO (6): 14: ID_P66
+2016-12-06T13:51:31-06:00 INFO (6): 15: {"id":"P66","sku":"2800100","productname":"Tuna - Yellowfin #2+, Wild, USA, Loin","shortescription":"","comment":null,"qty":1,"wholesale":12,"retail":15.5,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:51:31-06:00 INFO (6): 16: ID_P685
+2016-12-06T13:51:31-06:00 INFO (6): 17: {"id":"P685","sku":"16194101","productname":"Whitefish - Large, Wild, USA, Head On (3lb avg)","shortescription":"Lake Huron, USA<br/>\r\nAvailable most Mondays and Thursdays\r\n","comment":"Please fillet","qty":1,"wholesale":3,"retail":4.29,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:54:58-06:00 INFO (6): Allowed: 1
+2016-12-06T13:54:58-06:00 INFO (6): ItemsController 74: Retrieving customerlistitems.
+2016-12-06T13:54:58-06:00 INFO (6): ItemsController 179: Found customer Tony D'Alessandro
+2016-12-06T13:54:59-06:00 INFO (6): AjaxItemController found!
+2016-12-06T13:54:59-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1054&_=1481054099299
+2016-12-06T13:54:59-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T13:54:59-06:00 INFO (6): AjaxItemsController:192: Retrieving customerlistitems.
+2016-12-06T13:55:00-06:00 INFO (6): Found 11 customers in db.
+2016-12-06T13:55:00-06:00 INFO (6): Found 11 items in svc and 11 in DB.
+2016-12-06T13:55:00-06:00 DEBUG (7): Retrieved 11 customerlistitems.
+2016-12-06T13:55:00-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:55:00-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T13:55:00-06:00 INFO (6): No price overrides found!
+2016-12-06T13:55:00-06:00 INFO (6): Found 11 removedSKUs in Session!
+2016-12-06T13:55:03-06:00 INFO (6): Allowed: 1
+2016-12-06T13:55:03-06:00 INFO (6): Persisting PDF Report
+2016-12-06T13:55:03-06:00 INFO (6): 0: ID_P707
+2016-12-06T13:55:03-06:00 INFO (6): 1: {"id":"P707","sku":"2564","productname":"Cod - Frozen, Wild, USA, Loins (10lb Case)","shortescription":"5oz Loins","comment":null,"qty":1,"wholesale":4.15,"retail":5.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:55:04-06:00 INFO (6): 2: ID_P644
+2016-12-06T13:55:04-06:00 INFO (6): 3: {"id":"P644","sku":"2345","productname":"Crab - Live, Soft Shell, Hotel, Wild, USA 60ct","shortescription":"About 5 Dozen per Tray<br/>\r\nSeason newly opened. Cannot break tray.","comment":null,"qty":1,"wholesale":"N/A","retail":25.71,"uom":"dz","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:55:04-06:00 INFO (6): 4: ID_P516
+2016-12-06T13:55:04-06:00 INFO (6): 5: {"id":"P516","sku":"1977","productname":"Mahi Mahi - Frozen, Wild, Ecuador, Portions, 10lb box","shortescription":"8oz Fillet Portions","comment":null,"qty":1,"wholesale":7.5,"retail":10,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:55:04-06:00 INFO (6): 6: ID_P1046
+2016-12-06T13:55:04-06:00 INFO (6): 7: {"id":"P1046","sku":"164","productname":"Mahi Mahi - Wild, Ecuador, Head Off  (6lb avg)","shortescription":null,"comment":"Please fillet","qty":1,"wholesale":"N/A","retail":9.67,"uom":"lb","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:55:04-06:00 INFO (6): 8: ID_P105
+2016-12-06T13:55:04-06:00 INFO (6): 9: {"id":"P105","sku":"55168201","productname":"Shrimp - Frozen, 21/25, Farmed, P&D Tail Off, India (2lb Bag)","shortescription":null,"comment":null,"qty":1,"wholesale":6.5,"retail":8.67,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:55:04-06:00 INFO (6): 10: ID_P596
+2016-12-06T13:55:04-06:00 INFO (6): 11: {"id":"P596","sku":"2183","productname":"Shrimp - Frozen, 26/30, Farmed, P&D Tail Off, India (10lb)","shortescription":"Blue Sea","comment":null,"qty":1,"wholesale":6,"retail":8,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:55:04-06:00 INFO (6): 12: ID_P203
+2016-12-06T13:55:04-06:00 INFO (6): 13: {"id":"P203","sku":"1106","productname":"Tilapia - Frozen, Farmed, China, 5-7oz Fillets (10lb box)","shortescription":"","comment":null,"qty":1,"wholesale":2,"retail":2.86,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T13:55:04-06:00 INFO (6): 14: ID_P66
+2016-12-06T13:55:04-06:00 INFO (6): 15: {"id":"P66","sku":"2800100","productname":"Tuna - Yellowfin #2+, Wild, USA, Loin","shortescription":"","comment":null,"qty":1,"wholesale":12,"retail":15.5,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:55:04-06:00 INFO (6): 16: ID_P685
+2016-12-06T13:55:04-06:00 INFO (6): 17: {"id":"P685","sku":"16194101","productname":"Whitefish - Large, Wild, USA, Head On (3lb avg)","shortescription":"Lake Huron, USA<br/>\r\nAvailable most Mondays and Thursdays\r\n","comment":"Please fillet","qty":1,"wholesale":3,"retail":4.29,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T13:57:28-06:00 INFO (6): AjaxItemController found!
+2016-12-06T13:57:28-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=1054
+2016-12-06T13:57:28-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T14:05:43-06:00 INFO (6): AjaxItemController found!
+2016-12-06T14:05:43-06:00 INFO (6): /ajax/items?myaction=select&ids[]=P457&ids[]=P1277&ids[]=P707&ids[]=P644&ids[]=P516&ids[]=P1046&ids[]=P105&ids[]=P596&ids[]=P203&ids[]=P66&ids[]=P685&customerid=1054
+2016-12-06T14:05:43-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P457
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P1277
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P707
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P644
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P516
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P1046
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P105
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P596
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P203
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P66
+2016-12-06T14:05:43-06:00 INFO (6): Selecting P685
+2016-12-06T14:05:52-06:00 INFO (6): Allowed: 1
+2016-12-06T14:05:52-06:00 INFO (6): Persisting PDF Report
+2016-12-06T14:05:52-06:00 INFO (6): 0: ID_P707
+2016-12-06T14:05:52-06:00 INFO (6): 1: {"id":"P707","sku":"2564","productname":"Cod - Frozen, Wild, USA, Loins (10lb Case)","shortescription":"5oz Loins","comment":null,"qty":1,"wholesale":4.15,"retail":5.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T14:05:53-06:00 INFO (6): 2: ID_P644
+2016-12-06T14:05:53-06:00 INFO (6): 3: {"id":"P644","sku":"2345","productname":"Crab - Live, Soft Shell, Hotel, Wild, USA 60ct","shortescription":"About 5 Dozen per Tray<br/>\r\nSeason newly opened. Cannot break tray.","comment":null,"qty":1,"wholesale":"N/A","retail":25.71,"uom":"dz","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T14:05:53-06:00 INFO (6): 4: ID_P516
+2016-12-06T14:05:53-06:00 INFO (6): 5: {"id":"P516","sku":"1977","productname":"Mahi Mahi - Frozen, Wild, Ecuador, Portions, 10lb box","shortescription":"8oz Fillet Portions","comment":null,"qty":1,"wholesale":7.5,"retail":10,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T14:05:53-06:00 INFO (6): 6: ID_P1046
+2016-12-06T14:05:53-06:00 INFO (6): 7: {"id":"P1046","sku":"164","productname":"Mahi Mahi - Wild, Ecuador, Head Off  (6lb avg)","shortescription":null,"comment":"Please fillet","qty":1,"wholesale":"N/A","retail":9.67,"uom":"lb","option":null,"status":"Disabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T14:05:53-06:00 INFO (6): 8: ID_P105
+2016-12-06T14:05:53-06:00 INFO (6): 9: {"id":"P105","sku":"55168201","productname":"Shrimp - Frozen, 21/25, Farmed, P&D Tail Off, India (2lb Bag)","shortescription":null,"comment":null,"qty":1,"wholesale":6.5,"retail":8.67,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T14:05:53-06:00 INFO (6): 10: ID_P596
+2016-12-06T14:05:53-06:00 INFO (6): 11: {"id":"P596","sku":"2183","productname":"Shrimp - Frozen, 26/30, Farmed, P&D Tail Off, India (10lb)","shortescription":"Blue Sea","comment":null,"qty":1,"wholesale":6,"retail":8,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T14:05:53-06:00 INFO (6): 12: ID_P203
+2016-12-06T14:05:53-06:00 INFO (6): 13: {"id":"P203","sku":"1106","productname":"Tilapia - Frozen, Farmed, China, 5-7oz Fillets (10lb box)","shortescription":"","comment":null,"qty":1,"wholesale":2,"retail":2.86,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"","selected":true}
+2016-12-06T14:05:53-06:00 INFO (6): 14: ID_P66
+2016-12-06T14:05:53-06:00 INFO (6): 15: {"id":"P66","sku":"2800100","productname":"Tuna - Yellowfin #2+, Wild, USA, Loin","shortescription":"","comment":null,"qty":1,"wholesale":12,"retail":15.5,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T14:05:53-06:00 INFO (6): 16: ID_P685
+2016-12-06T14:05:53-06:00 INFO (6): 17: {"id":"P685","sku":"16194101","productname":"Whitefish - Large, Wild, USA, Head On (3lb avg)","shortescription":"Lake Huron, USA<br/>\r\nAvailable most Mondays and Thursdays\r\n","comment":"Please fillet","qty":1,"wholesale":3,"retail":4.29,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":0,"overrideprice":"","selected":true}
+2016-12-06T14:05:57-06:00 INFO (6): AjaxItemController found!
+2016-12-06T14:05:57-06:00 INFO (6): /ajax/items?myaction=unselect&customerid=1054
+2016-12-06T14:05:57-06:00 INFO (6): ItemsController Ajax called.

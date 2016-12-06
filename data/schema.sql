@@ -22,6 +22,7 @@ DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS user_role_xref;
 DROP TABLE IF EXISTS users;
+
 CREATE TABLE `users` (
     `username` varchar(100) PRIMARY KEY,
     `version` INTEGER DEFAULT 1,
@@ -48,11 +49,11 @@ CREATE INDEX cmp_index_users_username_salespersonname_sales_attr_id
 ON users (username, salespersonname, sales_attr_id);
 
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
-VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '630-999-0139');
+VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Jason Palmer', 183, 'jpalmer@fultonfishmarket.com', '630-999-0139');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
-VALUES('foobarx', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Foo Bar X', 247, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+VALUES('foobarx', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Foo Bar X', 247, 'cmetallo@fultonfishmarket.com', '802-233-9957');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
-VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '802-233-9957');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '802-238-1452');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 

@@ -5,6 +5,7 @@ namespace Sales\Service;
 use Application\Service\FFMEntityManagerServiceInterface;
 use Application\Service\LoggingServiceInterface;
 use DataAccess\FFM\Entity\ItemTableCheckbox;
+use Exception;
 use Sales\Service\CheckboxServiceInterface;
 
 /**
@@ -54,10 +55,12 @@ class CheckboxService implements CheckboxServiceInterface {
                     //here we are dealing with a Product
                     $product = $this->findProduct(substr($i, 1));//trim P
                     $record->setProduct($product);
-                } else {
+                } else if (strpos($i, 'A') !== false){
                     //here we are dealing with a RowPlusitemsPage.
                     $rowplusitemspage = $this->findRowPlusItemsPage(substr($i, 1));
                     $record->setRowPlusItemsPage($rowplusitemspage);
+                }else{
+                    throw new Exception();
                 }
 
                 $record->setSalesperson($user);
@@ -89,8 +92,10 @@ class CheckboxService implements CheckboxServiceInterface {
         $record;
         if (strpos($id, 'P') !== false){
             $record = $this->findCheckbox(null, substr($id, 1), $customerid, $salespersonusername);
-        }else{
+        }else if (strpos($id, 'A') !== false){
             $record = $this->findCheckbox(substr($id, 1), null, $customerid, $salespersonusername);
+        }else{
+            throw new Exception();
         }
         if (!empty($record)) {
             $record->setChecked(false);
