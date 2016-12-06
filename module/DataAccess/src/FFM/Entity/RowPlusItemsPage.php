@@ -31,15 +31,39 @@ class RowPlusItemsPage extends PostFormBinder {
      * @ORM\Version 
      */
     private $version;
-
+    
     /**
-     * @ORM\ManyToOne(targetEntity="Product", cascade={"all"}, fetch="LAZY")
-     * @ORM\JoinColumn(name="product", referencedColumnName="id")
+     * @ORM\Column(type="string", length=255)
      */
-    protected $product;
+    protected $productname;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $description;
+    
+    /**
+     * @ORM\Column(type="string", length=25, columnDefinition="VARCHAR(25) DEFAULT NULL")
+     */
+    protected $sku;
+    
+    /**
+     * @ORM\Column(type="string", length=100)
+     */
+    protected $uom;
+    
+    /**
+     * @ORM\Column(name="status", type="boolean")
+     */
+    protected $status;
+    
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $comment;
+
+    /**
+     * @ORM\Column(type="decimal")
      */
     protected $overrideprice;
 
@@ -73,20 +97,32 @@ class RowPlusItemsPage extends PostFormBinder {
         return $this->id;
     }
 
-    public function getProduct() {
-        return $this->product;
+    public function getVersion() {
+        return $this->version;
     }
 
-    public function getCustomer() {
-        return $this->_customerid;
+    public function getProductname() {
+        return $this->productname;
     }
 
-    public function getOverrideprice() {
-        return $this->overrideprice;
+    public function getDescription() {
+        return $this->description;
+    }
+
+    public function getUom() {
+        return $this->uom;
     }
 
     public function getStatus() {
         return $this->status;
+    }
+
+    public function getComment() {
+        return $this->comment;
+    }
+
+    public function getOverrideprice() {
+        return $this->overrideprice;
     }
 
     public function getActive() {
@@ -97,8 +133,20 @@ class RowPlusItemsPage extends PostFormBinder {
         return $this->_created;
     }
 
+    public function getCustomer() {
+        return $this->_customerid;
+    }
+
     public function getSalesperson() {
         return $this->_salesperson;
+    }
+    public function getSku() {
+        return $this->sku;
+    }
+
+    public function setSku($sku) {
+        $this->sku = $sku;
+        return $this;
     }
 
     public function setId($id) {
@@ -106,13 +154,33 @@ class RowPlusItemsPage extends PostFormBinder {
         return $this;
     }
 
-    public function setCustomer($customer) {
-        $this->_customerid = $customer;
+    public function setVersion($version) {
+        $this->version = $version;
         return $this;
     }
 
-    public function setProduct($product) {
-        $this->product = $product;
+    public function setProductname($productname) {
+        $this->productname = $productname;
+        return $this;
+    }
+
+    public function setDescription($description) {
+        $this->description = $description;
+        return $this;
+    }
+
+    public function setUom($uom) {
+        $this->uom = $uom;
+        return $this;
+    }
+
+    public function setStatus($status) {
+        $this->status = $status;
+        return $this;
+    }
+
+    public function setComment($comment) {
+        $this->comment = $comment;
         return $this;
     }
 
@@ -121,19 +189,26 @@ class RowPlusItemsPage extends PostFormBinder {
         return $this;
     }
 
-    public function setActive($active) {
-        $this->_active = $active;
+    public function setActive($_active) {
+        $this->_active = $_active;
         return $this;
     }
 
-    public function setCreated($created) {
-        $this->_created = $created;
+    public function setCreated($_created) {
+        $this->_created = $_created;
         return $this;
     }
 
-    public function setSalesperson($salesperson) {
-        $this->_salesperson = $salesperson;
+    public function setCustomer(Customer $customer) {
+        $this->_customerid = $customer;
         return $this;
     }
+
+    public function setSalesperson($_salesperson) {
+        $this->_salesperson = $_salesperson;
+        return $this;
+    }
+
+
 
 }

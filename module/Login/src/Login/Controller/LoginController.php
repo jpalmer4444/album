@@ -89,14 +89,8 @@ class LoginController extends AbstractActionController {
                     $this->plugin('flashmessenger')->addMessage($message);
                 }
                 if ($result->isValid()) {
-                    $redirect = $this->getSessionStorage()->admin() ? 'sales' : 'users';
-                    if(null !== $this->getSessionStorage()->getRequestedRoute()){
-                        //always force admin to salesperson selection at context sales!
-                        $redirect = $this->getSessionStorage()->admin() ? 
-                                'sales' : 
-                                $this->getSessionStorage()->getRequestedRoute();
-                    }
                     //set roles
+                    
                     $user = $this->entityManager->find('DataAccess\FFM\Entity\User', $request->getPost('username'));
                     $this->logger->info('Username: ' . $user->getUsername());
                     $roleXrefObjs = $this->entityManager->getRepository('DataAccess\FFM\Entity\UserRoleXref')->findBy(array('username' => $request->getPost('username')));
@@ -110,7 +104,7 @@ class LoginController extends AbstractActionController {
                     $this->getSessionStorage()->addRoles($roles);
                     $this->getSessionStorage()->addUser($user);//set $user in session storage for later access.
                     //if user is admin user then set salespersonInPlay to the user
-                    
+                    $redirect = $this->getSessionStorage()->admin() ? 'sales' : 'users';
                     
                     //check if it has rememberMe :
                     $this->getAuthService()->setStorage($this->getSessionStorage());

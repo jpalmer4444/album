@@ -22,6 +22,7 @@ class ItemsControllerFactory {
                     $customerrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Customer');
                     $productrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Product');
                     $userproductrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\UserProduct');
+                    $pricingoverridereportrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\PricingOverrideReport');
                     return new ItemsController(
                             $loggingService,
                             $myauthstorage,
@@ -31,6 +32,7 @@ class ItemsControllerFactory {
                             $customerrepository,
                             $productrepository,
                             $userproductrepository,
+                            $pricingoverridereportrepository,
                             $pricingconfig
                     );
     }

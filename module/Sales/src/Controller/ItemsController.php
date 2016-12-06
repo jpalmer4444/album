@@ -8,12 +8,12 @@ namespace Sales\Controller;
 use Application\Service\LoggingServiceInterface;
 use DataAccess\FFM\Entity\PricingOverrideReport;
 use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
+use DataAccess\FFM\Entity\Repository\Impl\PricingOverrideReportRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\ProductRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserProductRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
-use DataAccess\FFM\Entity\UserProduct;
 use DateTime;
 use Login\Model\MyAuthStorage;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -38,6 +38,7 @@ class ItemsController extends AbstractActionController {
     protected $customerrepository;
     protected $productrepository;
     protected $userproductrepository;
+    protected $pricingoverridereportrepository;
     protected $serviceLocator;
 
     public function setServiceLocator(ServiceLocatorInterface $serviceLocator) {
@@ -55,7 +56,7 @@ class ItemsController extends AbstractActionController {
             AbstractPluginManager $formManager, UserRepositoryImpl $userrepository, 
             RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, CustomerRepositoryImpl $customerrepository, 
             ProductRepositoryImpl $productrepository, UserProductRepositoryImpl $userproductrepository, 
-            $config = NULL) {
+            PricingOverrideReportRepositoryImpl $pricingoverridereportrepository, $config = NULL) {
         $this->logger = $logger;
         $this->myauthstorage = $myauthstorage;
         $this->pricingconfig = $config;
@@ -65,6 +66,7 @@ class ItemsController extends AbstractActionController {
         $this->customerrepository = $customerrepository;
         $this->productrepository = $productrepository;
         $this->userproductrepository = $userproductrepository;
+        $this->pricingoverridereportrepository = $pricingoverridereportrepository;
     }
 
     public function indexAction() {
@@ -96,32 +98,32 @@ class ItemsController extends AbstractActionController {
             if ($form->isValid()) {
                 $success = true;
                 //create a row_plus_items_page_row and create a Product with negative ID in Products table.
-                $product = $this->productrepository->addedProduct();
-                $userproduct = new UserProduct();
-                $userproduct->setCustomer($this->customerrepository->findCustomer($this->customerid));
-                $userproduct->setProduct($product);
-                $jsonModelArr["id"] = $product->getId();
+                //$product = $this->productrepository->addedProduct();
+                //$userproduct = new UserProduct();
+                //$userproduct->setCustomer($this->customerrepository->findCustomer($this->customerid));
+                //$userproduct->setProduct($product);
+                //$jsonModelArr["id"] = $product->getId();
                 $record = new RowPlusItemsPage();
                 $record->setLogger($this->logger);
-                $record->setProduct($product);
+                //$record->setProduct($product);
                 $jsonModelArr["sku"] = empty($form->getData()['sku']) ? '' : $form->getData()['sku'];
                 if (array_key_exists("sku", $jsonModelArr)) {
-                    $product->setSku($jsonModelArr["sku"]);
+                    $record->setSku($jsonModelArr["sku"]);
                 }
                 
                 $jsonModelArr["productname"] = empty($form->getData()['product']) ? '' : $form->getData()['product'];
                 if (array_key_exists("productname", $jsonModelArr)) {
-                    $product->setProductname($jsonModelArr["productname"]);
+                    $record->setProductname($jsonModelArr["productname"]);
                 }
                 
                 $jsonModelArr["shortescription"] = empty($form->getData()['description']) ? '' : $form->getData()['description'];
                 if (array_key_exists("shortescription", $jsonModelArr)) {
-                    $product->setDescription($jsonModelArr["shortescription"]);
+                    $record->setDescription($jsonModelArr["shortescription"]);
                 }
 
                 $jsonModelArr["comment"] = empty($form->getData()['comment']) ? '' : $form->getData()['comment'];
                 if (array_key_exists("comment", $jsonModelArr)) {
-                    $userproduct->setComment($jsonModelArr["comment"]);
+                    $record->setComment($jsonModelArr["comment"]);
                 }
 
                 $jsonModelArr["qty"] = '';
@@ -131,15 +133,14 @@ class ItemsController extends AbstractActionController {
                 $this->logger->info('ItemsController 122: Sanitizing...');
                 $jsonModelArr["overrideprice"] = empty($form->getData()['overrideprice']) ? '' : $form->getData()['overrideprice'];
                 if (array_key_exists("overrideprice", $jsonModelArr)) {
-                    $int3 = filter_var($jsonModelArr["overrideprice"], FILTER_SANITIZE_NUMBER_INT);
-                    $record->setOverrideprice($int3);
+                    $record->setOverrideprice($jsonModelArr["overrideprice"]);
                 }
                 $jsonModelArr["uom"] = empty($form->getData()['uom']) ? '' : $form->getData()['uom'];
                 if (array_key_exists("uom", $jsonModelArr)) {
-                    $product->setUom($jsonModelArr["uom"]);
+                    $record->setUom($jsonModelArr["uom"]);
                 }
                 $jsonModelArr["status"] = "1";
-                $product->setStatus(true);
+                $record->setStatus(true);
                 $jsonModelArr["saturdayenabled"] = "0";
                 $created = new DateTime("now");
                 $record->setCreated($created);
@@ -151,11 +152,13 @@ class ItemsController extends AbstractActionController {
                 $record->setSalesperson($salesperson);
                 //var_dump($record);
                 $this->rowplusitemspagerepository->persistAndFlush($record);
+                
                 //$this->productrepository->persistAndFlush($product);
-                $userproduct->setProduct($product);
-                $this->userproductrepository->persistAndFlush($userproduct);
+                //$userproduct->setProduct($product);
+                //$this->userproductrepository->persistAndFlush($userproduct);
                 $this->logger->info('Saved added row: ' . $record->getId());
-                $this->logger->info('Saved added product with negative PK: ' . $product->getId());
+                $jsonModelArr["id"] = "A" . $record->getId();
+                //$this->logger->info('Saved added product with negative PK: ' . $product->getId());
                 $jsonModelArr["success"] = $success;
             } else {
                 //find out why it failed here.
@@ -194,6 +197,7 @@ class ItemsController extends AbstractActionController {
             "salespersonname" => $this->myauthstorage->getUser()->getSalespersonname(),
             "salespersonemail" => $this->myauthstorage->getUser()->getEmail(),
             "companyname" => urlencode($customer->getCompany()),
+            "companynamehtml" => $customer->getCompany(),
             "salespersonphone1" => $this->myauthstorage->getUser()->getPhone1(),
             "salespersonid" => $this->myauthstorage->getUser()->getSales_attr_id(),
             "form" => $form
@@ -221,19 +225,13 @@ class ItemsController extends AbstractActionController {
 
                     $obj = json_decode($value, true);
                     $pricingOverrideReport = new PricingOverrideReport();
-                    $overrideSet = false;
                     if (array_key_exists("overrideprice", $obj)) {
-                        $int1 = $obj['overrideprice'] * 100;
-                        $pricingOverrideReport->setOverrideprice($int1);
+                        $pricingOverrideReport->setOverrideprice($obj['overrideprice']);
                         $overrideSet = true;
                     }
 
                     if (array_key_exists("retail", $obj)) {
-                        $int2 = $obj['retail'] * 100;
-                        $pricingOverrideReport->setRetail($int2);
-                        if (!$overrideSet) {
-                            $pricingOverrideReport->setOverrideprice($int2);
-                        }
+                        $pricingOverrideReport->setRetail($obj['retail']);
                     }
 
                     $created = new DateTime("now");
@@ -242,9 +240,14 @@ class ItemsController extends AbstractActionController {
                     $pricingOverrideReport->setCustomer($customer);
                     $salesperson = $this->userrepository->findUser($this->myauthstorage->getUser()->getUsername());
                     $pricingOverrideReport->setSalesperson($salesperson);
-                    $product = $this->productrepository->findProduct($obj['id']);
-                    $pricingOverrideReport->setProduct($product);
-                    $this->rowplusitemspagerepository->persistAndFlush($pricingOverrideReport);
+                    if (strpos($obj['id'], 'P') !== false){
+                        $product = $this->productrepository->findProduct(substr($obj['id'], 1));
+                        $pricingOverrideReport->setProduct($product);
+                    }else{
+                        $rowplusitemspage = $this->rowplusitemspagerepository->findRowPlusItemsPage(substr($obj['id'], 1));
+                        $pricingOverrideReport->setRowPlusItemsPage($rowplusitemspage);
+                    }
+                    $this->pricingoverridereportrepository->persistAndFlush($pricingOverrideReport);
                 }
                 $counter++;
             }

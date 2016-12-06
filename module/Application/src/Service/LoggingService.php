@@ -23,10 +23,6 @@ class LoggingService implements LoggingServiceInterface {
         $this->logger->debug($message);
     }
 
-    public function error($message) {
-        $this->logger->error($message);
-    }
-
     public function info($message) {
         $this->logger->info($message);
     }

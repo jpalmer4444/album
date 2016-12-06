@@ -4,6 +4,7 @@ namespace Ajax\Controller\Sales;
 
 use DataAccess\FFM\Entity\ItemPriceOverride;
 use DataAccess\FFM\Entity\Product;
+use DataAccess\FFM\Entity\RowPlusItemsPage;
 use DataAccess\FFM\Entity\UserProduct;
 use DateTime;
 use Doctrine\DBAL\LockMode;
@@ -32,6 +33,7 @@ class ItemsController extends AbstractRestfulController {
     protected $productrepository;
     protected $userproductrepository;
     protected $customerrepository;
+    protected $rowplusitemspagerepository;
     protected $customerid;
     protected $qb;
 
@@ -59,6 +61,9 @@ class ItemsController extends AbstractRestfulController {
         $this->productrepository = $container->get('FFMEntityManager')->
                 getEntityManager()->
                 getRepository('DataAccess\FFM\Entity\Product');
+        $this->rowplusitemspagerepository = $container->get('FFMEntityManager')->
+                getEntityManager()->
+                getRepository('DataAccess\FFM\Entity\RowPlusItemsPage');
         $this->customerrepository = $container->get('FFMEntityManager')->
                 getEntityManager()->
                 getRepository('DataAccess\FFM\Entity\Customer');
@@ -109,40 +114,78 @@ class ItemsController extends AbstractRestfulController {
         $rowIndex = $this->params()->fromQuery('index');
         $overrideprice = $this->params()->fromQuery('overrideprice');
         $this->logger->info('Saving overrideprice: ' . $overrideprice . '.');
-        //save overridePrice in DB
-        $record = new ItemPriceOverride();
-        $created = new DateTime("now");
-        $record->setCreated($created);
-        $record->setActive(true);
-        $customer = $this->customerrepository->findCustomer($customerid);
-        $record->setCustomer($customer);
-        $product = $this->productrepository->findProduct($id);
-        $record->setProduct($product);
-        if (!empty($overrideprice)) {
-            $int2 = filter_var($overrideprice, FILTER_SANITIZE_NUMBER_INT);
-            $record->setOverrideprice($int2);
-        }
-        $this->entityManager->getConnection()->beginTransaction(); // suspend auto-commit
-        try {
-            //... do some work
-            $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->myauthstorage->getSalespersonInPlay()) ?
-                    $this->myauthstorage->getUser()->getUsername() :
-                    $this->myauthstorage->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
-            $record->setSalesperson($salesperson);
-            $this->entityManager->persist($record);
-            $this->entityManager->flush();
-            $this->entityManager->getConnection()->commit();
-            return new JsonModel(array(
-                'success' => true,
-                'index' => $rowIndex,
-                'overrideprice' => number_format($record->getOverrideprice() / 100, 2)
-            ));
-        } catch (Exception $e) {
-            $this->entityManager->getConnection()->rollBack();
-            $this->logger->error(strval($e));
-            return new JsonModel(array(
-                'success' => false,
-            ));
+
+        //we can either have an $id that begins with 'P' which needs an ItemPriceOverride
+        //OR
+        //we can have an $id that begins with 'A' which has a corresponding RowPlusItemsRow.
+        if (strpos($id, 'P') !== false) {
+            //save overridePrice in DB
+            $record = new ItemPriceOverride();
+            $created = new DateTime("now");
+            $record->setCreated($created);
+            $record->setActive(true);
+            $customer = $this->customerrepository->findCustomer($customerid);
+            $record->setCustomer($customer);
+            $product = $this->productrepository->findProduct(substr($id, 1));
+            $record->setProduct($product);
+            if (!empty($overrideprice)) {
+                $record->setOverrideprice($overrideprice);
+            }
+            $this->entityManager->getConnection()->beginTransaction(); // suspend auto-commit
+            try {
+                //... do some work
+                $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->myauthstorage->getSalespersonInPlay()) ?
+                        $this->myauthstorage->getUser()->getUsername() :
+                        $this->myauthstorage->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
+                $record->setSalesperson($salesperson);
+                $this->entityManager->persist($record);
+                $this->entityManager->flush();
+                $this->entityManager->getConnection()->commit();
+                return new JsonModel(array(
+                    'success' => true,
+                    'index' => $rowIndex,
+                    'overrideprice' => $record->getOverrideprice()
+                ));
+            } catch (Exception $e) {
+                $this->entityManager->getConnection()->rollBack();
+                $this->logger->info(strval($e));
+                return new JsonModel(array(
+                    'success' => false,
+                ));
+            }
+        } else {
+            //update existing RowPlusItemsPage row
+            $record = $this->rowplusitemspagerepository->findRowPlusItemsPage(substr($id, 1));
+            $created = new DateTime("now");
+            $record->setCreated($created);
+            $record->setActive(true);
+            $customer = $this->customerrepository->findCustomer($customerid);
+            $record->setCustomer($customer);
+            if (!empty($overrideprice)) {
+                $record->setOverrideprice($overrideprice);
+            }
+            $this->entityManager->getConnection()->beginTransaction(); // suspend auto-commit
+            try {
+                //... do some work
+                $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->myauthstorage->getSalespersonInPlay()) ?
+                        $this->myauthstorage->getUser()->getUsername() :
+                        $this->myauthstorage->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
+                $record->setSalesperson($salesperson);
+                $this->entityManager->merge($record);
+                $this->entityManager->flush();
+                $this->entityManager->getConnection()->commit();
+                return new JsonModel(array(
+                    'success' => true,
+                    'index' => $rowIndex,
+                    'overrideprice' => $record->getOverrideprice()
+                ));
+            } catch (Exception $e) {
+                $this->entityManager->getConnection()->rollBack();
+                $this->logger->info(strval($e));
+                return new JsonModel(array(
+                    'success' => false,
+                ));
+            }
         }
     }
 
@@ -215,12 +258,10 @@ class ItemsController extends AbstractRestfulController {
                         $userproduct->setOption($product['option']);
                         $cdb->setQty($product['qty']);
                         if (!empty($product['wholesale'])) {
-                            $int1 = $product['wholesale'] * 100;
-                            $cdb->setWholesale($int1);
+                            $cdb->setWholesale($product['wholesale']);
                         }
                         if (!empty($product['retail'])) {
-                            $int2 = $product['retail'] * 100;
-                            $cdb->setRetail($int2);
+                            $cdb->setRetail($product['retail']);
                         }
                         $cdb->setUom($product['uom']);
                         $this->userproductrepository->merge($userproduct);
@@ -245,12 +286,10 @@ class ItemsController extends AbstractRestfulController {
                         $cdb->setDescription($product['shortescription']);
                         $cdb->setQty($product['qty']);
                         if (!empty($product['wholesale'])) {
-                            $int1 = $product['wholesale'] * 100;
-                            $cdb->setWholesale($int1);
+                            $cdb->setWholesale($product['wholesale']);
                         }
                         if (!empty($product['retail'])) {
-                            $int2 = $product['retail'] * 100;
-                            $cdb->setRetail($int2);
+                            $cdb->setRetail($product['retail']);
                         }
                         $cdb->setUom($product['uom']);
                         $this->userproductrepository->persist($userproduct);

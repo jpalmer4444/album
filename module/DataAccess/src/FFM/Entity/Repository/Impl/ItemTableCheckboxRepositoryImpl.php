@@ -2,6 +2,8 @@
 
 namespace DataAccess\FFM\Entity\Repository\Impl;
 
+use Exception;
+
 /**
  * Description of ItemTableCheckboxRepository
  *
@@ -14,13 +16,14 @@ class ItemTableCheckboxRepositoryImpl extends FFMRepository {
             . ' :customerid';
     const QUERY_CHECKBOX_BY_CUSTOMERID_AND_SALESPERSON_AND_ID = 'SELECT itemTableCheckbox FROM \DataAccess\FFM\Entity'
             . '\ItemTableCheckbox itemTableCheckbox WHERE itemTableCheckbox._salesperson = :username AND '
-            . 'itemTableCheckbox._customerid = :customerid AND itemTableCheckbox.product = :product';
+            . 'itemTableCheckbox._customerid = :customerid AND (itemTableCheckbox.product = :product OR itemTableCheckbox.rowPlusItemsPage = :rowPlusItemsPage)';
 
-    public function findCheckbox($product, $customerid, $salespersonusername) {
+    public function findCheckbox($rowplusitemspage, $product, $customerid, $salespersonusername) {
         $query = $this->getEntityManager()->createQuery(ItemTableCheckboxRepositoryImpl::QUERY_CHECKBOX_BY_CUSTOMERID_AND_SALESPERSON_AND_ID);
         $query->setParameter("username", $salespersonusername);
         $query->setParameter("customerid", $customerid);
         $query->setParameter("product", $product);
+        $query->setParameter("rowPlusItemsPage", $rowplusitemspage);
         try {
             $arr = $query->getResult();
             if(!empty(count($arr))){
@@ -39,7 +42,11 @@ class ItemTableCheckboxRepositoryImpl extends FFMRepository {
     }
 
     public function removeCheckbox($id, $customerid, $salespersonusername) {
-        $record = $this->findCheckbox($id, $customerid, $salespersonusername);
+        if (strpos($id, 'P') !== false){
+            $record = $this->findCheckbox(null, substr($id, 1), $customerid, $salespersonusername);
+        }else{
+            $record = $this->findCheckbox(substr($id, 1), null, $customerid, $salespersonusername);
+        }
         $record->setChecked(false);
         $this->getEntityManager()->persist($record);
         $this->getEntityManager()->flush();

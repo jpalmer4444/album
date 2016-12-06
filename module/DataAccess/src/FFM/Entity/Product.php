@@ -47,7 +47,7 @@ class Product {
     private $qty;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     protected $wholesale;
 
@@ -62,7 +62,7 @@ class Product {
     protected $sku;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     protected $retail;
 

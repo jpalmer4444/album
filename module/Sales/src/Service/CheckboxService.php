@@ -19,6 +19,7 @@ class CheckboxService implements CheckboxServiceInterface {
     protected $userrepository;
     protected $customerrepository;
     protected $productrepository;
+    protected $rowplusitemspagerepository;
 
     public function __construct(LoggingServiceInterface $logger, FFMEntityManagerServiceInterface $ffmEntityManagerService) {
         $this->logger = $logger;
@@ -26,26 +27,42 @@ class CheckboxService implements CheckboxServiceInterface {
         $this->userrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
         $this->customerrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\Customer');
         $this->productrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\Product');
+        $this->rowplusitemspagerepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\RowPlusItemsPage');
     }
 
     public function addRemovedID($id, $customerid, $salespersonusername) {
-        $record = $this->findCheckbox($id, $customerid, $salespersonusername);
+        $record;
+        if (strpos($id, 'P') !== false){
+            $record = $this->findCheckbox(null, substr($id, 1), $customerid, $salespersonusername);
+        }else{
+            $record = $this->findCheckbox(substr($id, 1), null, $customerid, $salespersonusername);
+        }
         if (!empty($record)) {
             $record->setChecked(true);
         } else {
-            if(empty(is_array($id))){
+            if (empty(is_array($id))) {
                 $id = array($id);
             }
             foreach ($id as $i) {
+                //here the $i will either be prefixed with 'A' or 'P' for AddedProduct OR Product respectively.
+
                 $this->logger->info("Creating and persisting Checkbox record. ID: " . $i . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
                 $record = new ItemTableCheckbox();
                 $user = $this->findUser($salespersonusername);
                 $customer = $this->findCustomer($customerid);
-                $product = $this->findProduct($i);
+                if (strpos($i, 'P') !== false) {
+                    //here we are dealing with a Product
+                    $product = $this->findProduct(substr($i, 1));//trim P
+                    $record->setProduct($product);
+                } else {
+                    //here we are dealing with a RowPlusitemsPage.
+                    $rowplusitemspage = $this->findRowPlusItemsPage(substr($i, 1));
+                    $record->setRowPlusItemsPage($rowplusitemspage);
+                }
+
                 $record->setSalesperson($user);
                 $record->setChecked(true);
                 $record->setCustomer($customer);
-                $record->setProduct($product);
                 $this->checkboxrepository->persist($record);
             }
         }
@@ -59,8 +76,9 @@ class CheckboxService implements CheckboxServiceInterface {
         //create non-associate (1d) array of SKUs. This will eliminate the need
         $onedim = array();
         foreach ($arrayOfCheckboxEntities as $entity) {
-            if($entity->getChecked()){
-                $onedim [] = $entity->getProduct();   
+            if ($entity->getChecked()) {
+                $productorrowplusitemspage = !empty($entity->getProduct()) ? $entity->getProduct() : $entity->getRowPlusItemsPage();
+                $onedim [] = $productorrowplusitemspage;
             }
         }
         return $onedim;
@@ -68,7 +86,12 @@ class CheckboxService implements CheckboxServiceInterface {
 
     public function removeRemovedID($id, $customerid, $salespersonusername) {
         //first find the record
-        $record = $this->findCheckbox($id, $customerid, $salespersonusername);
+        $record;
+        if (strpos($id, 'P') !== false){
+            $record = $this->findCheckbox(null, substr($id, 1), $customerid, $salespersonusername);
+        }else{
+            $record = $this->findCheckbox(substr($id, 1), null, $customerid, $salespersonusername);
+        }
         if (!empty($record)) {
             $record->setChecked(false);
         } else {
@@ -77,18 +100,22 @@ class CheckboxService implements CheckboxServiceInterface {
         $this->checkboxrepository->removeCheckbox($id, $customerid, $salespersonusername);
     }
 
-    protected function findCheckbox($id, $customerid, $salespersonusername) {
-        return $this->checkboxrepository->findCheckbox($id, $customerid, $salespersonusername);
+    protected function findCheckbox($rowplusitemspage, $id, $customerid, $salespersonusername) {
+        return $this->checkboxrepository->findCheckbox($rowplusitemspage, $id, $customerid, $salespersonusername);
     }
 
     protected function findUser($username) {
         return $this->userrepository->findUser($username);
     }
-    
+
     protected function findCustomer($customerid) {
         return $this->customerrepository->findCustomer($customerid);
     }
     
+    protected function findRowPlusItemsPage($id) {
+        return $this->rowplusitemspagerepository->findRowPlusItemsPage($id);
+    }
+
     protected function findProduct($productid) {
         return $this->productrepository->findProduct($productid);
     }

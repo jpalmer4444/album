@@ -38,6 +38,12 @@ class ItemTableCheckbox extends PostFormBinder {
     protected $product;
     
     /**
+     * @ORM\ManyToOne(targetEntity="RowPlusItemsPage", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="row_plus_items_page_id", referencedColumnName="id")
+     */
+    protected $rowPlusItemsPage;
+    
+    /**
      * @ORM\Column(name="created", type="datetime", nullable=true)
      */
     protected $_created;
@@ -70,6 +76,10 @@ class ItemTableCheckbox extends PostFormBinder {
     public function getCustomer() {
         return $this->_customerid;
     }
+    
+    public function getRowPlusItemsPage() {
+        return $this->rowPlusItemsPage;
+    }
 
     public function getCreated() {
         return $this->_created;
@@ -90,6 +100,11 @@ class ItemTableCheckbox extends PostFormBinder {
     
     public function setProduct($product) {
         $this->product = $product;
+        return $this;
+    }
+    
+    public function setRowPlusItemsPage($rowPlusItemsPage) {
+        $this->rowPlusItemsPage = $rowPlusItemsPage;
         return $this;
     }
     

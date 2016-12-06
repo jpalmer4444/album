@@ -49,7 +49,9 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
         return array(
             'factories' => array(
                 'Login\Model\MyAuthStorage' => function($sm) {
-                    return new MyAuthStorage('zf_tutorial');
+                    $myauthstorage = new MyAuthStorage('zf_tutorial');
+                    $myauthstorage->setLogger($sm->get('LoggingService'));
+                    return $myauthstorage;
                 },
                 'AuthService' => function($sm) {
                     //My assumption, you've alredy set dbAdapter

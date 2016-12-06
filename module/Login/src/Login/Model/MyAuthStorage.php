@@ -1,18 +1,23 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * 
  */
 
 namespace Login\Model;
 
+use Application\Service\LoggingServiceInterface;
 use DataAccess\FFM\Entity\User;
 use Zend\Authentication\Storage\Session;
  
 class MyAuthStorage extends Session
 {
+    
+    protected $logger;
+    
+    public function setLogger(LoggingServiceInterface $logger){
+        $this->logger = $logger;
+    }
     
     public function setRememberMe($rememberMe = 0, $time = 1209600)
     {
@@ -40,9 +45,11 @@ class MyAuthStorage extends Session
     }
     
     public function admin(){
-        $roleStr = $this->getRole();
+        $role = $this->getRole();
+        $roleArr = array($role => $role);
         //$roleStr will be a boolean if there is no roles present in session.
-        return $roleStr ? strcmp($roleStr, "admin") == 0 : $roleStr; 
+        $this->logger->info("MyAuthStorage:50: " . strval($roleArr[$role]));
+        return !empty($roleArr) ? array_key_exists("admin", $roleArr) : $roleArr;
     }
     
     public function getRoles(){

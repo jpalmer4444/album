@@ -39,12 +39,7 @@ class ItemPriceOverride extends PostFormBinder {
     protected $product;
     
     /**
-     * @ORM\Column(type="integer")
-     */
-    protected $retail;
-    
-    /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     protected $overrideprice;
 
@@ -90,10 +85,6 @@ class ItemPriceOverride extends PostFormBinder {
     public function getId() {
         return $this->id;
     }
-    
-    public function getRetail() {
-        return $this->retail;
-    }
 
     public function getProduct() {
         return $this->product;
@@ -121,11 +112,6 @@ class ItemPriceOverride extends PostFormBinder {
 
     public function setId($id) {
         $this->id = $id;
-        return $this;
-    }
-    
-    public function setRetail($retail) {
-        $this->retail = $retail;
         return $this;
     }
 

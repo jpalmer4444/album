@@ -38,12 +38,18 @@ class PricingOverrideReport extends PostFormBinder{
     protected $product;
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="RowPlusItemsPage", cascade={"all"}, fetch="LAZY")
+     * @ORM\JoinColumn(name="row_plus_items_page_id", referencedColumnName="id")
+     */
+    protected $rowPlusItemsPage;
+    
+    /**
+     * @ORM\Column(type="decimal")
      */
     protected $retail;
     
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="decimal")
      */
     protected $overrideprice;
     
@@ -71,8 +77,25 @@ class PricingOverrideReport extends PostFormBinder{
     public function getProduct() {
         return $this->product;
     }
-    
-    public function getRetail() {
+    public function getVersion() {
+        return $this->version;
+    }
+
+    public function getRowPlusItemsPage() {
+        return $this->rowPlusItemsPage;
+    }
+
+    public function setVersion($version) {
+        $this->version = $version;
+        return $this;
+    }
+
+    public function setRowPlusItemsPage($rowPlusItemsPage) {
+        $this->rowPlusItemsPage = $rowPlusItemsPage;
+        return $this;
+    }
+
+        public function getRetail() {
         return $this->retail;
     }
     

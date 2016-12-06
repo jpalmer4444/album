@@ -13,13 +13,14 @@ INSERT INTO album (artist, title) VALUES ('Bruce Springsteen', 'Wrecking Ball (D
 INSERT INTO album (artist, title) VALUES ('Lana Del Rey', 'Born To Die');
 INSERT INTO album (artist, title) VALUES ('Gotye', 'Making Mirrors');
 
+DROP TABLE IF EXISTS item_table_checkbox;
 DROP TABLE IF EXISTS row_plus_items_page;
 DROP TABLE IF EXISTS item_price_override;
 DROP TABLE IF EXISTS pricing_override_report;
-DROP TABLE IF EXISTS item_table_checkbox;
 DROP TABLE IF EXISTS user_products;
 DROP TABLE IF EXISTS products;
 DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS user_role_xref;
 DROP TABLE IF EXISTS users;
 CREATE TABLE `users` (
     `username` varchar(100) PRIMARY KEY,
@@ -47,17 +48,17 @@ CREATE INDEX cmp_index_users_username_salespersonname_sales_attr_id
 ON users (username, salespersonname, sales_attr_id);
 
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
-VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+VALUES('jpalmer', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '630-999-0139');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('foobarx', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Foo Bar X', 247, 'cmetallo@fultonfishmarket.com', '999-999-9999');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
-VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '802-238-1452');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
-VALUES('cmetallo', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+VALUES('cmetallo', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '847-809-6512');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
-VALUES('mspindler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '999-999-9999');
+VALUES('mspindler', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '847-809-6512');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('bzakrinski', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Bill Zakrinski', 206, 'bzak@fultonfishmarket.com', '347-680-2772');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
@@ -77,7 +78,6 @@ VALUES('sales', 'Salespeople Access');
 INSERT INTO roles (role, description) 
 VALUES('admin', 'Admin Access');
 
-DROP TABLE IF EXISTS user_role_xref;
 CREATE TABLE user_role_xref (
     role varchar(25) NOT NULL,
     username varchar(100) NOT NULL,
@@ -114,8 +114,8 @@ CREATE TABLE `products` (
     `productname` VARCHAR(255) NOT NULL,
     `description` VARCHAR(255),
     `qty` INTEGER,
-    `wholesale` INTEGER,
-    `retail` INTEGER,
+    `wholesale` DECIMAL(22,2),
+    `retail` DECIMAL(22,2),
     `uom` VARCHAR(100) NOT NULL,
     `status` BOOLEAN,
     `saturdayenabled` BOOLEAN,
@@ -164,13 +164,17 @@ CREATE TABLE `user_products` (
 CREATE TABLE `row_plus_items_page` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
     `version` INTEGER DEFAULT 1,
-    `product` INTEGER NOT NULL,
-    `overrideprice` INTEGER,
+    `overrideprice` DECIMAL(22,2),
     `active` BOOLEAN,
+    `sku` VARCHAR(25),
+    `productname` VARCHAR(255) NOT NULL,
+    `description` VARCHAR(255),
+    `comment` VARCHAR(255),
+    `uom` VARCHAR(100) NOT NULL,
+    `status` BOOLEAN,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER NOT NULL,
     `salesperson` VARCHAR(100) NOT NULL,
-    FOREIGN KEY(product) REFERENCES products(id),
     FOREIGN KEY(salesperson) REFERENCES users(username),
     FOREIGN KEY(customerid) REFERENCES customers(id)
 );
@@ -179,8 +183,7 @@ CREATE TABLE `item_price_override` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
     `version` INTEGER DEFAULT 1,
     `product` INTEGER NOT NULL,
-    `overrideprice` INTEGER,
-    `retail` INTEGER,
+    `overrideprice` DECIMAL(22,2),
     `active` BOOLEAN,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER NOT NULL,
@@ -193,9 +196,10 @@ CREATE TABLE `item_price_override` (
 CREATE TABLE `pricing_override_report` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
     `version` INTEGER DEFAULT 1,
-    `product` INTEGER NOT NULL,
-    `overrideprice` INTEGER,
-    `retail` INTEGER,
+    `product` INTEGER,
+    `row_plus_items_page_id` INTEGER,
+    `overrideprice` DECIMAL(22,2),
+    `retail` DECIMAL(22,2),
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     `customerid` INTEGER NOT NULL,
     `salesperson` VARCHAR(100) NOT NULL,
@@ -207,12 +211,14 @@ CREATE TABLE `pricing_override_report` (
 CREATE TABLE `item_table_checkbox` (
     `id` INTEGER PRIMARY KEY AUTO_INCREMENT, 
     `version` INTEGER DEFAULT 1,
-    `product` INTEGER NOT NULL,
+    `product` INTEGER,
+    `row_plus_items_page_id` INTEGER,
     `checked` BOOLEAN DEFAULT 0,
     `customerid` INTEGER NOT NULL,
     `salesperson` VARCHAR(100) NOT NULL,
     `created` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(product) REFERENCES products(id),
+    FOREIGN KEY(row_plus_items_page_id) REFERENCES row_plus_items_page(id),
     FOREIGN KEY(salesperson) REFERENCES users(username),
     FOREIGN KEY(customerid) REFERENCES customers(id)
 );
