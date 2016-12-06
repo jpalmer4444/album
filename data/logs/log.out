@@ -1765,3 +1765,33 @@ Stack trace:
 2016-12-06T05:01:00-06:00 INFO (6): AjaxItemController found!
 2016-12-06T05:01:00-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=P80&customerid=1153
 2016-12-06T05:01:00-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:23:39-06:00 INFO (6): Allowed: 1
+2016-12-06T05:23:39-06:00 INFO (6): Allowed: 1
+2016-12-06T05:23:39-06:00 INFO (6): Checking for identity
+2016-12-06T05:23:39-06:00 INFO (6): Identity not found.
+2016-12-06T05:23:44-06:00 INFO (6): Allowed: 1
+2016-12-06T05:23:44-06:00 INFO (6): AuthenticationAction called.
+2016-12-06T05:23:45-06:00 INFO (6): Username: jpalmer
+2016-12-06T05:23:45-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:23:45-06:00 INFO (6): Allowed: 1
+2016-12-06T05:23:45-06:00 INFO (6): Retrieving salespeople.
+2016-12-06T05:23:47-06:00 DEBUG (7): Retrieved 5 salespeople.
+2016-12-06T05:23:47-06:00 INFO (6): query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'Foo Bar X', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+2016-12-06T05:23:53-06:00 INFO (6): Allowed: 1
+2016-12-06T05:23:53-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:23:53-06:00 INFO (6): Retrieving Salespeople. ID: 206
+2016-12-06T05:23:54-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T05:23:54-06:00 INFO (6): Found 0 users in db.
+2016-12-06T05:24:07-06:00 INFO (6): Allowed: 1
+2016-12-06T05:24:07-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:24:08-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:24:08-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=1153&_=1481023447611
+2016-12-06T05:24:08-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:24:08-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:24:09-06:00 INFO (6): Found 0 customers in db.
+2016-12-06T05:24:09-06:00 INFO (6): Found 6 items in svc and 0 in DB.
+2016-12-06T05:24:09-06:00 DEBUG (7): Retrieved 6 customerlistitems.
+2016-12-06T05:24:09-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:24:09-06:00 INFO (6): MyAuthStorage:50: admin
+2016-12-06T05:24:09-06:00 INFO (6): No price overrides found!
+2016-12-06T05:24:09-06:00 INFO (6): Found 0 removedSKUs in Session!
