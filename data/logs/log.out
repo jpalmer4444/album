@@ -15,3 +15,100 @@
 2016-11-30T06:40:20-06:00 INFO (6): ItemsController 122: Sanitizing...
 2016-11-30T06:40:20-06:00 INFO (6): Saved added row: 6
 2016-11-30T06:40:20-06:00 INFO (6): Saved added product with negative PK: -6
+2016-12-06T05:19:54-06:00 INFO (6): Allowed: 1
+2016-12-06T05:19:54-06:00 INFO (6): Allowed: 1
+2016-12-06T05:19:54-06:00 INFO (6): Checking for identity
+2016-12-06T05:19:54-06:00 INFO (6): Identity not found.
+2016-12-06T05:19:59-06:00 INFO (6): Allowed: 1
+2016-12-06T05:19:59-06:00 INFO (6): AuthenticationAction called.
+2016-12-06T05:20:00-06:00 INFO (6): Username: jpalmer
+2016-12-06T05:20:00-06:00 INFO (6): Allowed: 1
+2016-12-06T05:20:00-06:00 INFO (6): Retrieving Salespeople. ID: 183
+2016-12-06T05:20:01-06:00 INFO (6): Retrieved #1 customers.
+2016-12-06T05:20:01-06:00 INFO (6): Found 0 users in db.
+2016-12-06T05:20:53-06:00 INFO (6): Allowed: 1
+2016-12-06T05:20:53-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:20:54-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:20:54-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481023253647
+2016-12-06T05:20:54-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:20:54-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:20:55-06:00 INFO (6): Found 0 customers in db.
+2016-12-06T05:20:55-06:00 INFO (6): Found 16 items in svc and 0 in DB.
+2016-12-06T05:20:55-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T05:20:55-06:00 INFO (6): No price overrides found!
+2016-12-06T05:20:55-06:00 INFO (6): Found 0 removedSKUs in Session!
+2016-12-06T05:21:00-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:00-06:00 INFO (6): /ajax/items?myaction=select&ids[]=873&customerid=398
+2016-12-06T05:21:00-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:00-06:00 INFO (6): Selecting 873
+2016-12-06T05:21:00-06:00 INFO (6): Creating and persisting Checkbox record. ID: 873 CUSTOMERID: 398 SALESPERSONUSERNAME: jpalmer
+2016-12-06T05:21:03-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:03-06:00 INFO (6): /ajax/items?myaction=select&ids[]=134&customerid=398
+2016-12-06T05:21:03-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:03-06:00 INFO (6): Selecting 134
+2016-12-06T05:21:03-06:00 INFO (6): Creating and persisting Checkbox record. ID: 134 CUSTOMERID: 398 SALESPERSONUSERNAME: jpalmer
+2016-12-06T05:21:04-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:04-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=134&customerid=398
+2016-12-06T05:21:04-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:08-06:00 INFO (6): Allowed: 1
+2016-12-06T05:21:08-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:21:13-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:13-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481023272692
+2016-12-06T05:21:13-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:13-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:21:14-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T05:21:14-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T05:21:14-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T05:21:14-06:00 INFO (6): No price overrides found!
+2016-12-06T05:21:14-06:00 INFO (6): Found 1 removedSKUs in Session!
+2016-12-06T05:21:18-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:18-06:00 INFO (6): /ajax/items?myaction=select&ids[]=77&customerid=398
+2016-12-06T05:21:18-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:18-06:00 INFO (6): Selecting 77
+2016-12-06T05:21:18-06:00 INFO (6): Creating and persisting Checkbox record. ID: 77 CUSTOMERID: 398 SALESPERSONUSERNAME: jpalmer
+2016-12-06T05:21:19-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:19-06:00 INFO (6): /ajax/items?myaction=select&ids[]=73&customerid=398
+2016-12-06T05:21:19-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:19-06:00 INFO (6): Selecting 73
+2016-12-06T05:21:19-06:00 INFO (6): Creating and persisting Checkbox record. ID: 73 CUSTOMERID: 398 SALESPERSONUSERNAME: jpalmer
+2016-12-06T05:21:20-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:20-06:00 INFO (6): /ajax/items?myaction=select&ids[]=253&customerid=398
+2016-12-06T05:21:20-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:20-06:00 INFO (6): Selecting 253
+2016-12-06T05:21:20-06:00 INFO (6): Creating and persisting Checkbox record. ID: 253 CUSTOMERID: 398 SALESPERSONUSERNAME: jpalmer
+2016-12-06T05:21:21-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:21-06:00 INFO (6): /ajax/items?myaction=select&ids[]=817&customerid=398
+2016-12-06T05:21:21-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:21-06:00 INFO (6): Selecting 817
+2016-12-06T05:21:21-06:00 INFO (6): Creating and persisting Checkbox record. ID: 817 CUSTOMERID: 398 SALESPERSONUSERNAME: jpalmer
+2016-12-06T05:21:22-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:22-06:00 INFO (6): /ajax/items?myaction=select&ids[]=648&customerid=398
+2016-12-06T05:21:22-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:22-06:00 INFO (6): Selecting 648
+2016-12-06T05:21:22-06:00 INFO (6): Creating and persisting Checkbox record. ID: 648 CUSTOMERID: 398 SALESPERSONUSERNAME: jpalmer
+2016-12-06T05:21:23-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:23-06:00 INFO (6): /ajax/items?myaction=select&ids[]=134&customerid=398
+2016-12-06T05:21:23-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:23-06:00 INFO (6): Selecting 134
+2016-12-06T05:21:24-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:24-06:00 INFO (6): /ajax/items?myaction=select&ids[]=91&customerid=398
+2016-12-06T05:21:24-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:24-06:00 INFO (6): Selecting 91
+2016-12-06T05:21:24-06:00 INFO (6): Creating and persisting Checkbox record. ID: 91 CUSTOMERID: 398 SALESPERSONUSERNAME: jpalmer
+2016-12-06T05:21:26-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:26-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=77&customerid=398
+2016-12-06T05:21:26-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:27-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:27-06:00 INFO (6): /ajax/items?myaction=unselect&ids[]=253&customerid=398
+2016-12-06T05:21:27-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:29-06:00 INFO (6): Allowed: 1
+2016-12-06T05:21:29-06:00 INFO (6): ItemsController 69: Retrieving customerlistitems.
+2016-12-06T05:21:40-06:00 INFO (6): AjaxItemController found!
+2016-12-06T05:21:40-06:00 INFO (6): /ajax/items?myaction=customerlisttableget&customerid=398&_=1481023299493
+2016-12-06T05:21:40-06:00 INFO (6): ItemsController Ajax called.
+2016-12-06T05:21:40-06:00 INFO (6): Retrieving customerlistitems.
+2016-12-06T05:21:41-06:00 INFO (6): Found 16 customers in db.
+2016-12-06T05:21:41-06:00 INFO (6): Found 16 items in svc and 16 in DB.
+2016-12-06T05:21:41-06:00 DEBUG (7): Retrieved 16 customerlistitems.
+2016-12-06T05:21:41-06:00 INFO (6): No price overrides found!
+2016-12-06T05:21:41-06:00 INFO (6): Found 6 removedSKUs in Session!
