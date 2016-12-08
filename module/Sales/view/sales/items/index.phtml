@@ -6,6 +6,9 @@ $escaper = new Escaper('utf-8');
 $form = $this->form;
 $form->prepare();
 ?>
+<?php
+    echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=1234'));
+    ?>
 <script>
     //#############################################################
     //#############################################################
@@ -16,24 +19,8 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var _customer_id = "<?= $escaper->escapeHtml($this->customerid) ?>";
-    var __company_name = "<?= $escaper->escapeHtml($this->companyname) ?>";
-    var _company_name = __company_name;
-    var __customername = "<?= $escaper->escapeHtml($this->customername) ?>";
-    var _customername = __customername;
-    try {
-      _company_name = decodeURIComponent(__company_name).replace(new RegExp("\\+", "g"), ' ');
-      //replace &#039; with '
-      _customername = decodeURIComponent(__customername).replace(new RegExp("\\&#039;", "g"), '\'');
-      _company_name = decodeURIComponent(_company_name).replace(new RegExp("\\&#039;", "g"), '\'');
-      //&#x00027;
-      _customername = decodeURIComponent(_customername).replace(new RegExp("\\&#x00027;", "g"), '\'');
-      _company_name = decodeURIComponent(_company_name).replace(new RegExp("\\&#x00027;", "g"), '\'');
-      //&apos;
-      _customername = decodeURIComponent(_customername).replace(new RegExp("\\&apos;", "g"), '\'');
-      _company_name = decodeURIComponent(_company_name).replace(new RegExp("\\&apos;", "g"), '\'');
-    } catch (e) {
-      console.log(JSON.stringify(e));
-    }
+    var _company_name = stripit("<?= $escaper->escapeHtml($this->companyname) ?>");
+    var _customername = stripit("<?= $escaper->escapeHtml($this->customername) ?>");
 
     //#############################################################
     //#############################################################
@@ -47,17 +34,6 @@ $form->prepare();
     //#############################################################
     //#############################################################
     //##
-    //##    Convenience function to get a human readable date string.
-    //##
-    //#############################################################
-    //#############################################################
-    var getPrettyTime = function () {
-      return new Date().format('Il F jS, Y g:i A').substring(1);
-    };
-
-    //#############################################################
-    //#############################################################
-    //##
     //##    OverridePrice button click handler.
     //##    Sends REST GET to Ajax Endpoint. The Endpoint
     //##    inserts the override price record into the db
@@ -66,10 +42,10 @@ $form->prepare();
     //##
     //#############################################################
     //#############################################################
-    var submitOverride = function (rowIdx, id) {
-      var overrideprice = $('#overrideprice').val();
-      var data = $(this).serialize();
-      $.getJSON("ajax/items?myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
+    var submitOverride = function (rowIdx, id, form) {
+      var overrideprice = JQUTILS.getVal('overrideprice');
+      var data = $(form).serialize();
+      $.getJSON("ajax/items?myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername="+encodeURIComponent("<?= $escaper->escapeHtml($this->customername) ?>")+"&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
         return overrideCallback(data);
       });
       return false;
@@ -90,7 +66,7 @@ $form->prepare();
           submitHandler: function (form) {
             var rowIdx = $('#override_form_submit').attr('data-ffm-row-index');
             var id = $('#override_form_submit').attr('data-ffm-id');
-            submitOverride(rowIdx, id);
+            submitOverride(rowIdx, id, form);
             return false;
           }
         });
@@ -136,213 +112,6 @@ $form->prepare();
       } else {
         console.log('Row NOT added response: ' + JSON.stringify(data));
       }
-    };
-
-    //#############################################################
-    //#############################################################
-    //##
-    //##    Utility method that wraps up and delivers override 
-    //##    price modal markup.
-    //##
-    //#############################################################
-    //#############################################################
-    var wrapModal = function (row) {
-      var wrapper = ' <div id="detailRowModal" class="modal fade dtr-bs-modal in" role="dialog" style="display: block; padding-left: 0px;">\n\
-                            <div class="modal-dialog" role="document">\n\
-                                <div class="modal-content">\n\
-                                    <div class="modal-header">\n\
-                                        <h4 class="modal-title">\n\
-                                            ' + generateDetailsModalHeader(row) + '\n\
-                                        </h4>\n\
-                                    </div>\n\
-                                <div class="modal-body">\n\
-                                ' + generateDetailsModalBody(row.index(), row.data()) + '\n\
-                                </div>\n\
-                            </div>\n\
-                        </div>';
-      return wrapper;
-    };
-
-    //#############################################################
-    //#############################################################
-    //##
-    //##    Utility method that generates raw markup for override 
-    //##    price popup modal header.
-    //##
-    //#############################################################
-    //#############################################################
-    var generateDetailsModalHeader = function (row) {
-      var data = row.data();
-      return data['productname'] + ' <div class="pull-right"><small ><span class="glyphicon glyphicon-barcode" aria-hidden="true"></span> <span >' + data['sku'] + '</span></small><span><button type="button" class="close" data-dismiss="modal">&times;</button></span></div>';
-    };
-    
-    console.log('parsed generateDetailsModalHeader');
-
-    //#############################################################
-    //#############################################################
-    //##
-    //##    Utility method to generate raw html for modal popup
-    //##    override price form.
-    //##
-    //#############################################################
-    //#############################################################
-    var generateDetailsModalBody = function (rowIdx, columns) {
-      var comment = columns.comment ? columns.comment : '';
-      var option = columns.option;
-      var qty = columns.qty;
-      var wholesale = columns.wholesale;
-      var retail = columns.retail;
-      var overrideprice = columns.overrideprice ? columns.overrideprice : '';
-      var uom = columns.uom;
-      var id = columns.id;
-      var status = columns.status;
-      var saturdayenabled = columns.saturdayenabled;
-      var data = '';
-      var copy = '<div class="row">\n\
-                                        <div class="col-md-12">\n\
-                                            <hr/>\n\
-                                        </div>\n\
-                                    </div>';
-      if ((comment && comment.length) ||
-              (option && option.length)) {
-        copy += '   <div class="row">\n\
-                                        <div class="col-md-12">\n\
-                                            <div class="table-responsive">\n\
-                                                <table class="table">\n\
-                                                    <thead>\n\
-                                                        <tr>\n\
-                                                            <th>Comment</th>\n\
-                                                            <th>Option</th>\n\
-                                                        </tr>\n\
-                                                    </thead>\n\
-                                                    <tbody>\n\
-                                                        <tr>\n\
-                                                            <td style="width: 50%;">' + comment + '</td>\n\
-                                                            <td style="width: 50%;">' + option + '</td>\n\
-                                                        <tr>\n\
-                                                    </tbody>\n\
-                                                </table>\n\
-                                            </div>\n\
-                                        </div>\n\
-                                    </div>';
-      }
-      copy += '   <div class="row">\n\
-                                        <div class="col-md-12">\n\
-                                            <div class="table-responsive">\n\
-                                                <table class="table">\n\
-                                                    <thead>\n\
-                                                        <tr>\n\
-                                                            <th>Wholesale</th>\n\
-                                                            <th>Retail</th>\n\
-                                                            <th>Override Price</th>\n\
-                                                        </tr>\n\
-                                                    </thead>\n\
-                                                    <tbody>\n\
-                                                        <tr>\n\
-                                                            <td style="width: 33%;">' + wholesale + '</td>\n\
-                                                            <td style="width: 33%;">' + retail + '</td>\n\
-                                                            <td style="width: 33%;">' + overrideprice + '</td>\n\
-                                                        <tr>\n\
-                                                    </tbody>\n\
-                                                </table>\n\
-                                            </div>\n\
-                                        </div>\n\
-                                    </div>';
-
-      copy += '   <div class="row">\n\
-                                        <div class="col-md-12">\n\
-                                            <div class="table-responsive">\n\
-                                                <table class="table">\n\
-                                                    <thead>\n\
-                                                        <tr>\n\
-                                                            <th>Qty</th>\n\
-                                                            <th>UOM</th>\n\
-                                                            <th>Saturday</th>\n\
-                                                        </tr>\n\
-                                                    </thead>\n\
-                                                    <tbody>\n\
-                                                        <tr>\n\
-                                                            <td style="width: 33%;">' + qty + '</td>\n\
-                                                            <td style="width: 33%;">' + uom + '</td>\n\
-                                                            <td style="width: 33%;">' + saturdayenabled + '</td>\n\
-                                                        <tr>\n\
-                                                    </tbody>\n\
-                                                </table>\n\
-                                            </div>\n\
-                                        </div>\n\
-                                    </div>';
-      //#############################################################
-      //#############################################################
-      //##
-      //##    IF row.status = Disabled
-      //##    Allow Price Override, but warn the Salesperson.
-      //##
-      //#############################################################
-      //#############################################################
-      if (status && status === 'Disabled') {
-        data += '<div class="row">';
-        data += '       <div class="col-md-12">';
-        data += '           <div class="ffm-callout ffm-callout-error">\n\
-                                                    <h4 >Notice <small class="pull-right">You must call first.</small></h4>\n\
-                                                    <hr/>\n\
-                                                    <p>\n\
-                                                        This item is marked Out Of Stock. Please call for availability.\n\
-                                                    </p>\n\
-                                                </div>';
-        data += '       </div>';
-        data += '</div>';
-      }
-      data += '   <div class="row">';
-      data += '       <div class="col-md-12">';
-      data += '           <form id="override_form" class="form" novalidate="novalidate">';
-      data += '               <div class="row form-group">\n\
-                                                    <div class="col-md-4">\n\
-                                                        <label for="overrideprice">\n\
-                                                            <i>Override Price</i>&nbsp;<span style="color:red;">*</span> \n\
-                                                        </label>\n\
-                                                    </div>\n\
-                                                    <div class="col-md-4">\n\
-                                                        <div class="input-group">\n\
-                                                            <div class="input-group-addon">$</div>\n\
-                                                            <input type="text" class="form-control" value="' + overrideprice + '" required data-msg="Override Price is required" id="overrideprice" aria-describedby="priceHelpInline" placeholder="Price">\n\
-                                                        </div>\n\
-                                                    </div>\n\
-                                                    \n\
-                                                    <div class="col-md-4">\n\
-                                                        <small id="priceHelpInline" class="text-muted"> -- Enter Price Override.</small>\n\
-                                                    </div>\n\
-                                                </div>';
-      data += '               <div class="row form-group">';
-      data += '                       <div class="col-md-4 col-md-offset-4">\n\
-                                                            <span class="pull-right">';
-      //#############################################################
-      //#############################################################
-      //##
-      //##    Override Price Click Handler.
-      //##
-      //#############################################################
-      //#############################################################
-      data += '                                       <button data-toggle="tooltip" data-dismiss="modal" title="Press To Cancel" class="btn btn-danger" >\n\
-                                                                    Close\n\
-                                                                </button>\n\
-                                                            </span>\n\
-                                                        </div>\n\
-                                                        <div class="col-md-4">\n\
-                                                            <span class="pull-left">\n\
-                                                                <button id="override_form_submit" onclick="initForm()" type="submit" data-ffm-row-index="' + rowIdx + '" data-ffm-id="' + id + '" \n\
-                                                                        data-toggle="tooltip" title="Submit Price Override" class="btn btn-default">\n\
-                                                                    Override\n\
-                                                                </button>\n\
-                                                            </span>\n\
-                                                        </div>\n\
-                                                </div>';
-      data += '           </form>';
-      data += '       </div>';
-      data += '   </div>';
-
-
-      //data =+ '';
-      return data + copy;
     };
 
     //#############################################################
@@ -410,7 +179,7 @@ $form->prepare();
         return '<span class="ellipsis" title="' + esc(d) + '">' + shortened + '&#8230;</span>';
       };
     };
-    
+
     var anySelected = function () {
       var selectedRows = $API.rows({selected: true}).count();
       return selectedRows > 0;

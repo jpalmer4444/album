@@ -27,18 +27,15 @@ class DateUtils {
     }
 
     public static function fromOne() {
-        $date = strtotime('today');
-        $time = "13:00:00"; //overwrite time to 1:00 if it is after 1:00.
-        $tz_string = "US/Samoa"; // Use one from list of TZ names http://php.net/manual/en/timezones.php UTC?
-        $tz_object = new DateTimeZone($tz_string);
-        $datetime = new DateTime();
-        $datetime->setTimestamp($date);
-        $datetime->setTimezone($tz_object);
-        return $datetime;
+        return $this->getDateTime('today');
     }
     
     public static function fromOneToOne() {
-        $date = strtotime('today -1 day');
+        return $this->getDateTime('today -1 day');
+    }
+    
+    private function getDateTime($start){
+        $date = strtotime($start);
         $time = "13:00:00"; //overwrite time to 1:00 if it is after 1:00.
         $tz_string = "US/Samoa"; // Use one from list of TZ names http://php.net/manual/en/timezones.php UTC?
         $tz_object = new DateTimeZone($tz_string);

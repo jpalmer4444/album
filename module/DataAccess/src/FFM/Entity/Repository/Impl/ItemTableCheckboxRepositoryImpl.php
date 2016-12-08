@@ -52,5 +52,13 @@ class ItemTableCheckboxRepositoryImpl extends FFMRepository {
         $this->getEntityManager()->persist($record);
         $this->getEntityManager()->flush();
     }
+    
+    public function persist($record) {
+        $this->getEntityManager()->persist($record);
+    }
+    
+    public function flush() {
+        $this->getEntityManager()->flush();
+    }
 
 }

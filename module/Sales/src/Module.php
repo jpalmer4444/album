@@ -9,6 +9,7 @@ use Sales\Factory\CheckboxServiceFactory;
 use Sales\Factory\ItemsControllerFactory;
 use Sales\Factory\RowPlusItemsPageFormFactory;
 use Sales\Factory\SalesControllerFactory;
+use Sales\Factory\SalesFormServiceFactory;
 use Sales\Factory\UsersControllerFactory;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -53,6 +54,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
         return [
             'factories' => [
                 'CheckboxService' => CheckboxServiceFactory::class,
+                'SalesFormService' => SalesFormServiceFactory::class,
             ]
         ];
     }

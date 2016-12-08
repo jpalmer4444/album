@@ -2,9 +2,13 @@
 
 namespace Sales\Service;
 
-use Application\Service\FFMEntityManagerServiceInterface;
 use Application\Service\LoggingServiceInterface;
 use DataAccess\FFM\Entity\ItemTableCheckbox;
+use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
+use DataAccess\FFM\Entity\Repository\Impl\ItemTableCheckboxRepositoryImpl;
+use DataAccess\FFM\Entity\Repository\Impl\ProductRepositoryImpl;
+use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
+use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use Exception;
 use Sales\Service\CheckboxServiceInterface;
 
@@ -22,13 +26,13 @@ class CheckboxService implements CheckboxServiceInterface {
     protected $productrepository;
     protected $rowplusitemspagerepository;
 
-    public function __construct(LoggingServiceInterface $logger, FFMEntityManagerServiceInterface $ffmEntityManagerService) {
+    public function __construct(LoggingServiceInterface $logger, ItemTableCheckboxRepositoryImpl $checkboxrepository, UserRepositoryImpl $userrepository, CustomerRepositoryImpl $customerrepository, ProductRepositoryImpl $productrepository, RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository) {
         $this->logger = $logger;
-        $this->checkboxrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\ItemTableCheckbox');
-        $this->userrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
-        $this->customerrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\Customer');
-        $this->productrepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\Product');
-        $this->rowplusitemspagerepository = $ffmEntityManagerService->getEntityManager()->getRepository('DataAccess\FFM\Entity\RowPlusItemsPage');
+        $this->checkboxrepository = $checkboxrepository;
+        $this->userrepository = $userrepository;
+        $this->customerrepository = $customerrepository;
+        $this->productrepository = $productrepository;
+        $this->rowplusitemspagerepository = $rowplusitemspagerepository;
     }
 
     public function addRemovedID($id, $customerid, $salespersonusername) {

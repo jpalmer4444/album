@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>QUnit items page js</title>
+ 
+  <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.0.1.css">
+  <script src="https://code.jquery.com/qunit/qunit-2.0.1.js"></script>
+  <script src="../js/datatables.cdn.js"></script>
+  <script src="../js/clean-blog.js"></script>
+  <script src="../js/pages/items.js"></script>
+ 
+  <script>
+      
+  ////////////////////////////////////////////////////////////
+  //
+  //    MODULE Test Items
+  //    This module has tests related to the items.phtml page
+  //    client side javascript.
+  //
+  ////////////////////////////////////////////////////////////
+  QUnit.module('Test Items');
+  
+  ////////////////////////////////////////////////////////////
+  //    stripit() -- strips and/or replaces special characters
+  ////////////////////////////////////////////////////////////
+  QUnit.test("stripit function removes special characters", function( assert ) {
+    assert.equal(stripit("Jason&#039;s House"), "Jason's House", "stripped &#039;");
+    assert.equal(stripit("Jason&#x00027;s House"), "Jason's House", "stripped &#x00027;");
+    assert.equal(stripit("Jason&apos;s House"), "Jason's House", "stripped &apos;");
+  });
+  
+  ////////////////////////////////////////////////////////////
+  //    stripit() -- continued
+  ////////////////////////////////////////////////////////////
+  QUnit.test("stripit function replaces pluses", function( assert ) {
+    assert.equal(stripit("Jason's+House"), "Jason's House", "replaced + with space");
+  });
+  
+  ////////////////////////////////////////////////////////////
+  //    JQUTILS.getVal() -- extracts value from input element
+  ////////////////////////////////////////////////////////////
+  QUnit.test("JQUTILS.getVal function gets value from component", function( assert ) {
+    assert.equal(JQUTILS.getVal("overrideprice"), "test_value", JQUTILS.getVal("overrideprice"));
+  });
+  
+  ////////////////////////////////////////////////////////////
+  //    getPrettyTime() -- formats date
+  ////////////////////////////////////////////////////////////
+  QUnit.test("getPrettyTime function suite", function( assert ) {
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    var days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+    var now = new Date();
+    var thisMonth = months[now.getMonth()];
+    var thisDay = days[now.getDay()];
+    var hours = now.getHours();
+    var am = 'AM';
+    var pm = 'PM';
+    var comma = ',';
+    var oneOf = 'nd or st or rd or th';
+    var time = `${hours < 13 ? hours : hours-12}:${now.getMinutes() < 10 ? "0" + now.getMinutes() : now.getMinutes()} ${hours < 13 ? am : pm}`;
+    var thisYear = now.getUTCFullYear();
+    var thisDate = now.getDate();
+    var prettyNow = getPrettyTime(now);
+    assert.ok(prettyNow, prettyNow);
+    assert.ok(prettyNow.indexOf(thisMonth) !== -1, 'contains current month: ' + thisMonth);
+    assert.ok(prettyNow.indexOf(thisDay) !== -1, 'contains current day: ' + thisDay);
+    assert.ok(prettyNow.indexOf(time) !== -1, 'contains current time: ' + time);
+    assert.ok(prettyNow.indexOf(thisYear) !== -1, 'contains current year: ' + thisYear);
+    assert.ok(prettyNow.indexOf(thisDate) !== -1, 'contains current date: ' + thisDate);
+    assert.ok(prettyNow.indexOf(comma) !== -1, 'contains a comma: ' + comma);
+    assert.ok((
+            prettyNow.includes("nd") || 
+            prettyNow.includes("st") || 
+            prettyNow.includes("rd") || 
+            prettyNow.includes("th")), 'contains oneOf: ' + oneOf);
+  });
+  
+  ////////////////////////////////////////////////////////////
+  //    generateDetailsModalHeader() -- generates modal header
+  ////////////////////////////////////////////////////////////
+  QUnit.test("generateDetailsModalHeader generates header with correct values", function( assert ) {
+      //generateDetailsModalHeader
+    let mockedrow = {data:function(){return {productname:'My Product Name',sku:'0123456789'}}};
+    let markup = generateDetailsModalHeader(mockedrow);
+    assert.ok($.parseHTML(markup), "produces valid markup");
+    assert.ok(markup.indexOf('My Product Name') !== -1, "contains productName");
+    assert.ok(markup.indexOf('0123456789') !== -1, "contains sku");
+  });
+  
+  ////////////////////////////////////////////////////////////
+  //    generateDetailsModalBody() -- generates modal body
+  ////////////////////////////////////////////////////////////
+  QUnit.test("generateDetailsModalBody generates body with correct values", function( assert ) {
+    //generateDetailsModalHeader
+    let rowIdx = 0;
+    let mockedcolumns = {comment:'comment',option:'option',qty:1,wholesale:1.99,retail:9.99,overrideprice:11.99,uom:'lb',id:1,status:true,saturdayenabled:true};
+    let markup = generateDetailsModalBody(rowIdx, mockedcolumns);
+    assert.ok($.parseHTML(markup), "produces valid markup");
+    assert.ok(markup.indexOf('<td style="width: 50%;">' + mockedcolumns.comment + '</td>') !== -1, "contains comment with markup");
+    assert.ok(markup.indexOf('<td style="width: 50%;">' + mockedcolumns.option + '</td>') !== -1, "contains option with markup");
+    assert.ok(markup.indexOf('<td style="width: 33%;">' + mockedcolumns.wholesale + '</td>') !== -1, "contains wholesale with markup");
+    assert.ok(markup.indexOf('<td style="width: 33%;">' + mockedcolumns.retail + '</td>') !== -1, "contains retail with markup");
+    assert.ok(markup.indexOf('<td style="width: 33%;">' + mockedcolumns.overrideprice + '</td>') !== -1, "contains overridepricce with markup");
+    assert.ok(markup.indexOf('<td style="width: 33%;">' + mockedcolumns.qty + '</td>') !== -1, "contains qty with markup");
+    assert.ok(markup.indexOf('<td style="width: 33%;">' + mockedcolumns.uom + '</td>') !== -1, "contains uom with markup");
+    assert.ok(markup.indexOf('<td style="width: 33%;">' + mockedcolumns.saturdayenabled + '</td>') !== -1, "contains saturdayenabled with markup");
+    assert.ok(markup.indexOf('<input type="text" class="form-control" value="' + mockedcolumns.overrideprice + '" required data-msg="Override Price is required" id="overrideprice" aria-describedby="priceHelpInline" placeholder="Price">') !== -1, "contains overrideprice for input value");
+    assert.ok(markup.indexOf('<button id="override_form_submit" onclick="initForm()" type="submit" data-ffm-row-index="' + rowIdx + '" data-ffm-id="' + mockedcolumns.id + '"') !== -1, "contains saturdayenabled with markup");
+    assert.ok(markup.indexOf('<button id="override_form_submit" onclick="initForm()" type="submit" data-ffm-row-index="' + rowIdx + '" data-ffm-id="' + mockedcolumns.id + '"') !== -1, "contains saturdayenabled with markup");
+  });
+  
+  
+  
+  </script>
+</head>
+<body>
+    <div style="display: none">
+        <input value="test_value" id="overrideprice" type="text">
+    </div>
+    
+    <div id="qunit"></div>
+ 
+</body>
+</html>

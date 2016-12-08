@@ -17,6 +17,7 @@ class ItemsControllerFactory {
                     $myauthstorage = $container->get('Login\Model\MyAuthStorage');
                     $pricingconfig = $container->get('config')['pricing_config'];
                     $formManager = $container->get('FormElementManager');
+                    $salesFromService = $container->get('SalesFormService');
                     $userrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
                     $rowplusitemspagerepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\RowPlusItemsPage');
                     $customerrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Customer');
@@ -33,6 +34,7 @@ class ItemsControllerFactory {
                             $productrepository,
                             $userproductrepository,
                             $pricingoverridereportrepository,
+                            $salesFromService,
                             $pricingconfig
                     );
     }
