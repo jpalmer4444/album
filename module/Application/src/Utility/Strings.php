@@ -19,260 +19,188 @@ class Strings {
      * FFMEntityManagerService
      * Service that provides an entry point into Doctrine EntityManager.
      */
-    const FFM_ENTITY_MANAGER = <<<'EOT'
-   FFMEntityManager
-EOT;
+    const FFM_ENTITY_MANAGER = 'FFMEntityManager';
 
     /**
      * @see SessionManager
      * SessionManager
      * Service that provides an entry point into Zend\Session\SessionManager.
      */
-    const SESSION_MANAGER = <<<'EOT'
-   SessionManager
-EOT;
+    const SESSION_MANAGER = 'SessionManager';
 
     /**
      * @see ReportService
      * ReportService
      * Service for reports.
      */
-    const REPORT_SERVICE = <<<'EOT'
-   ReportService
-EOT;
+    const REPORT_SERVICE = 'ReportService';
 
     /**
      * @see RestService
      * RestService
      * Service that makes REST calls to svc backend.
      */
-    const REST_SERVICE = <<<'EOT'
-   RestService
-EOT;
+    const REST_SERVICE = 'RestService';
 
     /**
      * config
      */
-    const CONFIG = <<<'EOT'
-   config
-EOT;
+    const CONFIG = 'config';
 
     /**
      * pricing_config
      */
-    const PRICING_CONFIG =  <<<'EOT'
-   pricing_config
-EOT;
+    const PRICING_CONFIG = 'pricing_config';
 
     /**
      * controllers
      */
-    const CONTROLLERS = <<<'EOT'
-   controllers
-EOT;
+    const CONTROLLERS = 'controllers';
 
     /**
      * factories
      */
-    const FACTORIES = <<<'EOT'
-   factories
-EOT;
+    const FACTORIES = 'factories';
 
     /**
      * dispatch
      */
-    const DISPATCH = <<<'EOT'
-   dispatch
-EOT;
+    const DISPATCH = 'dispatch';
 
     /**
      * invokables
      */
-    const INVOKABLES = <<<'EOT'
-   invokables
-EOT;
+    const INVOKABLES = 'invokables';
 
     /**
      * request
      */
-    const REQUEST = <<<'EOT'
-   request
-EOT;
+    const REQUEST = 'request';
 
     /**
      * response
      */
-    const RESPONSE = <<<'EOT'
-   response
-EOT;
+    const RESPONSE = 'response';
 
     /**
      * router
      */
-    const ROUTER = <<<'EOT'
-   router
-EOT;
+    const ROUTER = 'router';
 
     /**
      * controller
      */
-    const CONTROLLER = <<<'EOT'
-   controller
-EOT;
+    const CONTROLLER = 'controller';
 
     /**
      * action
      */
-    const ACTION = <<<'EOT'
-   action
-EOT;
+    const ACTION = 'action';
 
     /**
      * LoginController
      */
-    const LOGIN_CONTROLLER =  <<<'EOT'
-   Login\Controller\LoginController
-EOT;
+    const LOGIN_CONTROLLER = 'Login\Controller\LoginController';
 
     /**
      * SuccessController
      */
-    const SUCCESS_CONTROLLER = <<<'EOT'
-   Login\Controller\SuccessController
-EOT;
+    const SUCCESS_CONTROLLER = 'Login\Controller\SuccessController';
 
     /**
      * MyAuthStorage
      */
-    const MY_AUTH_STORAGE = <<<'EOT'
-   Login\Model\MyAuthStorage
-EOT;
+    const MY_AUTH_STORAGE = 'Login\Model\MyAuthStorage';
 
     /**
      * AuthService
      */
-    const AUTH_SERVICE = <<<'EOT'
-   AuthService
-EOT;
+    const AUTH_SERVICE = 'AuthService';
 
     /**
      * Zend\Db\Adapter\Adapter
      */
-    const ZEND_DB_ADAPTER = <<<'EOT'
-   Zend\Db\Adapter\Adapter
-EOT;
+    const ZEND_DB_ADAPTER = 'Zend\Db\Adapter\Adapter';
 
     /**
      * Zend\Mvc\Controller\AbstractActionController
      */
-    const ABSTRACT_ACTION_CONTROLLER = <<<'EOT'
-   Zend\Mvc\Controller\AbstractActionController
-EOT;
+    const ABSTRACT_ACTION_CONTROLLER = 'Zend\Mvc\Controller\AbstractActionController';
 
     /**
      * Zend\Loader\ClassMapAutoloader
      */
-    const CLASS_MAP_AUTO_LOADER = <<<'EOT'
-   Zend\Loader\ClassMapAutoloader
-EOT;
+    const CLASS_MAP_AUTO_LOADER = 'Zend\Loader\ClassMapAutoloader';
 
     /**
      * Zend\Loader\StandardAutoloader
      */
-    const STANDARD_AUTO_LOADER = <<<'EOT'
-   Zend\Loader\StandardAutoloader
-EOT;
+    const STANDARD_AUTO_LOADER = 'Zend\Loader\StandardAutoloader';
 
     /**
      * Sales\Factory\ItemsControllerFactory
      */
-    const SALES_ITEMS_CONTROLLER_FACTORY = <<<'EOT'
-   Sales\Factory\ItemsControllerFactory
-EOT;
+    const SALES_ITEMS_CONTROLLER_FACTORY = "Sales\Factory\ItemsControllerFactory";
 
     /**
      * Sales\Factory\SalesControllerFactory
      */
-    const SALES_SALES_CONTROLLER_FACTORY = <<<'EOT'
-   Sales\Factory\SalesControllerFactory
-EOT;
+    const SALES_SALES_CONTROLLER_FACTORY = "Sales\Factory\SalesControllerFactory";
 
     /**
      * Sales\Factory\UsersControllerFactory
      */
-    const SALES_USERS_CONTROLLER_FACTORY = <<<'EOT'
-   Sales\Factory\UsersControllerFactory
-EOT;
+    const SALES_USERS_CONTROLLER_FACTORY = "Sales\Factory\UsersControllerFactory";
 
     /**
      * Sales\Controller\ItemsControllerFactory
      */
-    const SALES_ITEMS_CONTROLLER = <<<'EOT'
-   Sales\Controller\ItemsController
-EOT;
+    const SALES_ITEMS_CONTROLLER = "Sales\Controller\ItemsController";
 
     /**
      * Sales\Controller\SalesControllerFactory
      */
-    const SALES_SALES_CONTROLLER = <<<'EOT'
-   Sales\Controller\SalesController
-EOT;
+    const SALES_SALES_CONTROLLER = "Sales\Controller\SalesController";
 
     /**
      * Sales\Controller\UsersControllerFactory
      */
-    const SALES_USERS_CONTROLLER = <<<'EOT'
-   Sales\Controller\UsersController
-EOT;
+    const SALES_USERS_CONTROLLER = "Sales\Controller\UsersController";
 
     /**
      * Ajax\Controller\ItemsControllerFactory
      */
-    const AJAX_ITEMS_CONTROLLER = <<<'EOT'
-   Ajax\Controller\Sales\ItemsController
-EOT;
+    const AJAX_ITEMS_CONTROLLER = "Ajax\Controller\Sales\ItemsController";
 
     /**
      * Ajax\Controller\SalesControllerFactory
      */
-    const AJAX_SALES_CONTROLLER = <<<'EOT'
-   Ajax\Controller\Sales\SalesController
-EOT;
+    const AJAX_SALES_CONTROLLER = "Ajax\Controller\Sales\SalesController";
 
     /**
      * Ajax\Controller\UsersControllerFactory
      */
-    const AJAX_USERS_CONTROLLER = <<<'EOT'
-   Ajax\Controller\Sales\UsersController
-EOT;
+    const AJAX_USERS_CONTROLLER = "Ajax\Controller\Sales\UsersController";
 
     /**
      * ItemsFilterTableArrayService
      */
-    const ITEMS_FILTER_TABLE_ARRAY_SERVICE = <<<'EOT'
-   ItemsFilterTableArrayService
-EOT;
+    const ITEMS_FILTER_TABLE_ARRAY_SERVICE = "ItemsFilterTableArrayService";
 
     /**
      * Application\ViewHelper\RequiredMarkInFormLabel
      */
-    const REQUIRED_MARK_IN_FORM_LABEL = <<<'EOT'
-   Application\ViewHelper\RequiredMarkInFormLabel
-EOT;
+    const REQUIRED_MARK_IN_FORM_LABEL = 'Application\ViewHelper\RequiredMarkInFormLabel';
 
     /**
      * formLabel
      */
-    const FORM_LABEL = <<<'EOT'
-   formLabel
-EOT;
+    const FORM_LABEL = 'formLabel';
 
     /**
      * namespaces
      */
-    const NAMESPACES = <<<'EOT'
-   namespaces
-EOT;
+    const NAMESPACES = 'namespaces';
 
     /**
      * 
@@ -309,4 +237,5 @@ EOT;
         }
         return $cur_eol;
     }
+
 }

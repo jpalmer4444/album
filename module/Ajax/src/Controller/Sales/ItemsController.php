@@ -38,10 +38,6 @@ class ItemsController extends AbstractRestfulController {
     protected $qb;
 
     public function onDispatch(MvcEvent $e) {
-        Logger::info("ItemsController", __LINE__, "AjaxItemController found! ");
-        //if(stringContains("myaction=overridePrice")){
-        //var_dump($e->getRequest());
-        //}
         Logger::info("ItemsController", __LINE__, "" . $e->getParam("request")->getRequestUri());
         try {
             return parent::onDispatch($e);
@@ -50,34 +46,38 @@ class ItemsController extends AbstractRestfulController {
         }
     }
 
+    function getEntityManager($container) {
+        return $container->get('FFMEntityManager')->getEntityManager();
+    }
+
+    function getRepo($model, $container) {
+        return $this->getEntityManager($container)->
+                        getRepository($model);
+    }
+
+    function getQueryBuilder($container) {
+        return $this->getEntityManager($container)->
+                        createQueryBuilder();
+    }
+
     public function __construct($container) {
         $this->restService = $container->get('RestService');
         $this->checkboxService = $container->get('CheckboxService');
         $this->logger = $container->get('LoggingService');
         $this->myauthstorage = $container->get('Login\Model\MyAuthStorage');
         $this->pricingconfig = $container->get('config')['pricing_config'];
-        $this->entityManager = $container->get('FFMEntityManager')->getEntityManager();
+        $this->entityManager = $this->getEntityManager($container);
         $this->itemsFilterService = $container->get('ItemsFilterTableArrayService');
-        $this->productrepository = $container->get('FFMEntityManager')->
-                getEntityManager()->
-                getRepository('DataAccess\FFM\Entity\Product');
-        $this->rowplusitemspagerepository = $container->get('FFMEntityManager')->
-                getEntityManager()->
-                getRepository('DataAccess\FFM\Entity\RowPlusItemsPage');
-        $this->customerrepository = $container->get('FFMEntityManager')->
-                getEntityManager()->
-                getRepository('DataAccess\FFM\Entity\Customer');
-        $this->userproductrepository = $container->get('FFMEntityManager')->
-                getEntityManager()->
-                getRepository('DataAccess\FFM\Entity\UserProduct');
-        $this->qb = $container->get('FFMEntityManager')->
-                        getEntityManager()->createQueryBuilder();
+        $this->productrepository = $this->getRepo('DataAccess\FFM\Entity\Product', $container);
+        $this->rowplusitemspagerepository = $this->getRepo('DataAccess\FFM\Entity\RowPlusItemsPage', $container);
+        $this->customerrepository = $this->getRepo('DataAccess\FFM\Entity\Customer', $container);
+        $this->userproductrepository = $this->getRepo('DataAccess\FFM\Entity\UserProduct', $container);
+        $this->qb = $this->getQueryBuilder($container);
     }
 
     //framework calls get when an id parameter is not found in request
     public function getList() {
         Logger::info("ItemsController", __LINE__, 'ItemsController Ajax called.');
-
         switch ($this->params()->fromQuery("myaction")) {
             case "select" : {
                     return $this->select();
@@ -95,10 +95,8 @@ class ItemsController extends AbstractRestfulController {
     //framework calls get when an id parameter is found in request
     public function get($id) {
         Logger::info("ItemsController", __LINE__, 'ItemsController Ajax called.');
-
         switch ($this->params()->fromQuery("myaction")) {
             case "overridePrice" :
-
             default : {
                     return $this->overridePrice($id);
                 }
@@ -109,30 +107,28 @@ class ItemsController extends AbstractRestfulController {
         return $this->restService->rest($url, $method, $params);
     }
 
-    protected function overridePrice($id) {
-        $customerid = $this->params()->fromQuery('customerid');
-        $rowIndex = $this->params()->fromQuery('index');
-        $overrideprice = $this->params()->fromQuery('overrideprice');
-        Logger::info("ItemsController", __LINE__, 'Saving overrideprice: ' . $overrideprice . '.');
+    function ifstrpos($var) {
+        return (strpos($var, 'P') !== false);
+    }
 
-        //we can either have an $id that begins with 'P' which needs an ItemPriceOverride
-        //OR
-        //we can have an $id that begins with 'A' which has a corresponding RowPlusItemsRow.
-        if (strpos($id, 'P') !== false) {
-            //save overridePrice in DB
-            $record = new ItemPriceOverride();
-            $created = new DateTime("now");
-            $record->setCreated($created);
-            $record->setActive(true);
-            $customer = $this->customerrepository->findCustomer($customerid);
-            $record->setCustomer($customer);
-            $product = $this->productrepository->findProduct(substr($id, 1));
-            $record->setProduct($product);
-            if (!empty($overrideprice)) {
-                $record->setOverrideprice($overrideprice);
-            }
-            $this->entityManager->getConnection()->beginTransaction(); // suspend auto-commit
-            try {
+    function getItemPriceOverride($customerid, $id) {
+        $record = new ItemPriceOverride();
+        $created = new DateTime("now");
+        $record->setCreated($created);
+        $record->setActive(true);
+        $customer = $this->customerrepository->findCustomer($customerid);
+        $record->setCustomer($customer);
+        $product = $this->productrepository->findProduct(substr($id, 1));
+        $record->setProduct($product);
+        return $record;
+    }
+    
+    function transaction(){
+        $this->entityManager->getConnection()->beginTransaction();
+    }
+    
+    function saveItemPriceOverride($record, $rowIndex){
+        try {
                 //... do some work
                 $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->myauthstorage->getSalespersonInPlay()) ?
                         $this->myauthstorage->getUser()->getUsername() :
@@ -153,19 +149,10 @@ class ItemsController extends AbstractRestfulController {
                     'success' => false,
                 ));
             }
-        } else {
-            //update existing RowPlusItemsPage row
-            $record = $this->rowplusitemspagerepository->findRowPlusItemsPage(substr($id, 1));
-            $created = new DateTime("now");
-            $record->setCreated($created);
-            $record->setActive(true);
-            $customer = $this->customerrepository->findCustomer($customerid);
-            $record->setCustomer($customer);
-            if (!empty($overrideprice)) {
-                $record->setOverrideprice($overrideprice);
-            }
-            $this->entityManager->getConnection()->beginTransaction(); // suspend auto-commit
-            try {
+    }
+    
+    function saveRowPlusItemsPage($record, $rowIndex){
+        try {
                 //... do some work
                 $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->myauthstorage->getSalespersonInPlay()) ?
                         $this->myauthstorage->getUser()->getUsername() :
@@ -186,6 +173,42 @@ class ItemsController extends AbstractRestfulController {
                     'success' => false,
                 ));
             }
+    }
+    
+    function getRowPlusItemsPage($customerid, $id, $overrideprice){
+        $record = $this->rowplusitemspagerepository->findRowPlusItemsPage(substr($id, 1));
+            $created = new DateTime("now");
+            $record->setCreated($created);
+            $record->setActive(true);
+            $customer = $this->customerrepository->findCustomer($customerid);
+            $record->setCustomer($customer);
+            if (!empty($overrideprice)) {
+                $record->setOverrideprice($overrideprice);
+            }
+            return $record;
+    }
+
+    protected function overridePrice($id) {
+        $customerid = $this->params()->fromQuery('customerid');
+        $rowIndex = $this->params()->fromQuery('index');
+        $overrideprice = $this->params()->fromQuery('overrideprice');
+        Logger::info("ItemsController", __LINE__, 'Saving overrideprice: ' . $overrideprice . '.');
+        //we can either have an $id that begins with 'P' which needs an ItemPriceOverride
+        //OR
+        //we can have an $id that begins with 'A' which has a corresponding RowPlusItemsRow.
+        if ($this->ifstrpos($id)) {
+            //save overridePrice in DB
+            $record = $this->getItemPriceOverride($customerid, $id);
+            if (!empty($overrideprice)) {
+                $record->setOverrideprice($overrideprice);
+            }
+            $this->transaction();
+            $this->saveItemPriceOverride($record, $rowIndex);
+        } else {
+            //update existing RowPlusItemsPage row
+            $record = $this->getRowPlusItemsPage($customerid, $id, $overrideprice);
+            $this->transaction();
+            $this->saveRowPlusItemsPage($record, $rowIndex);
         }
     }
 

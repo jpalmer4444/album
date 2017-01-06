@@ -1206,3 +1206,198 @@
 [INFO:Fri 1/6/2017 01:34:57AM:ItemsController:79] ItemsController Ajax called.
 [INFO:Fri 1/6/2017 01:34:57AM:ItemsController:193] Retrieving customerlistitems.
 [DEBUG:Fri 1/6/2017 01:34:58AM:ItemsController:216] No customerlistitems items found.
+[INFO:Fri 1/6/2017 03:49:06AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:49:06AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:49:06AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:49:06AM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 03:49:06AM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 03:49:06AM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 03:49:06AM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 03:49:06AM:ItemsController:41] AjaxItemController found! 
+[INFO:Fri 1/6/2017 03:49:06AM:ItemsController:45] /ajax/items
+[INFO:Fri 1/6/2017 03:49:06AM:ItemsController:79] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 03:49:06AM:ItemsController:193] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 03:49:07AM:ItemsController:216] No customerlistitems items found.
+[INFO:Fri 1/6/2017 03:50:08AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:50:08AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:50:08AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:50:08AM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 03:50:08AM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 03:50:08AM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 03:50:08AM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 03:50:08AM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 03:50:08AM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 03:50:08AM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 03:50:09AM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 03:58:08AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:58:09AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:58:09AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:58:09AM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 03:58:09AM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 03:58:09AM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 03:58:09AM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 03:58:09AM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 03:58:09AM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 03:58:09AM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 03:58:10AM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 03:58:31AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:58:31AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:58:31AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:58:31AM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 03:58:31AM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 03:58:31AM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 03:58:31AM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 03:58:31AM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 03:58:31AM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 03:58:31AM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 03:58:32AM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 04:01:04AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 04:01:04AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 04:01:04AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 04:01:04AM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 04:01:04AM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 04:01:04AM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 04:01:04AM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 04:01:05AM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 04:01:05AM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 04:01:05AM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 04:01:05AM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 04:02:12AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 04:02:12AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 04:02:12AM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 04:02:13AM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 04:02:13AM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 04:02:13AM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 04:02:13AM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 04:02:13AM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 04:02:13AM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 04:02:13AM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 04:02:13AM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 03:22:11PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:22:11PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:22:11PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:22:11PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 03:22:11PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 03:22:11PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 03:22:11PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 03:22:11PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 03:22:11PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 03:22:11PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 03:22:12PM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 03:29:50PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:29:50PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:29:50PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:29:51PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 03:29:51PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 03:29:51PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 03:29:51PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 03:29:51PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 03:29:51PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 03:29:51PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 03:29:51PM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 03:30:44PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:30:44PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:30:44PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:30:44PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 03:30:44PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 03:30:44PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 03:30:44PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 03:30:44PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 03:30:44PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 03:30:44PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 03:30:45PM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 03:33:40PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:33:40PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:33:40PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 03:33:40PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 03:33:40PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 03:33:40PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 03:33:40PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 03:33:40PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 03:33:40PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 03:33:41PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 03:33:41PM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 05:22:59PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:22:59PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:22:59PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:23:00PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 05:23:00PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 05:23:00PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 05:23:00PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 05:23:00PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 05:23:00PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 05:23:00PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 05:23:02PM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 05:43:25PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:43:25PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:43:25PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:43:25PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 05:43:25PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 05:43:25PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 05:43:25PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 05:43:25PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 05:43:25PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 05:43:25PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 05:43:27PM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 05:53:11PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:53:11PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:53:11PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:53:11PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 05:53:11PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 05:53:11PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 05:53:11PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 05:53:11PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 05:53:11PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 05:53:11PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 05:53:12PM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 05:56:20PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:56:20PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:56:20PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:56:20PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 05:56:20PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 05:56:20PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 05:56:20PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 05:56:20PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 05:56:20PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 05:56:20PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 05:56:21PM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 05:56:34PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:56:34PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:56:35PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 05:56:35PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 05:56:35PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 05:56:35PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 05:56:35PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 05:56:35PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 05:56:35PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 05:56:35PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 05:56:35PM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 06:00:53PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 06:00:53PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 06:00:53PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 06:00:53PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 06:00:53PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 06:00:53PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 06:00:53PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 06:00:53PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 06:00:53PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 06:00:53PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 06:00:54PM:ItemsController:239] No customerlistitems items found.
+[INFO:Fri 1/6/2017 06:01:47PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 06:01:47PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 06:01:47PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 06:01:47PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 06:01:47PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 06:01:47PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 06:01:47PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 06:02:05PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 06:02:05PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 06:02:05PM:MyAclPlugin:137] Allowed: 
+[INFO:Fri 1/6/2017 06:02:06PM:SalesFormService:43] Sanitizing...
+[INFO:Fri 1/6/2017 06:02:06PM:MyAclPlugin:137] Allowed: 1
+[INFO:Fri 1/6/2017 06:02:06PM:LoginController:57] Checking for identity
+[INFO:Fri 1/6/2017 06:02:06PM:LoginController:66] Identity not found.
+[INFO:Fri 1/6/2017 06:02:06PM:ItemsController:41] /ajax/items
+[INFO:Fri 1/6/2017 06:02:06PM:ItemsController:80] ItemsController Ajax called.
+[INFO:Fri 1/6/2017 06:02:06PM:ItemsController:216] Retrieving customerlistitems.
+[DEBUG:Fri 1/6/2017 06:02:06PM:ItemsController:239] No customerlistitems items found.
