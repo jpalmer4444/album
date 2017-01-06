@@ -9,8 +9,10 @@ namespace DataAccess\FFM\Entity\Repository\Impl;
  */
 class UserRepositoryImpl extends FFMRepository {
     
-    const QUERY_SALESPERSON_BY_NAME_AND_SALES_ATTR_ID = "SELECT user FROM DataAccess\FFM\Entity\User user WHERE "
-            . "user.sales_attr_id = :sales_attr_id AND user.salespersonname = :salespersonname";
+    const QUERY_SALESPERSON_BY_NAME_AND_SALES_ATTR_ID = <<<'EOT'
+            SELECT user FROM DataAccess\FFM\Entity\User user = :sales_attr_id AND 
+            user.salespersonname = :salespersonname
+EOT;
     
     public function findBySalesPersonNameAndSalespersonId($salespersonid, $salespersonname) {
         return $this->getEntityManager()->

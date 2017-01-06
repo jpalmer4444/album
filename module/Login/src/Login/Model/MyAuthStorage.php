@@ -7,6 +7,7 @@
 namespace Login\Model;
 
 use Application\Service\LoggingServiceInterface;
+use Application\Utility\Logger;
 use DataAccess\FFM\Entity\User;
 use Zend\Authentication\Storage\Session;
  
@@ -48,7 +49,7 @@ class MyAuthStorage extends Session
         $role = $this->getRole();
         $roleArr = array($role => $role);
         //$roleStr will be a boolean if there is no roles present in session.
-        $this->logger->info("MyAuthStorage:50: " . strval($roleArr[$role]));
+        Logger::info("MyAuthStorage", __LINE__, strval($roleArr[$role]));
         return !empty($roleArr) ? array_key_exists("admin", $roleArr) : $roleArr;
     }
     
@@ -71,6 +72,12 @@ class MyAuthStorage extends Session
     
     public function getRequestedRoute(){
         return $this->session->getManager()->getStorage()['requestedRoute'];
+    }
+    
+    public function getUserOrSalespersonInPlay() {
+        $facade = empty($this->getSalespersonInPlay());
+        return $facade ? $this->getUser() : 
+                    $this->getSalespersonInPlay();
     }
     
     /**

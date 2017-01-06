@@ -90,7 +90,6 @@ class ModelMocks {
         $rowplusitemspage->setCustomer($customer);
         $rowplusitemspage->setDescription("Description");
         $rowplusitemspage->setId($id);
-        $rowplusitemspage->setLogger($logger);
         $rowplusitemspage->setOverrideprice(9.99);
         $rowplusitemspage->setProductname("Mock Product Name ");
         $rowplusitemspage->setSalesperson($salesperson);
@@ -99,6 +98,10 @@ class ModelMocks {
         $rowplusitemspage->setUom("lb");
         $rowplusitemspage->setVersion(1);
         return $rowplusitemspage;
+    }
+    
+    public static function getMyAuthStorageMock(){
+        
     }
     
 }

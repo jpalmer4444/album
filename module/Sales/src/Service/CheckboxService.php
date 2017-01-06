@@ -3,6 +3,7 @@
 namespace Sales\Service;
 
 use Application\Service\LoggingServiceInterface;
+use Application\Utility\Logger;
 use DataAccess\FFM\Entity\ItemTableCheckbox;
 use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\ItemTableCheckboxRepositoryImpl;
@@ -51,7 +52,7 @@ class CheckboxService implements CheckboxServiceInterface {
             foreach ($id as $i) {
                 //here the $i will either be prefixed with 'A' or 'P' for AddedProduct OR Product respectively.
 
-                $this->logger->info("Creating and persisting Checkbox record. ID: " . $i . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
+                Logger::info("CheckboxService", __LINE__, "Creating and persisting Checkbox record. ID: " . $i . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
                 $record = new ItemTableCheckbox();
                 $user = $this->findUser($salespersonusername);
                 $customer = $this->findCustomer($customerid);
@@ -104,7 +105,7 @@ class CheckboxService implements CheckboxServiceInterface {
         if (!empty($record)) {
             $record->setChecked(false);
         } else {
-            $this->logger->info("Checkbox record not found to remove. ID: " . $id . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
+            Logger::info("CheckboxService", __LINE__, "Checkbox record not found to remove. ID: " . $id . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
         }
         $this->checkboxrepository->removeCheckbox($id, $customerid, $salespersonusername);
     }

@@ -3,12 +3,14 @@
 namespace Sales\Service;
 
 use Application\Service\LoggingServiceInterface;
+use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
 use DateTime;
 use Login\Model\MyAuthStorage;
+use ReflectionClass;
 use Zend\Form\Form;
 use Zend\View\Model\JsonModel;
 
@@ -19,72 +21,71 @@ use Zend\View\Model\JsonModel;
  */
 class SalesFormService implements SalesFormServiceInterface {
 
-    protected $logger;
-
-    public function __construct(LoggingServiceInterface $logger) {
-        $this->logger = $logger;
-    }
-
-    public function postRowPlusItemsPage(MyAuthStorage $myauthstorage, CustomerRepositoryImpl $customerrepository, UserRepositoryImpl $userrepository, RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, Form $form, array $jsonModelArr, $customerid) {
+    public function assembleRowPlusItemsPageAndArray(
+            MyAuthStorage $myauthstorage, 
+            CustomerRepositoryImpl $customerrepository, 
+            UserRepositoryImpl $userrepository, 
+            RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, 
+            Form $form, 
+            array $jsonModelArr, 
+            $customerid
+    ) {
         if ($form->isValid()) {
             $success = true;
-            $record = $this->getRowPlusItemsPageRecord();
-            
-            $jsonModelArr["sku"] = empty($form->getData()['sku']) ? '' : $form->getData()['sku'];
-            if (array_key_exists("sku", $jsonModelArr)) {
-                $record->setSku($jsonModelArr["sku"]);
-            }
-            $jsonModelArr["productname"] = empty($form->getData()['product']) ? '' : $form->getData()['product'];
-            if (array_key_exists("productname", $jsonModelArr)) {
-                $record->setProductname($jsonModelArr["productname"]);
-            }
-            $jsonModelArr["shortescription"] = empty($form->getData()['description']) ? '' : $form->getData()['description'];
-            if (array_key_exists("shortescription", $jsonModelArr)) {
-                $record->setDescription($jsonModelArr["shortescription"]);
-            }
-            $jsonModelArr["comment"] = empty($form->getData()['comment']) ? '' : $form->getData()['comment'];
-            if (array_key_exists("comment", $jsonModelArr)) {
-                $record->setComment($jsonModelArr["comment"]);
-            }
-            $jsonModelArr["qty"] = '';
-            $jsonModelArr["option"] = '';
-            $jsonModelArr["wholesale"] = '';
-            $jsonModelArr["retail"] = '';
-            $this->logger->info('SalesFormService:51: Sanitizing...');
-            $jsonModelArr["overrideprice"] = empty($form->getData()['overrideprice']) ? '' : $form->getData()['overrideprice'];
-            if (array_key_exists("overrideprice", $jsonModelArr)) {
-                $record->setOverrideprice($jsonModelArr["overrideprice"]);
-            }
-            $jsonModelArr["uom"] = empty($form->getData()['uom']) ? '' : $form->getData()['uom'];
-            if (array_key_exists("uom", $jsonModelArr)) {
-                $record->setUom($jsonModelArr["uom"]);
-            }
-            $jsonModelArr["status"] = "1";
-            $record->setStatus(true);
-            $jsonModelArr["saturdayenabled"] = "0";
-            $created = new DateTime("now");
-            $record->setCreated($created);
-            $record->setActive(true);
-            $customer = $customerrepository->findCustomer($customerid);
-            $record->setCustomer($customer);
-            $salesperson = $userrepository->findUser(empty($myauthstorage->getSalespersonInPlay()) ? $myauthstorage->getUser()->getUsername() : $myauthstorage->getSalespersonInPlay()->getUsername());
-            $record->setSalesperson($salesperson);
-            //var_dump($record);
+            $record = $this->getRowPlusItemsPageRecord($userrepository, $customerrepository, $myauthstorage, $customerid);
+            $this->assembleReflectMethod(['sku', 'sku', 'sku', 'sku', 'sku', 'sku'], $jsonModelArr, $form, $record);
+            $this->assembleReflectMethod(['productname', 'product', 'product', 'productname', 'productname', 'productname'], $jsonModelArr, $form, $record);
+            $this->assembleReflectMethod(['shortescription', 'description', 'description', 'shortescription', 'shortescription', 'description'], $jsonModelArr, $form, $record);
+            $this->assembleReflectMethod(['comment', 'comment', 'comment', 'comment', 'comment', 'comment'], $jsonModelArr, $form, $record);
+            $this->assembleReflectMethod(['overrideprice', 'overrideprice', 'overrideprice', 'overrideprice', 'overrideprice', 'overrideprice'], $jsonModelArr, $form, $record);
+            $this->assembleReflectMethod(['uom', 'uom', 'uom', 'uom', 'uom', 'uom'], $jsonModelArr, $form, $record);
+            $this->setupArrayDefaults($jsonModelArr);
+            Logger::info("SalesFormService", __LINE__, 'Sanitizing...');
             $rowplusitemspagerepository->persistAndFlush($record);
             $jsonModelArr["id"] = "A" . $record->getId();
             $jsonModelArr["success"] = $success;
         } else {
             foreach ($form->getMessages() as $message) {
-                $this->logger->info('Message: ' . print_r($message, true));
+                Logger::info("SalesFormService", __LINE__, 'Message: ' . print_r($message, true));
             }
         }
         return new JsonModel($jsonModelArr);
     }
 
-    private function getRowPlusItemsPageRecord() {
+    private function getRowPlusItemsPageRecord(
+            UserRepositoryImpl $userrepository, 
+            CustomerRepositoryImpl $customerrepository, 
+            MyAuthStorage $myauthstorage, 
+            $customerid) {
         $record = new RowPlusItemsPage();
-        $record->setLogger($this->logger);
+        $record->setStatus(true);
+        $created = new DateTime("now");
+        $record->setCreated($created);
+        $record->setActive(true);
+        $customer = $customerrepository->findCustomer($customerid);
+        $record->setCustomer($customer);
+        $salesperson = $userrepository->findUser($myauthstorage->getUserOrSalespersonInPlay()->getUsername());
+        $record->setSalesperson($salesperson);
         return $record;
+    }
+    
+    private function assembleReflectMethod(array $args, array &$data, Form $form, RowPlusItemsPage &$rowplusitemspage) {
+        $data[$args[0]] = empty($form->getData()[$args[1]]) ? '' : $form->getData()[$args[2]];
+        if (array_key_exists($args[3], $data)) {
+            $reflectionClass = new ReflectionClass('DataAccess\FFM\Entity\RowPlusItemsPage');
+            $reflectionProperty = $reflectionClass->getProperty($args[5]);
+            $reflectionProperty->setAccessible(true);
+            $reflectionProperty->setValue($rowplusitemspage, $data[$args[4]]);
+        }
+    }
+    
+    private function setupArrayDefaults(&$jsonModelArr) {
+        $jsonModelArr["qty"] = '';
+            $jsonModelArr["option"] = '';
+            $jsonModelArr["wholesale"] = '';
+            $jsonModelArr["retail"] = '';
+            $jsonModelArr["status"] = "1";
+            $jsonModelArr["saturdayenabled"] = "0";
     }
 
 }

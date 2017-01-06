@@ -10,6 +10,7 @@ require 'vendor/autoload.php';
 
 use Application\Service\FFMEntityManagerService;
 use Application\Service\LoggingService;
+use Application\Utility\Logger;
 use Login\Model\MyAuthStorage;
 use Login\Model\User;
 use Zend\Authentication\AuthenticationService;
@@ -53,16 +54,16 @@ class LoginController extends AbstractActionController {
 
     public function loginAction() {
         //if already login, redirect to success page 
-        $this->logger->info('Checking for identity');
+        Logger::info("LoginController", __LINE__, 'Checking for identity');
         if ($this->getAuthService()->hasIdentity()) {
-            $this->logger->info('Identity found.');
+            Logger::info("LoginController", __LINE__, 'Identity found.');
             if($this->getSessionStorage()->admin()){
                 return $this->redirect()->toRoute('sales');
             }else{
                 return $this->redirect()->toRoute('users');
             }
         }else{
-            $this->logger->info('Identity not found.');
+            Logger::info("LoginController", __LINE__, 'Identity not found.');
         }
         $form = $this->getForm();
         return array(
@@ -72,7 +73,7 @@ class LoginController extends AbstractActionController {
     }
 
     public function authenticateAction() {
-        $this->logger->info('AuthenticationAction called.');
+        Logger::info("LoginController", __LINE__, 'AuthenticationAction called.');
         $form = $this->getForm();
         $redirect = 'login';
         $request = $this->getRequest();
@@ -92,13 +93,13 @@ class LoginController extends AbstractActionController {
                     //set roles
                     
                     $user = $this->entityManager->find('DataAccess\FFM\Entity\User', $request->getPost('username'));
-                    $this->logger->info('Username: ' . $user->getUsername());
+                    Logger::info("LoginController", __LINE__, 'Username: ' . $user->getUsername());
                     $roleXrefObjs = $this->entityManager->getRepository('DataAccess\FFM\Entity\UserRoleXref')->findBy(array('username' => $request->getPost('username')));
                     $roles = [];
                     $idx = 0;
                     foreach ($roleXrefObjs as $role) {
                         //save message temporary into flashmessenger
-                        //$this->logger->info('Role: ' . $role->getRole());
+                        //Logger::info(static::class, __LINE__, 'Role: ' . $role->getRole());
                         $roles[$idx++] = $role;
                     }
                     $this->getSessionStorage()->addRoles($roles);
@@ -116,7 +117,7 @@ class LoginController extends AbstractActionController {
                     $this->getAuthService()->getStorage()->write($request->getPost('username'));
                 }
             }else{
-               $this->logger->info('attempting AuthenticationAction.'); 
+               Logger::info("LoginController", __LINE__, 'attempting AuthenticationAction.'); 
             }
         }
         return $this->redirect()->toRoute($redirect);

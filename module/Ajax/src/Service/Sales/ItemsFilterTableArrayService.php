@@ -5,6 +5,7 @@ namespace Ajax\Service\Sales;
 use Ajax\Service\Sales\ItemsFilterTableArrayService;
 use Ajax\Service\Sales\ItemsFilterTableArrayServiceInterface;
 use Application\Utility\DateUtils;
+use Application\Utility\Logger;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
 
 /**
@@ -47,7 +48,8 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
     public function _filter($restcallitems, $customerid) {
 
         //iterate items
-        $this->logger->debug('Retrieved ' . count($restcallitems) . ' ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
+        $msg = 'Retrieved ' . count($restcallitems) . ' ' . $this->pricingconfig['by_sku_object_items_controller'] . '.';
+        Logger::debug("ItemsFilterTableArrayService", __LINE__, $msg);
         $merged = array();
         $customer = $this->customerrepository->findCustomer($customerid);
 
@@ -72,13 +74,13 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         foreach ($itemPriceOverrides as $price) {
             $override = $price->getOverrideprice();
             $pid = strval($price->getProduct()->getId());
-            $this->logger->info('Found saved overrideprice: ' . $override . ' with productID: ' . $pid);
+            Logger::info("ItemsFilterTableArrayService", __LINE__, 'Found saved overrideprice: ' . $override . ' with productID: ' . $pid);
             $overrideMap[$pid] = $override;
             $foundSomeOverrides = true;
         }
 
         if (!$foundSomeOverrides) {
-            $this->logger->info("No price overrides found!");
+            Logger::info("ItemsFilterTableArrayService", __LINE__, "No price overrides found!");
         }
 
         //now allow rows found in DB SO: A row will either be from a User adding the entire row it
@@ -89,10 +91,10 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         //get a reference to IDS that have been selected from the table.
         $removedSKUS = $this->retrieveRemovedSkus($customerid);
 
-        $this->logger->info('Found ' . count($removedSKUS) . ' removedSKUs in Session!');
+        Logger::info("ItemsFilterTableArrayService", __LINE__, 'Found ' . count($removedSKUS) . ' removedSKUs in Session!');
 
         //foreach ($removedSKUS as $removed) {
-        //$this->logger->info('Setting checkbox for table row with SKU: ' . $removed);
+        //Logger::info("ItemsFilterTableArrayService", __LINE__, 'Setting checkbox for table row with SKU: ' . $removed);
         //}
         //create a selected field for each REST call item based on removed SKUs.
         $removedIDS = array();
@@ -110,10 +112,10 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
             //if override exists - then graph it in.
             //if (array_key_exists(strval($item->getId()), $overrideMap)) {
             //$adjOverrideprice = $overrideMap[strval($item->getProduct()->getId())];
-            //$this->logger->info("ItemsFilterTableArrayService: Found Override in map: " . $adjOverrideprice);
+            //Logger::info("ItemsFilterTableArrayService", __LINE__, "ItemsFilterTableArrayService: Found Override in map: " . $adjOverrideprice);
             //}
 
-            $this->logger->info("ItemsFilterTableArrayService: RowPlusItemPage.Id: " . $item->getId());
+            Logger::info("ItemsFilterTableArrayService", __LINE__, "RowPlusItemPage.Id: " . $item->getId());
 
             $addSelected = false;
             if (in_array($item->getId(), $removedIDS)) {

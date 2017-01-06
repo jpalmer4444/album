@@ -1,9 +1,12 @@
 <?php
 
+namespace Command;
+
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Speeds up web-app Classloading dramatically.
  */
-return array();
+return array(
+    "Command\Controller\Reporting\PriceOverrideController" =>  __DIR__ . "/Controller/Reporting/priceOverrideController.php",
+    "Command\Query\ORMQuery" =>  __DIR__ . "/Query/ORMQuery.php"
+);
 

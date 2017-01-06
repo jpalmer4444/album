@@ -6,6 +6,7 @@ namespace Sales\Controller;
  */
 
 use Application\Service\LoggingServiceInterface;
+use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Customer;
 use DataAccess\FFM\Entity\PricingOverrideReport;
 use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
@@ -83,11 +84,11 @@ class ItemsController extends AbstractActionController {
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
-            return $this->salesFormService->postRowPlusItemsPage($this->myauthstorage, $this->customerrepository, $this->userrepository, $this->rowplusitemspagerepository, $form, array(), $this->customerid);
+            return $this->salesFormService->assembleRowPlusItemsPageAndArray($this->myauthstorage, $this->customerrepository, $this->userrepository, $this->rowplusitemspagerepository, $form, array(), $this->customerid);
         }
         $customer = $this->customerrepository->findCustomer($this->customerid);
         if (empty($customer)) {
-            $this->logger->info("Redirecting to users page because customer was not found!");
+            Logger::info("ItemsController", __LINE__, "Redirecting to users page because customer was not found!");
             return $this->redirect()->toRoute('users', ['controller' => 'UsersController','action' => 'index'], array());
         }
         $time = new DateTime();
@@ -100,7 +101,7 @@ class ItemsController extends AbstractActionController {
         if ($request->isPost()) {
             $counter = 0;
             foreach ($_POST as $key => $value) {
-                $this->logger->info($key . ': ' . $value);
+                Logger::info("ItemsController", __LINE__, $key . ': ' . $value);
                 //if KEY is ODD then $value is stringified JSON row object
                 if (!($counter % 2 == 0)) {
                     $obj = json_decode($value, true);
@@ -130,7 +131,7 @@ class ItemsController extends AbstractActionController {
                 $counter++;
             }
         } else {
-            $this->logger->info('Ignoring Request that is not a POST!');
+            Logger::info("ItemsController", __LINE__, 'Ignoring Request that is not a POST!');
         }
         return new JsonModel(array(
             "success" => true
@@ -142,7 +143,7 @@ class ItemsController extends AbstractActionController {
             "customerid" => $this->customerid,
             "reporttime" => $reporttime,
             "customername" => $this->customername,
-            "salesperson" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getUsername() : $salespersoninplay->getUsername(),
+            "salesperson" => $this->myauthstorage->getUserOrSalespersonInPlay()->getUsername(),
             "salespersonname" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getSalespersonname() : $salespersoninplay->getSalespersonname(),
             "salespersonemail" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getEmail() : $salespersoninplay->getEmail(),
             "companyname" => urlencode($customer->getCompany()),

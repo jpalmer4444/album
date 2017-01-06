@@ -1,9 +1,14 @@
 <?php
 
+namespace Album;
+
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Speeds up web-app Classloading dramatically.
  */
-return array();
+return array(
+    "Album\Controller\AlbumController" =>  __DIR__ . "/Controller/AlbumController.php",
+    "Album\Form\AlbumForm" =>  __DIR__ . "/Form/AlbumForm.php",
+    "Album\Model\Album" =>  __DIR__ . "/Model/Album.php",
+    "Album\Model\AlbumTable" =>  __DIR__ . "/Model/AlbumTable.php"
+);
 

@@ -82,37 +82,9 @@ $form->prepare();
     //##
     //#############################################################
     //#############################################################
-    var appendRowToTable = function (data) {
-      if (data.success) {
-        $API.row.add({
-          "id": data['id'],
-          "productname": data['productname'],
-          "shortescription": data['shortescription'],
-          "comment": data['comment'],
-          "option": data['option'],
-          "qty": data['qty'],
-          "wholesale": data['wholesale'],
-          "retail": data['retail'],
-          "overrideprice": data['overrideprice'],
-          "uom": data['uom'],
-          "sku": data['sku'],
-          "status": data['status'] === '1' ? 'Enabled' : 'Disabled',
-          "saturdayenabled": data['saturdayenabled'] === '1' ? 'Enabled' : 'Disabled'
-        }).draw(false);
-        //remove values from the form.
-        $('[name="product"]').val('');
-        $('[name="description"]').val('');
-        $('[name="comment"]').val('');
-        $('[name="wholesale"]').val('');
-        $('[name="overrideprice"]').val('');
-        $('[name="uom"]').val('');
-        $('[name="sku"]').val('');
-        $('.modal').modal('hide');
-        return false;
-      } else {
-        console.log('Row NOT added response: ' + JSON.stringify(data));
-      }
-    };
+    // (data, API, $productInput, $description, $comment, $wholesale, $overrideprice, $uom, $sku, $modal)
+    //#############################################################
+    
 
     //#############################################################
     //#############################################################
@@ -489,11 +461,12 @@ $form->prepare();
               } else {
                 BootstrapDialog.show({
                   type: BootstrapDialog.TYPE_DEFAULT,
-                  title: 'No Rows Selected',
+                  title: '<strong><span class="error_dialog_title">No Rows Selected</span></strong>',
                   message: 'You have clicked "PDF" button, but you haven\'t selected any Products. Please select some and try again.',
                   buttons: [
                     {
                       label: 'Close',
+                      cssClass: 'btn-default',
                       action: function (dialogRef) {
                         dialogRef.close();
                       }
@@ -625,7 +598,7 @@ $form->prepare();
           })
                   .done(function (response) {
                     if (response.success) {
-                      appendRowToTable(response);
+                      appendRowToTable(response, $API, $('[name="product"]'), $('[name="description"]'), $('[name="comment"]'), $('[name="wholesale"]'), $('[name="overrideprice"]'), $('[name="uom"]'), $('[name="sku"]'), $('.modal'));
                     } else {
                       alert('Error - Please contact IT.\n' + JSON.stringify(response));
                     }

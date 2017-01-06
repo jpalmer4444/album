@@ -2,6 +2,7 @@
 
 namespace Command;
 
+use Application\Utility\Strings;
 use Command\Controller\Reporting\PriceOverrideController;
 use Zend\Console\Adapter\AdapterInterface as Console;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -27,8 +28,8 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                 PriceOverrideController::class => function($container) {
                     return new PriceOverrideController(
                             $container->get('LoggingService'),
-                            $container->get('FFMEntityManager')->getEntityManager(),
-                            $container->get('config')['pricing_config']
+                            $container->get(Strings::FFM_ENTITY_MANAGER)->getEntityManager(),
+                            $container->get(Strings::CONFIG)[Strings::PRICING_CONFIG]
                     );
                 },
             ],
@@ -49,11 +50,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getAutoloaderConfig()
     {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+            Strings::CLASS_MAP_AUTO_LOADER => array(
                 __DIR__ . '/autoload_classmap.php',
             ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+            Strings::STANDARD_AUTO_LOADER => array(
+                Strings::NAMESPACES => array(
                     __NAMESPACE__ => __DIR__ . '/' . __NAMESPACE__,
                 ),
             ),

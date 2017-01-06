@@ -5,6 +5,7 @@ namespace Album;
 use Album\Controller\AlbumController;
 use Album\Model\Album;
 use Album\Model\AlbumTable;
+use Application\Utility\Strings;
 use Zend\Db\Adapter\AdapterInterface;
 use Zend\Db\ResultSet\ResultSet;
 use Zend\Db\TableGateway\TableGateway;
@@ -27,7 +28,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                     $tableGateway = $container->get(Model\AlbumTableGateway::class);
                     return new AlbumTable($tableGateway);
                 },
-                Model\AlbumTableGateway::class => function ($container) {
+                AlbumTableGateway::class => function ($container) {
                     $dbAdapter = $container->get(AdapterInterface::class);
                     $resultSetPrototype = new ResultSet();
                     $resultSetPrototype->setArrayObjectPrototype(new Album());
@@ -40,10 +41,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getAutoloaderConfig()
      {
          return array(
-             'Zend\Loader\ClassMapAutoloader' => array(
+            Strings::CLASS_MAP_AUTO_LOADER => array(
                  __DIR__ . '/autoload_classmap.php',
              ),
-             'Zend\Loader\StandardAutoloader' => array(
+             Strings::STANDARD_AUTO_LOADER => array(
                  'namespaces' => array(
                      __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
                  ),

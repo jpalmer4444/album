@@ -3,6 +3,7 @@
 namespace Command\Controller\Reporting;
 
 use Application\Service\LoggingServiceInterface;
+use Application\Utility\Logger;
 use DateTime;
 use Doctrine\ORM\EntityManager;
 use RuntimeException;
@@ -33,7 +34,7 @@ class PriceOverrideController extends AbstractActionController {
 
     protected function priceoverridereportAction() {
 
-        $this->logger->info("Price Override Report.");
+        Logger::info("PriceOverrideController", __LINE__, "Price Override Report.");
 
         $request = $this->getRequest();
 
@@ -42,7 +43,7 @@ class PriceOverrideController extends AbstractActionController {
         // Make sure that we are running in a console and the user has not tricked our
         // application into running this action from a public web server.
         if (!$request instanceof Request) {
-            //$this->logger->info(get_class($request));
+            //Logger::info("PriceOverrideController", __LINE__, get_class($request));
             throw new RuntimeException('You can only use this action from a console!');
         }else{
             $console->clear();

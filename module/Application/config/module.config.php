@@ -2,9 +2,6 @@
 
 namespace Application;
 
-use Application\Controller\IndexController;
-use Login\Controller\LoginController;
-
 return [
     'router' => [
         'routes' => [
@@ -13,7 +10,7 @@ return [
                 'options' => [
                     'route' => '/',
                     'defaults' => [
-                        'controller' => LoginController::class, //<--Changes Home Page to 
+                        'controller' => "Login\Controller\LoginController", //<--Changes Home Page to 
                         'action' => 'login',
                     ],
                 ],
@@ -23,7 +20,7 @@ return [
                 'options' => [
                     'route' => '/application[/:action]',
                     'defaults' => [
-                        'controller' => IndexController::class,
+                        'controller' => "Application\Controller\IndexController",
                         'action' => 'index',
                     ],
                 ],

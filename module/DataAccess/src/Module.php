@@ -8,6 +8,7 @@
 
 namespace DataAccess;
 
+use Application\Utility\Strings;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
@@ -18,10 +19,10 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     
     public function getAutoloaderConfig() {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+            Strings::CLASS_MAP_AUTO_LOADER => array(
                 __DIR__ . '/autoload_classmap.php',
             ),
-            'Zend\Loader\StandardAutoloader' => array(
+            Strings::STANDARD_AUTO_LOADER => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/' . __NAMESPACE__,
                 ),

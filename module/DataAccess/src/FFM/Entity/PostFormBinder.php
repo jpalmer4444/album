@@ -2,10 +2,9 @@
 
 namespace DataAccess\FFM\Entity;
 
-use ReflectionMethod;
+use Application\Utility\Logger;
+use DataAccess\FFM\Entity\PostFormBinderInterface;
 use Zend\Form\Form;
-use Zend\Log\Logger;
-use Zend\Log\Writer\Stream;
 
 /**
  * Description of FFMEntity
@@ -15,18 +14,6 @@ use Zend\Log\Writer\Stream;
 class PostFormBinder implements PostFormBinderInterface {
 
     protected $logger;
-
-    /*
-     * $jsonModelArr["qty"] = empty($form->getData()['qty']) ? '' : $form->getData()['qty'];
-      if (array_key_exists("qty", $jsonModelArr)) {
-      $record->setQty($jsonModelArr["qty"]);
-      }
-      $jsonModelArr["wholesale"] = empty($form->getData()['wholesale']) ? '' : $form->getData()['wholesale'];
-      if (array_key_exists("wholesale", $jsonModelArr)) {
-      $int = filter_var($jsonModelArr["wholesale"], FILTER_SANITIZE_NUMBER_INT);
-      $record->setWholesale($int);
-      }
-     */
 
     public function bind(Form $form, $postData, $instance) {
         
@@ -54,22 +41,7 @@ class PostFormBinder implements PostFormBinderInterface {
     }
 
     private function log($m) {
-        if ($this->hasLogger()) {
-            $this->logger->info($m);
-        } else {
-            $writer = new Stream('php://stderr');
-            $logger = new Logger();
-            $logger->addWriter($writer);
-            $logger->error("PostFormBinder - please configure logger in DataModel by calling Parent::setLogger()");
-        }
-    }
-
-    private function hasLogger() {
-        return !empty($this->logger);
-    }
-
-    public function setLogger($logger) {
-        $this->logger = $logger;
+        Logger::info("PostFormBinder", __LINE__, $m);
     }
 
 }

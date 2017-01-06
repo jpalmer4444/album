@@ -2,15 +2,6 @@
 
 namespace Sales;
 
-use Sales\Controller\ItemsController;
-use Sales\Controller\SalesController;
-use Sales\Controller\UsersController;
-use Sales\Factory\CheckboxServiceFactory;
-use Sales\Factory\ItemsControllerFactory;
-use Sales\Factory\RowPlusItemsPageFormFactory;
-use Sales\Factory\SalesControllerFactory;
-use Sales\Factory\SalesFormServiceFactory;
-use Sales\Factory\UsersControllerFactory;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
@@ -39,9 +30,9 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getControllerConfig() {
         return [
             'factories' => array(
-                ItemsController::class => ItemsControllerFactory::class,
-                SalesController::class => SalesControllerFactory::class,
-                UsersController::class => UsersControllerFactory::class,
+                "Sales\Controller\ItemsController" => "Sales\Factory\ItemsControllerFactory",
+                "Sales\Controller\SalesController" => "Sales\Factory\SalesControllerFactory",
+                "Sales\Controller\UsersController" => "Sales\Factory\UsersControllerFactory",
             ),
         ];
     }
@@ -53,8 +44,8 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getServiceConfig() {
         return [
             'factories' => [
-                'CheckboxService' => CheckboxServiceFactory::class,
-                'SalesFormService' => SalesFormServiceFactory::class,
+                'CheckboxService' => "Sales\Factory\CheckboxServiceFactory",
+                'SalesFormService' => "Sales\Factory\SalesFormServiceFactory",
             ]
         ];
     }
@@ -62,7 +53,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getFormElementConfig() {
         return array(
             'factories' => array(
-                'RowPlusItemsPageForm' => RowPlusItemsPageFormFactory::class,
+                'RowPlusItemsPageForm' => "Sales\Factory\RowPlusItemsPageFormFactory",
             ),
         );
     }

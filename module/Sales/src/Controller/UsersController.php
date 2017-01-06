@@ -1,16 +1,15 @@
 <?php
 
-/**
- */
-
 namespace Sales\Controller;
 
+use Application\Utility\Logger;
+use DataAccess\FFM\Entity\Customer;
+use DateTime;
 use Doctrine\ORM\Query\Expr\From;
 use Doctrine\ORM\Query\Expr\OrderBy;
 use Doctrine\ORM\Query\Expr\Select;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use DateTime;
 
 class UsersController extends AbstractActionController {
 
@@ -59,7 +58,7 @@ class UsersController extends AbstractActionController {
             $salespersonid = $this->myauthstorage->getUser()->getSales_attr_id();
         }
 
-        $this->logger->info('Retrieving Salespeople. ID: ' . $salespersonid);
+        Logger::info("UsersController", __LINE__, 'Retrieving Salespeople. ID: ' . $salespersonid);
 
         $params = [
             "id" => $this->pricingconfig['by_sku_userid'],
@@ -72,14 +71,14 @@ class UsersController extends AbstractActionController {
         $method = $this->pricingconfig['by_sku_method'];
 
         $json = $this->rest($url, $method, $params);
-        $this->logger->info('Retrieved #' . count($json) . ' ' . $this->pricingconfig['by_sku_object_users_controller'] . '.');
+        Logger::info("UsersController", __LINE__, 'Retrieved #' . count($json) . ' ' . $this->pricingconfig['by_sku_object_users_controller'] . '.');
 
         //now lookup these items in the DB and update if there are discrepancies
         $this->qb->add('select', new Select(array('u')))
                 ->add('from', new From('DataAccess\FFM\Entity\Customer', 'u'));
         $arr = [];
         foreach ($json['customers'] as $customer) {
-            //$this->logger->info(json_encode($customer));
+            //Logger::info("UsersController", __LINE__, json_encode($customer));
             $arr [] = $this->qb->expr()->eq('u.email', "'" . utf8_encode($customer['email']) . "'");
         }
 
@@ -90,7 +89,7 @@ class UsersController extends AbstractActionController {
 
         $query = $this->qb->getQuery();
         $dbcustomers = $query->getResult();
-        $this->logger->info('Found ' . count($dbcustomers) . ' users in db.');
+        Logger::info("UsersController", __LINE__, 'Found ' . count($dbcustomers) . ' users in db.');
 
         $inDb = count($dbcustomers);
         $inSvc = count($json['customers']);
@@ -115,7 +114,7 @@ class UsersController extends AbstractActionController {
                     $some = true;
                 } else {
                     //insert record because it doesn't exist.
-                    $cdb = new \DataAccess\FFM\Entity\Customer();
+                    $cdb = new Customer();
                     $cdb->setId($customer['id']);
                     $cdb->setEmail($customer['email']);
                     $cdb->setName($customer['name']);

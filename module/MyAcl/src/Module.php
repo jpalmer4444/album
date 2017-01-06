@@ -4,6 +4,7 @@ namespace MyAcl; // added for module specific layouts. ericp
 // added for Acl  ###################################
 
 
+use Application\Utility\Strings;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
@@ -32,12 +33,12 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
         $sm = $application->getServiceManager();
         $sharedManager = $application->getEventManager()->getSharedManager();
 
-        $router = $sm->get('router');
-        $request = $sm->get('request');
+        $router = $sm->get(Strings::ROUTER);
+        $request = $sm->get(Strings::REQUEST);
 
         $matchedRoute = $router->match($request);
         if (null !== $matchedRoute) {
-            $sharedManager->attach('Zend\Mvc\Controller\AbstractActionController', 'dispatch', function($e) use ($sm) {
+            $sharedManager->attach(Strings::ABSTRACT_ACTION_CONTROLLER, Strings::DISPATCH, function($e) use ($sm) {
                 $sm->get('ControllerPluginManager')->get('MyAclPlugin')
                         ->doAuthorization($e); //pass to the plugin...    
             }, 2
@@ -56,7 +57,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function init(ModuleManager $moduleManager)
     {
         $sharedEvents = $moduleManager->getEventManager()->getSharedManager();
-        $sharedEvents->attach(__NAMESPACE__, 'dispatch', function($e) {
+        $sharedEvents->attach(__NAMESPACE__, Strings::DISPATCH, function($e) {
             // This event will only be fired when an ActionController under the MyModule namespace is dispatched.
             $controller = $e->getTarget();
             //$controller->layout('layout/zfcommons'); // points to module/Album/view/layout/album.phtml
@@ -71,11 +72,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getAutoloaderConfig()
     {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+            Strings::CLASS_MAP_AUTO_LOADER => array(
                 __DIR__ . '/autoload_classmap.php',
             ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+            Strings::STANDARD_AUTO_LOADER => array(
+                Strings::NAMESPACES => array(
                     __NAMESPACE__ => __DIR__ . '/' . __NAMESPACE__,
                 ),
             ),

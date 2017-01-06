@@ -14,39 +14,51 @@ use Application\Factory\LoggingServiceFactory;
 use Application\Factory\ReportServiceFactory;
 use Application\Factory\RestServiceFactory;
 use Application\Factory\SessionManagerFactory;
-use Application\Service\LoggingService;
-use Application\Service\ReportService;
-use Application\Service\RestService;
+use Application\Utility\Strings;
+use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ServiceManager\Factory\InvokableFactory;
-use Zend\Session\SessionManager;
 
-class Module implements ConfigProviderInterface, ServiceProviderInterface {
+class Module implements ConfigProviderInterface, ServiceProviderInterface, AutoloaderProviderInterface {
 
     const VERSION = '3.0.2dev';
 
     public function getControllerConfig() {
         return [
-            'controllers' => [
-                'factories' => [
+            Strings::CONTROLLERS => [
+                Strings::FACTORIES => [
                     IndexController::class => InvokableFactory::class,
                 ],
         ]];
     }
-
+    
     public function getConfig() {
         return include __DIR__ . '/../config/module.config.php';
     }
 
+    public function getAutoloaderConfig()
+     {
+         return array(
+            Strings::CLASS_MAP_AUTO_LOADER => array(
+                 __DIR__ . '/autoload_classmap.php',
+             ),
+             Strings::STANDARD_AUTO_LOADER => array(
+                 'namespaces' => array(
+                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                 ),
+             ),
+         );
+     }
+
     public function getServiceConfig() {
         return array(
-            'factories' => array(
+            Strings::FACTORIES => array(
                 'LoggingService' => LoggingServiceFactory::class,
-                'RestService' => RestServiceFactory::class,
-                'ReportService' => ReportServiceFactory::class,
-                'FFMEntityManager' => FFMEntityManagerServiceFactory::class,
-                'SessionManager' => SessionManagerFactory::class,
+                Strings::REST_SERVICE => RestServiceFactory::class,
+                Strings::REPORT_SERVICE => ReportServiceFactory::class,
+                Strings::FFM_ENTITY_MANAGER => FFMEntityManagerServiceFactory::class,
+                Strings::SESSION_MANAGER => SessionManagerFactory::class,
             ),
         );
     }
@@ -57,18 +69,18 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface {
     public function onBootstrap($e) {
         $sm = $e->getApplication()->getServiceManager();
 
-        $router = $sm->get('router');
-        $request = $sm->get('request');
+        $router = $sm->get(Strings::ROUTER);
+        $request = $sm->get(Strings::REQUEST);
         $matchedRoute = $router->match($request);
 
         if ($matchedRoute) {
             $params = $matchedRoute->getParams();
 
-            $controller = $params['controller'];
+            $controller = $params[Strings::CONTROLLER];
 
             //only needed when this is not an Ajax request and not security related.
-            if (isset($params['action'])) {
-                $action = $params['action'];
+            if (isset($params[Strings::ACTION])) {
+                $action = $params[Strings::ACTION];
 
                 $module_array = explode('\\', $controller);
                 $module = array_pop($module_array);
@@ -89,8 +101,8 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface {
 
     public function getViewHelperConfig() {
         return array(
-            'invokables' => array(
-                'formlabel' => 'Application\ViewHelper\RequiredMarkInFormLabel',
+            Strings::INVOKABLES => array(
+                Strings::FORM_LABEL => Strings::REQUIRED_MARK_IN_FORM_LABEL,
             ),
         );
     }

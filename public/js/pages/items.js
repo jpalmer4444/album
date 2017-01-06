@@ -256,5 +256,35 @@ var generateDetailsModalBody = function (rowIdx, columns) {
   return data + copy;
 };
 
+var appendRowToTable = function (data, API, $product, $description, $comment, $wholesale, $overrideprice, $uom, $sku, $modal) {
+      if (data.success) {
+        API.row.add({
+          "id": data['id'],
+          "productname": data['productname'],
+          "shortescription": data['shortescription'],
+          "comment": data['comment'],
+          "option": data['option'],
+          "qty": data['qty'],
+          "wholesale": data['wholesale'],
+          "retail": data['retail'],
+          "overrideprice": data['overrideprice'],
+          "uom": data['uom'],
+          "sku": data['sku'],
+          "status": data['status'] === '1' ? 'Enabled' : 'Disabled',
+          "saturdayenabled": data['saturdayenabled'] === '1' ? 'Enabled' : 'Disabled'
+        }).draw(false);
+        $product.val('');
+        $description.val('');
+        $comment.val('');
+        $wholesale.val('');
+        $overrideprice.val('');
+        $uom.val('');
+        $sku.val('');
+        $modal.modal('hide');
+        return false;
+      } else {
+        console.log('Row NOT added response: ' + JSON.stringify(data));
+      }
+    };
 
 

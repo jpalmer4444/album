@@ -1,8 +1,5 @@
 <?php
 
-use Zend\Log\Logger;
-use Zend\Log\Writer\Stream;
-
 /**
  * If you need an environment-specific system or application configuration,
  * there is an example in the documentation
@@ -11,10 +8,6 @@ use Zend\Log\Writer\Stream;
  * https://svc.ffmalpha.com/bySKU.php?id=jpalmer&pw=goodbass&object=customers&salespersonid=183
  */
 $env = getenv('APPLICATION_ENV') ?: 'development';
-$writer = new Stream('php://stderr');
-$logger = new Logger();
-$logger->addWriter($writer);
-$logger->info("application.config.php ENV: " . $env);
 return [
 // Retrieve list of modules used in this application.
     'modules' => require __DIR__ . '/modules.config.php',

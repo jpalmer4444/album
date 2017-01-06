@@ -2,8 +2,7 @@
 
 namespace Login;
 
-use Login\Controller\LoginController;
-use Login\Controller\SuccessController;
+use Application\Utility\Strings;
 use Login\Factory\LoginControllerFactory;
 use Login\Factory\SuccessControllerFactory;
 use Login\Model\MyAuthStorage;
@@ -20,11 +19,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     
     public function getAutoloaderConfig() {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+            Strings::CLASS_MAP_AUTO_LOADER => array(
                 __DIR__ . '/autoload_classmap.php',
             ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+            Strings::STANDARD_AUTO_LOADER => array(
+                Strings::NAMESPACES => array(
                     __NAMESPACE__ => __DIR__ . '/' . __NAMESPACE__,
                 ),
             ),
@@ -34,9 +33,9 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getControllerConfig() {
 
         return [
-            'factories' => [
-                LoginController::class => LoginControllerFactory::class,
-                SuccessController::class => SuccessControllerFactory::class,
+            Strings::FACTORIES => [
+                Strings::LOGIN_CONTROLLER => LoginControllerFactory::class,
+                Strings::SUCCESS_CONTROLLER => SuccessControllerFactory::class,
             ],
         ];
     }
@@ -48,12 +47,12 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getServiceConfig() {
         return array(
             'factories' => array(
-                'Login\Model\MyAuthStorage' => function($sm) {
+                Strings::MY_AUTH_STORAGE => function($sm) {
                     $myauthstorage = new MyAuthStorage('zf_tutorial');
                     $myauthstorage->setLogger($sm->get('LoggingService'));
                     return $myauthstorage;
                 },
-                'AuthService' => function($sm) {
+                Strings::AUTH_SERVICE => function($sm) {
                     //My assumption, you've alredy set dbAdapter
                     //and has users table with columns : user_name and pass_word
                     //that password hashed with bcrypt
@@ -61,11 +60,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                                 return (new Bcrypt())->verify($requestCredential, $dbCredential);
                             };
                             
-                    $dbAdapter = $sm->get('Zend\Db\Adapter\Adapter');
+                    $dbAdapter = $sm->get(Strings::ZEND_DB_ADAPTER);
                     $authAdapter = new AuthAdapter($dbAdapter, 'users', 'username', 'password', $credentialValidationCallback);
                     $authService = new AuthenticationService();
                     $authService->setAdapter($authAdapter);
-                    $authService->setStorage($sm->get('Login\Model\MyAuthStorage'));
+                    $authService->setStorage($sm->get(Strings::MY_AUTH_STORAGE));
 
                     return $authService;
                 },

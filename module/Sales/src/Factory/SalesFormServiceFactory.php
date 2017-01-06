@@ -13,8 +13,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
 class SalesFormServiceFactory {
 
     public function __invoke(ServiceLocatorInterface $sm) {
-        $loggingService = $sm->get('LoggingService');
-        return new SalesFormService($loggingService);
+        return new SalesFormService();
     }
 
 }

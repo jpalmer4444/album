@@ -3,6 +3,7 @@
 namespace Sales\Controller;
 
 use Application\Service\FFMEntityManagerServiceInterface;
+use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\User;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -22,7 +23,11 @@ class SalesController extends AbstractActionController {
     protected $userrepository;
     protected $userForm;
 
-    public function __construct($container, FFMEntityManagerServiceInterface $ffmEntityManagerService, AbstractPluginManager $formManager, UserRepositoryImpl $userrepository) {
+    public function __construct(
+            $container, 
+            FFMEntityManagerServiceInterface $ffmEntityManagerService, 
+            AbstractPluginManager $formManager, 
+            UserRepositoryImpl $userrepository) {
         $this->restService = $container->get('RestService');
         $this->logger = $container->get('LoggingService');
         $this->myauthstorage = $container->get('Login\Model\MyAuthStorage');
@@ -56,7 +61,7 @@ class SalesController extends AbstractActionController {
             }
             return new JsonModel(array("success" => true));
         }
-        $this->logger->info('Retrieving ' . $this->pricingconfig['by_sku_object_sales_controller'] . '.');
+        Logger::info("SalesController", __LINE__, 'Retrieving ' . $this->pricingconfig['by_sku_object_sales_controller'] . '.');
         $params = [
             "id" => $this->pricingconfig['by_sku_userid'],
             "pw" => $this->pricingconfig['by_sku_password'],
@@ -66,9 +71,9 @@ class SalesController extends AbstractActionController {
         $method = $this->pricingconfig['by_sku_method'];
         $json = $this->rest($url, $method, $params);
         if (array_key_exists($this->pricingconfig['by_sku_object_sales_controller'], $json)) {
-            $this->logger->debug('Retrieved ' . count($json[$this->pricingconfig['by_sku_object_sales_controller']]) . ' ' . $this->pricingconfig['by_sku_object_sales_controller'] . '.');
+            Logger::info("SalesController", __LINE__, 'Retrieved ' . count($json[$this->pricingconfig['by_sku_object_sales_controller']]) . ' ' . $this->pricingconfig['by_sku_object_sales_controller'] . '.');
         } else {
-            $this->logger->debug('No ' . $this->pricingconfig['by_sku_object_sales_controller'] . ' items found! Error!');
+            Logger::info("Salescontroller", __LINE__, 'No ' . $this->pricingconfig['by_sku_object_sales_controller'] . ' items found! Error!');
         }
         //lookup salesperson in DB for every one in REST call.
         if (!empty($json)) {
@@ -83,7 +88,7 @@ class SalesController extends AbstractActionController {
                 }
             }
             $q .= ") ORDER BY user.username DESC";
-            $this->logger->info("query: " . $q);
+            Logger::info("SalesController", __LINE__, "query: " . $q);
             $users = $this->entityManager->createQuery($q)->getResult();
             if (!empty($users)) {
 
@@ -99,7 +104,7 @@ class SalesController extends AbstractActionController {
                 }
 
                 foreach ($users as $user) {
-                    //$this->logger->info(var_dump($user));
+                    //Logger::info("SalesController", __LINE__, var_dump($user));
                     //here we want to iterate $json['salespeople'] and find associated salesperson
                     //and then we want to add email and phone to that salesperson
                 }

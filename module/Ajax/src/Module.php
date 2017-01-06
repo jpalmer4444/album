@@ -6,6 +6,7 @@ use Ajax\Controller\Sales\ItemsController;
 use Ajax\Controller\Sales\SalesController;
 use Ajax\Controller\Sales\UsersController;
 use Ajax\Service\Sales\ItemsFilterTableArrayService;
+use Application\Utility\Strings;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
@@ -29,7 +30,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getServiceConfig() {
         return [
             'factories' => [
-                "ItemsFilterTableArrayService" => function($sm) {
+                Strings::ITEMS_FILTER_TABLE_ARRAY_SERVICE => function($sm) {
                     return new ItemsFilterTableArrayService(
                             $sm
                     );
@@ -41,17 +42,17 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getControllerConfig(){
         return [
             'factories' => [
-                UsersController::class => function($container) {
+            Strings::AJAX_USERS_CONTROLLER => function($container) {
                     return new UsersController(
                             $container
                     );
                 },
-                ItemsController::class => function($container) {
+                Strings::AJAX_ITEMS_CONTROLLER => function($container) {
                     return new ItemsController(
                             $container
                     );
                 },
-                SalesController::class => function($container) {
+                Strings::AJAX_SALES_CONTROLLER => function($container) {
                     return new SalesController(
                             $container
                     );
@@ -64,11 +65,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getAutoloaderConfig()
     {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
+            Strings::CLASS_MAP_AUTO_LOADER => array(
                 __DIR__ . '/autoload_classmap.php',
             ),
-            'Zend\Loader\StandardAutoloader' => array(
-                'namespaces' => array(
+            Strings::STANDARD_AUTO_LOADER => array(
+                Strings::NAMESPACES => array(
                     __NAMESPACE__ => __DIR__ . '/' . __NAMESPACE__,
                 ),
             ),

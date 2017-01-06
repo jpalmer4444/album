@@ -2,11 +2,10 @@
 
 namespace SalesTest\Service;
 
+use Application\Utility\Logger;
 use DataAccess\FFM\Entity\ItemTableCheckbox;
 use DateTime;
 use Sales\Service\CheckboxService;
-use Zend\Log\Logger;
-use Zend\Log\Writer\Stream;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 /**
@@ -21,12 +20,7 @@ class CheckboxServiceTest extends AbstractHttpControllerTestCase {
 
     protected function setup() {
         
-        $writer = new Stream(__DIR__ . '/../../../../../data/logs/test.out');
-        $logger = new Logger();
-        $logger->addWriter($writer);
-        
-        $this->logger = $logger;
-        $this->logger->info("Testing CheckboxServiceTest");
+        Logger::info("CheckboxServiceTest", __LINE__, "Setting up CheckboxServiceTest", TRUE);
         
         //mock LoggingService
         $logger_mock = $this->getMockBuilder('Application\Service\LoggingService')
@@ -67,7 +61,6 @@ class CheckboxServiceTest extends AbstractHttpControllerTestCase {
         $checkbox1->setCreated($now);
         $checkbox1->setCustomer($customer1);
         $checkbox1->setId(1);
-        $checkbox1->setLogger($this->logger);
         $sku = 123;
         $product1 = ModelMocks::getMockProduct("1", $now, 1, $sku, TRUE, $customer1);
         $checkbox1->setProduct($product1);

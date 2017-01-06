@@ -18,6 +18,6 @@ use Zend\Form\Form;
  */
 interface SalesFormServiceInterface {
     
-    public function postRowPlusItemsPage(MyAuthStorage $myauthstorage, CustomerRepositoryImpl $customerrepository, UserRepositoryImpl $userrepository, RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, Form $form, array $jsonModelArr, $customerid);
+    public function assembleRowPlusItemsPageAndArray(MyAuthStorage $myauthstorage, CustomerRepositoryImpl $customerrepository, UserRepositoryImpl $userrepository, RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, Form $form, array $jsonModelArr, $customerid);
     
 }

@@ -2,6 +2,7 @@
 
 namespace Ajax\Controller\Sales;
 
+use Application\Utility\Logger;
 use DataAccess\FFM\Entity\ItemPriceOverride;
 use DataAccess\FFM\Entity\Product;
 use DataAccess\FFM\Entity\UserProduct;
@@ -37,15 +38,15 @@ class ItemsController extends AbstractRestfulController {
     protected $qb;
 
     public function onDispatch(MvcEvent $e) {
-        $this->logger->info("AjaxItemController found! ");
+        Logger::info("ItemsController", __LINE__, "AjaxItemController found! ");
         //if(stringContains("myaction=overridePrice")){
         //var_dump($e->getRequest());
         //}
-        $this->logger->info("" . $e->getParam("request")->getRequestUri());
+        Logger::info("ItemsController", __LINE__, "" . $e->getParam("request")->getRequestUri());
         try {
             return parent::onDispatch($e);
         } catch (Exception $exc) {
-            $this->logger->info($exc->getTraceAsString());
+            Logger::info("ItemsController", __LINE__, $exc->getTraceAsString());
         }
     }
 
@@ -75,7 +76,7 @@ class ItemsController extends AbstractRestfulController {
 
     //framework calls get when an id parameter is not found in request
     public function getList() {
-        $this->logger->info('ItemsController Ajax called.');
+        Logger::info("ItemsController", __LINE__, 'ItemsController Ajax called.');
 
         switch ($this->params()->fromQuery("myaction")) {
             case "select" : {
@@ -93,7 +94,7 @@ class ItemsController extends AbstractRestfulController {
 
     //framework calls get when an id parameter is found in request
     public function get($id) {
-        $this->logger->info('ItemsController Ajax called.');
+        Logger::info("ItemsController", __LINE__, 'ItemsController Ajax called.');
 
         switch ($this->params()->fromQuery("myaction")) {
             case "overridePrice" :
@@ -112,7 +113,7 @@ class ItemsController extends AbstractRestfulController {
         $customerid = $this->params()->fromQuery('customerid');
         $rowIndex = $this->params()->fromQuery('index');
         $overrideprice = $this->params()->fromQuery('overrideprice');
-        $this->logger->info('Saving overrideprice: ' . $overrideprice . '.');
+        Logger::info("ItemsController", __LINE__, 'Saving overrideprice: ' . $overrideprice . '.');
 
         //we can either have an $id that begins with 'P' which needs an ItemPriceOverride
         //OR
@@ -147,7 +148,7 @@ class ItemsController extends AbstractRestfulController {
                 ));
             } catch (Exception $e) {
                 $this->entityManager->getConnection()->rollBack();
-                $this->logger->info(strval($e));
+                Logger::info("ItemsController", __LINE__, strval($e));
                 return new JsonModel(array(
                     'success' => false,
                 ));
@@ -180,7 +181,7 @@ class ItemsController extends AbstractRestfulController {
                 ));
             } catch (Exception $e) {
                 $this->entityManager->getConnection()->rollBack();
-                $this->logger->info(strval($e));
+                Logger::info("ItemsController", __LINE__, strval($e));
                 return new JsonModel(array(
                     'success' => false,
                 ));
@@ -189,7 +190,7 @@ class ItemsController extends AbstractRestfulController {
     }
 
     protected function getTable() {
-        $this->logger->info('AjaxItemsController:192: Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
+        Logger::info("ItemsController", __LINE__, 'Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
         $customerid = $this->params()->fromQuery('customerid');
         $this->customerid = $customerid;
         $params = $this->getBaseBySkuParams();
@@ -212,7 +213,7 @@ class ItemsController extends AbstractRestfulController {
             $this->sync($json);
             $restcallitemsmerged = $this->itemsFilterService->_filter($json[$this->pricingconfig['by_sku_object_items_controller']], $customerid);
         } else {
-            $this->logger->debug('No ' . $this->pricingconfig['by_sku_object_items_controller'] . ' items found.');
+            Logger::debug("ItemsController", __LINE__, 'No ' . $this->pricingconfig['by_sku_object_items_controller'] . ' items found.');
         }
         return new JsonModel(array(
             "data" => $restcallitemsmerged
@@ -234,10 +235,10 @@ class ItemsController extends AbstractRestfulController {
                 ->add('orderBy', new OrderBy('u.productname', 'ASC'));
         $query = $this->qb->getQuery();
         $dbcustomers = $query->getResult();
-        $this->logger->info('Found ' . count($dbcustomers) . ' customers in db.');
+        Logger::info("ItemsController", __LINE__, 'Found ' . count($dbcustomers) . ' customers in db.');
         $inDb = count($dbcustomers);
         $inSvc = count($json[$this->pricingconfig['by_sku_object_items_controller']]);
-        $this->logger->info('Found ' . $inSvc . ' items in svc and ' . $inDb . ' in DB.');
+        Logger::info("ItemsController", __LINE__, 'Found ' . $inSvc . ' items in svc and ' . $inDb . ' in DB.');
         if ($inDb < $inSvc) {
             //remove every matching row in DB and rewrite them all to guarantee we have latest data
             //in theory this should flush everything out and keep records up-to-date over time.
@@ -320,10 +321,10 @@ class ItemsController extends AbstractRestfulController {
             $userinplay = $this->myauthstorage->getUser();
         }
         if (empty($userinplay)) {
-            $this->logger->info("UserinPlay is null!");
+            Logger::info("ItemsController", __LINE__, "UserinPlay is null!");
         }
         foreach ($ids as $id) {
-            $this->logger->info('Selecting ' . $id);
+            Logger::info("ItemsController", __LINE__, 'Selecting ' . $id);
             $this->checkboxService->addRemovedID($id, $customerid, $userinplay->getUsername());
         }
         return new JsonModel(array(
@@ -337,7 +338,7 @@ class ItemsController extends AbstractRestfulController {
             return $this->unselectAll();
         }
         $customerid = $this->params()->fromQuery('customerid');
-        //$this->logger->info('Unselecting ' . $skus);
+        //Logger::info(static::class, __LINE__, 'Unselecting ' . $skus);
         $userinplay = $this->myauthstorage->getSalespersonInPlay();
         if (empty($userinplay)) {
             $userinplay = $this->myauthstorage->getUser();

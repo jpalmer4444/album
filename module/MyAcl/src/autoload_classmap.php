@@ -1,9 +1,12 @@
 <?php
 
+namespace MyAcl;
+
 /* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Speeds up web-app Classloading dramatically.
  */
-return array();
+return array(
+    "MyAcl\MyAcl\Controller\Factory\MyAclPluginFactory" =>  __DIR__ . "/MyAcl/Controller/Factory/MyAclPluginFactory.php",
+    "MyAcl\MyAcl\Controller\Plugin\MyAclPlugin" =>  __DIR__ . "/MyAcl/Controller/Plugin/MyAclPlugin.php"
+);
 

@@ -2,6 +2,8 @@
 
 namespace MyAcl\Controller\Plugin;
 
+use Application\Utility\Logger;
+use DataAccess\FFM\Entity\UserRoleXref;
 use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 use Zend\Permissions\Acl\Acl;
 use Zend\Permissions\Acl\Role\GenericRole as Role;
@@ -103,7 +105,7 @@ class MyAclPlugin extends AbstractPlugin {
         if (null !== $this->authService->getStorage()->getRoles()) {
             $roles = $this->authService->getStorage()->getRoles();
         } else {
-            $anonymous = new \DataAccess\FFM\Entity\UserRoleXref();
+            $anonymous = new UserRoleXref();
             $anonymous->setUsername("anonymous");
             $anonymous->setRole("anonymous");
             $roles[0] = $anonymous;
@@ -132,7 +134,7 @@ class MyAclPlugin extends AbstractPlugin {
             }
         }
         
-        $this->logger->info("Allowed: " . $allowed);
+        Logger::info("MyAclPlugin", __LINE__, "Allowed: " . $allowed);
 
         if (!$allowed) {
             $router = $e->getRouter();

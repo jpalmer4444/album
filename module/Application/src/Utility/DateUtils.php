@@ -27,14 +27,14 @@ class DateUtils {
     }
 
     public static function fromOne() {
-        return $this->getDateTime('today');
+        return DateUtils::getDateTime('today  1:00PM');
     }
     
     public static function fromOneToOne() {
-        return $this->getDateTime('today -1 day');
+        return DateUtils::getDateTime('today -1 day 1:00PM');
     }
     
-    private function getDateTime($start){
+    private static function getDateTime($start){
         $date = strtotime($start);
         $time = "13:00:00"; //overwrite time to 1:00 if it is after 1:00.
         $tz_string = "US/Samoa"; // Use one from list of TZ names http://php.net/manual/en/timezones.php UTC?
