@@ -23,6 +23,7 @@ class DateUtilsTest extends TestCase{
         Logger::stderr(DateUtilsTest::class, __LINE__, "Testing DateUtils::getDailyCutoff()");
         $cutoff = DateUtils::getDailyCutoff();
         $this->assertNotNull($cutoff, "DateUtils::getDailyCutoff returned null!");
+        //Logger::stderr(DateUtilsTest::class, __LINE__, "Cutoff DIFF " . $cutoff->diff(new DateTime())->format("%d days %h hours %i minutes %s seconds"));
     }
     
 }

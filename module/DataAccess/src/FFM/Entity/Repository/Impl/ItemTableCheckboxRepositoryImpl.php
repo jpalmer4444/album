@@ -12,18 +12,9 @@ use Exception;
  */
 class ItemTableCheckboxRepositoryImpl extends FFMRepository {
 
-    const QUERY_IDS_BY_CUSTOMERID_AND_SALESPERSON = <<<'EOT'
-            SELECT itemTableCheckbox FROM \DataAccess\FFM\Entity\ItemTableCheckbox 
-            itemTableCheckbox WHERE itemTableCheckbox._salesperson = :username AND 
-            itemTableCheckbox._customerid = :customerid
-EOT;
+    const QUERY_IDS_BY_CUSTOMERID_AND_SALESPERSON = 'SELECT itemTableCheckbox FROM \DataAccess\FFM\Entity\ItemTableCheckbox itemTableCheckbox WHERE itemTableCheckbox._salesperson = :username AND itemTableCheckbox._customerid = :customerid';
     
-    const QUERY_CHECKBOX_BY_CUSTOMERID_AND_SALESPERSON_AND_ID = <<<'EOT'
-            SELECT itemTableCheckbox FROM \DataAccess\FFM\Entity\ItemTableCheckbox 
-            itemTableCheckbox WHERE itemTableCheckbox._salesperson = :username AND 
-            itemTableCheckbox._customerid = :customerid AND 
-            (itemTableCheckbox.product = :product OR itemTableCheckbox.rowPlusItemsPage = :rowPlusItemsPage)
-EOT;
+    const QUERY_CHECKBOX_BY_CUSTOMERID_AND_SALESPERSON_AND_ID = 'SELECT itemTableCheckbox FROM \DataAccess\FFM\Entity\ItemTableCheckbox itemTableCheckbox WHERE itemTableCheckbox._salesperson = :username AND itemTableCheckbox._customerid = :customerid AND (itemTableCheckbox.product = :product OR itemTableCheckbox.rowPlusItemsPage = :rowPlusItemsPage)';
 
     public function findCheckbox($rowplusitemspage, $product, $customerid, $salespersonusername) {
         $query = $this->getEntityManager()->createQuery(ItemTableCheckboxRepositoryImpl::QUERY_CHECKBOX_BY_CUSTOMERID_AND_SALESPERSON_AND_ID);
