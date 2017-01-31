@@ -1,0 +1,62 @@
+---
+  - name: Deploy Pricing (localhost)
+    hosts: local
+    connection: local
+    gather_facts: False
+    tags: deployment
+
+    tasks:
+        
+      - name: Test pricing
+        shell: |
+            cd /u/local/jasonpalmer/pricing/module/Sales/test
+            phpunit
+            
+      - name: Zip pricing
+        shell: |
+            cd /u/local/jasonpalmer/
+            zip -r pricing.zip pricing/
+            
+      - name: SCP pricing
+        shell: |
+            cd /u/local/jasonpalmer/
+            scp -i /Users/jasonpalmer/jpalmer.pem pricing.zip ec2-user@10.0.0.72:.
+        
+# REMOTE
+        
+  - name: Deploy Pricing (WebServer)
+    hosts: webserver
+    vars_files:
+    - ./vars/pricing_vars.yml
+    remote_user: ec2-user
+
+    tasks:
+        
+      - name: Deploy pricing on remote
+        shell: |
+            cd ~/
+            sudo unzip pricing.zip
+            rm pricing.zip
+            cd /vol01/
+            sudo rm -rf pricing_archive
+            sudo mv pricing pricing_archive
+            sudo mv ~/pricing/ /vol01/pricing/
+            sudo chown apache:apache -R pricing/*
+            sudo chmod a+r,a+w,a+x -R pricing/*
+            sudo rm -rf /vol01/pricing/data/cache/*
+            
+      - name: insert/update Apache Config
+        become: True
+        blockinfile:
+          dest: /etc/httpd/conf/httpd.conf
+          state: present
+          marker: "# {mark} ANSIBLE MANAGED BLOCK PRICING"
+          block: "{{ pricing_vhost_block }}"
+          
+      - name: Restart Apache
+        become: True
+        shell: |
+            service httpd restart
+            
+      
+

@@ -32,6 +32,11 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                             $container->get(Strings::CONFIG)[Strings::PRICING_CONFIG]
                     );
                 },
+                RedisCommandController::class => function($container) {
+                    return new RedisCommandController(
+                            $container
+                    );
+                },
             ],
         ];
     }
@@ -44,6 +49,13 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
 
             // Describe expected parameters
             [ '--verbose|-v', '(optional) turn on verbose mode'        ],
+            
+            'redis command <cmd> [--verbose|-v] [--host=|-h=] [--port=|-p=] [--database=|-d=]' => 'Show Redis Connection.',
+            [ 'cmd', 'Redis command'        ],
+            [ '--verbose|-v', '(optional) turn on verbose mode'        ],
+            [ '--host|-h', 'host'        ],
+            [ '--port|-p', 'port'        ],
+            [ '--database|-d', 'database'        ],
         ];
     } 
     

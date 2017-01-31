@@ -1,0 +1,24 @@
+pricing_vhost_block: |
+    LogFormat "%h %l %u %t \"%r\" %>s %b" common
+
+    <VirtualHost *:80>
+        #ServerName ffmalpha
+        DocumentRoot /var/www/html/pricing/public
+        ServerName pricing.ffmalpha.com
+        Redirect permanent / https://pricing.ffmalpha.com/
+    </VirtualHost>
+
+    <VirtualHost *:443>
+        #ServerName ffmalpha
+        SSLEngine on
+        SSLCertificateFile /GoDaddy/wildcard.ffmalpha/a6d275acc843a94f/a6d275acc843a94f.crt
+        SSLCertificateKeyFile /GoDaddy/wildcard.ffmalpha/ffmalpha.key
+        SSLCACertificateFile /GoDaddy/wildcard.ffmalpha/a6d275acc843a94f/gd_bundle-g2-g1.crt
+        DocumentRoot /var/www/html/pricing/public
+        ServerName pricing.ffmalpha.com
+        SetEnv APPLICATION_ENV "staging"
+        LogLevel info
+        ErrorLog "/var/log/httpd/pricing-error.log"
+        CustomLog "/var/log/httpd/pricing-custom.log" common
+    </VirtualHost>
+my_var: myvar

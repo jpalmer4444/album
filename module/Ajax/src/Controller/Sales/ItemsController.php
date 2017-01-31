@@ -64,7 +64,7 @@ class ItemsController extends AbstractRestfulController {
         $this->restService = $container->get('RestService');
         $this->checkboxService = $container->get('CheckboxService');
         $this->logger = $container->get('LoggingService');
-        $this->myauthstorage = $container->get('Login\Model\MyAuthStorage');
+        $this->myauthstorage = $container->get('PredisService')->getMyAuthStorage();
         $this->pricingconfig = $container->get('config')['pricing_config'];
         $this->entityManager = $this->getEntityManager($container);
         $this->itemsFilterService = $container->get('ItemsFilterTableArrayService');

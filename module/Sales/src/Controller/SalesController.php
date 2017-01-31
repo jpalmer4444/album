@@ -30,7 +30,7 @@ class SalesController extends AbstractActionController {
             UserRepositoryImpl $userrepository) {
         $this->restService = $container->get('RestService');
         $this->logger = $container->get('LoggingService');
-        $this->myauthstorage = $container->get('Login\Model\MyAuthStorage');
+        $this->myauthstorage = $container->get('PredisService')->getMyAuthStorage();
         $this->pricingconfig = $container->get('config')['pricing_config'];
         $this->entityManager = $ffmEntityManagerService->getEntityManager();
         $this->formManager = $formManager;

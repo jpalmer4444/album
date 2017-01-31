@@ -2,8 +2,7 @@
 
 namespace SalesTest\Controller;
 
-use Zend\Log\Logger;
-use Zend\Log\Writer\Stream;
+use Application\Utility\Logger;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 
 /**
@@ -19,15 +18,11 @@ class SalesControllerTest extends AbstractControllerTestCase {
         $this->setApplicationConfig(
                 include __DIR__ . '/../../../../../config/application.config.php'
         );
-        $writer = new Stream('php://stderr');
-        $this->logger = new Logger();
-        $this->logger->addWriter($writer);
-        $this->logger->info("Creating SalesControllerTest");
         parent::setUp();
     }
 
     public function testSalesCanBeAccessed() {
-        $this->logger->info("Testing if sales can be accessed");
+        Logger::info("SalesControllerTest", __LINE__, "Testing if sales can be accessed");
         $this->dispatch('/sales');
         $this->assertResponseStatusCode(302);
         $this->assertModuleName('Sales');

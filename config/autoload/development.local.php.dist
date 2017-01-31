@@ -27,21 +27,45 @@ return [
         'by_sku_object_items_controller' => 'customerlistitems',
         'by_sku_object_users_controller' => 'customers',
         'by_sku_object_sales_controller' => 'salespeople',
-        'sslcapath' => '/Users/jasonpalmer/svc.localhost.key', 
-        'sslcafile' => '/Users/jasonpalmer/svc.localhost.crt', 
+        'sslcapath' => '/Users/jasonpalmer/svc.localhost.key',
+        'sslcafile' => '/Users/jasonpalmer/svc.localhost.crt',
         'ssl' => array(
-                // Do not Verify server side certificate,
-                // accept invalid or self-signed SSL certificates
-                'verify_peer' => true,
-                'allow_self_signed' => true,
-                // Capture the peer's certificate
-                'capture_peer_cert' => true,
-                'passphrase' => 'changeme'
-            ),
+            // Do not Verify server side certificate,
+            // accept invalid or self-signed SSL certificates
+            'verify_peer' => true,
+            'allow_self_signed' => true,
+            // Capture the peer's certificate
+            'capture_peer_cert' => false,
+            'passphrase' => 'changeme'
+        ),
+    ],
+    'custom_session_config' => [
+        Strings::COOKIE_DOMAIN => NULL,
+        Strings::COOKIE_HTTP_ONLY => FALSE,
+        Strings::COOKIE_LIFETIME => 0,
+        Strings::COOKIE_PATH => '/',
+        Strings::COOKIE_SECURE => FALSE,
+        Strings::NAME => 'PHPSESSID',
+        Strings::OPTIONS => array(),
+        Strings::REMEMBER_ME_SECONDS => 86400,
+        Strings::SAVE_PATH => '/Applications/MAMP/tmp/php',
+        Strings::USE_COOKIES => TRUE,
+        Strings::MY_AUTH_STORAGE => NULL
+    ],
+    'redis_config' => [
+        'host' => 'ffm.oy6xzh.ng.0001.use1.cache.amazonaws.com',
+        'port' => 6379,
+        'ttl' => 86400,
+        'database' => 4,
     ],
     'db' => [
         'driver' => 'Pdo',
-        'dsn' => sprintf('sqlite:%s/data/pricing_app.db', realpath(getcwd()))
+        'dsn' => "mysql:dbname=md_dgtl;host=localhost",
+        'username' => 'jpalmer',
+        'password' => 'goodbass',
+        'driver_options' => array(
+            PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES \'UTF8\''
+        ),
     ],
     'service_manager' => array(
         'factories' => array(
@@ -53,9 +77,14 @@ return [
         'connection' => array(
             // default connection name
             'orm_default' => array(
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOSqlite\Driver',
+                'driverClass' => 'Doctrine\DBAL\Driver\Mysqli\Driver',
                 'params' => array(
-                    'url' => 'sqlite://../data/pricing_app.db'
+                    'dbname' => 'md_dgtl',
+                    'user' => 'jpalmer',
+                    'password' => 'goodbass',
+                    'host' => 'localhost',
+                    'port' => 3306,
+                    'driver' => 'pdo_mysql',
                 )
             )
         ),
@@ -68,7 +97,6 @@ return [
                     __DIR__ . '/' . __NAMESPACE__
                 ),
             ),
-
             // default metadata driver, aggregates all other drivers into a single one.
             // Override `orm_default` only if you know what you're doing
             'orm_default' => array(

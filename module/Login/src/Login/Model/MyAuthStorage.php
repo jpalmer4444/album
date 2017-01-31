@@ -8,7 +8,6 @@ namespace Login\Model;
 
 use Application\Service\LoggingServiceInterface;
 use Application\Utility\Logger;
-use DataAccess\FFM\Entity\User;
 use Zend\Authentication\Storage\Session;
  
 class MyAuthStorage extends Session
@@ -57,7 +56,7 @@ class MyAuthStorage extends Session
         return $this->session->getManager()->getStorage()['roles'];
     }
     
-    public function addUser(User $user) {
+    public function addUser($user) {
         $this->session->getManager()->getStorage()['user'] = $user;
         $this->session->getManager()->getStorage()['username'] = $user->getUsername();
     }
@@ -84,7 +83,7 @@ class MyAuthStorage extends Session
      * 
      * @param User $userModel
      */
-    public function addSalespersonInPlay(User $userModel) {
+    public function addSalespersonInPlay(DataAccess\FFM\Entity\User $userModel) {
         $this->session->getManager()->getStorage()['salespersoninplay'] = $userModel;
     }
     

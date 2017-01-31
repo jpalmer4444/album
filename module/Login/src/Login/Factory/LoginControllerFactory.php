@@ -15,9 +15,10 @@ class LoginControllerFactory {
     public function __invoke(ServiceLocatorInterface $container) {
         return new LoginController(
                             $container->get('AuthService'), 
-                            $container->get('Login\Model\MyAuthStorage'),
+                            $container->get('PredisService'),
                             $container->get('LoggingService'),
-                            $container->get('FFMEntityManager')
+                            $container->get('FFMEntityManager'),
+                $container
                     );
     }
     

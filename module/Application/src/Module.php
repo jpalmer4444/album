@@ -11,6 +11,7 @@ namespace Application;
 use Application\Controller\IndexController;
 use Application\Factory\FFMEntityManagerServiceFactory;
 use Application\Factory\LoggingServiceFactory;
+use Application\Factory\PredisServiceFactory;
 use Application\Factory\ReportServiceFactory;
 use Application\Factory\RestServiceFactory;
 use Application\Factory\SessionManagerFactory;
@@ -55,6 +56,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
         return array(
             Strings::FACTORIES => array(
                 'LoggingService' => LoggingServiceFactory::class,
+                'PredisService' => PredisServiceFactory::class,
                 Strings::REST_SERVICE => RestServiceFactory::class,
                 Strings::REPORT_SERVICE => ReportServiceFactory::class,
                 Strings::FFM_ENTITY_MANAGER => FFMEntityManagerServiceFactory::class,

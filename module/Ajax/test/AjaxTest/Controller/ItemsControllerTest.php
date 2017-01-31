@@ -2,8 +2,7 @@
 
 namespace AjaxTest\Controller;
 
-use Zend\Log\Logger;
-use Zend\Log\Writer\Stream;
+use Application\Utility\Logger;
 use Zend\Test\PHPUnit\Controller\AbstractControllerTestCase;
 
 /**
@@ -19,15 +18,12 @@ class ItemsControllerTest extends AbstractControllerTestCase {
         $this->setApplicationConfig(
                 include __DIR__ . '/../../../../../config/application.config.php'
         );
-        $writer = new Stream('php://stderr');
-        $this->logger = new Logger();
-        $this->logger->addWriter($writer);
-        $this->logger->info("Creating (Ajax) ItemsControllerTest");
+        Logger::info("ItemsControllerTest", __LINE__, 'Creating (Ajax) ItemsControllerTest');
         parent::setUp();
     }
 
     public function testAjaxItemsCanBeAccessed() {
-        $this->logger->info("Testing if ajax/items can be accessed");
+        Logger::info("ItemsControllerTest", __LINE__, "Testing if ajax/items can be accessed");
         $this->dispatch('/ajax/items');
         $this->assertResponseStatusCode(200);
         $this->assertModuleName('Ajax');
