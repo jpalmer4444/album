@@ -11,14 +11,15 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @author jasonpalmer
  */
 class LoginControllerFactory {
-    
+
     public function __invoke(ServiceLocatorInterface $container) {
+        $authService = $container->get('AuthService');
+        $predisService = $container->get('PredisService');
+        $loggingService = $container->get('LoggingService');
+        $entityManager = $container->get('FFMEntityManager');
         return new LoginController(
-                            $container->get('AuthService'), 
-                            $container->get('Login\Model\MyAuthStorage'),
-                            $container->get('LoggingService'),
-                            $container->get('FFMEntityManager')
-                    );
+                $authService, $predisService, $loggingService, $entityManager
+        );
     }
-    
+
 }

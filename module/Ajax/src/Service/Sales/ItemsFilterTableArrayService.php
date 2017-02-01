@@ -25,7 +25,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
 
     public function __construct($sm) {
         $this->logger = $sm->get('LoggingService');
-        $this->myauthstorage = $sm->get('Login\Model\MyAuthStorage');
+        $this->myauthstorage = $sm->get('PredisService')->getMyAuthStorage();
         $this->pricingconfig = $sm->get('config')['pricing_config'];
         $this->entityManager = $sm->get('FFMEntityManager');
         $this->checkboxService = $sm->get('CheckboxService');

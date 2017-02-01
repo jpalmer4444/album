@@ -47,11 +47,6 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getServiceConfig() {
         return array(
             'factories' => array(
-                Strings::MY_AUTH_STORAGE => function($sm) {
-                    $myauthstorage = new MyAuthStorage('zf_tutorial');
-                    $myauthstorage->setLogger($sm->get('LoggingService'));
-                    return $myauthstorage;
-                },
                 Strings::AUTH_SERVICE => function($sm) {
                     //My assumption, you've alredy set dbAdapter
                     //and has users table with columns : user_name and pass_word
@@ -64,7 +59,8 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                     $authAdapter = new AuthAdapter($dbAdapter, 'users', 'username', 'password', $credentialValidationCallback);
                     $authService = new AuthenticationService();
                     $authService->setAdapter($authAdapter);
-                    $authService->setStorage($sm->get(Strings::MY_AUTH_STORAGE));
+                    
+                    //$authService->setStorage($sm->get(Strings::MY_AUTH_STORAGE));
 
                     return $authService;
                 },

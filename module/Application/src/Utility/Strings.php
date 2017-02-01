@@ -201,6 +201,18 @@ class Strings {
      * namespaces
      */
     const NAMESPACES = 'namespaces';
+    
+    const COOKIE_DOMAIN = 'cookieDomain';
+    const COOKIE_HTTP_ONLY = 'cookieHttpOnly';
+    const COOKIE_LIFETIME = 'cookieLifetime';
+    const COOKIE_PATH = 'cookiePath';
+    const COOKIE_SECURE = 'cookieSecure';
+    const NAME = 'name';
+    const OPTIONS = 'options';
+    const REMEMBER_ME_SECONDS = 'rememberMeSeconds';
+    const SAVE_PATH = 'savePath';
+    const USE_COOKIES = 'useCookies';
+    const SESSION = 'session';
 
     /**
      * 

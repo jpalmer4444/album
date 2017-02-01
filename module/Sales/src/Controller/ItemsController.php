@@ -25,6 +25,7 @@ use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
+use Application\Service\PredisService;
 
 class ItemsController extends AbstractActionController {
 
@@ -57,13 +58,13 @@ class ItemsController extends AbstractActionController {
      * @param \Sales\Controller\FormElementManager $formManager
      * @param type $config simple array of environment specific properties
      */
-    public function __construct(LoggingServiceInterface $logger, MyAuthStorage $myauthstorage, 
+    public function __construct(LoggingServiceInterface $logger, PredisService $predisService, 
             AbstractPluginManager $formManager, UserRepositoryImpl $userrepository, 
             RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, CustomerRepositoryImpl $customerrepository, 
             ProductRepositoryImpl $productrepository, UserProductRepositoryImpl $userproductrepository, 
             PricingOverrideReportRepositoryImpl $pricingoverridereportrepository, SalesFormService $salesFormService, $config = NULL) {
         $this->logger = $logger;
-        $this->myauthstorage = $myauthstorage;
+        $this->myauthstorage = $predisService->getMyAuthStorage();
         $this->pricingconfig = $config;
         $this->formManager = $formManager;
         $this->userrepository = $userrepository;

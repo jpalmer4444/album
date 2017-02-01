@@ -14,7 +14,7 @@ class ItemsControllerFactory {
     
     public function __invoke(ServiceLocatorInterface $container) {
         $loggingService = $container->get('LoggingService');
-                    $myauthstorage = $container->get('Login\Model\MyAuthStorage');
+                    $predisService = $container->get('PredisService');
                     $pricingconfig = $container->get('config')['pricing_config'];
                     $formManager = $container->get('FormElementManager');
                     $salesFromService = $container->get('SalesFormService');
@@ -26,7 +26,7 @@ class ItemsControllerFactory {
                     $pricingoverridereportrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\PricingOverrideReport');
                     return new ItemsController(
                             $loggingService,
-                            $myauthstorage,
+                            $predisService,
                             $formManager,
                             $userrepository,
                             $rowplusitemspagerepository,

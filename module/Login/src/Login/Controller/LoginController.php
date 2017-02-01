@@ -10,8 +10,8 @@ require 'vendor/autoload.php';
 
 use Application\Service\FFMEntityManagerService;
 use Application\Service\LoggingService;
+use Application\Service\PredisService;
 use Application\Utility\Logger;
-use Login\Model\MyAuthStorage;
 use Login\Model\User;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
@@ -22,15 +22,17 @@ class LoginController extends AbstractActionController {
     protected $storage;
     protected $flashmessages;
     protected $authservice;
+    protected $predisService;
     public $value;
     protected $logger;
     protected $entityManager;
 
-    public function __construct(AuthenticationService $authservice, MyAuthStorage $storage, LoggingService $logger, FFMEntityManagerService $entityManager) {
+    public function __construct(AuthenticationService $authservice, PredisService $predisService, LoggingService $logger, FFMEntityManagerService $entityManager) {
         $this->authservice = $authservice;
-        $this->storage = $storage;
+        $this->storage = $predisService->getMyAuthStorage();
         $this->form = $this->getForm();
         $this->logger = $logger;
+        $this->predisService = $predisService;
         $this->entityManager = $entityManager->getEntityManager();
     }
 
@@ -108,13 +110,15 @@ class LoginController extends AbstractActionController {
                     $redirect = $this->getSessionStorage()->admin() ? 'sales' : 'users';
                     
                     //check if it has rememberMe :
-                    $this->getAuthService()->setStorage($this->getSessionStorage());
+                    //$this->getAuthService()->setStorage($this->getSessionStorage());
                     if ($request->getPost('rememberme') == 1) {
                         $this->getSessionStorage()
                                 ->setRememberMe(1);
                         //set storage again 
                     }
                     $this->getAuthService()->getStorage()->write($request->getPost('username'));
+                    //must persist back to predisService or we lose it!
+                    $this->predisService->setMyAuthStorage($this->getSessionStorage());
                 }
             }else{
                Logger::info("LoginController", __LINE__, 'attempting AuthenticationAction.'); 
