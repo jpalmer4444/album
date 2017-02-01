@@ -7,11 +7,13 @@ This is a TODO list for the feature/zend-mvc-v3-minimal branch.
     problems in terms of serialization and deserialization. So the answer is to add a toArray() function that serializes
     instance state that is required to "de-serialize" a MyAuthStorage object manually.
     MyAuthStorage instance state pre-changes.
-        - rememberMe
         - roles (UserRoleXref's)
         - user (User)
         - requestedRoute (string aka: login)
         - salespersoninplay (User)
   RedisService will serialize the array returned from MyAuthStorage->toArray() and save it by SESSIONID in Redis
-  then RedisService will save seesionState and restoreSessionState by de-serializing the array and calling 
-  MyAuthStorage::getInstance() to restore the MyAuthStorage instance.
+  then RedisService will get Session Storage by retrieving the session data array from Redis and deserializing it and calling 
+  MyAuthStorage::getInstance() to restore the MyAuthStorage instance. This should allow unlimited WebServer instances to serve 
+  the pricing web application from a Load-Balanced Cloud environment.
+
+

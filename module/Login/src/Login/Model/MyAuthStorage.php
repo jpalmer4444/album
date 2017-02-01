@@ -1,7 +1,11 @@
 <?php
 
 /*
- * 
+ * ATTENTION: This class serves as Session Storage and is serialized to Redis and keyed by
+ * PHPSessionID:MyAuthStorage...
+ * Any properties added to this class that need to be persistent must be added to the toArray()
+ * and getInstance() functions. This is necessary in order for Redis to be able to properly store
+ * the session state in a serialized manner.
  */
 
 namespace Login\Model;
