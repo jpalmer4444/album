@@ -39,6 +39,8 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
         ];
     }
     
+    
+    
     public function getControllerConfig(){
         return [
             'factories' => [

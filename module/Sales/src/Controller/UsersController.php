@@ -20,7 +20,7 @@ class UsersController extends AbstractActionController {
 
     protected $restService;
     protected $logger;
-    protected $myauthstorage;
+    protected $authService;
     protected $pricingconfig;
     protected $userrepository;
     protected $customerrepository;
@@ -29,7 +29,7 @@ class UsersController extends AbstractActionController {
     public function __construct($container) {
         $this->restService = $container->get('RestService');
         $this->logger = $container->get('LoggingService');
-        $this->myauthstorage = $container->get('PredisService')->getMyAuthStorage();
+        $this->authService = $container->get('AuthService');
         $this->pricingconfig = $container->get('config')['pricing_config'];
         $this->userrepository = $container->get('FFMEntityManager')->
                 getEntityManager()->
@@ -45,17 +45,17 @@ class UsersController extends AbstractActionController {
         //http://svc.ffmalpha.com/bySKU.php?id=jpalmer&pw=goodbass&object=customers&salespersonid=183
         $requestedsalespersonid = $this->params()->fromQuery('salespersonid');
         $requestedsalespersonname = $this->params()->fromQuery('salesperson');
-        if (isset($requestedsalespersonid) && isset($requestedsalespersonname) && $this->myauthstorage->admin()) {
+        if (isset($requestedsalespersonid) && isset($requestedsalespersonname) && $this->authService->getStorage()->admin()) {
             $salespersonid = $requestedsalespersonid;
             //lookup salesperson by id and set in Session
             //now lookup the Salesperson they are impersonating...
             $salesperson = $this->userrepository->findBySalesPersonNameAndSalespersonId($requestedsalespersonid, $requestedsalespersonname);
             //we have multiple salespersons here possibly - so match it to logged in username
-            $this->myauthstorage->addSalespersonInPlay($salesperson[0]);
-        } else if ($this->myauthstorage->admin() && !empty($this->myauthstorage->getSalespersonInPlay())) {
-            $salespersonid = $this->myauthstorage->getSalespersonInPlay()->getSales_attr_id();
+            $this->authService->getStorage()->addSalespersonInPlay($salesperson[0]);
+        } else if ($this->authService->getStorage()->admin() && !empty($this->authService->getStorage()->getSalespersonInPlay())) {
+            $salespersonid = $this->authService->getStorage()->getSalespersonInPlay()->getSales_attr_id();
         } else {
-            $salespersonid = $this->myauthstorage->getUser()->getSales_attr_id();
+            $salespersonid = $this->authService->getStorage()->getUser()->getSales_attr_id();
         }
 
         Logger::info("UsersController", __LINE__, 'Retrieving Salespeople. ID: ' . $salespersonid);

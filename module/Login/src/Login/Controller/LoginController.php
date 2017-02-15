@@ -10,11 +10,13 @@ require 'vendor/autoload.php';
 
 use Application\Service\FFMEntityManagerService;
 use Application\Service\LoggingService;
-use Application\Service\PredisService;
 use Application\Utility\Logger;
 use Login\Model\User;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
+use Zend\Session\Container;
+use Zend\Session\SessionManager;
+use Zend\Stdlib\ArrayObject;
 
 class LoginController extends AbstractActionController {
 
@@ -22,28 +24,21 @@ class LoginController extends AbstractActionController {
     protected $storage;
     protected $flashmessages;
     protected $authservice;
-    protected $predisService;
     public $value;
     protected $logger;
     protected $entityManager;
+    protected $sessionManager;
 
-    public function __construct(AuthenticationService $authservice, PredisService $predisService, LoggingService $logger, FFMEntityManagerService $entityManager) {
+    public function __construct(AuthenticationService $authservice, LoggingService $logger, FFMEntityManagerService $entityManager) {
         $this->authservice = $authservice;
-        $this->storage = $predisService->getMyAuthStorage();
         $this->form = $this->getForm();
         $this->logger = $logger;
-        $this->predisService = $predisService;
         $this->entityManager = $entityManager->getEntityManager();
     }
 
     public function getAuthService() {
 
         return $this->authservice;
-    }
-
-    public function getSessionStorage() {
-
-        return $this->storage;
     }
 
     public function getForm() {
@@ -55,16 +50,17 @@ class LoginController extends AbstractActionController {
     }
 
     public function loginAction() {
+
         //if already login, redirect to success page 
         Logger::info("LoginController", __LINE__, 'Checking for identity');
         if ($this->getAuthService()->hasIdentity()) {
             Logger::info("LoginController", __LINE__, 'Identity found.');
-            if($this->getSessionStorage()->admin()){
+            if ($this->getAuthService()->getStorage()->admin()) {
                 return $this->redirect()->toRoute('sales');
-            }else{
+            } else {
                 return $this->redirect()->toRoute('users');
             }
-        }else{
+        } else {
             Logger::info("LoginController", __LINE__, 'Identity not found.');
         }
         $form = $this->getForm();
@@ -75,6 +71,8 @@ class LoginController extends AbstractActionController {
     }
 
     public function authenticateAction() {
+        //Logger::info("LoginController", __LINE__, 'SessionId for Container: ' . $id);
+        //$session->
         Logger::info("LoginController", __LINE__, 'AuthenticationAction called.');
         $form = $this->getForm();
         $redirect = 'login';
@@ -93,7 +91,7 @@ class LoginController extends AbstractActionController {
                 }
                 if ($result->isValid()) {
                     //set roles
-                    
+
                     $user = $this->entityManager->find('DataAccess\FFM\Entity\User', $request->getPost('username'));
                     Logger::info("LoginController", __LINE__, 'Username: ' . $user->getUsername());
                     $roleXrefObjs = $this->entityManager->getRepository('DataAccess\FFM\Entity\UserRoleXref')->findBy(array('username' => $request->getPost('username')));
@@ -104,35 +102,30 @@ class LoginController extends AbstractActionController {
                         //Logger::info(static::class, __LINE__, 'Role: ' . $role->getRole());
                         $roles[$idx++] = $role;
                     }
-                    $this->getSessionStorage()->addRoles($roles);
-                    $this->getSessionStorage()->addUser($user);//set $user in session storage for later access.
+                    $this->authservice->getStorage()->addRoles($roles);
+                    $this->authservice->getStorage()->addUser($user); //set $user in session storage for later access.
                     //if user is admin user then set salespersonInPlay to the user
-                    $redirect = $this->getSessionStorage()->admin() ? 'sales' : 'users';
-                    
+                    $redirect = $this->authservice->getStorage()->admin() ? 'sales' : 'users';
+
                     //check if it has rememberMe :
                     //$this->getAuthService()->setStorage($this->getSessionStorage());
                     if ($request->getPost('rememberme') == 1) {
-                        $this->getSessionStorage()
+                        $this->authservice->getStorage()
                                 ->setRememberMe(1);
                         //set storage again 
                     }
-                    $this->getAuthService()->getStorage()->write($request->getPost('username'));
-                    //must persist back to predisService or we lose it!
-                    $this->predisService->setMyAuthStorage($this->getSessionStorage());
                 }
-            }else{
-               Logger::info("LoginController", __LINE__, 'attempting AuthenticationAction.'); 
+            } else {
+                Logger::info("LoginController", __LINE__, 'attempting AuthenticationAction.');
             }
         }
         return $this->redirect()->toRoute($redirect);
     }
 
     public function logoutAction() {
-        $this->getSessionStorage()->forgetMe();
+        $this->authservice->getStorage()->forgetMe();
         $this->getAuthService()->clearIdentity();
-
         $this->plugin('flashmessenger')->addMessage("You've been logged out");
         return $this->redirect()->toRoute('login');
     }
-
-}
+}  

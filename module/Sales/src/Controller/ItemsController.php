@@ -5,6 +5,7 @@ namespace Sales\Controller;
 /**
  */
 
+use Application\Service\LoggingService;
 use Application\Service\LoggingServiceInterface;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Customer;
@@ -19,18 +20,18 @@ use DataAccess\FFM\Entity\User;
 use DateTime;
 use Login\Model\MyAuthStorage;
 use Sales\Service\SalesFormService;
+use Zend\Authentication\AuthenticationService;
 use Zend\Form\Form;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
-use Application\Service\PredisService;
 
 class ItemsController extends AbstractActionController {
 
     protected $logger;
-    protected $myauthstorage;
+    protected $authService;
     protected $pricingconfig;
     protected $customerid;
     protected $customername;
@@ -58,13 +59,21 @@ class ItemsController extends AbstractActionController {
      * @param \Sales\Controller\FormElementManager $formManager
      * @param type $config simple array of environment specific properties
      */
-    public function __construct(LoggingServiceInterface $logger, PredisService $predisService, 
-            AbstractPluginManager $formManager, UserRepositoryImpl $userrepository, 
-            RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, CustomerRepositoryImpl $customerrepository, 
-            ProductRepositoryImpl $productrepository, UserProductRepositoryImpl $userproductrepository, 
-            PricingOverrideReportRepositoryImpl $pricingoverridereportrepository, SalesFormService $salesFormService, $config = NULL) {
+    public function __construct(
+            LoggingService $logger, 
+            AuthenticationService $authService, 
+            AbstractPluginManager $formManager, 
+            UserRepositoryImpl $userrepository, 
+            RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, 
+            CustomerRepositoryImpl $customerrepository, 
+            ProductRepositoryImpl $productrepository, 
+            UserProductRepositoryImpl $userproductrepository, 
+            PricingOverrideReportRepositoryImpl $pricingoverridereportrepository, 
+            SalesFormService $salesFormService, 
+            $config = NULL
+            ) {
         $this->logger = $logger;
-        $this->myauthstorage = $predisService->getMyAuthStorage();
+        $this->authService = $authService;
         $this->pricingconfig = $config;
         $this->formManager = $formManager;
         $this->userrepository = $userrepository;
@@ -85,7 +94,7 @@ class ItemsController extends AbstractActionController {
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
-            return $this->salesFormService->assembleRowPlusItemsPageAndArray($this->myauthstorage, $this->customerrepository, $this->userrepository, $this->rowplusitemspagerepository, $form, array(), $this->customerid);
+            return $this->salesFormService->assembleRowPlusItemsPageAndArray($this->authService, $this->customerrepository, $this->userrepository, $this->rowplusitemspagerepository, $form, array(), $this->customerid);
         }
         $customer = $this->customerrepository->findCustomer($this->customerid);
         if (empty($customer)) {
@@ -93,7 +102,7 @@ class ItemsController extends AbstractActionController {
             return $this->redirect()->toRoute('users', ['controller' => 'UsersController','action' => 'index'], array());
         }
         $time = new DateTime();
-        return new ViewModel($this->assembleViewModel($time->format('Y_m_d'), $this->myauthstorage->getSalespersonInPlay(), $customer, $form));
+        return new ViewModel($this->assembleViewModel($time->format('Y_m_d'), $this->authService->getStorage()->getSalespersonInPlay(), $customer, $form));
     }
 
     public function reportAction() {
@@ -118,7 +127,7 @@ class ItemsController extends AbstractActionController {
                     $pricingOverrideReport->setCreated($created);
                     $customer = $this->customerrepository->findCustomer($this->customerid);
                     $pricingOverrideReport->setCustomer($customer);
-                    $salesperson = $this->userrepository->findUser($this->myauthstorage->getUser()->getUsername());
+                    $salesperson = $this->userrepository->findUser($this->authService->getStorage()->getUser()->getUsername());
                     $pricingOverrideReport->setSalesperson($salesperson);
                     if (strpos($obj['id'], 'P') !== false){
                         $product = $this->productrepository->findProduct(substr($obj['id'], 1));
@@ -144,13 +153,13 @@ class ItemsController extends AbstractActionController {
             "customerid" => $this->customerid,
             "reporttime" => $reporttime,
             "customername" => $this->customername,
-            "salesperson" => $this->myauthstorage->getUserOrSalespersonInPlay()->getUsername(),
-            "salespersonname" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getSalespersonname() : $salespersoninplay->getSalespersonname(),
-            "salespersonemail" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getEmail() : $salespersoninplay->getEmail(),
+            "salesperson" => $this->authService->getStorage()->getUserOrSalespersonInPlay()->getUsername(),
+            "salespersonname" => empty($salespersoninplay) ? $this->authService->getStorage()->getUser()->getSalespersonname() : $salespersoninplay->getSalespersonname(),
+            "salespersonemail" => empty($salespersoninplay) ? $this->authService->getStorage()->getUser()->getEmail() : $salespersoninplay->getEmail(),
             "companyname" => urlencode($customer->getCompany()),
             "companynamehtml" => $customer->getCompany(),
-            "salespersonphone1" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getPhone1() : $salespersoninplay->getPhone1(),
-            "salespersonid" => empty($salespersoninplay) ? $this->myauthstorage->getUser()->getSales_attr_id() : $salespersoninplay->getSales_attr_id(),
+            "salespersonphone1" => empty($salespersoninplay) ? $this->authService->getStorage()->getUser()->getPhone1() : $salespersoninplay->getPhone1(),
+            "salespersonid" => empty($salespersoninplay) ? $this->authService->getStorage()->getUser()->getSales_attr_id() : $salespersoninplay->getSales_attr_id(),
             "form" => $form);
     }
     

@@ -2,7 +2,7 @@
 
 namespace Sales\Service;
 
-use Application\Service\LoggingServiceInterface;
+use Application\Service\LoggingService;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\ItemTableCheckbox;
 use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
@@ -11,14 +11,13 @@ use DataAccess\FFM\Entity\Repository\Impl\ProductRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use Exception;
-use Sales\Service\CheckboxServiceInterface;
 
 /**
  * Description of CheckboxService
  *
  * @author jasonpalmer
  */
-class CheckboxService implements CheckboxServiceInterface {
+class CheckboxService  {
 
     protected $logger;
     protected $checkboxrepository;
@@ -27,7 +26,7 @@ class CheckboxService implements CheckboxServiceInterface {
     protected $productrepository;
     protected $rowplusitemspagerepository;
 
-    public function __construct(LoggingServiceInterface $logger, ItemTableCheckboxRepositoryImpl $checkboxrepository, UserRepositoryImpl $userrepository, CustomerRepositoryImpl $customerrepository, ProductRepositoryImpl $productrepository, RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository) {
+    public function __construct(LoggingService $logger, ItemTableCheckboxRepositoryImpl $checkboxrepository, UserRepositoryImpl $userrepository, CustomerRepositoryImpl $customerrepository, ProductRepositoryImpl $productrepository, RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository) {
         $this->logger = $logger;
         $this->checkboxrepository = $checkboxrepository;
         $this->userrepository = $userrepository;
@@ -51,7 +50,6 @@ class CheckboxService implements CheckboxServiceInterface {
             }
             foreach ($id as $i) {
                 //here the $i will either be prefixed with 'A' or 'P' for AddedProduct OR Product respectively.
-
                 Logger::info("CheckboxService", __LINE__, "Creating and persisting Checkbox record. ID: " . $i . " CUSTOMERID: " . $customerid . " SALESPERSONUSERNAME: " . $salespersonusername);
                 $record = new ItemTableCheckbox();
                 $user = $this->findUser($salespersonusername);

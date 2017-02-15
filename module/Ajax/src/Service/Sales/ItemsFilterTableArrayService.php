@@ -3,7 +3,6 @@
 namespace Ajax\Service\Sales;
 
 use Ajax\Service\Sales\ItemsFilterTableArrayService;
-use Ajax\Service\Sales\ItemsFilterTableArrayServiceInterface;
 use Application\Utility\DateUtils;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
@@ -13,11 +12,16 @@ use DataAccess\FFM\Entity\RowPlusItemsPage;
  *
  * @author jasonpalmer
  */
-class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterface {
+class ItemsFilterTableArrayService  {
+    
+    const QUERY_PAGES = "SELECT rowPlus FROM DataAccess\FFM\Entity\RowPlusItemsPage rowPlus WHERE rowPlus._created >= :created AND rowPlus._active = 1 AND rowPlus._customerid = :customerid AND rowPlus._salesperson = :salesperson ORDER BY rowPlus._created DESC";
+    
+    const QUERY_OVERRIDES = "SELECT override FROM DataAccess\FFM\Entity\ItemPriceOverride override WHERE override._created >= :created AND override._active = 1 AND override._customerid = :customerid AND override._salesperson = :salesperson GROUP BY override.id ORDER BY override._created DESC";
+    
 
     protected $logger;
     protected $pricingconfig;
-    protected $myauthstorage;
+    protected $authService;
     protected $entityManager;
     protected $checkboxService;
     protected $productrepository;
@@ -25,7 +29,7 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
 
     public function __construct($sm) {
         $this->logger = $sm->get('LoggingService');
-        $this->myauthstorage = $sm->get('PredisService')->getMyAuthStorage();
+        $this->authService = $sm->get('AuthService');
         $this->pricingconfig = $sm->get('config')['pricing_config'];
         $this->entityManager = $sm->get('FFMEntityManager');
         $this->checkboxService = $sm->get('CheckboxService');
@@ -145,9 +149,9 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
         return $this->entityManager->getEntityManager()->
                         createQuery($q)->setParameter("customerid", $customerid)->
                         setParameter("created", DateUtils::getDailyCutoff())->
-                        setParameter("salesperson", $this->myauthstorage->admin() && !empty($this->myauthstorage->getSalespersonInPlay()) ?
-                                $this->myauthstorage->getSalespersonInPlay()->getUsername() :
-                                $this->myauthstorage->getUser()->getUsername())
+                        setParameter("salesperson", $this->authService->getStorage()->admin() && !empty($this->authService->getStorage()->getSalespersonInPlay()) ?
+                                $this->authService->getStorage()->getSalespersonInPlay()->getUsername() :
+                                $this->authService->getStorage()->getUser()->getUsername())
                         ->getResult();
     }
 
@@ -160,9 +164,9 @@ class ItemsFilterTableArrayService implements ItemsFilterTableArrayServiceInterf
     }
 
     protected function retrieveRemovedSkus($customerid) {
-        $userinplay = $this->myauthstorage->getSalespersonInPlay();
+        $userinplay = $this->authService->getStorage()->getSalespersonInPlay();
         if (empty($userinplay)) {
-            $userinplay = $this->myauthstorage->getUser();
+            $userinplay = $this->authService->getStorage()->getUser();
         }
         return !empty($this->checkboxService->getRemovedIDS($customerid, $userinplay->getUsername())) ?
                 $this->checkboxService->getRemovedIDS($customerid, $userinplay->getUsername()) :

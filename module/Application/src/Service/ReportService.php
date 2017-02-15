@@ -9,7 +9,7 @@ use DateTime;
  *
  * @author jasonpalmer
  */
-class ReportService implements ReportServiceInterface{
+class ReportService {
     
     protected $pricingoverridereportrepository;
     

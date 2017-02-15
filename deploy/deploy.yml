@@ -7,11 +7,6 @@
 
     tasks:
         
-      - name: Test pricing
-        shell: |
-            cd /u/local/jasonpalmer/pricing/module/Sales/test
-            phpunit
-            
       - name: Zip pricing
         shell: |
             cd /u/local/jasonpalmer/
@@ -20,7 +15,8 @@
       - name: SCP pricing
         shell: |
             cd /u/local/jasonpalmer/
-            scp -i /Users/jasonpalmer/jpalmer.pem pricing.zip ec2-user@10.0.0.72:.
+            scp -i /Users/jasonpalmer/jpalmer.pem pricing.zip root@10.0.5.243:.
+            scp -i /Users/jasonpalmer/jpalmer.pem pricing.zip root@10.0.4.172:.
         
 # REMOTE
         
@@ -28,25 +24,23 @@
     hosts: webserver
     vars_files:
     - ./vars/pricing_vars.yml
-    remote_user: ec2-user
+    remote_user: root
 
     tasks:
         
       - name: Deploy pricing on remote
         shell: |
-            cd ~/
-            sudo unzip pricing.zip
-            rm pricing.zip
+            cd ~/;sudo unzip pricing.zip
+            rm -rf pricing.zip
             cd /vol01/
             sudo rm -rf pricing_archive
             sudo mv pricing pricing_archive
             sudo mv ~/pricing/ /vol01/pricing/
             sudo chown apache:apache -R pricing/*
-            sudo chmod a+r,a+w,a+x -R pricing/*
+            sudo chmod a+r,a+w,a+x -R pricing/* 
             sudo rm -rf /vol01/pricing/data/cache/*
             
       - name: insert/update Apache Config
-        become: True
         blockinfile:
           dest: /etc/httpd/conf/httpd.conf
           state: present
@@ -54,7 +48,6 @@
           block: "{{ pricing_vhost_block }}"
           
       - name: Restart Apache
-        become: True
         shell: |
             service httpd restart
             

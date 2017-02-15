@@ -1,5 +1,11 @@
 <?php
 
+use Application\Cache\Predis;
+use Zend\Session\Config\SessionConfig;
+use Zend\Session\Storage\SessionArrayStorage;
+use Zend\Session\Validator\HttpUserAgent;
+use Zend\Session\Validator\RemoteAddr;
+
 /**
  * Global Configuration Override
  *
@@ -12,18 +18,38 @@
  * file.
  */
 return [
-    'session' => array(
-        'config' => array(
-            'class' => 'Zend\Session\Config\SessionConfig',
-            'options' => array(
-                'name' => 'pricing_app',
-            ),
-            'save_handler' => 'sessionTable'
-        ),
-        'storage' => 'Zend\Session\Storage\SessionArrayStorage',
-        'validators' => array(
-            'Zend\Session\Validator\RemoteAddr',
-            'Zend\Session\Validator\HttpUserAgent',
-        ),
-    ),
+    'session_config' => [
+        // Cookie expires in 24 hours
+        'cookie_lifetime' => 36000,
+    ],
+    'session_manager' => [
+        'validators' => [
+            RemoteAddr::class,
+            HttpUserAgent::class,
+        ],
+    ],
+    'session_storage' => [
+        'type' => SessionArrayStorage::class,
+    ],
+    'session' => [
+        'config' => [
+            'class' => SessionConfig::class,
+            'options' => [
+                'name' => 'pricing_app_v1',
+            ],
+        ],
+        'storage' => SessionArrayStorage::class,
+        'validators' => [
+            RemoteAddr::class,
+            HttpUserAgent::class,
+        ],
+    ],
+    'service_manager' => [
+        'factories' => [
+            // Configures the default SessionManager instance
+        'Zend\Session\ManagerInterface' => 'Zend\Session\Service\SessionManagerFactory',
+        // Provides session configuration to SessionManagerFactory
+        'Zend\Session\Config\ConfigInterface' => 'Zend\Session\Service\SessionConfigFactory',
+        ],
+    ],
 ];

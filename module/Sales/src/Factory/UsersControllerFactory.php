@@ -3,7 +3,7 @@
 namespace Sales\Factory;
 
 use Sales\Controller\UsersController;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Description of UsersControllerFactory
@@ -12,7 +12,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class UsersControllerFactory {
     
-    public function __invoke(ServiceLocatorInterface $container) {
+    public function __invoke(ServiceManager $container) {
         return new UsersController(
                             $container
                     );

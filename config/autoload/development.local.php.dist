@@ -27,23 +27,21 @@ return [
         'by_sku_object_items_controller' => 'customerlistitems',
         'by_sku_object_users_controller' => 'customers',
         'by_sku_object_sales_controller' => 'salespeople',
-        'sslcapath' => '/Users/jasonpalmer/svc.localhost.key',
-        'sslcafile' => '/Users/jasonpalmer/svc.localhost.crt',
         'ssl' => array(
             // Do not Verify server side certificate,
             // accept invalid or self-signed SSL certificates
-            'verify_peer' => true,
-            'allow_self_signed' => true,
+            'verify_peer' => FALSE,
+            'allow_self_signed' => TRUE,
             // Capture the peer's certificate
-            'capture_peer_cert' => false,
-            'passphrase' => 'changeme'
+            'verify_host' => FALSE,
+            'CN_match' => 'svc.localhost'
         ),
     ],
     'redis_config' => [
-        'host' => 'ffm.oy6xzh.ng.0001.use1.cache.amazonaws.com',
+        'host' => 'localhost',
         'port' => 6379,
         'ttl' => 86400,
-        'database' => 4,
+        'database' => 1,
     ],
     'db' => [
         'driver' => 'Pdo',

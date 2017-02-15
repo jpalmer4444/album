@@ -23,5 +23,16 @@ class UserRepositoryImpl extends FFMRepository {
         return $this->getEntityManager()->find("DataAccess\FFM\Entity\User", $username);
     }
     
+    /**
+     * Get user by session id
+     *
+     * @param $sessionId
+     * @return null|object
+     */
+    public function findBySessionId($sessionId)
+    {
+        return $this->findOneBy(['session_id' => $sessionId]);
+    }
+    
     
 }

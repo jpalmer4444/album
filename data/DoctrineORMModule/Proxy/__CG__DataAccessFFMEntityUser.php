@@ -64,10 +64,10 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
     public function __sleep()
     {
         if ($this->__isInitialized__) {
-            return ['__isInitialized__', 'username', '' . "\0" . 'DataAccess\\FFM\\Entity\\User' . "\0" . 'version', 'password', 'salespersonname', 'phone1', 'email', 'sales_attr_id', 'lastlogin', '_created', '_updated'];
+            return ['__isInitialized__', 'username', '' . "\0" . 'DataAccess\\FFM\\Entity\\User' . "\0" . 'version', 'password', 'salespersonname', 'phone1', 'email', 'sales_attr_id', 'lastlogin', '_created', '_updated', 'session_id'];
         }
 
-        return ['__isInitialized__', 'username', '' . "\0" . 'DataAccess\\FFM\\Entity\\User' . "\0" . 'version', 'password', 'salespersonname', 'phone1', 'email', 'sales_attr_id', 'lastlogin', '_created', '_updated'];
+        return ['__isInitialized__', 'username', '' . "\0" . 'DataAccess\\FFM\\Entity\\User' . "\0" . 'version', 'password', 'salespersonname', 'phone1', 'email', 'sales_attr_id', 'lastlogin', '_created', '_updated', 'session_id'];
     }
 
     /**
@@ -176,6 +176,17 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
     /**
      * {@inheritDoc}
      */
+    public function getSessionId()
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'getSessionId', []);
+
+        return parent::getSessionId();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function getUsername()
     {
         if ($this->__isInitialized__ === false) {
@@ -274,6 +285,17 @@ class User extends \DataAccess\FFM\Entity\User implements \Doctrine\ORM\Proxy\Pr
         $this->__initializer__ && $this->__initializer__->__invoke($this, 'getPassword', []);
 
         return parent::getPassword();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function setSessionId($sessionId)
+    {
+
+        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setSessionId', [$sessionId]);
+
+        return parent::setSessionId($sessionId);
     }
 
     /**

@@ -19,7 +19,7 @@ class SalesFormServiceTest extends AbstractHttpControllerTestCase {
     
     protected $userrepository_mock;
     protected $customerrepository_mock;
-    protected $myauthstorage_mock;
+    protected $authService_mock;
     protected $rowplusitemspagerepository_mock;
     protected $form_mock;
 
@@ -28,12 +28,12 @@ class SalesFormServiceTest extends AbstractHttpControllerTestCase {
         
         Logger::info("SalesFormServiceTest", __LINE__, "Testing SalesFormServiceTest", TRUE);
         
-        $this->myauthstorage_mock = $this->getMockBuilder('Login\Model\MyAuthStorage')
+        $this->authService_mock = $this->getMockBuilder('Zend\Authentication\AuthenticationService')
                 ->disableOriginalConstructor()
                 ->getMock();
         
         //mock getUserOrSalespersonInPlay
-        $this->myauthstorage_mock->expects($this->any())
+        $this->authService_mock->expects($this->any())
                 ->method('getUserOrSalespersonInPlay')
                 ->will($this->returnValue(ModelMocks::getMockUser("1", new DateTime(), 1)));
         

@@ -9,7 +9,7 @@ namespace Sales\Service;
 use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
-use Login\Model\MyAuthStorage;
+use Zend\Authentication\AuthenticationService;
 use Zend\Form\Form;
 
 /**
@@ -18,6 +18,6 @@ use Zend\Form\Form;
  */
 interface SalesFormServiceInterface {
     
-    public function assembleRowPlusItemsPageAndArray(MyAuthStorage $myauthstorage, CustomerRepositoryImpl $customerrepository, UserRepositoryImpl $userrepository, RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, Form $form, array $jsonModelArr, $customerid);
+    public function assembleRowPlusItemsPageAndArray(AuthenticationService $authService, CustomerRepositoryImpl $customerrepository, UserRepositoryImpl $userrepository, RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, Form $form, array $jsonModelArr, $customerid);
     
 }

@@ -13,6 +13,8 @@ use Zend\ModuleManager\Feature\ServiceProviderInterface;
 class Module implements AutoloaderProviderInterface, ConfigProviderInterface, ServiceProviderInterface{
 
     const VERSION = '3.0.2dev';
+    
+    //vendor/fultonfishmarket/data/FultonFishMarket/DataAccess
 
     public function getAutoloaderConfig() {
         return array(

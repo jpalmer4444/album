@@ -2,7 +2,7 @@
 
 namespace Sales\Controller;
 
-use Application\Service\FFMEntityManagerServiceInterface;
+use Application\Service\FFMEntityManagerService;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\User;
@@ -16,7 +16,6 @@ class SalesController extends AbstractActionController {
     protected $restService;
     protected $logger;
     //https://svc.ffmalpha.com/bySKU.php?id=jpalmer&pw=goodbass&object=salespeople
-    protected $myauthstorage;
     //environment specifics properties/values
     protected $pricingconfig;
     protected $entityManager;
@@ -25,12 +24,11 @@ class SalesController extends AbstractActionController {
 
     public function __construct(
             $container, 
-            FFMEntityManagerServiceInterface $ffmEntityManagerService, 
+            FFMEntityManagerService $ffmEntityManagerService, 
             AbstractPluginManager $formManager, 
             UserRepositoryImpl $userrepository) {
         $this->restService = $container->get('RestService');
         $this->logger = $container->get('LoggingService');
-        $this->myauthstorage = $container->get('PredisService')->getMyAuthStorage();
         $this->pricingconfig = $container->get('config')['pricing_config'];
         $this->entityManager = $ffmEntityManagerService->getEntityManager();
         $this->formManager = $formManager;

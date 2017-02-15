@@ -47,21 +47,20 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getServiceConfig() {
         return array(
             'factories' => array(
+                Strings::MY_AUTH_STORAGE => function($sm) {
+                    $myauthstorage = new MyAuthStorage('zf_tutorial');
+                    return $myauthstorage;
+                },
                 Strings::AUTH_SERVICE => function($sm) {
-                    //My assumption, you've alredy set dbAdapter
-                    //and has users table with columns : user_name and pass_word
-                    //that password hashed with bcrypt
+                    //password hashed with bcrypt
                     $credentialValidationCallback = function($dbCredential, $requestCredential) {
                                 return (new Bcrypt())->verify($requestCredential, $dbCredential);
                             };
-                            
                     $dbAdapter = $sm->get(Strings::ZEND_DB_ADAPTER);
                     $authAdapter = new AuthAdapter($dbAdapter, 'users', 'username', 'password', $credentialValidationCallback);
                     $authService = new AuthenticationService();
                     $authService->setAdapter($authAdapter);
-                    
-                    //$authService->setStorage($sm->get(Strings::MY_AUTH_STORAGE));
-
+                    $authService->setStorage($sm->get(Strings::MY_AUTH_STORAGE));
                     return $authService;
                 },
             ),

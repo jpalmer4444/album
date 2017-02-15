@@ -4,18 +4,18 @@ namespace Application\Service;
 
 use Application\Service\RestServiceInterface;
 use Zend\Http\Client;
-use Zend\Stdlib\Parameters;
+use Zend\Http\Client\Adapter\Curl;
 use Zend\Http\Request;
+use Zend\Stdlib\Parameters;
 
 /**
  * Description of RestService
  *
  * @author jasonpalmer
  */
-class RestService implements RestServiceInterface {
+class RestService  {
 
     protected $logger;
-    
     protected $pricingconfig;
 
     public function __construct($sm) {
@@ -31,41 +31,26 @@ class RestService implements RestServiceInterface {
      * @return type
      */
     public function rest($url, $method = 'GET', $params = []) {
-
         $request = new Request();
         $request->getHeaders()->addHeaders(array(
             'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
         ));
         $request->setUri($url);
         $request->setMethod($method);
-
         if (strcmp(strtoupper($method), "GET") == 0) {
             $request->setQuery(new Parameters($params));
         } else {
             $request->setPost(new Parameters($params));
         }
-
         $client = new Client();
-
-        $options = array(
-            'ssl' => $this->pricingconfig['ssl'],
-        );
-        
-        //support both .crt and .key certs OR .pem cert
-        if(array_key_exists("sslcert", $this->pricingconfig)){
-            $options['sslcert'] = $this->pricingconfig['sslcert'];
-        }else{
-            if(array_key_exists("sslcapath", $this->pricingconfig)){
-                $options['sslcapath'] = $this->pricingconfig['sslcapath'];
-            }
-            //$options['sslcapath'] = $this->pricingconfig['sslcapath'];
-            if(array_key_exists("sslcafile", $this->pricingconfig)){
-                $options['sslcafile'] = $this->pricingconfig['sslcafile'];
-            }
-        }
-
-        $client->setOptions($options);
-
+        $adapter = new Curl();
+        $adapter->setOptions(array(
+            'curloptions' => array(
+                CURLOPT_SSL_VERIFYPEER => FALSE,
+                CURLOPT_SSL_VERIFYHOST => FALSE,
+            )
+        ));
+        $client->setAdapter($adapter);
         $response = $client->dispatch($request);
         return json_decode($response->getBody(), true);
     }

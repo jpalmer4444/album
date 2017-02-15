@@ -25,7 +25,7 @@ class ItemsController extends AbstractRestfulController {
 
     protected $restService;
     protected $logger;
-    protected $myauthstorage;
+    protected $authService;
     protected $pricingconfig;
     protected $entityManager;
     protected $itemsFilterService;
@@ -61,10 +61,11 @@ class ItemsController extends AbstractRestfulController {
     }
 
     public function __construct($container) {
+        Logger::info("ItemsController", __LINE__, 'Building ItemController (AJAX).');
         $this->restService = $container->get('RestService');
         $this->checkboxService = $container->get('CheckboxService');
         $this->logger = $container->get('LoggingService');
-        $this->myauthstorage = $container->get('PredisService')->getMyAuthStorage();
+        $this->authService = $container->get('AuthService');
         $this->pricingconfig = $container->get('config')['pricing_config'];
         $this->entityManager = $this->getEntityManager($container);
         $this->itemsFilterService = $container->get('ItemsFilterTableArrayService');
@@ -130,9 +131,9 @@ class ItemsController extends AbstractRestfulController {
     function saveItemPriceOverride($record, $rowIndex){
         try {
                 //... do some work
-                $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->myauthstorage->getSalespersonInPlay()) ?
-                        $this->myauthstorage->getUser()->getUsername() :
-                        $this->myauthstorage->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
+                $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->authService->getStorage()->getSalespersonInPlay()) ?
+                        $this->authService->getStorage()->getUser()->getUsername() :
+                        $this->authService->getStorage()->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
                 $record->setSalesperson($salesperson);
                 $this->entityManager->persist($record);
                 $this->entityManager->flush();
@@ -154,9 +155,9 @@ class ItemsController extends AbstractRestfulController {
     function saveRowPlusItemsPage($record, $rowIndex){
         try {
                 //... do some work
-                $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->myauthstorage->getSalespersonInPlay()) ?
-                        $this->myauthstorage->getUser()->getUsername() :
-                        $this->myauthstorage->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
+                $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->authService->getStorage()->getSalespersonInPlay()) ?
+                        $this->authService->getStorage()->getUser()->getUsername() :
+                        $this->authService->getStorage()->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
                 $record->setSalesperson($salesperson);
                 $this->entityManager->merge($record);
                 $this->entityManager->flush();
@@ -339,9 +340,9 @@ class ItemsController extends AbstractRestfulController {
     protected function select() {
         $ids = $this->params()->fromQuery('ids');
         $customerid = $this->params()->fromQuery('customerid');
-        $userinplay = $this->myauthstorage->getSalespersonInPlay();
+        $userinplay = $this->authService->getStorage()->getSalespersonInPlay();
         if (empty($userinplay)) {
-            $userinplay = $this->myauthstorage->getUser();
+            $userinplay = $this->authService->getStorage()->getUser();
         }
         if (empty($userinplay)) {
             Logger::info("ItemsController", __LINE__, "UserinPlay is null!");
@@ -362,9 +363,9 @@ class ItemsController extends AbstractRestfulController {
         }
         $customerid = $this->params()->fromQuery('customerid');
         //Logger::info(static::class, __LINE__, 'Unselecting ' . $skus);
-        $userinplay = $this->myauthstorage->getSalespersonInPlay();
+        $userinplay = $this->authService->getStorage()->getSalespersonInPlay();
         if (empty($userinplay)) {
-            $userinplay = $this->myauthstorage->getUser();
+            $userinplay = $this->authService->getStorage()->getUser();
         }
         foreach ($ids as $id) {
             $this->checkboxService->removeRemovedID($id, $customerid, $userinplay->getUsername());
@@ -377,9 +378,9 @@ class ItemsController extends AbstractRestfulController {
     protected function unselectAll() {
         $customerid = $this->params()->fromQuery('customerid');
 
-        $userinplay = $this->myauthstorage->getSalespersonInPlay();
+        $userinplay = $this->authService->getStorage()->getSalespersonInPlay();
         if (empty($userinplay)) {
-            $userinplay = $this->myauthstorage->getUser();
+            $userinplay = $this->authService->getStorage()->getUser();
         }
         $removedIDS = $this->checkboxService->getRemovedIDS($customerid, $userinplay->getUsername());
         foreach ($removedIDS as $id) {

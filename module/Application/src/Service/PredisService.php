@@ -6,8 +6,6 @@ use Application\Utility\Logger;
 use Exception;
 use Login\Model\MyAuthStorage;
 use Predis\Client;
-use SuperClosure\Analyzer\AstAnalyzer;
-use SuperClosure\Serializer;
 use Zend\ServiceManager\ServiceManager;
 
 /**
@@ -15,13 +13,12 @@ use Zend\ServiceManager\ServiceManager;
  *
  * @author jasonpalmer
  */
-class PredisService implements PredisServiceInterface {
-    
+class PredisService  {
+
     protected $client;
     protected $container;
-    protected $serializer;
     protected $sessionId;
-    
+
     public function __construct(ServiceManager $container) {
         try{
             session_start();
@@ -33,12 +30,11 @@ class PredisService implements PredisServiceInterface {
             Logger::info("PredisService", __LINE__, $msg);
             $this->sessionId = '__testing__';
         }
-        $this->serializer = new Serializer(new AstAnalyzer());
-        $parameters = [ 
-            "host"=>$container->get('config')['redis_config']['host'], 
-            "port"=>$container->get('config')['redis_config']['port'], 
-            "ttl"=>$container->get('config')['redis_config']['ttl']
-            ];
+        $parameters = [
+            "host" => $container->get('config')['redis_config']['host'],
+            "port" => $container->get('config')['redis_config']['port'],
+            "ttl" => $container->get('config')['redis_config']['ttl']
+        ];
         $options = [
             'parameters' => [
                 'database' => $container->get('config')['redis_config']['database'],
@@ -46,29 +42,33 @@ class PredisService implements PredisServiceInterface {
         ];
         $client = new Client($parameters, $options);
         $this->client = $client;
-        $storage = new MyAuthStorage("zf_tutorial");
-        $serializedData = $this->serialize($storage->toArray());
-        
-        Logger::info("PredisService", __LINE__, 'Serialized: ' . $serializedData);
-        
-        $this->set($this->sessionId . ":MyAuthStorage", $serializedData);
+        if (empty($this->get($this->sessionId))) {
+            $storage = new MyAuthStorage("zf_tutorial");
+            $serializedData = $this->serialize($storage->toArray());
+            Logger::info("PredisService", __LINE__, 'Serialized: ' . $serializedData);
+            $this->set($this->sessionId, $serializedData);
+        }
     }
-    
-    public function getMyAuthStorage(){
-        $myauthstoragearray = unserialize($this->get($this->sessionId . ":MyAuthStorage"));
+
+    public function getMyAuthStorage() {
+        $myauthstoragearray = unserialize($this->get($this->sessionId));
         //Logger::info("PredisService", __LINE__, 'UnSerialized: ' . strval($myauthstorage));
         return MyAuthStorage::getInstance($myauthstoragearray);
     }
-    
-    public function setMyAuthStorage(MyAuthStorage $myauthstorage){
+
+    public function setMyAuthStorage(MyAuthStorage $myauthstorage) {
         $serializedData = $this->serialize($myauthstorage->toArray());
-        $this->set($this->sessionId . ":MyAuthStorage", $serializedData);
+        $this->set($this->sessionId, $serializedData);
     }
     
+    public function clear() {
+        $this->client->del($this->sessionId);
+    }
+
     public function get($key) {
         return $this->client->get($key);
     }
-    
+
     public function set($key, $value) {
         return $this->client->set($key, $value);
     }

@@ -63,6 +63,15 @@ class User
      */
     protected $_updated;
     
+    /**
+     * @ORM\Column(type="string")
+     */
+    protected $session_id;
+    
+    public function getSessionId() {
+        return $this->session_id;
+    }
+    
     public function getUsername() {
         return $this->username;
     }
@@ -97,6 +106,10 @@ class User
     
     public function getPassword() {
         return $this->password;
+    }
+    
+    public function setSessionId($sessionId) {
+        $this->sessionId = $sessionId;
     }
     
     public function setPhone1($phone1) {

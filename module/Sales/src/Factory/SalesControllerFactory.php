@@ -3,7 +3,7 @@
 namespace Sales\Factory;
 
 use Sales\Controller\SalesController;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Description of SalesControllerFactory
@@ -12,7 +12,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class SalesControllerFactory {
 
-    public function __invoke(ServiceLocatorInterface $container) {
+    public function __invoke(ServiceManager $container) {
         return new SalesController(
                 $container, 
                 $container->get('FFMEntityManager'), 

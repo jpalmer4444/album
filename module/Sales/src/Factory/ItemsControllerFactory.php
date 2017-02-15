@@ -3,7 +3,7 @@
 namespace Sales\Factory;
 
 use Sales\Controller\ItemsController;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Description of ItemsControllerFactory
@@ -12,9 +12,9 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class ItemsControllerFactory {
     
-    public function __invoke(ServiceLocatorInterface $container) {
+    public function __invoke(ServiceManager $container) {
         $loggingService = $container->get('LoggingService');
-                    $predisService = $container->get('PredisService');
+                    $authService = $container->get('AuthService');
                     $pricingconfig = $container->get('config')['pricing_config'];
                     $formManager = $container->get('FormElementManager');
                     $salesFromService = $container->get('SalesFormService');
@@ -26,7 +26,7 @@ class ItemsControllerFactory {
                     $pricingoverridereportrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\PricingOverrideReport');
                     return new ItemsController(
                             $loggingService,
-                            $predisService,
+                            $authService,
                             $formManager,
                             $userrepository,
                             $rowplusitemspagerepository,

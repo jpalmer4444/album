@@ -2,15 +2,14 @@
 
 namespace Sales\Service;
 
-use Application\Service\LoggingServiceInterface;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
 use DateTime;
-use Login\Model\MyAuthStorage;
 use ReflectionClass;
+use Zend\Authentication\AuthenticationService;
 use Zend\Form\Form;
 use Zend\View\Model\JsonModel;
 
@@ -19,10 +18,10 @@ use Zend\View\Model\JsonModel;
  *
  * @author jasonpalmer
  */
-class SalesFormService implements SalesFormServiceInterface {
+class SalesFormService {
 
     public function assembleRowPlusItemsPageAndArray(
-            MyAuthStorage $myauthstorage, 
+            AuthenticationService $authService, 
             CustomerRepositoryImpl $customerrepository, 
             UserRepositoryImpl $userrepository, 
             RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, 
@@ -32,7 +31,7 @@ class SalesFormService implements SalesFormServiceInterface {
     ) {
         if ($form->isValid()) {
             $success = true;
-            $record = $this->getRowPlusItemsPageRecord($userrepository, $customerrepository, $myauthstorage, $customerid);
+            $record = $this->getRowPlusItemsPageRecord($userrepository, $customerrepository, $authService, $customerid);
             $this->assembleReflectMethod(['sku', 'sku', 'sku', 'sku', 'sku', 'sku'], $jsonModelArr, $form, $record);
             $this->assembleReflectMethod(['productname', 'product', 'product', 'productname', 'productname', 'productname'], $jsonModelArr, $form, $record);
             $this->assembleReflectMethod(['shortescription', 'description', 'description', 'shortescription', 'shortescription', 'description'], $jsonModelArr, $form, $record);
@@ -55,7 +54,7 @@ class SalesFormService implements SalesFormServiceInterface {
     private function getRowPlusItemsPageRecord(
             UserRepositoryImpl $userrepository, 
             CustomerRepositoryImpl $customerrepository, 
-            MyAuthStorage $myauthstorage, 
+            AuthenticationService $authService, 
             $customerid) {
         $record = new RowPlusItemsPage();
         $record->setStatus(true);
@@ -64,7 +63,7 @@ class SalesFormService implements SalesFormServiceInterface {
         $record->setActive(true);
         $customer = $customerrepository->findCustomer($customerid);
         $record->setCustomer($customer);
-        $salesperson = $userrepository->findUser($myauthstorage->getUserOrSalespersonInPlay()->getUsername());
+        $salesperson = $userrepository->findUser($authService->getStorage()->getUserOrSalespersonInPlay()->getUsername());
         $record->setSalesperson($salesperson);
         return $record;
     }

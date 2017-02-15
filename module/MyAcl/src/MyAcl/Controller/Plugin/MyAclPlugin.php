@@ -13,12 +13,10 @@ class MyAclPlugin extends AbstractPlugin {
     protected $sesscontainer;
     protected $logger;
     protected $authService;
-    protected $predisService;
 
-    public function __construct($logger, $authService, $predisService) {
+    public function __construct($logger, $authService) {
         $this->logger = $logger;
         $this->authService = $authService;
-        $this->predisService = $predisService;
     }
 
     public function doAuthorization($e) {
@@ -38,30 +36,30 @@ class MyAclPlugin extends AbstractPlugin {
         # RESOURCES ########################################
         //$acl->addResource('application'); // Application module
         $acl->addResource('album:Album\Controller\AlbumController:index'); // album module, album controller, index action
-        $acl->addResource('album:Album\Controller\AlbumController:add'); 
-        $acl->addResource('album:Album\Controller\AlbumController:edit'); 
-        $acl->addResource('album:Album\Controller\AlbumController:delete'); 
-        
+        $acl->addResource('album:Album\Controller\AlbumController:add');
+        $acl->addResource('album:Album\Controller\AlbumController:edit');
+        $acl->addResource('album:Album\Controller\AlbumController:delete');
+
         $acl->addResource('application:Application\Controller\IndexController:index');
         $acl->addResource('application:Application\Controller\IndexController:resetpassword');
-        
+
         $acl->addResource('login:Login\Controller\LoginController:authenticate');
         $acl->addResource('login:Login\Controller\LoginController:login');
         $acl->addResource('login:Login\Controller\LoginController:login/authenticate');
         $acl->addResource('login:Login\Controller\LoginController:logout');
-        
+
         //success route
         $acl->addResource('login:Login\Controller\SuccessController:index');
-        
+
         //sales route
         $acl->addResource('sales:Sales\Controller\SalesController:index');
         $acl->addResource('sales:Sales\Controller\ItemsController:index');
         $acl->addResource('sales:Sales\Controller\ItemsController:report');
         $acl->addResource('sales:Sales\Controller\UsersController:index');
-        
+
         //command route
         $acl->addResource('command:Command\Controller\Reporting\PriceOverrideController:priceoverridereport');
-        
+
         //add doctrinemodule for Console calls or MyAclPlugin will intercept
         $acl->addResource('doctrinemodule');
         //doctrinemodule:DoctrineModule\Controller\Cli:cli
@@ -83,10 +81,6 @@ class MyAclPlugin extends AbstractPlugin {
         $acl->allow('anonymous', 'doctrinemodule:DoctrineModule\Controller\Cli:cli');
         $acl->allow('anonymous', 'command:Command\Controller\Reporting\PriceOverrideController:priceoverridereport');
         /// module/MyAcl/src/MyAcl/Controller/Plugin/MyAclPlugin.php
-        
-        
-        
-        
         // $acl->allow('role', 'resource', 'controller:action');
         // Sales -------------------------->
         $acl->allow('sales', 'login:Login\Controller\LoginController:logout');
@@ -104,8 +98,8 @@ class MyAclPlugin extends AbstractPlugin {
         $controllerClass = get_class($controller);
         $moduleName = strtolower(substr($controllerClass, 0, strpos($controllerClass, '\\')));
         $roles = [];
-        if (!empty($this->predisService->getMyAuthStorage()->getRoles())) {
-            $roles = $this->predisService->getMyAuthStorage()->getRoles();
+        if (!empty($this->authService->getStorage()->getRoles())) {
+            $roles = $this->authService->getStorage()->getRoles();
         } else {
             $anonymous = new UserRoleXref();
             $anonymous->setUsername("anonymous");
@@ -135,15 +129,15 @@ class MyAclPlugin extends AbstractPlugin {
                 $allowed = TRUE;
             }
         }
-        
+
         Logger::info("MyAclPlugin", __LINE__, "Allowed: " . $allowed);
 
         if (!$allowed) {
             $router = $e->getRouter();
             $request = $e->getRequest();
             $routeMatch = $router->match($request);
-            if (!is_null($routeMatch)){
-                $this->predisService->getMyAuthStorage()->addRequestedRoute($routeMatch->getMatchedRouteName());
+            if (!is_null($routeMatch)) {
+                $this->authService->getStorage()->addRequestedRoute($routeMatch->getMatchedRouteName());
             }
             // $url    = $router->assemble(array(), array('name' => 'Login/auth')); // assemble a login route
             $url = $router->assemble(array(), array('name' => 'login'));

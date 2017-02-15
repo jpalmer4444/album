@@ -47,17 +47,19 @@
                             src="img/ffm_logo_80x80.png" 
                             alt="FFM">
                             <?php if (isset($_SESSION["user"])): ?>
-                            &nbsp; Welcome, <?= $_SESSION["username"] ?>
+                            &nbsp; Welcome, <?= $_SESSION["user"]->getUsername() ?>
                         <?php endif; ?>
                     </span>
                 </div>
                 <div id="navbar5" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
+                        
                         <?php if (isset($_SESSION["user"])): ?>
                             <li>
                                 <a href="<?php echo $this->url('login/process', array('action' => 'logout')); ?>">Logout</a>
                             </li>
                         <?php endif; ?>
+                            
                         <?php if (isset($_SESSION["roles"])): ?>
                             <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
                                 <li>
@@ -69,6 +71,7 @@
                                 </li>
                             <?php endif; ?>
                         <?php endif; ?>
+                                
                         <?php if (isset($_SESSION["user"])): ?>
                             <li>
                                 <a 
@@ -80,6 +83,8 @@
                                     href="<?= $this->url('users') ?>">Customers</a>
                             </li>
                         <?php endif; ?>
+                            
+                            
                     </ul>
                 </div>
                 <!--/.nav-collapse -->
@@ -93,7 +98,7 @@
         <footer>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="col-lg-8 text-center col-lg-offset-2 col-md-10 col-md-offset-1">
                         <p class="copyright text-muted">&copy; 2014 - <?= date('Y') ?> Meade Digital Enterprises. All rights reserved.</p>
                     </div>
                 </div>

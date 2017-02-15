@@ -11,15 +11,19 @@ namespace Application;
 use Application\Controller\IndexController;
 use Application\Factory\FFMEntityManagerServiceFactory;
 use Application\Factory\LoggingServiceFactory;
-use Application\Factory\PredisServiceFactory;
 use Application\Factory\ReportServiceFactory;
 use Application\Factory\RestServiceFactory;
-use Application\Factory\SessionManagerFactory;
+use Application\Factory\SessionServiceFactory;
 use Application\Utility\Strings;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ServiceManager\Factory\InvokableFactory;
+use Zend\Session\Container;
+use Zend\Session\SessionManager;
+use Zend\Session\Storage\SessionArrayStorage;
+use Zend\Session\Validator\HttpUserAgent;
+use Zend\Session\Validator\RemoteAddr;
 
 class Module implements ConfigProviderInterface, ServiceProviderInterface, AutoloaderProviderInterface {
 
@@ -33,34 +37,32 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
                 ],
         ]];
     }
-    
+
     public function getConfig() {
         return include __DIR__ . '/../config/module.config.php';
     }
 
-    public function getAutoloaderConfig()
-     {
-         return array(
+    public function getAutoloaderConfig() {
+        return array(
             Strings::CLASS_MAP_AUTO_LOADER => array(
-                 __DIR__ . '/autoload_classmap.php',
-             ),
-             Strings::STANDARD_AUTO_LOADER => array(
-                 'namespaces' => array(
-                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
-                 ),
-             ),
-         );
-     }
+                __DIR__ . '/autoload_classmap.php',
+            ),
+            Strings::STANDARD_AUTO_LOADER => array(
+                'namespaces' => array(
+                    __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
+                ),
+            ),
+        );
+    }
 
     public function getServiceConfig() {
         return array(
             Strings::FACTORIES => array(
                 'LoggingService' => LoggingServiceFactory::class,
-                'PredisService' => PredisServiceFactory::class,
                 Strings::REST_SERVICE => RestServiceFactory::class,
                 Strings::REPORT_SERVICE => ReportServiceFactory::class,
                 Strings::FFM_ENTITY_MANAGER => FFMEntityManagerServiceFactory::class,
-                Strings::SESSION_MANAGER => SessionManagerFactory::class,
+                'SessionService' => SessionServiceFactory::class,
             ),
         );
     }
@@ -69,6 +71,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
      * Adds global method available in layout
      */
     public function onBootstrap($e) {
+
         $sm = $e->getApplication()->getServiceManager();
 
         $router = $sm->get(Strings::ROUTER);
@@ -88,16 +91,63 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
                 $module = array_pop($module_array);
 
                 $route = $matchedRoute->getMatchedRouteName();
-
+                
+                $sessionService = $sm->get('SessionService');
+                
                 $e->getViewModel()->setVariables(
                         array(
                             'CURRENT_MODULE_NAME' => $module,
                             'CURRENT_CONTROLLER_NAME' => $controller,
                             'CURRENT_ACTION_NAME' => $action,
                             'CURRENT_ROUTE_NAME' => $route,
+                            'FFM_SESSION' => [
+                                'user' => $sessionService->getUser(),
+                                'roles' => $sessionService->getRoles(),
+                                'salespersoninplay' => $sessionService->getSalespersonInPlay()
+                            ]
                         )
                 );
             }
+        }
+    }
+
+    public function bootstrapSession($e) {
+        $session = $e->getApplication()
+                ->getServiceManager()
+                ->get(SessionManager::class);
+        $session->start();
+        $container = new Container('initialized');
+        if (isset($container->init)) {
+            return;
+        }
+        $serviceManager = $e->getApplication()->getServiceManager();
+        $request = $serviceManager->get('Request');
+        $session->setStorage(new SessionArrayStorage());
+        //$session->regenerateId();
+        $container->init = 1;
+        $container->remoteAddr = $request->getServer()->get('REMOTE_ADDR');
+        $container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
+        $config = $serviceManager->get('Config');
+        if (!isset($config['session'])) {
+            return;
+        }
+        $sessionConfig = $config['session'];
+        if (!isset($sessionConfig['validators'])) {
+            return;
+        }
+        $chain = $session->getValidatorChain();
+        foreach ($sessionConfig['validators'] as $validator) {
+            switch ($validator) {
+                case HttpUserAgent::class:
+                    $validator = new $validator($container->httpUserAgent);
+                    break;
+                case RemoteAddr::class:
+                    $validator = new $validator($container->remoteAddr);
+                    break;
+                default:
+                    $validator = new $validator();
+            }
+            $chain->attach('session.validate', array($validator, 'isValid'));
         }
     }
 

@@ -5,7 +5,7 @@ namespace Sales\Factory;
 use Sales\DTO\RowPlusItemsPageForm;
 use Sales\Filter\RowPlusItemsPageInputFilter;
 use Zend\Hydrator\ObjectProperty;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Description of RowPlusItemsPageFormFactory
@@ -14,7 +14,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class RowPlusItemsPageFormFactory {
     
-    public function __invoke(ServiceLocatorInterface $container) {
+    public function __invoke(ServiceManager $container) {
         $form = new RowPlusItemsPageForm();
                     $form->setInputFilter(new RowPlusItemsPageInputFilter());
                     $form->setHydrator(new ObjectProperty());

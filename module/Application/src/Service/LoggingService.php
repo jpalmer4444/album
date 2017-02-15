@@ -10,7 +10,7 @@ use Zend\Log\Logger;
  *
  * @author jasonpalmer
  */
-class LoggingService implements LoggingServiceInterface {
+class LoggingService  {
     
     protected $logger;
     

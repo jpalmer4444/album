@@ -3,7 +3,7 @@
 namespace Sales\Factory;
 
 use Sales\Service\SalesFormService;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Description of SalesFormServiceFactory
@@ -12,7 +12,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class SalesFormServiceFactory {
 
-    public function __invoke(ServiceLocatorInterface $sm) {
+    public function __invoke(ServiceManager $sm) {
         return new SalesFormService();
     }
 

@@ -3,7 +3,7 @@
 namespace Sales\Factory;
 
 use Sales\Service\CheckboxService;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\ServiceManager;
 
 /**
  * Description of CheckboxServiceFactory
@@ -12,7 +12,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class CheckboxServiceFactory {
 
-    public function __invoke(ServiceLocatorInterface $sm) {
+    public function __invoke(ServiceManager $sm) {
         $loggingService = $sm->get('LoggingService');
         $entityManager = $sm->get('FFMEntityManager');
         $checkboxrepository = $entityManager->getEntityManager()->getRepository('DataAccess\FFM\Entity\ItemTableCheckbox');

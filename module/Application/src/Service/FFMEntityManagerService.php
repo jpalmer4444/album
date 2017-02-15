@@ -13,7 +13,7 @@ namespace Application\Service;
  *
  * @author jasonpalmer
  */
-class FFMEntityManagerService implements FFMEntityManagerServiceInterface {
+class FFMEntityManagerService {
 
     protected $entityManager;
 

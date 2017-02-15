@@ -4,8 +4,9 @@ pricing_vhost_block: |
     <VirtualHost *:80>
         #ServerName ffmalpha
         DocumentRoot /var/www/html/pricing/public
-        ServerName pricing.ffmalpha.com
-        Redirect permanent / https://pricing.ffmalpha.com/
+        ServerName pricing3.ffmalpha.com
+        LogLevel info
+        Redirect permanent / https://pricing3.ffmalpha.com/
     </VirtualHost>
 
     <VirtualHost *:443>
@@ -15,7 +16,7 @@ pricing_vhost_block: |
         SSLCertificateKeyFile /GoDaddy/wildcard.ffmalpha/ffmalpha.key
         SSLCACertificateFile /GoDaddy/wildcard.ffmalpha/a6d275acc843a94f/gd_bundle-g2-g1.crt
         DocumentRoot /var/www/html/pricing/public
-        ServerName pricing.ffmalpha.com
+        ServerName pricing3.ffmalpha.com
         SetEnv APPLICATION_ENV "staging"
         LogLevel info
         ErrorLog "/var/log/httpd/pricing-error.log"

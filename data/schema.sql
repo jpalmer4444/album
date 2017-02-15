@@ -26,6 +26,7 @@ DROP TABLE IF EXISTS users;
 CREATE TABLE `users` (
     `username` varchar(100) PRIMARY KEY,
     `version` INTEGER DEFAULT 1,
+    `session_id` varchar(255) DEFAULT NULL,
     `password` varchar(100) NOT NULL,
     `salespersonname` varchar(100) NOT NULL,
     `email` varchar(100) NOT NULL,
@@ -54,7 +55,7 @@ INSERT INTO users (username, password, salespersonname, sales_attr_id, email, ph
 VALUES('foobarx', '$2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC', 'Foo Bar X', 247, 'cmetallo@fultonfishmarket.com', '802-233-9957');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('dtanzer', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '802-233-9957');
-INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
+INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1)
 VALUES('jdowns', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '802-238-1452');
 INSERT INTO users (username, password, salespersonname, sales_attr_id, email, phone1) 
 VALUES('cmetallo', '$2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO', 'Cyndi Metallo', 183, 'cmetallo@fultonfishmarket.com', '847-809-6512');
