@@ -99,7 +99,7 @@ class LoginController extends AbstractActionController {
                 if ($result->isValid()) {
                     //set roles
 
-                    $this->sessionService->login($this->sessionManager, $request->getPost('username'));
+                    $this->sessionService->login($request->getPost('username'));
                     //if user is admin user then set salespersonInPlay to the user
                     $redirect = $this->sessionService->admin() ? 'sales' : 'users';
 
@@ -116,7 +116,6 @@ class LoginController extends AbstractActionController {
                 }
             } else {
                 $this->explainLoginFailure($request->getPost('username'), 'form');
-                Logger::info("LoginController", __LINE__, 'Login FORM failed validation! Cannot login username: ' . $request->getPost('username'));
             }
         }
         return $this->redirect()->toRoute($redirect);

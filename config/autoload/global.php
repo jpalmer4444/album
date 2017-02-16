@@ -24,6 +24,7 @@ return [
         'cookie_secure' => true
     ],
     'session_manager' => [
+        
     ],
     'session_storage' => [
         'type' => SessionArrayStorage::class,
@@ -36,8 +37,6 @@ return [
             ],
         ],
         'storage' => SessionArrayStorage::class,
-        'validators' => [
-        ],
     ],
     'service_manager' => [
         'factories' => [

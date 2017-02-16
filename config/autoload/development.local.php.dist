@@ -37,12 +37,6 @@ return [
             'CN_match' => 'svc.localhost'
         ),
     ],
-    'redis_config' => [
-        'host' => 'localhost',
-        'port' => 6379,
-        'ttl' => 86400,
-        'database' => 1,
-    ],
     'db' => [
         'driver' => 'Pdo',
         'dsn' => "mysql:dbname=md_dgtl;host=localhost",

@@ -84,7 +84,7 @@ class ItemsController extends AbstractRestfulController {
         Logger::info("ItemsController", __LINE__, 'ItemsController Ajax called.');
         $username = $this->params()->fromQuery("username");
         $session_id = $this->params()->fromQuery("session_id");
-        $this->sessionService->login($this->sessionManager, $username, $session_id);
+        $this->sessionService->login($username, $session_id);
         switch ($this->params()->fromQuery("myaction")) {
             case "select" : {
                     return $this->select();
@@ -104,7 +104,7 @@ class ItemsController extends AbstractRestfulController {
         Logger::info("ItemsController", __LINE__, 'ItemsController Ajax called.');
         $username = $this->params()->fromQuery("username");
         $session_id = $this->params()->fromQuery("session_id");
-        $this->sessionService->login($this->sessionManager, $username, $session_id);
+        $this->sessionService->login($username, $session_id);
         switch ($this->params()->fromQuery("myaction")) {
             case "overridePrice" :
             default : {

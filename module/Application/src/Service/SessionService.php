@@ -29,11 +29,17 @@ class SessionService {
     protected $userrepository;
     protected $userrolexrefrepository;
     protected $roles;
+    protected $sessionManager;
     protected $salespersoninplay;
     protected $user;
     protected $request;
 
     public function __construct(UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository, SessionManager $sessionManager, Request $request, Response $response) {
+        $this->userrepository = $userrepository;
+        $this->userrolexrefrepository = $userrolexrefrepository;
+        $this->request = $request;
+        $this->response = $response;
+        $this->sessionManager = $sessionManager;
         //$sessionManager->start();
         $this->sessionId = $sessionManager->getId();
         if(!$this->sessionId){
@@ -41,16 +47,13 @@ class SessionService {
             $this->sessionId = $sessionManager->getId();
         }
         Logger::info("SessionService", __LINE__, "(CONSTRUCTOR) Session Id: " . $this->sessionId);
-        $this->userrepository = $userrepository;
-        $this->userrolexrefrepository = $userrolexrefrepository;
-        $this->request = $request;
-        $this->response = $response;
+        
         $this->doLookup();
     }
 
-    public function login(SessionManager $sessionManager, $username, $session_id = NULL) {
+    public function login($username, $session_id = NULL) {
         try {
-            $this->sessionId = !empty($session_id) ? $session_id : $sessionManager->getId();
+            $this->sessionId = !empty($session_id) ? $session_id : $this->sessionManager->getId();
             Logger::info("SessionService", __LINE__, "(LOGIN) Session Id: " . $this->sessionId);
             Logger::info("SessionService", __LINE__, "(LOGIN) username: " . $username);
             $user = $this->userrepository->findUser($username);
@@ -96,6 +99,7 @@ class SessionService {
             unset($this->user);
             $this->deleteCookie("salesperson");
             $this->deleteCookie("requestedRoute");
+            $this->sessionManager->getStorage()->clear();
         } catch (Exception $exc) {
             Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
         }

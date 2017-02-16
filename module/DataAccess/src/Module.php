@@ -58,9 +58,9 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
      */
     public function handleError(MvcEvent $event) {
         $controller = $event->getController();
-        $error = $event->getParam(' error');
-        $exception = $event->getParam(' exception');
-        $message = sprintf(' Error dispatching controller "% s". Error was: "% s"', $controller, $error);
+        $error = $event->getParam('error');
+        $exception = $event->getParam('exception');
+        $message = sprintf(' Error dispatching controller "%s". Error was: "%s"', $controller, $error);
         if ($exception instanceof \Exception) {
             $message .= ', Exception(' . $exception->getMessage() . '): ' . $exception->getTraceAsString();
         }

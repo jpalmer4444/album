@@ -71,29 +71,19 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
      * Adds global method available in layout
      */
     public function onBootstrap($e) {
-
         $sm = $e->getApplication()->getServiceManager();
-
         $router = $sm->get(Strings::ROUTER);
         $request = $sm->get(Strings::REQUEST);
         $matchedRoute = $router->match($request);
-
         if ($matchedRoute) {
             $params = $matchedRoute->getParams();
-
             $controller = $params[Strings::CONTROLLER];
-
             //only needed when this is not an Ajax request and not security related.
             if (isset($params[Strings::ACTION])) {
                 $action = $params[Strings::ACTION];
-
                 $module_array = explode('\\', $controller);
                 $module = array_pop($module_array);
-
                 $route = $matchedRoute->getMatchedRouteName();
-
-                //if (!$request->isXmlHttpRequest()) {
-                    
                     $sessionService = $sm->get('SessionService');
                     $e->getViewModel()->setVariables(
                             array(
@@ -109,7 +99,6 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
                                 ]
                             )
                     );
-                //}
             }
         }
     }
@@ -119,17 +108,8 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
                 ->getServiceManager()
                 ->get(SessionManager::class);
         $session->start();
-        //$container = new Container('initialized');
-        //if (isset($container->init)) {
-            //return;
-        //}
         $serviceManager = $e->getApplication()->getServiceManager();
-        //$request = $serviceManager->get('Request');
         $session->setStorage(new SessionArrayStorage());
-        //$session->regenerateId();
-        $container->init = 1;
-        //$container->remoteAddr = $request->getServer()->get('REMOTE_ADDR');
-        //$container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
         $config = $serviceManager->get('Config');
         if (!isset($config['session'])) {
             return;
