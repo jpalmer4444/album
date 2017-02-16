@@ -119,17 +119,17 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
                 ->getServiceManager()
                 ->get(SessionManager::class);
         $session->start();
-        $container = new Container('initialized');
-        if (isset($container->init)) {
-            return;
-        }
+        //$container = new Container('initialized');
+        //if (isset($container->init)) {
+            //return;
+        //}
         $serviceManager = $e->getApplication()->getServiceManager();
-        $request = $serviceManager->get('Request');
+        //$request = $serviceManager->get('Request');
         $session->setStorage(new SessionArrayStorage());
         //$session->regenerateId();
         $container->init = 1;
-        $container->remoteAddr = $request->getServer()->get('REMOTE_ADDR');
-        $container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
+        //$container->remoteAddr = $request->getServer()->get('REMOTE_ADDR');
+        //$container->httpUserAgent = $request->getServer()->get('HTTP_USER_AGENT');
         $config = $serviceManager->get('Config');
         if (!isset($config['session'])) {
             return;

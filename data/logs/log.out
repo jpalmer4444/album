@@ -610,3 +610,166 @@
 [INFO:Thu 2/16/2017 07:30:29AM:ItemsController:114] 3: {"id":"P969","sku":"584001","productname":"Salmon - Atlantic, Farmed, Norway, Fillets (11lb Pair)","shortescription":"Two (5.5lb avg) Sides","comment":null,"qty":4,"wholesale":6.95,"retail":9.93,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"1.99","selected":true}
 [INFO:Thu 2/16/2017 07:30:29AM:ItemsController:114] 4: ID_P1207
 [INFO:Thu 2/16/2017 07:30:29AM:ItemsController:114] 5: {"id":"P1207","sku":"2200","productname":"Shrimp - Frozen, 21/25, Farmed, P&D Tail On, India (10lb)","shortescription":null,"comment":null,"qty":2,"wholesale":6.01,"retail":8.01,"uom":"lb","option":null,"status":"Enabled","saturdayenabled":1,"overrideprice":"2.00","selected":true}
+[INFO:Thu 2/16/2017 12:52:36PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 12:52:36PM:SessionService:118] No Session data found.
+[INFO:Thu 2/16/2017 12:52:36PM:SessionService:182] 
+[INFO:Thu 2/16/2017 12:52:36PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 12:52:36PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 12:52:36PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 12:52:37PM:DataAccess\Module:67]  Error dispatching controller "". Error was: ""
+[INFO:Thu 2/16/2017 12:52:46PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 12:52:46PM:SessionService:118] No Session data found.
+[INFO:Thu 2/16/2017 12:52:46PM:SessionService:182] 
+[INFO:Thu 2/16/2017 12:52:46PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 12:52:46PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 12:52:47PM:SessionService:54] (LOGIN) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 12:52:47PM:SessionService:55] (LOGIN) username: jpalmer
+[INFO:Thu 2/16/2017 12:52:47PM:SessionService:61] (LOGIN) Saved Session ID: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 12:52:47PM:SessionService:66] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => admin
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jpalmer
+                    [version:DataAccess\FFM\Entity\User:private] => 102
+                    [password:protected] => $2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC
+                    [salespersonname:protected] => Jason Palmer
+                    [phone1:protected] => 630-999-0139
+                    [email:protected] => jpalmer@fultonfishmarket.com
+                    [sales_attr_id:protected] => 183
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 12:52:47.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 12:44:34.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 5815e670cc2b84f829f8e7584e76baac
+                )
+
+        )
+
+)
+
+[INFO:Thu 2/16/2017 12:52:47PM:SessionService:71] (LOGIN) Looked up salesperson: NULL
+[INFO:Thu 2/16/2017 12:52:47PM:SessionService:182] admin
+[INFO:Thu 2/16/2017 12:52:47PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 12:52:47PM:SessionService:182] admin
+[INFO:Thu 2/16/2017 12:52:47PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 12:52:47PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 12:52:47PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 12:52:48PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 12:52:48PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 12:52:48PM:DataAccess\Module:67]  Error dispatching controller "". Error was: ""
+[INFO:Thu 2/16/2017 12:56:49PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 12:56:49PM:SessionService:182] admin
+[INFO:Thu 2/16/2017 12:56:49PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 12:56:49PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 12:56:49PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 12:56:50PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 12:56:50PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 12:56:51PM:DataAccess\Module:67]  Error dispatching controller "". Error was: ""
+[INFO:Thu 2/16/2017 01:02:52PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 01:02:52PM:SessionService:182] admin
+[INFO:Thu 2/16/2017 01:02:52PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 01:02:52PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 01:02:52PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 01:02:53PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 01:02:53PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 01:02:54PM:DataAccess\Module:67]  Error dispatching controller "". Error was: ""
+[INFO:Thu 2/16/2017 01:02:58PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 01:02:58PM:SessionService:182] admin
+[INFO:Thu 2/16/2017 01:02:58PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 01:02:59PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 01:02:59PM:SessionService:118] No Session data found.
+[INFO:Thu 2/16/2017 01:02:59PM:SessionService:182] 
+[INFO:Thu 2/16/2017 01:02:59PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 01:02:59PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 01:02:59PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 01:03:00PM:DataAccess\Module:67]  Error dispatching controller "". Error was: ""
+[INFO:Thu 2/16/2017 01:13:02PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 01:13:02PM:SessionService:118] No Session data found.
+[INFO:Thu 2/16/2017 01:13:02PM:SessionService:182] 
+[INFO:Thu 2/16/2017 01:13:02PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 01:13:02PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 01:13:03PM:SessionService:54] (LOGIN) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 01:13:03PM:SessionService:55] (LOGIN) username: jpalmer
+[INFO:Thu 2/16/2017 01:13:03PM:SessionService:61] (LOGIN) Saved Session ID: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 01:13:03PM:SessionService:66] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => admin
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jpalmer
+                    [version:DataAccess\FFM\Entity\User:private] => 104
+                    [password:protected] => $2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC
+                    [salespersonname:protected] => Jason Palmer
+                    [phone1:protected] => 630-999-0139
+                    [email:protected] => jpalmer@fultonfishmarket.com
+                    [sales_attr_id:protected] => 183
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 13:13:03.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 13:02:58.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 5815e670cc2b84f829f8e7584e76baac
+                )
+
+        )
+
+)
+
+[INFO:Thu 2/16/2017 01:13:03PM:SessionService:71] (LOGIN) Looked up salesperson: NULL
+[INFO:Thu 2/16/2017 01:13:03PM:SessionService:182] admin
+[INFO:Thu 2/16/2017 01:13:03PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 01:13:03PM:SessionService:182] admin
+[INFO:Thu 2/16/2017 01:13:03PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 01:13:03PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 01:13:03PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 01:13:04PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 01:13:04PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 01:13:04PM:DataAccess\Module:67]  Error dispatching controller "". Error was: ""
+[INFO:Thu 2/16/2017 01:13:06PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 01:13:06PM:SessionService:182] admin
+[INFO:Thu 2/16/2017 01:13:06PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 01:13:07PM:SessionService:43] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 01:13:07PM:SessionService:118] No Session data found.
+[INFO:Thu 2/16/2017 01:13:07PM:SessionService:182] 
+[INFO:Thu 2/16/2017 01:13:07PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 01:13:07PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 01:13:07PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 01:13:07PM:DataAccess\Module:67]  Error dispatching controller "". Error was: ""

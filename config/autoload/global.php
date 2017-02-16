@@ -21,12 +21,9 @@ return [
     'session_config' => [
         // Cookie expires in 24 hours
         'cookie_lifetime' => 36000,
+        'cookie_secure' => true
     ],
     'session_manager' => [
-        'validators' => [
-            RemoteAddr::class,
-            HttpUserAgent::class,
-        ],
     ],
     'session_storage' => [
         'type' => SessionArrayStorage::class,
@@ -40,16 +37,10 @@ return [
         ],
         'storage' => SessionArrayStorage::class,
         'validators' => [
-            RemoteAddr::class,
-            HttpUserAgent::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
-            // Configures the default SessionManager instance
-        'Zend\Session\ManagerInterface' => 'Zend\Session\Service\SessionManagerFactory',
-        // Provides session configuration to SessionManagerFactory
-        'Zend\Session\Config\ConfigInterface' => 'Zend\Session\Service\SessionConfigFactory',
         ],
     ],
 ];
