@@ -2,6 +2,7 @@
 
 namespace Sales\Service;
 
+use Application\Service\SessionService;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Repository\Impl\CustomerRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
@@ -9,7 +10,6 @@ use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
 use DateTime;
 use ReflectionClass;
-use Zend\Authentication\AuthenticationService;
 use Zend\Form\Form;
 use Zend\View\Model\JsonModel;
 
@@ -21,7 +21,7 @@ use Zend\View\Model\JsonModel;
 class SalesFormService {
 
     public function assembleRowPlusItemsPageAndArray(
-            AuthenticationService $authService, 
+            SessionService $sessionService, 
             CustomerRepositoryImpl $customerrepository, 
             UserRepositoryImpl $userrepository, 
             RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, 
@@ -31,7 +31,7 @@ class SalesFormService {
     ) {
         if ($form->isValid()) {
             $success = true;
-            $record = $this->getRowPlusItemsPageRecord($userrepository, $customerrepository, $authService, $customerid);
+            $record = $this->getRowPlusItemsPageRecord($userrepository, $customerrepository, $sessionService, $customerid);
             $this->assembleReflectMethod(['sku', 'sku', 'sku', 'sku', 'sku', 'sku'], $jsonModelArr, $form, $record);
             $this->assembleReflectMethod(['productname', 'product', 'product', 'productname', 'productname', 'productname'], $jsonModelArr, $form, $record);
             $this->assembleReflectMethod(['shortescription', 'description', 'description', 'shortescription', 'shortescription', 'description'], $jsonModelArr, $form, $record);
@@ -54,7 +54,7 @@ class SalesFormService {
     private function getRowPlusItemsPageRecord(
             UserRepositoryImpl $userrepository, 
             CustomerRepositoryImpl $customerrepository, 
-            AuthenticationService $authService, 
+            SessionService $sessionService, 
             $customerid) {
         $record = new RowPlusItemsPage();
         $record->setStatus(true);
@@ -63,7 +63,7 @@ class SalesFormService {
         $record->setActive(true);
         $customer = $customerrepository->findCustomer($customerid);
         $record->setCustomer($customer);
-        $salesperson = $userrepository->findUser($authService->getStorage()->getUserOrSalespersonInPlay()->getUsername());
+        $salesperson = $userrepository->findUser($sessionService->getUserOrSalespersonInPlay()->getUsername());
         $record->setSalesperson($salesperson);
         return $record;
     }

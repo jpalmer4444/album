@@ -12,11 +12,11 @@ class MyAclPlugin extends AbstractPlugin {
 
     protected $sesscontainer;
     protected $logger;
-    protected $authService;
+    protected $sessionService;
 
-    public function __construct($logger, $authService) {
+    public function __construct($logger, $sessionService) {
         $this->logger = $logger;
-        $this->authService = $authService;
+        $this->sessionService = $sessionService;
     }
 
     public function doAuthorization($e) {
@@ -98,8 +98,8 @@ class MyAclPlugin extends AbstractPlugin {
         $controllerClass = get_class($controller);
         $moduleName = strtolower(substr($controllerClass, 0, strpos($controllerClass, '\\')));
         $roles = [];
-        if (!empty($this->authService->getStorage()->getRoles())) {
-            $roles = $this->authService->getStorage()->getRoles();
+        if (!empty($this->sessionService->getRoles())) {
+            $roles = $this->sessionService->getRoles();
         } else {
             $anonymous = new UserRoleXref();
             $anonymous->setUsername("anonymous");
@@ -137,7 +137,7 @@ class MyAclPlugin extends AbstractPlugin {
             $request = $e->getRequest();
             $routeMatch = $router->match($request);
             if (!is_null($routeMatch)) {
-                $this->authService->getStorage()->addRequestedRoute($routeMatch->getMatchedRouteName());
+                $this->sessionService->addRequestedRoute($routeMatch->getMatchedRouteName());
             }
             // $url    = $router->assemble(array(), array('name' => 'Login/auth')); // assemble a login route
             $url = $router->assemble(array(), array('name' => 'login'));

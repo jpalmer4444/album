@@ -14,7 +14,7 @@ class ItemsControllerFactory {
     
     public function __invoke(ServiceManager $container) {
         $loggingService = $container->get('LoggingService');
-                    $authService = $container->get('AuthService');
+                    $sessionService = $container->get('SessionService');
                     $pricingconfig = $container->get('config')['pricing_config'];
                     $formManager = $container->get('FormElementManager');
                     $salesFromService = $container->get('SalesFormService');
@@ -26,7 +26,7 @@ class ItemsControllerFactory {
                     $pricingoverridereportrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\PricingOverrideReport');
                     return new ItemsController(
                             $loggingService,
-                            $authService,
+                            $sessionService,
                             $formManager,
                             $userrepository,
                             $rowplusitemspagerepository,

@@ -46,22 +46,22 @@
                         <img 
                             src="img/ffm_logo_80x80.png" 
                             alt="FFM">
-                            <?php if (isset($_SESSION["user"])): ?>
-                            &nbsp; Welcome, <?= $_SESSION["user"]->getUsername() ?>
+                            <?php if (isset($this->FFM_SESSION["user"])): ?>
+                            &nbsp; Welcome, <?= $this->FFM_SESSION["user"]->getUsername() ?>
                         <?php endif; ?>
                     </span>
                 </div>
                 <div id="navbar5" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         
-                        <?php if (isset($_SESSION["user"])): ?>
+                        <?php if (isset($this->FFM_SESSION["user"]) && count($this->FFM_SESSION["user"]) > 0): ?>
                             <li>
                                 <a href="<?php echo $this->url('login/process', array('action' => 'logout')); ?>">Logout</a>
                             </li>
                         <?php endif; ?>
                             
-                        <?php if (isset($_SESSION["roles"])): ?>
-                            <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
+                        <?php if (isset($this->FFM_SESSION["roles"]) && count($this->FFM_SESSION["roles"]) > 0): ?>
+                            <?php if ($this->FFM_SESSION["roles"][0]->getRole() == "admin"): ?>
                                 <li>
                                     <a 
                                     <?php if (strcmp($this->CURRENT_ROUTE_NAME, "sales") == 0): ?>
@@ -72,7 +72,7 @@
                             <?php endif; ?>
                         <?php endif; ?>
                                 
-                        <?php if (isset($_SESSION["user"])): ?>
+                        <?php if (isset($this->FFM_SESSION["user"])): ?>
                             <li>
                                 <a 
                                 <?php

@@ -10,13 +10,14 @@ require 'vendor/autoload.php';
 
 use Application\Service\FFMEntityManagerService;
 use Application\Service\LoggingService;
+use Application\Service\SessionService;
 use Application\Utility\Logger;
+use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
+use DataAccess\FFM\Entity\Repository\Impl\UserRoleXrefRepositoryImpl;
 use Login\Model\User;
 use Zend\Authentication\AuthenticationService;
 use Zend\Mvc\Controller\AbstractActionController;
-use Zend\Session\Container;
 use Zend\Session\SessionManager;
-use Zend\Stdlib\ArrayObject;
 
 class LoginController extends AbstractActionController {
 
@@ -24,16 +25,23 @@ class LoginController extends AbstractActionController {
     protected $storage;
     protected $flashmessages;
     protected $authservice;
+    protected $userrepository;
+    protected $userrolexrefrepository;
     public $value;
     protected $logger;
     protected $entityManager;
     protected $sessionManager;
+    protected $sessionService;
 
-    public function __construct(AuthenticationService $authservice, LoggingService $logger, FFMEntityManagerService $entityManager) {
+    public function __construct(AuthenticationService $authservice, LoggingService $logger, FFMEntityManagerService $entityManager, SessionService $sessionService, SessionManager $sessionManager, UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository) {
         $this->authservice = $authservice;
+        $this->sessionManager = $sessionManager;
         $this->form = $this->getForm();
         $this->logger = $logger;
         $this->entityManager = $entityManager->getEntityManager();
+        $this->sessionService = $sessionService;
+        $this->userrepository = $userrepository;
+        $this->userrolexrefrepository = $userrolexrefrepository;
     }
 
     public function getAuthService() {
@@ -55,11 +63,11 @@ class LoginController extends AbstractActionController {
         Logger::info("LoginController", __LINE__, 'Checking for identity');
         if ($this->getAuthService()->hasIdentity()) {
             Logger::info("LoginController", __LINE__, 'Identity found.');
-            if ($this->getAuthService()->getStorage()->admin()) {
-                return $this->redirect()->toRoute('sales');
-            } else {
-                return $this->redirect()->toRoute('users');
-            }
+            //if ($this->sessionService->admin()) {
+            //return $this->redirect()->toRoute('sales');
+            //} else {
+            //return $this->redirect()->toRoute('users');
+            //}
         } else {
             Logger::info("LoginController", __LINE__, 'Identity not found.');
         }
@@ -71,8 +79,7 @@ class LoginController extends AbstractActionController {
     }
 
     public function authenticateAction() {
-        //Logger::info("LoginController", __LINE__, 'SessionId for Container: ' . $id);
-        //$session->
+        $this->getAuthService()->clearIdentity();
         Logger::info("LoginController", __LINE__, 'AuthenticationAction called.');
         $form = $this->getForm();
         $redirect = 'login';
@@ -92,20 +99,9 @@ class LoginController extends AbstractActionController {
                 if ($result->isValid()) {
                     //set roles
 
-                    $user = $this->entityManager->find('DataAccess\FFM\Entity\User', $request->getPost('username'));
-                    Logger::info("LoginController", __LINE__, 'Username: ' . $user->getUsername());
-                    $roleXrefObjs = $this->entityManager->getRepository('DataAccess\FFM\Entity\UserRoleXref')->findBy(array('username' => $request->getPost('username')));
-                    $roles = [];
-                    $idx = 0;
-                    foreach ($roleXrefObjs as $role) {
-                        //save message temporary into flashmessenger
-                        //Logger::info(static::class, __LINE__, 'Role: ' . $role->getRole());
-                        $roles[$idx++] = $role;
-                    }
-                    $this->authservice->getStorage()->addRoles($roles);
-                    $this->authservice->getStorage()->addUser($user); //set $user in session storage for later access.
+                    $this->sessionService->login($this->sessionManager, $request->getPost('username'));
                     //if user is admin user then set salespersonInPlay to the user
-                    $redirect = $this->authservice->getStorage()->admin() ? 'sales' : 'users';
+                    $redirect = $this->sessionService->admin() ? 'sales' : 'users';
 
                     //check if it has rememberMe :
                     //$this->getAuthService()->setStorage($this->getSessionStorage());
@@ -114,18 +110,34 @@ class LoginController extends AbstractActionController {
                                 ->setRememberMe(1);
                         //set storage again 
                     }
+                } else {
+                    $this->explainLoginFailure($request->getPost('username'), 'auth.result');
+                    //Logger::info("LoginController", __LINE__, 'Login RESULT failed! Cannot login username: ' . $request->getPost('username'));
                 }
             } else {
-                Logger::info("LoginController", __LINE__, 'attempting AuthenticationAction.');
+                $this->explainLoginFailure($request->getPost('username'), 'form');
+                Logger::info("LoginController", __LINE__, 'Login FORM failed validation! Cannot login username: ' . $request->getPost('username'));
             }
         }
         return $this->redirect()->toRoute($redirect);
     }
 
+    private function explainLoginFailure($username, $reason) {
+        if (!empty($username)) {
+            $user = $this->userrepository->findUser($username);
+            $roleXrefs = $this->userrolexrefrepository->findBy(array('username' => $username));
+            Logger::info("LoginController.EXPLAIN_LOGIN_FAILURE($reason)", __LINE__, "User: " . var_export($user, TRUE));
+            Logger::info("LoginController.EXPLAIN_LOGIN_FAILURE($reason)", __LINE__, "Roles: " . var_export($roleXrefs, TRUE));
+        } else {
+            Logger::info("LoginController.EXPLAIN_LOGIN_FAILURE($reason)", __LINE__, "No Username!");
+        }
+    }
+
     public function logoutAction() {
-        $this->authservice->getStorage()->forgetMe();
         $this->getAuthService()->clearIdentity();
+        $this->sessionService->logout();
         $this->plugin('flashmessenger')->addMessage("You've been logged out");
         return $this->redirect()->toRoute('login');
     }
-}  
+
+}

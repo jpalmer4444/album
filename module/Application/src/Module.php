@@ -91,22 +91,25 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
                 $module = array_pop($module_array);
 
                 $route = $matchedRoute->getMatchedRouteName();
-                
-                $sessionService = $sm->get('SessionService');
-                
-                $e->getViewModel()->setVariables(
-                        array(
-                            'CURRENT_MODULE_NAME' => $module,
-                            'CURRENT_CONTROLLER_NAME' => $controller,
-                            'CURRENT_ACTION_NAME' => $action,
-                            'CURRENT_ROUTE_NAME' => $route,
-                            'FFM_SESSION' => [
-                                'user' => $sessionService->getUser(),
-                                'roles' => $sessionService->getRoles(),
-                                'salespersoninplay' => $sessionService->getSalespersonInPlay()
-                            ]
-                        )
-                );
+
+                //if (!$request->isXmlHttpRequest()) {
+                    
+                    $sessionService = $sm->get('SessionService');
+                    $e->getViewModel()->setVariables(
+                            array(
+                                'CURRENT_MODULE_NAME' => $module,
+                                'CURRENT_CONTROLLER_NAME' => $controller,
+                                'CURRENT_ACTION_NAME' => $action,
+                                'CURRENT_ROUTE_NAME' => $route,
+                                'FFM_SESSION' => [
+                                    'user' => $sessionService->getUser(),
+                                    'roles' => $sessionService->getRoles(),
+                                    'admin' => $sessionService->admin(),
+                                    'salespersoninplay' => $sessionService->getSalespersonInPlay()
+                                ]
+                            )
+                    );
+                //}
             }
         }
     }

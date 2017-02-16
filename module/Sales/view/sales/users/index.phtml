@@ -14,11 +14,11 @@ $escaper = new Escaper('utf-8');
         </div>
         <div class="col-md-12">
             <nav class="breadcrumb">
-                <?php if (isset($_SESSION["roles"])): ?>
-                    <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
-                        <?php if (isset($_SESSION["salespersoninplay"])): ?>
+                <?php if (!empty($this->roles)): ?>
+                    <?php if ($this->roles[0]->getRole() == "admin"): ?>
+                        <?php if (isset($this->salespersoninplayname)): ?>
                                 <li>
-                                    <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales"><?= $_SESSION["salespersoninplay"]->getSalespersonname() ?></a>
+                                    <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales"><?= $this->salespersoninplayname ?></a>
                                 </li>
                         <?php else: ?>
                             <li>

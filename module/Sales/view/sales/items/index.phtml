@@ -19,6 +19,8 @@ $form->prepare();
     //#############################################################
     //#############################################################
     var _customer_id = "<?= $escaper->escapeHtml($this->customerid) ?>";
+    var _username = "<?= $escaper->escapeHtml($this->username) ?>";
+    var _session_id = "<?= $escaper->escapeHtml($this->session_id) ?>";
     var _company_name = stripit("<?= $escaper->escapeHtml($this->companyname) ?>");
     var _customername = stripit("<?= $escaper->escapeHtml($this->customername) ?>");
 
@@ -45,7 +47,7 @@ $form->prepare();
     var submitOverride = function (rowIdx, id, form) {
       var overrideprice = JQUTILS.getVal('overrideprice');
       var data = $(form).serialize();
-      $.getJSON("ajax/items?myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername="+encodeURIComponent("<?= $escaper->escapeHtml($this->customername) ?>")+"&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
+      $.getJSON("ajax/items?username=" + _username + "&session_id=" + _session_id + "&myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername="+encodeURIComponent("<?= $escaper->escapeHtml($this->customername) ?>")+"&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
         return overrideCallback(data);
       });
       return false;
@@ -169,7 +171,7 @@ $form->prepare();
       $('[data-toggle="tooltip"]').tooltip();
       console.log("Making datatables AJAX call with url: " + '/ajax/items?myaction=customerlisttableget&customerid=' + _customer_id);
       $API = $('#customerlisttable').DataTable({
-        "ajax": '/ajax/items?myaction=customerlisttableget&customerid=' + _customer_id,
+        "ajax": '/ajax/items?username=' + _username + '&session_id=' + _session_id + '&myaction=customerlisttableget&customerid=' + _customer_id,
         //#############################################################
         //#############################################################
         //##
@@ -321,7 +323,7 @@ $form->prepare();
             action: function () {
               $API.rows({page: 'all'}).select();
               //now manually select all checkboxes and redraw table.
-              var url = 'ajax/items?myaction=select';
+              var url = "ajax/items?username=" + _username + "&session_id=" + _session_id + "&myaction=select";
               $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
                 $('#selected_row_' + rowIdx).attr('checked', 'checked');
                 url += '&ids[]=' + $API.row(rowIdx).data()['id'];
@@ -348,7 +350,7 @@ $form->prepare();
                 $API.row(rowIdx).invalidate();
               });
               //send notify to items REST controller to un-select all items in result set.
-              $.getJSON('ajax/items?myaction=unselect&customerid=' + _customer_id, function () {
+              $.getJSON("ajax/items?username=" + _username + "&session_id=" + _session_id + "&myaction=unselect&customerid=" + _customer_id, function () {
               }).done(function () {
                 console.log('Unselected All');
               }).fail(function () {
@@ -437,7 +439,7 @@ $form->prepare();
               }
               var outdata = out.join('&');
               $.ajax({
-                url: 'items/report?customerid=' + _customer_id,
+                url: "items/report?username=" + _username + "&session_id=" + _session_id + "&customerid=" + _customer_id,
                 type: 'POST',
                 data: outdata,
                 contentType: 'application/x-www-form-urlencoded',
@@ -518,7 +520,7 @@ $form->prepare();
         var checked = forCheck.checked;
         var rowObj = $API.row(rowIdx).data();
         var id = rowObj['id'];
-        var url = 'ajax/items?myaction=';
+        var url = "ajax/items?username=" + _username + "&session_id=" + _session_id + "&myaction=";
         if (checked) {
           url += 'select';
           $API.row(rowIdx).data()['selected'] = true;
@@ -593,7 +595,7 @@ $form->prepare();
         submitHandler: function (form) {
           $.ajax({
             type: 'POST',
-            url: "items?customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>&companyname=<?= $escaper->escapeHtml($this->companyname) ?>",
+            url: "items?username=" + _username + "&session_id=" + _session_id + "&customerid=<?= $escaper->escapeHtml($this->customerid) ?>&customername=<?= $escaper->escapeHtml($this->customername) ?>&companyname=<?= $escaper->escapeHtml($this->companyname) ?>",
             data: $(form).serialize()
           })
                   .done(function (response) {
@@ -617,11 +619,11 @@ $form->prepare();
         </div>
         <div class="col-md-12">
             <nav class="breadcrumb">
-                <?php if (isset($_SESSION["roles"])): ?>
-                    <?php if ($_SESSION["roles"][0]->getRole() == "admin"): ?>
-                        <?php if (isset($_SESSION["salespersoninplay"])): ?>
+                <?php if (!empty($this->roles)): ?>
+                    <?php if ($this->roles[0]->getRole() == "admin"): ?>
+                        <?php if (isset($this->salespersonname)): ?>
                             <li>
-                                <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales"><?= $_SESSION["salespersoninplay"]->getSalespersonname() ?></a>
+                                <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales"><?= $this->salespersonname ?></a>
                             </li>
                         <?php else: ?>
                             <li>

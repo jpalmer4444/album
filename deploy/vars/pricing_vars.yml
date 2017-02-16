@@ -2,8 +2,6 @@ pricing_vhost_block: |
     LogFormat "%h %l %u %t \"%r\" %>s %b" common
 
     <VirtualHost *:80>
-        #ServerName ffmalpha
-        DocumentRoot /var/www/html/pricing/public
         ServerName pricing3.ffmalpha.com
         LogLevel info
         Redirect permanent / https://pricing3.ffmalpha.com/

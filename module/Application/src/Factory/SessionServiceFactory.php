@@ -14,10 +14,12 @@ use Zend\Session\SessionManager;
 class SessionServiceFactory {
 
     public function __invoke(ServiceManager $sm) {
-        $sessionId = $sm->get(SessionManager::class)->getId();
+        $sessionManager = $sm->get(SessionManager::class);
         $userrepository = $sm->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
         $userrolexrefrepository = $sm->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\UserRoleXref');
-        return new SessionService($userrepository, $userrolexrefrepository, $sessionId);
+        $request = $sm->get('Request');
+        $response = $sm->get('Response');
+        return new SessionService($userrepository, $userrolexrefrepository, $sessionManager, $request, $response);
     }
 
 }

@@ -12,6 +12,11 @@ use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRoleXrefRepositoryImpl;
 use DateTime;
+use Exception;
+use Zend\Http\Header\SetCookie;
+use Zend\Http\Request;
+use Zend\Http\Response;
+use Zend\Session\SessionManager;
 
 /**
  * Description of SessionService
@@ -26,56 +31,148 @@ class SessionService {
     protected $roles;
     protected $salespersoninplay;
     protected $user;
+    protected $request;
 
-    public function __construct(UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository, $sessionId) {
-        $this->sessionId = $sessionId;
+    public function __construct(UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository, SessionManager $sessionManager, Request $request, Response $response) {
+        //$sessionManager->start();
+        $this->sessionId = $sessionManager->getId();
+        if(!$this->sessionId){
+            $sessionManager->start();
+            $this->sessionId = $sessionManager->getId();
+        }
+        Logger::info("SessionService", __LINE__, "(CONSTRUCTOR) Session Id: " . $this->sessionId);
         $this->userrepository = $userrepository;
         $this->userrolexrefrepository = $userrolexrefrepository;
+        $this->request = $request;
+        $this->response = $response;
         $this->doLookup();
     }
 
-    public function login() {
-        $updateUser = $this->userrepository->findUser($this->user->getUsername());
-        $updateUser->setSessionId($this->sessionId);
-        $updateUser->setLastLogin(new DateTime());
-        $this->userrepository->persistAndFlush($updateUser);
+    public function login(SessionManager $sessionManager, $username, $session_id = NULL) {
+        try {
+            $this->sessionId = !empty($session_id) ? $session_id : $sessionManager->getId();
+            Logger::info("SessionService", __LINE__, "(LOGIN) Session Id: " . $this->sessionId);
+            Logger::info("SessionService", __LINE__, "(LOGIN) username: " . $username);
+            $user = $this->userrepository->findUser($username);
+            $user->setSessionId($this->sessionId);
+            $user->setLastLogin(new DateTime());
+            $this->userrepository->mergeAndFlush($user);
+            $this->user = $user;
+            Logger::info("SessionService", __LINE__, "(LOGIN) Saved Session ID: " . $user->getSessionId());
+            if (!empty($this->user)) {
+                $roleXrefs = $this->userrolexrefrepository->findBy(array('username' => $this->user->getUsername()));
+                $this->roles = [];
+                $idx = 0;
+                Logger::info("SessionService", __LINE__, "(LOGIN) Adding Roles: " . print_r($roleXrefs, TRUE));
+                foreach ($roleXrefs as $role) {
+                    $this->roles[$idx++] = $role;
+                }
+                $salespersoninplayusernamecookie = $this->getCookie('salesperson');
+                Logger::info("SessionService", __LINE__, "(LOGIN) Looked up salesperson: " . (!empty($salespersoninplayusernamecookie) ? $salespersoninplayusernamecookie : "NULL"));
+                if (!empty($salespersoninplayusernamecookie)) {
+                    $this->salespersoninplay = $this->userrepository->findUser($salespersoninplayusernamecookie);
+                }
+            } else {
+                Logger::info("SessionService", __LINE__, "Login Failed!");
+            }
+        } catch (Exception $exc) {
+            Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
+        }
+    }
+
+    public function getSessionId() {
+        return $this->sessionId;
     }
 
     public function logout() {
-        $updateUser = $this->userrepository->findUser($this->user->getUsername());
-        $updateUser->setSessionId(NULL);
-        $this->userrepository->persistAndFlush($updateUser);
+        try {
+            $updateUser = $this->userrepository->findUser($this->user->getUsername());
+            $updateUser->setSessionId(NULL);
+            $this->userrepository->merge($updateUser);
+            $this->userrepository->flush();
+            unset($this->roles);
+            unset($this->sessionId);
+            unset($this->salespersoninplay);
+            unset($this->user);
+            $this->deleteCookie("salesperson");
+            $this->deleteCookie("requestedRoute");
+        } catch (Exception $exc) {
+            Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
+        }
     }
 
     public function doLookup() {
-        $this->user = $this->userrepository->findBySessionId($this->sessionId);
-        if (!empty($this->user)) {
-            $roleXrefs = $this->userrolexrefrepository->findBy(array('username' => $this->user->getUsername()));
-            $this->roles = [];
-            foreach ($roleXrefs as $role) {
-                $this->roles[] = $role;
+        try {
+            $this->user = $this->userrepository->findBySessionId($this->sessionId);
+            if (!empty($this->user)) {
+                $roleXrefs = $this->userrolexrefrepository->findBy(array('username' => $this->user->getUsername()));
+                $this->roles = [];
+                foreach ($roleXrefs as $role) {
+                    $this->roles[] = $role;
+                }
+                $salespersoninplayusernamecookie = $this->getCookie('salesperson');
+                if (!empty($salespersoninplayusernamecookie)) {
+                    $this->salespersoninplay = $this->userrepository->findUser($salespersoninplayusernamecookie);
+                }
+            } else {
+                Logger::info("SessionService", __LINE__, "No Session data found.");
             }
-            $salespersoninplayusername = $_COOKIE('salespersoninplayusername');
-            if (!empty($salespersoninplayusername)) {
-                $this->salespersoninplay = $this->userrepository->findUser($salespersoninplayusername);
+        } catch (\Exception $exc) {
+            Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
+        }
+    }
+
+    private function setCookie($name, $value, $timeplus = 3600) {
+        try {
+            $this->createCookie($name, $value, $timeplus);
+        } catch (Exception $exc) {
+            Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
+        }
+    }
+
+    private function createCookie($name, $value, $timeplus = 3600) {
+        // create a cookie
+        $cookie = new SetCookie(
+                $name, $value, time() + $timeplus, // 1 year lifetime
+                '/'
+        );
+
+        $this->response->getHeaders()->addHeader($cookie);
+    }
+
+    private function deleteCookie($name) {
+        $cookie = new SetCookie(
+                $name, '', strtotime('-1 Year', time()), // -1 year lifetime (negative from now)
+                '/'
+        );
+        $this->response->getHeaders()->addHeader($cookie);
+    }
+
+    private function getCookie($name) {
+        try {
+            $cookie = $this->request->getCookie();
+            if ($cookie->offsetExists($name)) {
+                return $cookie->offsetGet($name);
             }
-        }else{
-            Logger::info("SessionService", __LINE__, "No Session data found.");
+        } catch (Exception $exc) {
+            Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
         }
     }
 
     public function addRequestedRoute($requestedRoute, $seconds = 3600) {
         //adds a 1 hour cookie.
-        setcookie('requestedRoute', $requestedRoute, time() + $seconds, '/');
+        $this->setCookie('requestedRoute', $requestedRoute, $seconds);
     }
 
     public function getRequestedRoute() {
-        return $_COOKIE('requestedRoute');
+        $cookie = $this->getCookie('requestedRoute');
+        return !empty($cookie) ? $cookie : NULL;
     }
 
-    public function addSalespersonInPlay($salespersoninplayusername, $seconds = 86400) {
+    public function addSalespersonInPlay($salespersoninplayusername, $seconds = 3600) {
         //adds a 1 hour cookie.
-        setcookie('salespersoninplayusername', $salespersoninplayusername, time() + $seconds, '/');
+        Logger::info("UsersController", __LINE__, 'Added Salespersoninplay: ' . $salespersoninplayusername);
+        $this->setCookie('salesperson', $salespersoninplayusername, $seconds);
     }
 
     public function admin() {
@@ -83,7 +180,7 @@ class SessionService {
         $roleArr = array($role => $role);
         //$roleStr will be a boolean if there is no roles present in session.
         Logger::info("SessionService", __LINE__, strval($roleArr[$role]));
-        return !empty($roleArr) ? array_key_exists("admin", $roleArr) : $roleArr;
+        return !empty($roleArr) ? array_key_exists("admin", $roleArr) : false;
     }
 
     public function getRole() {
@@ -95,6 +192,15 @@ class SessionService {
 
     public function getRoles() {
         return $this->roles;
+    }
+
+    public function getViewRoles() {
+        $roles = [];
+        $idx = 0;
+        foreach ($this->roles as $role) {
+            $roles[$idx++] = $role->getRole();
+        }
+        return $roles;
     }
 
     public function getSalespersonInPlay() {

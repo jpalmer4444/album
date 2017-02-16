@@ -64,7 +64,7 @@ class User
     protected $_updated;
     
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="session_id", type="string", nullable=true)
      */
     protected $session_id;
     
@@ -109,7 +109,7 @@ class User
     }
     
     public function setSessionId($sessionId) {
-        $this->sessionId = $sessionId;
+        $this->session_id = $sessionId;
     }
     
     public function setPhone1($phone1) {

@@ -47,10 +47,6 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     public function getServiceConfig() {
         return array(
             'factories' => array(
-                Strings::MY_AUTH_STORAGE => function($sm) {
-                    $myauthstorage = new MyAuthStorage('zf_tutorial');
-                    return $myauthstorage;
-                },
                 Strings::AUTH_SERVICE => function($sm) {
                     //password hashed with bcrypt
                     $credentialValidationCallback = function($dbCredential, $requestCredential) {
@@ -60,7 +56,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                     $authAdapter = new AuthAdapter($dbAdapter, 'users', 'username', 'password', $credentialValidationCallback);
                     $authService = new AuthenticationService();
                     $authService->setAdapter($authAdapter);
-                    $authService->setStorage($sm->get(Strings::MY_AUTH_STORAGE));
+                    //do not override storage for AuthenticationService!
                     return $authService;
                 },
             ),

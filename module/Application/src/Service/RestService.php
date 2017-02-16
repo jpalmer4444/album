@@ -2,7 +2,7 @@
 
 namespace Application\Service;
 
-use Application\Service\RestServiceInterface;
+use Application\Utility\Logger;
 use Zend\Http\Client;
 use Zend\Http\Client\Adapter\Curl;
 use Zend\Http\Request;
@@ -15,11 +15,9 @@ use Zend\Stdlib\Parameters;
  */
 class RestService  {
 
-    protected $logger;
     protected $pricingconfig;
 
     public function __construct($sm) {
-        $this->logger = $sm->get('LoggingService');
         $this->pricingconfig = $sm->get('config')['pricing_config'];
     }
 
@@ -35,6 +33,7 @@ class RestService  {
         $request->getHeaders()->addHeaders(array(
             'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
         ));
+        Logger::info("RestService", __LINE__, "Calling WebService with GET URL: " . $url . "?" . implode("&",$params));
         $request->setUri($url);
         $request->setMethod($method);
         if (strcmp(strtoupper($method), "GET") == 0) {

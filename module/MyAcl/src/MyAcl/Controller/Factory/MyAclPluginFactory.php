@@ -14,8 +14,8 @@ class MyAclPluginFactory
 {
     public function __invoke(ServiceLocatorInterface $container) {
         $loggingService = $container->get('LoggingService');
-                    $authService = $container->get('AuthService');
-                    return new MyAclPlugin($loggingService, $authService);
+                    $sessionService = $container->get('SessionService');
+                    return new MyAclPlugin($loggingService, $sessionService);
     }
 
 }

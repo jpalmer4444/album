@@ -21,7 +21,7 @@ class ItemsFilterTableArrayService  {
 
     protected $logger;
     protected $pricingconfig;
-    protected $authService;
+    protected $sessionService;
     protected $entityManager;
     protected $checkboxService;
     protected $productrepository;
@@ -29,7 +29,7 @@ class ItemsFilterTableArrayService  {
 
     public function __construct($sm) {
         $this->logger = $sm->get('LoggingService');
-        $this->authService = $sm->get('AuthService');
+        $this->sessionService = $sm->get('SessionService');
         $this->pricingconfig = $sm->get('config')['pricing_config'];
         $this->entityManager = $sm->get('FFMEntityManager');
         $this->checkboxService = $sm->get('CheckboxService');
@@ -149,9 +149,9 @@ class ItemsFilterTableArrayService  {
         return $this->entityManager->getEntityManager()->
                         createQuery($q)->setParameter("customerid", $customerid)->
                         setParameter("created", DateUtils::getDailyCutoff())->
-                        setParameter("salesperson", $this->authService->getStorage()->admin() && !empty($this->authService->getStorage()->getSalespersonInPlay()) ?
-                                $this->authService->getStorage()->getSalespersonInPlay()->getUsername() :
-                                $this->authService->getStorage()->getUser()->getUsername())
+                        setParameter("salesperson", $this->sessionService->admin() && !empty($this->sessionService->getSalespersonInPlay()) ?
+                                $this->sessionService->getSalespersonInPlay()->getUsername() :
+                                $this->sessionService->getUser()->getUsername())
                         ->getResult();
     }
 
@@ -164,9 +164,9 @@ class ItemsFilterTableArrayService  {
     }
 
     protected function retrieveRemovedSkus($customerid) {
-        $userinplay = $this->authService->getStorage()->getSalespersonInPlay();
+        $userinplay = $this->sessionService->getSalespersonInPlay();
         if (empty($userinplay)) {
-            $userinplay = $this->authService->getStorage()->getUser();
+            $userinplay = $this->sessionService->getUser();
         }
         return !empty($this->checkboxService->getRemovedIDS($customerid, $userinplay->getUsername())) ?
                 $this->checkboxService->getRemovedIDS($customerid, $userinplay->getUsername()) :

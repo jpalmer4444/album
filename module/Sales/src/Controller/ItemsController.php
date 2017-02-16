@@ -7,6 +7,7 @@ namespace Sales\Controller;
 
 use Application\Service\LoggingService;
 use Application\Service\LoggingServiceInterface;
+use Application\Service\SessionService;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Customer;
 use DataAccess\FFM\Entity\PricingOverrideReport;
@@ -20,7 +21,6 @@ use DataAccess\FFM\Entity\User;
 use DateTime;
 use Login\Model\MyAuthStorage;
 use Sales\Service\SalesFormService;
-use Zend\Authentication\AuthenticationService;
 use Zend\Form\Form;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\AbstractPluginManager;
@@ -31,7 +31,7 @@ use Zend\View\Model\ViewModel;
 class ItemsController extends AbstractActionController {
 
     protected $logger;
-    protected $authService;
+    protected $sessionService;
     protected $pricingconfig;
     protected $customerid;
     protected $customername;
@@ -61,7 +61,7 @@ class ItemsController extends AbstractActionController {
      */
     public function __construct(
             LoggingService $logger, 
-            AuthenticationService $authService, 
+            SessionService $sessionService, 
             AbstractPluginManager $formManager, 
             UserRepositoryImpl $userrepository, 
             RowPlusItemsPageRepositoryImpl $rowplusitemspagerepository, 
@@ -73,7 +73,7 @@ class ItemsController extends AbstractActionController {
             $config = NULL
             ) {
         $this->logger = $logger;
-        $this->authService = $authService;
+        $this->sessionService = $sessionService;
         $this->pricingconfig = $config;
         $this->formManager = $formManager;
         $this->userrepository = $userrepository;
@@ -94,7 +94,7 @@ class ItemsController extends AbstractActionController {
         $request = $this->getRequest();
         if ($request->isPost()) {
             $form->setData($request->getPost());
-            return $this->salesFormService->assembleRowPlusItemsPageAndArray($this->authService, $this->customerrepository, $this->userrepository, $this->rowplusitemspagerepository, $form, array(), $this->customerid);
+            return $this->salesFormService->assembleRowPlusItemsPageAndArray($this->sessionService, $this->customerrepository, $this->userrepository, $this->rowplusitemspagerepository, $form, array(), $this->customerid);
         }
         $customer = $this->customerrepository->findCustomer($this->customerid);
         if (empty($customer)) {
@@ -102,7 +102,7 @@ class ItemsController extends AbstractActionController {
             return $this->redirect()->toRoute('users', ['controller' => 'UsersController','action' => 'index'], array());
         }
         $time = new DateTime();
-        return new ViewModel($this->assembleViewModel($time->format('Y_m_d'), $this->authService->getStorage()->getSalespersonInPlay(), $customer, $form));
+        return new ViewModel($this->assembleViewModel($time->format('Y_m_d'), $this->sessionService->getSalespersonInPlay(), $customer, $form));
     }
 
     public function reportAction() {
@@ -127,7 +127,7 @@ class ItemsController extends AbstractActionController {
                     $pricingOverrideReport->setCreated($created);
                     $customer = $this->customerrepository->findCustomer($this->customerid);
                     $pricingOverrideReport->setCustomer($customer);
-                    $salesperson = $this->userrepository->findUser($this->authService->getStorage()->getUser()->getUsername());
+                    $salesperson = $this->userrepository->findUser($this->sessionService->getUser()->getUsername());
                     $pricingOverrideReport->setSalesperson($salesperson);
                     if (strpos($obj['id'], 'P') !== false){
                         $product = $this->productrepository->findProduct(substr($obj['id'], 1));
@@ -148,19 +148,23 @@ class ItemsController extends AbstractActionController {
         ));
     }
     
-    private function assembleViewModel($reporttime, User $salespersoninplay, Customer $customer, Form $form){
+    private function assembleViewModel($reporttime, $salespersoninplay, Customer $customer, Form $form){
         return array(
+            "username" => $this->sessionService->getUser()->getUsername(),
+            "session_id" => $this->sessionService->getSessionId(),
             "customerid" => $this->customerid,
             "reporttime" => $reporttime,
             "customername" => $this->customername,
-            "salesperson" => $this->authService->getStorage()->getUserOrSalespersonInPlay()->getUsername(),
-            "salespersonname" => empty($salespersoninplay) ? $this->authService->getStorage()->getUser()->getSalespersonname() : $salespersoninplay->getSalespersonname(),
-            "salespersonemail" => empty($salespersoninplay) ? $this->authService->getStorage()->getUser()->getEmail() : $salespersoninplay->getEmail(),
+            "salesperson" => $this->sessionService->getUserOrSalespersonInPlay()->getUsername(),
+            "salespersonname" => empty($salespersoninplay) ? $this->sessionService->getUser()->getSalespersonname() : $salespersoninplay->getSalespersonname(),
+            "salespersonemail" => empty($salespersoninplay) ? $this->sessionService->getUser()->getEmail() : $salespersoninplay->getEmail(),
             "companyname" => urlencode($customer->getCompany()),
             "companynamehtml" => $customer->getCompany(),
-            "salespersonphone1" => empty($salespersoninplay) ? $this->authService->getStorage()->getUser()->getPhone1() : $salespersoninplay->getPhone1(),
-            "salespersonid" => empty($salespersoninplay) ? $this->authService->getStorage()->getUser()->getSales_attr_id() : $salespersoninplay->getSales_attr_id(),
-            "form" => $form);
+            "salespersonphone1" => empty($salespersoninplay) ? $this->sessionService->getUser()->getPhone1() : $salespersoninplay->getPhone1(),
+            "salespersonid" => empty($salespersoninplay) ? $this->sessionService->getUser()->getSales_attr_id() : $salespersoninplay->getSales_attr_id(),
+            "form" => $form,
+            "roles" => $this->sessionService->getRoles(),
+                );
     }
     
     private function setLocals(){

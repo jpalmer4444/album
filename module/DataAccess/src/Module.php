@@ -61,7 +61,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
         $error = $event->getParam(' error');
         $exception = $event->getParam(' exception');
         $message = sprintf(' Error dispatching controller "% s". Error was: "% s"', $controller, $error);
-        if ($exception instanceof Exception) {
+        if ($exception instanceof \Exception) {
             $message .= ', Exception(' . $exception->getMessage() . '): ' . $exception->getTraceAsString();
         }
         Logger::info("DataAccess\Module", __LINE__, $message);
