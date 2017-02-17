@@ -1,1 +1,816 @@
 
+[INFO:Thu 2/16/2017 06:12:36PM:ElasticRemoteAddr:23] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 06:12:36PM:ElasticHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 06:12:36PM:SessionService:49] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 06:12:36PM:SessionService:122] No Session data found.
+[INFO:Thu 2/16/2017 06:12:36PM:SessionService:186] 
+[INFO:Thu 2/16/2017 06:12:36PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 06:12:36PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 06:12:36PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 06:12:37PM:DataAccess\Module:67]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 06:12:46PM:ElasticRemoteAddr:23] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 06:12:46PM:ElasticHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:49] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:122] No Session data found.
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:186] 
+[INFO:Thu 2/16/2017 06:12:46PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 06:12:46PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:57] (LOGIN) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:58] (LOGIN) username: jpalmer
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:64] (LOGIN) Saved Session ID: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:69] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => admin
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jpalmer
+                    [version:DataAccess\FFM\Entity\User:private] => 108
+                    [password:protected] => $2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC
+                    [salespersonname:protected] => Jason Palmer
+                    [phone1:protected] => 630-999-0139
+                    [email:protected] => jpalmer@fultonfishmarket.com
+                    [sales_attr_id:protected] => 183
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 18:12:46.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 15:52:39.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 5815e670cc2b84f829f8e7584e76baac
+                )
+
+        )
+
+)
+
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:74] (LOGIN) Looked up salesperson: NULL
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:186] admin
+[INFO:Thu 2/16/2017 06:12:46PM:ElasticRemoteAddr:23] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 06:12:46PM:ElasticHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:49] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 06:12:46PM:SessionService:186] admin
+[INFO:Thu 2/16/2017 06:12:47PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 06:12:47PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 06:12:47PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 06:12:48PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 06:12:48PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 06:12:48PM:DataAccess\Module:67]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 06:24:02PM:BalancedRemoteAddr:28] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 06:24:02PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 06:24:02PM:SessionService:49] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 06:24:02PM:SessionService:186] admin
+[INFO:Thu 2/16/2017 06:24:02PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 06:24:02PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 06:24:02PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 06:24:03PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 06:24:03PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 06:24:03PM:DataAccess\Module:67]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 06:30:52PM:BalancedRemoteAddr:28] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 06:30:52PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 06:30:52PM:SessionService:49] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 06:30:52PM:SessionService:186] admin
+[INFO:Thu 2/16/2017 06:30:52PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 06:30:52PM:BalancedRemoteAddr:28] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 06:30:52PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 06:30:52PM:SessionService:49] (CONSTRUCTOR) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 06:30:52PM:SessionService:122] No Session data found.
+[INFO:Thu 2/16/2017 06:30:52PM:SessionService:186] 
+[INFO:Thu 2/16/2017 06:30:52PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 06:30:52PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 06:30:52PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 06:30:53PM:DataAccess\Module:67]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 06:52:35PM:SessionService:49] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 06:52:35PM:SessionService:122] No Session data found.
+[INFO:Thu 2/16/2017 06:52:35PM:SessionService:186] 
+[INFO:Thu 2/16/2017 06:52:35PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 06:52:35PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 06:52:35PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 06:52:35PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 06:52:35PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 06:52:36PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:18:11PM:SessionService:44] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:18:11PM:SessionService:118] No Session data found.
+[INFO:Thu 2/16/2017 07:18:11PM:SessionService:182] 
+[INFO:Thu 2/16/2017 07:18:11PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:18:11PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:18:11PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:18:11PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:18:11PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:18:12PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:18:23PM:SessionService:44] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:18:23PM:SessionService:118] No Session data found.
+[INFO:Thu 2/16/2017 07:18:23PM:SessionService:182] 
+[INFO:Thu 2/16/2017 07:18:24PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:18:24PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:18:24PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:18:24PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 07:18:24PM:SessionService:52] (LOGIN) Session Id: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 07:18:24PM:SessionService:53] (LOGIN) username: jpalmer
+[INFO:Thu 2/16/2017 07:18:24PM:SessionService:59] (LOGIN) Saved Session ID: 5815e670cc2b84f829f8e7584e76baac
+[INFO:Thu 2/16/2017 07:18:24PM:SessionService:64] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => admin
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jpalmer
+                    [version:DataAccess\FFM\Entity\User:private] => 110
+                    [password:protected] => $2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC
+                    [salespersonname:protected] => Jason Palmer
+                    [phone1:protected] => 630-999-0139
+                    [email:protected] => jpalmer@fultonfishmarket.com
+                    [sales_attr_id:protected] => 183
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:18:24.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 18:30:52.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 5815e670cc2b84f829f8e7584e76baac
+                )
+
+        )
+
+)
+
+[INFO:Thu 2/16/2017 07:18:24PM:SessionService:69] (LOGIN) Looked up salesperson: NULL
+[INFO:Thu 2/16/2017 07:18:24PM:SessionService:182] admin
+[INFO:Thu 2/16/2017 07:18:24PM:SessionService:44] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:18:24PM:SessionService:118] No Session data found.
+[INFO:Thu 2/16/2017 07:18:24PM:SessionService:182] 
+[INFO:Thu 2/16/2017 07:18:24PM:MyAclPlugin:133] Allowed: 
+[INFO:Thu 2/16/2017 07:18:25PM:SessionService:44] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:18:25PM:SessionService:118] No Session data found.
+[INFO:Thu 2/16/2017 07:18:25PM:SessionService:182] 
+[INFO:Thu 2/16/2017 07:18:25PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:18:25PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:18:25PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:18:25PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:18:25PM:LoginController:65] Identity found.
+[INFO:Thu 2/16/2017 07:18:25PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:23:13PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:13PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:13PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:23:13PM:SessionService:190] sales
+[INFO:Thu 2/16/2017 07:23:13PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:23:13PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:23:13PM:LoginController:65] Identity found.
+[INFO:Thu 2/16/2017 07:23:13PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:23:16PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:16PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:16PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:23:16PM:SessionService:190] sales
+[INFO:Thu 2/16/2017 07:23:16PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:23:16PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:16PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:16PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:16PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:17PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:17PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:17PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:23:44PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:44PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:44PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:23:44PM:SessionService:190] sales
+[INFO:Thu 2/16/2017 07:23:44PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:23:44PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:23:44PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:23:45PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:23:47PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:47PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:47PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:23:47PM:SessionService:190] sales
+[INFO:Thu 2/16/2017 07:23:47PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:23:47PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:47PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:47PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:47PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:48PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:48PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:48PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:23:53PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:23:53PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:23:53PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:23:53PM:SessionService:190] sales
+[INFO:Thu 2/16/2017 07:23:53PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:23:53PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:23:53PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:23:53PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:24:36PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:24:36PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:24:36PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:24:36PM:SessionService:190] sales
+[INFO:Thu 2/16/2017 07:24:36PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:24:36PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:24:36PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:24:37PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:24:39PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:24:39PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:24:39PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:24:39PM:SessionService:190] sales
+[INFO:Thu 2/16/2017 07:24:39PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:24:39PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:24:39PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:24:39PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:24:39PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:24:39PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:24:39PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:24:39PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:24:39PM:SessionService:190] sales
+[INFO:Thu 2/16/2017 07:24:39PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:24:39PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:24:39PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:24:40PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:24:41PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:24:41PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:24:41PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:24:41PM:SessionService:190] sales
+[INFO:Thu 2/16/2017 07:24:41PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:24:41PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:24:41PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:24:41PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:24:41PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:24:41PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:24:41PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:24:41PM:SessionService:53] (CONSTRUCTOR) Session Id: 
+[INFO:Thu 2/16/2017 07:24:41PM:SessionService:190] sales
+[INFO:Thu 2/16/2017 07:24:42PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:24:42PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:24:42PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:24:42PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:27:40PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:27:40PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:27:40PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:27:40PM:SessionService:127] No Session data found.
+[INFO:Thu 2/16/2017 07:27:40PM:SessionService:191] 
+[INFO:Thu 2/16/2017 07:27:41PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:27:41PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:27:41PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:27:41PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:27:46PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:27:46PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:27:46PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:27:46PM:SessionService:127] No Session data found.
+[INFO:Thu 2/16/2017 07:27:46PM:SessionService:191] 
+[INFO:Thu 2/16/2017 07:27:46PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:27:46PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 07:28:51PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:28:51PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:28:51PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:28:51PM:SessionService:127] No Session data found.
+[INFO:Thu 2/16/2017 07:28:51PM:SessionService:191] 
+[INFO:Thu 2/16/2017 07:28:51PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:28:51PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 07:28:52PM:SessionService:62] (LOGIN) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:28:52PM:SessionService:63] (LOGIN) username: jpalmer
+[INFO:Thu 2/16/2017 07:28:52PM:SessionService:69] (LOGIN) Saved Session ID: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:28:52PM:SessionService:74] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => admin
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jpalmer
+                    [version:DataAccess\FFM\Entity\User:private] => 111
+                    [password:protected] => $2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC
+                    [salespersonname:protected] => Jason Palmer
+                    [phone1:protected] => 630-999-0139
+                    [email:protected] => jpalmer@fultonfishmarket.com
+                    [sales_attr_id:protected] => 183
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:28:52.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:18:24.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 7b442a3f9d4201108009bac16fc51b65
+                )
+
+        )
+
+)
+
+[INFO:Thu 2/16/2017 07:28:52PM:SessionService:79] (LOGIN) Looked up salesperson: NULL
+[INFO:Thu 2/16/2017 07:28:52PM:SessionService:191] admin
+[INFO:Thu 2/16/2017 07:28:52PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:28:52PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:28:52PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:28:52PM:SessionService:191] admin
+[INFO:Thu 2/16/2017 07:28:52PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:28:52PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 07:28:52PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 07:28:54PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 07:28:54PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 07:28:54PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:28:58PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:28:58PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:28:58PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:28:58PM:SessionService:191] admin
+[INFO:Thu 2/16/2017 07:28:58PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:28:58PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:28:58PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:28:58PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:28:58PM:SessionService:127] No Session data found.
+[INFO:Thu 2/16/2017 07:28:58PM:SessionService:191] 
+[INFO:Thu 2/16/2017 07:28:58PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:28:58PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:28:58PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:28:58PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:29:03PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:29:03PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:29:03PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:29:03PM:SessionService:127] No Session data found.
+[INFO:Thu 2/16/2017 07:29:03PM:SessionService:191] 
+[INFO:Thu 2/16/2017 07:29:03PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:29:03PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 07:29:04PM:SessionService:62] (LOGIN) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:29:04PM:SessionService:63] (LOGIN) username: jdowns
+[INFO:Thu 2/16/2017 07:29:04PM:SessionService:69] (LOGIN) Saved Session ID: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:29:04PM:SessionService:74] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => admin
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jdowns
+                    [version:DataAccess\FFM\Entity\User:private] => 6
+                    [password:protected] => $2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO
+                    [salespersonname:protected] => Cyndi Metallo
+                    [phone1:protected] => 802-238-1452
+                    [email:protected] => cmetallo@fultonfishmarket.com
+                    [sales_attr_id:protected] => 183
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:29:04.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 11:33:33.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 7b442a3f9d4201108009bac16fc51b65
+                )
+
+        )
+
+)
+
+[INFO:Thu 2/16/2017 07:29:04PM:SessionService:79] (LOGIN) Looked up salesperson: NULL
+[INFO:Thu 2/16/2017 07:29:04PM:SessionService:191] admin
+[INFO:Thu 2/16/2017 07:29:04PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:29:04PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:29:04PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:29:04PM:SessionService:191] admin
+[INFO:Thu 2/16/2017 07:29:04PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:29:04PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 07:29:04PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 07:29:05PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 07:29:05PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 07:29:06PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:29:08PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:29:08PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:29:08PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:29:08PM:SessionService:191] admin
+[INFO:Thu 2/16/2017 07:29:08PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:29:08PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:29:08PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:29:08PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:29:08PM:SessionService:127] No Session data found.
+[INFO:Thu 2/16/2017 07:29:08PM:SessionService:191] 
+[INFO:Thu 2/16/2017 07:29:08PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:29:08PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:29:08PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:29:10PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:35:59PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:35:59PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:35:59PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:35:59PM:SessionService:128] No Session data found.
+[INFO:Thu 2/16/2017 07:35:59PM:SessionService:192] 
+[INFO:Thu 2/16/2017 07:35:59PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:35:59PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:35:59PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:36:00PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:36:04PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:04PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:128] No Session data found.
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:192] 
+[INFO:Thu 2/16/2017 07:36:04PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:36:04PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:62] (LOGIN) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:63] (LOGIN) username: jpalmer
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:69] (LOGIN) Saved Session ID: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:74] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => admin
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jpalmer
+                    [version:DataAccess\FFM\Entity\User:private] => 113
+                    [password:protected] => $2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC
+                    [salespersonname:protected] => Jason Palmer
+                    [phone1:protected] => 630-999-0139
+                    [email:protected] => jpalmer@fultonfishmarket.com
+                    [sales_attr_id:protected] => 183
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:36:04.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:28:58.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 7b442a3f9d4201108009bac16fc51b65
+                )
+
+        )
+
+)
+
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:79] (LOGIN) Looked up salesperson: NULL
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:192] admin
+[INFO:Thu 2/16/2017 07:36:04PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:04PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:36:04PM:SessionService:192] admin
+[INFO:Thu 2/16/2017 07:36:04PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:36:04PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 07:36:04PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 07:36:07PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 07:36:07PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 07:36:07PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:36:09PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:09PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:09PM:SessionService:54] (CONSTRUCTOR) Session Id: 7b442a3f9d4201108009bac16fc51b65
+[INFO:Thu 2/16/2017 07:36:09PM:SessionService:192] admin
+[INFO:Thu 2/16/2017 07:36:09PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:36:09PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:09PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:09PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:09PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:10PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:10PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:10PM:SessionService:54] (CONSTRUCTOR) Session Id: 2ffb28f0733b9357642951204c74bb3b
+[INFO:Thu 2/16/2017 07:36:10PM:SessionService:128] No Session data found.
+[INFO:Thu 2/16/2017 07:36:10PM:SessionService:192] 
+[INFO:Thu 2/16/2017 07:36:10PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:36:10PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:36:10PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:36:10PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:36:17PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:17PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:17PM:SessionService:54] (CONSTRUCTOR) Session Id: 2ffb28f0733b9357642951204c74bb3b
+[INFO:Thu 2/16/2017 07:36:17PM:SessionService:128] No Session data found.
+[INFO:Thu 2/16/2017 07:36:17PM:SessionService:192] 
+[INFO:Thu 2/16/2017 07:36:17PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:36:17PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 07:36:18PM:SessionService:62] (LOGIN) Session Id: 2ffb28f0733b9357642951204c74bb3b
+[INFO:Thu 2/16/2017 07:36:18PM:SessionService:63] (LOGIN) username: jmeade
+[INFO:Thu 2/16/2017 07:36:18PM:SessionService:69] (LOGIN) Saved Session ID: 2ffb28f0733b9357642951204c74bb3b
+[INFO:Thu 2/16/2017 07:36:18PM:SessionService:74] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => sales
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jmeade
+                    [version:DataAccess\FFM\Entity\User:private] => 15
+                    [password:protected] => $2y$11$dNgq1cOKM4hEhuML8rwZD.XY195yLIz.i0.cnn92/EtnY2vl1PGrO
+                    [salespersonname:protected] => Jody Meade
+                    [phone1:protected] => 570-335-6484
+                    [email:protected] => jody@fultonfishmarket.com
+                    [sales_attr_id:protected] => 180
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:36:18.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 11:41:29.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 2ffb28f0733b9357642951204c74bb3b
+                )
+
+        )
+
+)
+
+[INFO:Thu 2/16/2017 07:36:18PM:SessionService:79] (LOGIN) Looked up salesperson: NULL
+[INFO:Thu 2/16/2017 07:36:18PM:SessionService:192] sales
+[INFO:Thu 2/16/2017 07:36:18PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:18PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:18PM:SessionService:54] (CONSTRUCTOR) Session Id: 2ffb28f0733b9357642951204c74bb3b
+[INFO:Thu 2/16/2017 07:36:18PM:SessionService:192] sales
+[INFO:Thu 2/16/2017 07:36:18PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:36:18PM:SessionService:192] sales
+[INFO:Thu 2/16/2017 07:36:18PM:UsersController:61] ISNOTADMIN
+[INFO:Thu 2/16/2017 07:36:18PM:UsersController:65] Retrieving Salespeople. ID: 180
+[INFO:Thu 2/16/2017 07:36:18PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customers&180
+[INFO:Thu 2/16/2017 07:36:19PM:UsersController:78] Retrieved #1 customers.
+[INFO:Thu 2/16/2017 07:36:20PM:UsersController:96] Found 156 users in db.
+[INFO:Thu 2/16/2017 07:36:21PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:36:24PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:24PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:24PM:SessionService:54] (CONSTRUCTOR) Session Id: 2ffb28f0733b9357642951204c74bb3b
+[INFO:Thu 2/16/2017 07:36:24PM:SessionService:192] sales
+[INFO:Thu 2/16/2017 07:36:24PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:36:24PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:24PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:24PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:24PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:24PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:36:24PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:36:24PM:SessionService:54] (CONSTRUCTOR) Session Id: 1b5126136bfea9932bb3011782158388
+[INFO:Thu 2/16/2017 07:36:24PM:SessionService:128] No Session data found.
+[INFO:Thu 2/16/2017 07:36:24PM:SessionService:192] 
+[INFO:Thu 2/16/2017 07:36:24PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:36:24PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:36:24PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:36:25PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:37:46PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:37:46PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:37:46PM:SessionService:54] (CONSTRUCTOR) Session Id: 1b5126136bfea9932bb3011782158388
+[INFO:Thu 2/16/2017 07:37:46PM:SessionService:130] No Session data found.
+[INFO:Thu 2/16/2017 07:37:46PM:SessionService:194] 
+[INFO:Thu 2/16/2017 07:37:46PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:37:46PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:37:46PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:37:47PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:37:50PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:37:50PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:37:50PM:SessionService:54] (CONSTRUCTOR) Session Id: 1b5126136bfea9932bb3011782158388
+[INFO:Thu 2/16/2017 07:37:50PM:SessionService:130] No Session data found.
+[INFO:Thu 2/16/2017 07:37:50PM:SessionService:194] 
+[INFO:Thu 2/16/2017 07:37:50PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:37:50PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 07:37:51PM:SessionService:62] (LOGIN) Session Id: 1b5126136bfea9932bb3011782158388
+[INFO:Thu 2/16/2017 07:37:51PM:SessionService:63] (LOGIN) username: jpalmer
+[INFO:Thu 2/16/2017 07:37:51PM:SessionService:69] (LOGIN) Saved Session ID: 1b5126136bfea9932bb3011782158388
+[INFO:Thu 2/16/2017 07:37:51PM:SessionService:74] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => admin
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jpalmer
+                    [version:DataAccess\FFM\Entity\User:private] => 115
+                    [password:protected] => $2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC
+                    [salespersonname:protected] => Jason Palmer
+                    [phone1:protected] => 630-999-0139
+                    [email:protected] => jpalmer@fultonfishmarket.com
+                    [sales_attr_id:protected] => 183
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:37:51.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:36:09.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 1b5126136bfea9932bb3011782158388
+                )
+
+        )
+
+)
+
+[INFO:Thu 2/16/2017 07:37:51PM:SessionService:79] (LOGIN) Looked up salesperson: NULL
+[INFO:Thu 2/16/2017 07:37:51PM:SessionService:194] admin
+[INFO:Thu 2/16/2017 07:37:51PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:37:51PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:37:51PM:SessionService:54] (CONSTRUCTOR) Session Id: 1b5126136bfea9932bb3011782158388
+[INFO:Thu 2/16/2017 07:37:51PM:SessionService:194] admin
+[INFO:Thu 2/16/2017 07:37:51PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:37:51PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 07:37:51PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 07:37:52PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 07:37:52PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 07:37:52PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:37:54PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:37:54PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:37:54PM:SessionService:54] (CONSTRUCTOR) Session Id: 1b5126136bfea9932bb3011782158388
+[INFO:Thu 2/16/2017 07:37:54PM:SessionService:194] admin
+[INFO:Thu 2/16/2017 07:37:54PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:37:54PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:37:54PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:37:54PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:37:54PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:37:54PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:37:54PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:37:54PM:SessionService:54] (CONSTRUCTOR) Session Id: 52ffa461f50537f92d58c60a75c718a6
+[INFO:Thu 2/16/2017 07:37:54PM:SessionService:130] No Session data found.
+[INFO:Thu 2/16/2017 07:37:54PM:SessionService:194] 
+[INFO:Thu 2/16/2017 07:37:54PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:37:54PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:37:54PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:37:55PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:38:25PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:38:25PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:38:25PM:SessionService:54] (CONSTRUCTOR) Session Id: 52ffa461f50537f92d58c60a75c718a6
+[INFO:Thu 2/16/2017 07:38:25PM:SessionService:130] No Session data found.
+[INFO:Thu 2/16/2017 07:38:25PM:SessionService:194] 
+[INFO:Thu 2/16/2017 07:38:25PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:38:25PM:LoginController:83] AuthenticationAction called.
+[INFO:Thu 2/16/2017 07:38:25PM:SessionService:62] (LOGIN) Session Id: 52ffa461f50537f92d58c60a75c718a6
+[INFO:Thu 2/16/2017 07:38:25PM:SessionService:63] (LOGIN) username: jpalmer
+[INFO:Thu 2/16/2017 07:38:25PM:SessionService:69] (LOGIN) Saved Session ID: 52ffa461f50537f92d58c60a75c718a6
+[INFO:Thu 2/16/2017 07:38:25PM:SessionService:74] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => admin
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jpalmer
+                    [version:DataAccess\FFM\Entity\User:private] => 117
+                    [password:protected] => $2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC
+                    [salespersonname:protected] => Jason Palmer
+                    [phone1:protected] => 630-999-0139
+                    [email:protected] => jpalmer@fultonfishmarket.com
+                    [sales_attr_id:protected] => 183
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:38:25.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-16 19:37:54.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 52ffa461f50537f92d58c60a75c718a6
+                )
+
+        )
+
+)
+
+[INFO:Thu 2/16/2017 07:38:25PM:SessionService:79] (LOGIN) Looked up salesperson: NULL
+[INFO:Thu 2/16/2017 07:38:25PM:SessionService:194] admin
+[INFO:Thu 2/16/2017 07:38:26PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:38:26PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:38:26PM:SessionService:54] (CONSTRUCTOR) Session Id: 52ffa461f50537f92d58c60a75c718a6
+[INFO:Thu 2/16/2017 07:38:26PM:SessionService:194] admin
+[INFO:Thu 2/16/2017 07:38:26PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:38:26PM:SalesController:62] Retrieving salespeople.
+[INFO:Thu 2/16/2017 07:38:26PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Thu 2/16/2017 07:38:26PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Thu 2/16/2017 07:38:26PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Thu 2/16/2017 07:38:27PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:38:35PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:38:35PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:38:35PM:SessionService:54] (CONSTRUCTOR) Session Id: 52ffa461f50537f92d58c60a75c718a6
+[INFO:Thu 2/16/2017 07:38:35PM:SessionService:194] admin
+[INFO:Thu 2/16/2017 07:38:35PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:38:35PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:38:35PM:LoginController:65] Identity found.
+[INFO:Thu 2/16/2017 07:38:35PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:38:47PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:38:47PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:38:47PM:SessionService:54] (CONSTRUCTOR) Session Id: 52ffa461f50537f92d58c60a75c718a6
+[INFO:Thu 2/16/2017 07:38:47PM:SessionService:194] admin
+[INFO:Thu 2/16/2017 07:38:47PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:38:47PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:38:47PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:38:47PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:38:47PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:38:48PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:38:48PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:38:48PM:SessionService:54] (CONSTRUCTOR) Session Id: 0e27324d8fb2872d7cdfbc6333e9b302
+[INFO:Thu 2/16/2017 07:38:48PM:SessionService:130] No Session data found.
+[INFO:Thu 2/16/2017 07:38:48PM:SessionService:194] 
+[INFO:Thu 2/16/2017 07:38:48PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:38:48PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:38:48PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:38:48PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Thu 2/16/2017 07:38:55PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:38:55PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:38:55PM:SessionService:54] (CONSTRUCTOR) Session Id: 0e27324d8fb2872d7cdfbc6333e9b302
+[INFO:Thu 2/16/2017 07:38:55PM:SessionService:130] No Session data found.
+[INFO:Thu 2/16/2017 07:38:55PM:SessionService:194] 
+[INFO:Thu 2/16/2017 07:38:55PM:MyAclPlugin:133] Allowed: 
+[INFO:Thu 2/16/2017 07:38:56PM:BalancedRemoteAddr:29] IPAddress: ::1 this->data: ::1
+[INFO:Thu 2/16/2017 07:38:56PM:BalancedHttpUserAgent:27] UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0 this->data: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.12; rv:51.0) Gecko/20100101 Firefox/51.0
+[INFO:Thu 2/16/2017 07:38:56PM:SessionService:54] (CONSTRUCTOR) Session Id: 0e27324d8fb2872d7cdfbc6333e9b302
+[INFO:Thu 2/16/2017 07:38:56PM:SessionService:130] No Session data found.
+[INFO:Thu 2/16/2017 07:38:56PM:SessionService:194] 
+[INFO:Thu 2/16/2017 07:38:56PM:MyAclPlugin:133] Allowed: 1
+[INFO:Thu 2/16/2017 07:38:56PM:LoginController:63] Checking for identity
+[INFO:Thu 2/16/2017 07:38:56PM:LoginController:72] Identity not found.
+[INFO:Thu 2/16/2017 07:38:56PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"

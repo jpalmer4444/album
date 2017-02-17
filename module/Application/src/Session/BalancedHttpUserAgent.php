@@ -6,17 +6,17 @@
  * and open the template in the editor.
  */
 
-namespace Application\Service;
+namespace Application\Session;
 
 use Application\Utility\Logger;
 use Zend\Session\Validator\HttpUserAgent;
 
 /**
- * Description of ElasticHttpUserAgent
+ * Description of BalancedHttpUserAgent
  *
  * @author jasonpalmer
  */
-class ElasticHttpUserAgent extends HttpUserAgent{
+class BalancedHttpUserAgent extends HttpUserAgent{
     
     public function isValid()
     {
@@ -30,7 +30,7 @@ class ElasticHttpUserAgent extends HttpUserAgent{
     }
     
     private function log($line, $msg){
-        Logger::info("ElasticHttpUserAgent", $line, $msg);
+        Logger::info("BalancedHttpUserAgent", $line, $msg);
     }
     
 }

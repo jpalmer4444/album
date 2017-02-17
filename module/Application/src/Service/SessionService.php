@@ -42,9 +42,14 @@ class SessionService {
         $this->sessionManager = $sessionManager;
         //$sessionManager->start();
         $this->sessionId = $sessionManager->getId();
-        if(!$this->sessionId){
-            $sessionManager->start();
-            $this->sessionId = $sessionManager->getId();
+        if (!$this->sessionId) {
+            if ($sessionManager->isValid()) {
+                $sessionManager->start();
+                $this->sessionId = $sessionManager->getId();
+            }else{
+                $sessionManager->destroy();
+                $sessionManager->start(TRUE);
+            }
         }
         Logger::info("SessionService", __LINE__, "(CONSTRUCTOR) Session Id: " . $this->sessionId);
         
@@ -100,6 +105,9 @@ class SessionService {
             $this->deleteCookie("salesperson");
             $this->deleteCookie("requestedRoute");
             $this->sessionManager->getStorage()->clear();
+            while($this->sessionManager->sessionExists()){
+                $this->sessionManager->destroy();
+            }
         } catch (Exception $exc) {
             Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
         }

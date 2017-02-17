@@ -6,16 +6,23 @@
  * and open the template in the editor.
  */
 
-namespace Application\Service;
+namespace Application\Session;
 
+use Application\Utility\Logger;
 use Zend\Session\Validator\RemoteAddr;
 
 /**
- * Description of ElasticRemoteAddr
+ * Description of BalancedRemoteAddr
  *
  * @author jasonpalmer
  */
-class ElasticRemoteAddr extends RemoteAddr{
+class BalancedRemoteAddr extends RemoteAddr{
+    
+    public static function getUseProxy() {
+        return true;
+    }
+
+    //UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36
     
     public function isValid()
     {
@@ -24,7 +31,7 @@ class ElasticRemoteAddr extends RemoteAddr{
     }
     
     private function log($line, $msg){
-        Logger::info("ElasticRemoteAddr", $line, $msg);
+        Logger::info("BalancedRemoteAddr", $line, $msg);
     }
 
     

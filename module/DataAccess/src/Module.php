@@ -10,7 +10,6 @@ namespace DataAccess;
 
 use Application\Utility\Logger;
 use Application\Utility\Strings;
-use Exception;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;

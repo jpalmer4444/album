@@ -15,15 +15,17 @@ use Application\Factory\ReportServiceFactory;
 use Application\Factory\RestServiceFactory;
 use Application\Factory\SessionServiceFactory;
 use Application\Utility\Strings;
+use Zend\Http\Request;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 use Zend\ModuleManager\Feature\ServiceProviderInterface;
 use Zend\ServiceManager\Factory\InvokableFactory;
-use Zend\Session\Container;
 use Zend\Session\SessionManager;
 use Zend\Session\Storage\SessionArrayStorage;
 use Zend\Session\Validator\HttpUserAgent;
 use Zend\Session\Validator\RemoteAddr;
+use Zend\View\Model\JsonModel;
+use Zend\View\Model\ModelInterface;
 
 class Module implements ConfigProviderInterface, ServiceProviderInterface, AutoloaderProviderInterface {
 
@@ -107,9 +109,12 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
         $session = $e->getApplication()
                 ->getServiceManager()
                 ->get(SessionManager::class);
-        $session->start();
+        $sessionId = $session->start();
         $serviceManager = $e->getApplication()->getServiceManager();
         $session->setStorage(new SessionArrayStorage());
+        if(empty($sessionId)){
+            $session->regenerateId(FALSE);
+        }
         $config = $serviceManager->get('Config');
         if (!isset($config['session'])) {
             return;
@@ -132,6 +137,82 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
             }
             $chain->attach('session.validate', array($validator, 'isValid'));
         }
+    }
+    
+    public function onRenderError($e)
+    {
+        // must be an error
+        if (!$e->isError()) {
+            return;
+        }
+        // Check the accept headers for application/json
+        $request = $e->getRequest();
+        if (!$request instanceof Request) {
+            return;
+        }
+        $headers = $request->getHeaders();
+        if (!$headers->has('Accept')) {
+            return;
+        }
+        $accept = $headers->get('Accept');
+        $match  = $accept->match('application/json');
+        if (!$match || $match->getTypeString() == '*/*') {
+            // not application/json
+            return;
+        }
+        // make debugging easier if we're using xdebug!
+        ini_set('html_errors', 0); 
+        // if we have a JsonModel in the result, then do nothing
+        $currentModel = $e->getResult();
+        if ($currentModel instanceof JsonModel) {
+            return;
+        }
+        // create a new JsonModel - use application/api-problem+json fields.
+        $response = $e->getResponse();
+        $model = new JsonModel(array(
+            "httpStatus" => $response->getStatusCode(),
+            "title" => $response->getReasonPhrase(),
+        ));
+        // Find out what the error is
+        $exception  = $currentModel->getVariable('exception');
+        if ($currentModel instanceof ModelInterface && $currentModel->reason) {
+            switch ($currentModel->reason) {
+                case 'error-controller-cannot-dispatch':
+                    $model->detail = 'The requested controller was unable to dispatch the request.';
+                    break;
+                case 'error-controller-not-found':
+                    $model->detail = 'The requested controller could not be mapped to an existing controller class.';
+                    break;
+                case 'error-controller-invalid':
+                    $model->detail = 'The requested controller was not dispatchable.';
+                    break;
+                case 'error-router-no-match':
+                    $model->detail = 'The requested URL could not be matched by routing.';
+                    break;
+                default:
+                    $model->detail = $currentModel->message;
+                    break;
+            }
+        }
+        if ($exception) {
+            if ($exception->getCode()) {
+                $e->getResponse()->setStatusCode($exception->getCode());
+            }
+            $model->detail = $exception->getMessage();
+            // find the previous exceptions
+            $messages = array();
+            while ($exception = $exception->getPrevious()) {
+                $messages[] = "* " . $exception->getMessage();
+            };
+            if (count($messages)) {
+                $exceptionString = implode("n", $messages);
+                $model->messages = $exceptionString;
+            }
+        }
+        // set our new view model
+        $model->setTerminal(true);
+        $e->setResult($model);
+        $e->setViewModel($model);
     }
 
     public function getViewHelperConfig() {

@@ -257,12 +257,19 @@ class ItemsController extends AbstractRestfulController {
     }
 
     private function sync($json) {
+        $some = FALSE;
         //now lookup these items in the DB and update if there are discrepancies
         $this->qb->add('select', new Select(array('u')))
                 ->add('from', new From('DataAccess\FFM\Entity\Product', 'u'));
         $arr = [];
         foreach ($json[$this->pricingconfig['by_sku_object_items_controller']] as $product) {
+            $some = TRUE;
             $arr [] = $this->qb->expr()->eq('u.id', "'" . utf8_encode($product['id']) . "'");
+        }
+        
+        if(empty($some)){
+            Logger::info("ItemsController", __LINE__, 'No items found to sync');
+            return;
         }
 
         $this->qb->add('where', $this->qb->expr()->orX(

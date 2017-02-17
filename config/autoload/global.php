@@ -1,10 +1,9 @@
 <?php
 
-use Application\Cache\Predis;
+use Application\Session\BalancedHttpUserAgent;
+use Application\Session\BalancedRemoteAddr;
 use Zend\Session\Config\SessionConfig;
 use Zend\Session\Storage\SessionArrayStorage;
-use Zend\Session\Validator\HttpUserAgent;
-use Zend\Session\Validator\RemoteAddr;
 
 /**
  * Global Configuration Override
@@ -24,7 +23,10 @@ return [
         'cookie_secure' => true
     ],
     'session_manager' => [
-        
+        'validators' => [
+            BalancedRemoteAddr::class,
+            BalancedHttpUserAgent::class,
+        ],
     ],
     'session_storage' => [
         'type' => SessionArrayStorage::class,
@@ -37,6 +39,10 @@ return [
             ],
         ],
         'storage' => SessionArrayStorage::class,
+        'validators' => [
+            BalancedRemoteAddr::class,
+            BalancedHttpUserAgent::class,
+        ],
     ],
     'service_manager' => [
         'factories' => [
