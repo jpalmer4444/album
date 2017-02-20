@@ -9,6 +9,7 @@
 namespace Application;
 
 use Application\Controller\IndexController;
+use Application\Factory\CookieServiceFactory;
 use Application\Factory\DateServiceFactory;
 use Application\Factory\FFMEntityManagerServiceFactory;
 use Application\Factory\LoggingServiceFactory;
@@ -69,6 +70,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
                 'SessionService' => SessionServiceFactory::class,
                 'DateService' => DateServiceFactory::class,
                 'SynchronizationService' => SynchronizationServiceFactory::class,
+                'CookieService' => CookieServiceFactory::class,
             ),
         );
     }

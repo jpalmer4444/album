@@ -1,7 +1,5 @@
-[INFO:Wed 2/15/2017 04:15:47PM:CheckboxServiceTest:21] Running TestSuite at Wednesday 15th of February 2017 04:15:47 PM
-[INFO:Wed 2/15/2017 04:15:47PM:CheckboxServiceTest:23] Setting up CheckboxServiceTest
-[INFO:Wed 2/15/2017 04:15:47PM:CheckboxServiceTest:23] Setting up CheckboxServiceTest
-[INFO:Wed 2/15/2017 04:15:47PM:CheckboxServiceTest:23] Setting up CheckboxServiceTest
-[INFO:Wed 2/15/2017 04:15:47PM:SalesFormServiceTest:29] Testing SalesFormServiceTest
-[INFO:Wed 2/15/2017 04:15:47PM:ItemsFilterTableArrayServiceInterfaceTest:21] Setting up ItemsFilterTableArrayServiceInterfaceTest
-[INFO:Wed 2/15/2017 04:15:47PM:ItemsFilterTableArrayServiceInterfaceTest:21] Setting up ItemsFilterTableArrayServiceInterfaceTest
+[INFO:Mon 2/20/2017 04:46:31PM:CheckboxServiceTest:21] Running TestSuite at Monday 20th of February 2017 04:46:31 PM
+[INFO:Mon 2/20/2017 04:46:31PM:CheckboxServiceTest:23] Setting up CheckboxServiceTest
+[INFO:Mon 2/20/2017 04:46:31PM:CheckboxServiceTest:23] Setting up CheckboxServiceTest
+[INFO:Mon 2/20/2017 04:46:31PM:CheckboxServiceTest:23] Setting up CheckboxServiceTest
+[INFO:Mon 2/20/2017 04:46:31PM:SalesFormServiceTest:29] Testing SalesFormServiceTest

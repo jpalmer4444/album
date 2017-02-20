@@ -7,6 +7,11 @@
 
     tasks:
         
+      - name: Test pricing
+        shell: |
+            cd {{ lookup('env','PROJECT_HOME_DIR') }}/pricing/module/Sales/test
+            APPLICATION_ENV=staging phpunit
+        
       - name: Zip pricing
         shell: |
             cd {{ lookup('env','PROJECT_HOME_DIR') }}/

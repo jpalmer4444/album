@@ -21,14 +21,9 @@ class SessionServiceFactory implements FactoryInterface {
         $request = $container->get('Request');
         $response = $container->get('Response');
         $config = $container->get('Config');
-        $cookieLifetime = 86400;
-        if (array_key_exists('session_config', $config) &&
-                array_key_exists('cookie_lifetime', $config['session_config'])) {
-            $session_config = $config['session_config'];
-            $cookieLifetime = $session_config['cookie_lifetime'];
-        }
+        $cookieService = $container->get('CookieService');
 
-        return new SessionService($userrepository, $userrolexrefrepository, $sessionManager, $request, $response, $cookieLifetime);
+        return new SessionService($userrepository, $userrolexrefrepository, $sessionManager, $request, $response, $cookieService);
     }
 
 }

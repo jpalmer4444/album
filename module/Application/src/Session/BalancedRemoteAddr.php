@@ -40,9 +40,14 @@ class BalancedRemoteAddr extends RemoteAddr{
         ) {
             $the_ip = $headers['HTTP_X_FORWARDED_FOR'];
         } else {
-            $the_ip = filter_var( $_SERVER['REMOTE_ADDR'], 
+            if(array_key_exists('REMOTE_ADDR', $_SERVER)){
+                $the_ip = filter_var( $_SERVER['REMOTE_ADDR'], 
                     FILTER_VALIDATE_IP, 
                     FILTER_FLAG_IPV4 );
+            }else{
+                $the_ip = '';
+            }
+            
         }
         return $the_ip;
     }

@@ -13,8 +13,10 @@ class MyAclPlugin extends AbstractPlugin {
     protected $sesscontainer;
     protected $logger;
     protected $sessionService;
+    protected $cookieService;
 
-    public function __construct($logger, $sessionService) {
+    public function __construct($logger, $sessionService, $cookieService) {
+        $this->cookieService = $cookieService;
         $this->logger = $logger;
         $this->sessionService = $sessionService;
     }
@@ -137,7 +139,7 @@ class MyAclPlugin extends AbstractPlugin {
             $request = $e->getRequest();
             $routeMatch = $router->match($request);
             if (!is_null($routeMatch)) {
-                $this->sessionService->addRequestedRoute($routeMatch->getMatchedRouteName());
+                $this->sessionService->addRequestedRoute($routeMatch->getMatchedRouteName(), $this->cookieService->getCookieLifetime());
             }
             // $url    = $router->assemble(array(), array('name' => 'Login/auth')); // assemble a login route
             $url = $router->assemble(array(), array('name' => 'login'));

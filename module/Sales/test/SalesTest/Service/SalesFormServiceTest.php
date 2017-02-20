@@ -19,7 +19,7 @@ class SalesFormServiceTest extends AbstractHttpControllerTestCase {
     
     protected $userrepository_mock;
     protected $customerrepository_mock;
-    protected $authService_mock;
+    protected $sessionService_mock;
     protected $rowplusitemspagerepository_mock;
     protected $form_mock;
 
@@ -28,12 +28,12 @@ class SalesFormServiceTest extends AbstractHttpControllerTestCase {
         
         Logger::info("SalesFormServiceTest", __LINE__, "Testing SalesFormServiceTest", TRUE);
         
-        $this->authService_mock = $this->getMockBuilder('Zend\Authentication\AuthenticationService')
+        $this->sessionService_mock = $this->getMockBuilder('Application\Service\SessionService')
                 ->disableOriginalConstructor()
                 ->getMock();
         
         //mock getUserOrSalespersonInPlay
-        $this->authService_mock->expects($this->any())
+        $this->sessionService_mock->expects($this->any())
                 ->method('getUserOrSalespersonInPlay')
                 ->will($this->returnValue(ModelMocks::getMockUser("1", new DateTime(), 1)));
         
@@ -94,7 +94,7 @@ class SalesFormServiceTest extends AbstractHttpControllerTestCase {
     
     public function testAssembleRowPlusItemsPageAndArray(){
         $jsonModelArray = array();
-        $jsonViewModel = $this->service->assembleRowPlusItemsPageAndArray($this->myauthstorage_mock, $this->customerrepository_mock, $this->userrepository_mock, $this->rowplusitemspagerepository_mock, $this->form_mock, $jsonModelArray, 1);
+        $jsonViewModel = $this->service->assembleRowPlusItemsPageAndArray($this->sessionService_mock, $this->customerrepository_mock, $this->userrepository_mock, $this->rowplusitemspagerepository_mock, $this->form_mock, $jsonModelArray, 1);
         $this->assertNotNull($jsonViewModel, "failed to return not null");
         $this->assertInstanceOf(JsonModel::class, $jsonViewModel, "failed to instantiate a JSONModel");
         $this->assertArrayHasKey("id", $jsonViewModel->getVariables(), "failed to instantiate a JSONModel with key id");

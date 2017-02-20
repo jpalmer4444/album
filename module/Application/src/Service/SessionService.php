@@ -6,11 +6,11 @@
 
 namespace Application\Service;
 
-use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRoleXrefRepositoryImpl;
+use DataAccess\FFM\Entity\User;
+use DataAccess\FFM\Entity\UserRoleXref;
 use DateTime;
-use Exception;
 use Zend\Http\Header\SetCookie;
 use Zend\Http\Request;
 use Zend\Http\Response;
@@ -23,7 +23,7 @@ use Zend\Session\SessionManager;
  */
 class SessionService extends BaseService {
 
-    protected $cookieLifetime;
+    protected $cookieService;
 
     /**
      * Session ID
@@ -34,55 +34,55 @@ class SessionService extends BaseService {
 
     /**
      * UserRepository
-     * @var DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl
+     * @var UserRepositoryImpl
      */
     protected $userrepository;
 
     /**
      * UserRoleXrefRepository
-     * @var DataAccess\FFM\Entity\Repository\Impl\UserRoleXrefRepositoryImpl
+     * @var UserRoleXrefRepositoryImpl
      */
     protected $userrolexrefrepository;
 
     /**
      * Roles
-     * @var DataAccess\FFM\Entity\UserRoleXref
+     * @var UserRoleXref
      */
     protected $roles;
 
     /**
      * SessionManager
-     * @var Zend\Session\SessionManager
+     * @var SessionManager
      */
     protected $sessionManager;
 
     /**
      * Salesperson In Play
-     * @var DataAccess\FFM\Entity\User
+     * @var User
      */
     protected $salespersoninplay;
 
     /**
      * User
-     * @var DataAccess\FFM\Entity\User
+     * @var User
      */
     protected $user;
 
     /**
      * Request
-     * @var Zend\Http\Request
+     * @var Request
      */
     protected $request;
 
     /**
      * Response
-     * @var Zend\Http\Response
+     * @var Response
      */
     protected $response;
 
     public function __construct(
-    UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository, SessionManager $sessionManager, Request $request, Response $response, $cookieLifetime = 86400) {
-        $this->cookieLifetime = $cookieLifetime;
+    UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository, SessionManager $sessionManager, Request $request, Response $response, CookieService $cookieService) {
+        $this->cookieService = $cookieService;
         $this->setUserRepository($userrepository);
         $this->setUserRoleXrefRepository($userrolexrefrepository);
         $this->setRequest($request);
@@ -179,7 +179,7 @@ class SessionService extends BaseService {
 
     private function setCookie($name, $value, $timeplus) {
         if (empty($timeplus)) {
-            $timeplus = $this->cookieLifetime;
+            $timeplus = $this->cookieService->getCookieLifetime();
         }
         try {
             $this->createCookie($name, $value, $timeplus);
@@ -190,7 +190,7 @@ class SessionService extends BaseService {
 
     private function createCookie($name, $value, $timeplus) {
         if (empty($timeplus)) {
-            $timeplus = $this->cookieLifetime;
+            $timeplus = $this->cookieService->getCookieLifetime();;
         }
         // create a cookie
         $cookie = new SetCookie(
@@ -222,7 +222,7 @@ class SessionService extends BaseService {
 
     public function addRequestedRoute($requestedRoute, $seconds) {
         if (empty($seconds)) {
-            $seconds = $this->cookieLifetime;
+            $seconds = $this->cookieService->getCookieLifetime();;
         }
         //adds a 1 hour cookie.
         $this->setCookie('requestedRoute', $requestedRoute, $seconds);
@@ -234,7 +234,7 @@ class SessionService extends BaseService {
     }
 
     public function addSalespersonInPlay($salespersoninplayusername) {
-        $seconds = $this->cookieLifetime;
+        $seconds = $this->cookieService->getCookieLifetime();;
 
         //adds a 1 hour cookie.
         $this->log(this::class, __LINE__, 'Added Salespersoninplay: ' . $salespersoninplayusername);
