@@ -2,7 +2,7 @@
 
 namespace Sales\Controller;
 
-use Application\Service\FFMEntityManagerService;
+use Application\Service\EntityService;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\User;
@@ -24,7 +24,7 @@ class SalesController extends AbstractActionController {
 
     public function __construct(
             $container, 
-            FFMEntityManagerService $ffmEntityManagerService, 
+            EntityService $ffmEntityManagerService, 
             AbstractPluginManager $formManager, 
             UserRepositoryImpl $userrepository) {
         $this->restService = $container->get('RestService');

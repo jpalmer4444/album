@@ -31,12 +31,12 @@ class ItemsFilterTableArrayService  {
         $this->dateService = $sm->get('DateService');
         $this->sessionService = $sm->get('SessionService');
         $this->pricingconfig = $sm->get('config')['pricing_config'];
-        $this->entityManager = $sm->get('FFMEntityManager');
+        $this->entityManager = $sm->get('EntityService');
         $this->checkboxService = $sm->get('CheckboxService');
-        $this->productrepository = $sm->get('FFMEntityManager')->
+        $this->productrepository = $sm->get('EntityService')->
                 getEntityManager()->
                 getRepository('DataAccess\FFM\Entity\Product');
-        $this->customerrepository = $sm->get('FFMEntityManager')->
+        $this->customerrepository = $sm->get('EntityService')->
                 getEntityManager()->
                 getRepository('DataAccess\FFM\Entity\Customer');
     }

@@ -15,7 +15,7 @@ class CheckboxServiceFactory implements FactoryInterface{
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL) {
         $loggingService = $container->get('LoggingService');
-        $entityManager = $container->get('FFMEntityManager');
+        $entityManager = $container->get('EntityService');
         $checkboxrepository = $entityManager->getEntityManager()->getRepository('DataAccess\FFM\Entity\ItemTableCheckbox');
         $userrepository = $entityManager->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
         $customerrepository = $entityManager->getEntityManager()->getRepository('DataAccess\FFM\Entity\Customer');

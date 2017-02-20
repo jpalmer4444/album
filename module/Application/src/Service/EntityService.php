@@ -9,11 +9,11 @@
 namespace Application\Service;
 
 /**
- * Description of FFMEntityManager
+ * Description of EntityService
  *
  * @author jasonpalmer
  */
-class FFMEntityManagerService {
+class EntityService {
 
     protected $entityManager;
 

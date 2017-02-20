@@ -8,7 +8,7 @@ namespace Login\Controller;
 
 require 'vendor/autoload.php';
 
-use Application\Service\FFMEntityManagerService;
+use Application\Service\EntityService;
 use Application\Service\LoggingService;
 use Application\Service\SessionService;
 use Application\Utility\Logger;
@@ -33,7 +33,7 @@ class LoginController extends AbstractActionController {
     protected $sessionManager;
     protected $sessionService;
 
-    public function __construct(AuthenticationService $authservice, LoggingService $logger, FFMEntityManagerService $entityManager, SessionService $sessionService, SessionManager $sessionManager, UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository) {
+    public function __construct(AuthenticationService $authservice, LoggingService $logger, EntityService $entityManager, SessionService $sessionService, SessionManager $sessionManager, UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository) {
         $this->authservice = $authservice;
         $this->sessionManager = $sessionManager;
         $this->form = $this->getForm();

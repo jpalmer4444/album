@@ -28,7 +28,7 @@ class SynchronizationService extends BaseService{
     protected $customerrepository;
     
     public function __construct(ContainerInterface $container) {
-        $this->qb = $container->get('FFMEntityManager')->getEntityManager()->
+        $this->qb = $container->get('EntityService')->getEntityManager()->
                         createQueryBuilder();
         $this->userproductrepository = $this->getRepo('DataAccess\FFM\Entity\UserProduct', $container);
         $this->productrepository = $this->getRepo('DataAccess\FFM\Entity\Product', $container);
@@ -37,7 +37,7 @@ class SynchronizationService extends BaseService{
     }
     
     private function getRepo($model, $container) {
-        return $container->get('FFMEntityManager')->getEntityManager()->
+        return $container->get('EntityService')->getEntityManager()->
                         getRepository($model);
     }
     

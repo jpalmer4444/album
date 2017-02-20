@@ -19,12 +19,12 @@ class ItemsControllerFactory implements FactoryInterface{
                     $pricingconfig = $container->get('config')['pricing_config'];
                     $formManager = $container->get('FormElementManager');
                     $salesFromService = $container->get('SalesFormService');
-                    $userrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
-                    $rowplusitemspagerepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\RowPlusItemsPage');
-                    $customerrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Customer');
-                    $productrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Product');
-                    $userproductrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\UserProduct');
-                    $pricingoverridereportrepository = $container->get('FFMEntityManager')->getEntityManager()->getRepository('DataAccess\FFM\Entity\PricingOverrideReport');
+                    $userrepository = $container->get('EntityService')->getEntityManager()->getRepository('DataAccess\FFM\Entity\User');
+                    $rowplusitemspagerepository = $container->get('EntityService')->getEntityManager()->getRepository('DataAccess\FFM\Entity\RowPlusItemsPage');
+                    $customerrepository = $container->get('EntityService')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Customer');
+                    $productrepository = $container->get('EntityService')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Product');
+                    $userproductrepository = $container->get('EntityService')->getEntityManager()->getRepository('DataAccess\FFM\Entity\UserProduct');
+                    $pricingoverridereportrepository = $container->get('EntityService')->getEntityManager()->getRepository('DataAccess\FFM\Entity\PricingOverrideReport');
                     return new ItemsController(
                             $loggingService,
                             $sessionService,

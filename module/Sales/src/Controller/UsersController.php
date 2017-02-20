@@ -31,13 +31,13 @@ class UsersController extends AbstractActionController {
         $this->logger = $container->get('LoggingService');
         $this->sessionService = $container->get('SessionService');
         $this->pricingconfig = $container->get('config')['pricing_config'];
-        $this->userrepository = $container->get('FFMEntityManager')->
+        $this->userrepository = $container->get('EntityService')->
                 getEntityManager()->
                 getRepository('DataAccess\FFM\Entity\User');
-        $this->customerrepository = $container->get('FFMEntityManager')->
+        $this->customerrepository = $container->get('EntityService')->
                 getEntityManager()->
                 getRepository('DataAccess\FFM\Entity\Customer');
-        $this->qb = $container->get('FFMEntityManager')->
+        $this->qb = $container->get('EntityService')->
                         getEntityManager()->createQueryBuilder();
     }
 

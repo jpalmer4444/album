@@ -13,12 +13,12 @@ use PHPUnit\Framework\TestCase;
  */
 class StringsTest extends TestCase{
     
-    public function testConstFFMEntityManager() {
+    public function testConstEntityService() {
         Logger::stderr(StringsTest::class, __LINE__, "Testing Strings::FFM_ENTITY_MANAGER.");
-        $entityManager = Strings::FFM_ENTITY_MANAGER;
+        $entityManager = Strings::ENTITY_SERVICE;
         $eol = Strings::detectEol($entityManager, PHP_EOL);
         $this->assertEquals(PHP_EOL, $eol, "InCorrect EOL for string StringsTest::FFM_ENTITY_MANAGER");
-        $this->assertEquals($entityManager, Strings::FFM_ENTITY_MANAGER, "InCorrect value for Strings::FFM_ENTITY_MANAGER");
+        $this->assertEquals($entityManager, Strings::ENTITY_SERVICE, "InCorrect value for Strings::FFM_ENTITY_MANAGER");
         $this->assertNotNull($entityManager);
     }
     

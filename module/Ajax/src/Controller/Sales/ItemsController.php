@@ -2,7 +2,7 @@
 
 namespace Ajax\Controller\Sales;
 
-use Application\Service\FFMEntityManagerService;
+use Application\Service\EntityService;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\ItemPriceOverride;
 use DateTime;
@@ -60,12 +60,12 @@ class ItemsController extends AbstractRestfulController {
     }
 
     /**
-     * Returns an instance of FFMEntityManagerService
+     * Returns an instance of EntityService
      * @param type $container
-     * @return FFMEntityManagerService
+     * @return EntityService
      */
     private function getEntityManager($container) {
-        return $container->get('FFMEntityManager')->getEntityManager();
+        return $container->get('EntityService')->getEntityManager();
     }
 
     private function getRepo($model, $container) {

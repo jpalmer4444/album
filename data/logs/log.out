@@ -2521,3 +2521,98 @@
 [INFO:Mon 2/20/2017 04:46:31PM:MyAclPlugin:135] Allowed: 1
 [INFO:Mon 2/20/2017 04:46:31PM:LoginController:63] Checking for identity
 [INFO:Mon 2/20/2017 04:46:31PM:LoginController:72] Identity not found.
+[INFO:Mon 2/20/2017 12:59:08PM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Mon 2/20/2017 12:59:08PM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Mon 2/20/2017 12:59:08PM:Application\Service\this:102] (CONSTRUCTOR) Session Id: 0290217fc5d9572b813a04e0d6a11a27
+[INFO:Mon 2/20/2017 12:59:08PM:Application\Service\this:177] No Session data found.
+[INFO:Mon 2/20/2017 12:59:08PM:Application\Service\this:209] 
+[INFO:Mon 2/20/2017 12:59:08PM:MyAclPlugin:135] Allowed: 
+[INFO:Mon 2/20/2017 12:59:34PM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Mon 2/20/2017 12:59:34PM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Mon 2/20/2017 12:59:34PM:Application\Service\this:102] (CONSTRUCTOR) Session Id: 0290217fc5d9572b813a04e0d6a11a27
+[INFO:Mon 2/20/2017 12:59:34PM:Application\Service\this:177] No Session data found.
+[INFO:Mon 2/20/2017 12:59:34PM:Application\Service\this:209] 
+[INFO:Mon 2/20/2017 12:59:34PM:MyAclPlugin:135] Allowed: 
+[INFO:Mon 2/20/2017 12:59:34PM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Mon 2/20/2017 12:59:34PM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Mon 2/20/2017 12:59:34PM:Application\Service\this:102] (CONSTRUCTOR) Session Id: 0290217fc5d9572b813a04e0d6a11a27
+[INFO:Mon 2/20/2017 12:59:34PM:Application\Service\this:177] No Session data found.
+[INFO:Mon 2/20/2017 12:59:34PM:Application\Service\this:209] 
+[INFO:Mon 2/20/2017 12:59:34PM:MyAclPlugin:135] Allowed: 1
+[INFO:Mon 2/20/2017 12:59:34PM:LoginController:63] Checking for identity
+[INFO:Mon 2/20/2017 12:59:34PM:LoginController:72] Identity not found.
+[INFO:Mon 2/20/2017 12:59:35PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Mon 2/20/2017 12:59:41PM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Mon 2/20/2017 12:59:41PM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Mon 2/20/2017 12:59:41PM:Application\Service\this:102] (CONSTRUCTOR) Session Id: 0290217fc5d9572b813a04e0d6a11a27
+[INFO:Mon 2/20/2017 12:59:41PM:Application\Service\this:177] No Session data found.
+[INFO:Mon 2/20/2017 12:59:41PM:Application\Service\this:209] 
+[INFO:Mon 2/20/2017 12:59:41PM:MyAclPlugin:135] Allowed: 1
+[INFO:Mon 2/20/2017 12:59:41PM:LoginController:83] AuthenticationAction called.
+[INFO:Mon 2/20/2017 12:59:41PM:Application\Service\this:109] (LOGIN) Session Id: 0290217fc5d9572b813a04e0d6a11a27
+[INFO:Mon 2/20/2017 12:59:41PM:Application\Service\this:110] (LOGIN) username: jpalmer
+[INFO:Mon 2/20/2017 12:59:41PM:Application\Service\this:116] (LOGIN) Saved Session ID: 0290217fc5d9572b813a04e0d6a11a27
+[INFO:Mon 2/20/2017 12:59:41PM:Application\Service\this:121] (LOGIN) Adding Roles: Array
+(
+    [0] => DataAccess\FFM\Entity\UserRoleXref Object
+        (
+            [role:protected] => admin
+            [username:protected] => DataAccess\FFM\Entity\User Object
+                (
+                    [username:protected] => jpalmer
+                    [version:DataAccess\FFM\Entity\User:private] => 364
+                    [password:protected] => $2y$10$BaoRbZVUPtpZlhRJxd2dYeXEGf71LshO2AFWs6xlfYqKb6v5DgTjC
+                    [salespersonname:protected] => Jason Palmer
+                    [phone1:protected] => 630-999-0139
+                    [email:protected] => jpalmer@fultonfishmarket.com
+                    [sales_attr_id:protected] => 183
+                    [lastlogin:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-20 12:59:41.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_created:protected] => DateTime Object
+                        (
+                            [date] => 2016-12-20 15:53:38.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [_updated:protected] => DateTime Object
+                        (
+                            [date] => 2017-02-20 10:33:02.000000
+                            [timezone_type] => 3
+                            [timezone] => America/Chicago
+                        )
+
+                    [session_id:protected] => 0290217fc5d9572b813a04e0d6a11a27
+                )
+
+        )
+
+)
+
+[INFO:Mon 2/20/2017 12:59:41PM:Application\Service\this:126] (LOGIN) Looked up salesperson: bzakrinski
+[INFO:Mon 2/20/2017 12:59:41PM:Application\Service\this:209] admin
+[INFO:Mon 2/20/2017 12:59:41PM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Mon 2/20/2017 12:59:41PM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Mon 2/20/2017 12:59:41PM:Application\Service\this:102] (CONSTRUCTOR) Session Id: 0290217fc5d9572b813a04e0d6a11a27
+[INFO:Mon 2/20/2017 12:59:42PM:Application\Service\this:209] admin
+[INFO:Mon 2/20/2017 12:59:42PM:MyAclPlugin:135] Allowed: 1
+[INFO:Mon 2/20/2017 12:59:42PM:SalesController:62] Retrieving salespeople.
+[INFO:Mon 2/20/2017 12:59:42PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Mon 2/20/2017 12:59:43PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Mon 2/20/2017 12:59:43PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Mon 2/20/2017 12:59:45PM:DataAccess\Module:66]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Mon 2/20/2017 01:16:58PM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Mon 2/20/2017 01:16:58PM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Mon 2/20/2017 01:16:58PM:Application\Service\this:102] (CONSTRUCTOR) Session Id: 0290217fc5d9572b813a04e0d6a11a27
+[INFO:Mon 2/20/2017 01:16:58PM:Application\Service\this:209] admin
+[INFO:Mon 2/20/2017 01:16:58PM:MyAclPlugin:135] Allowed: 1
+[INFO:Mon 2/20/2017 01:16:59PM:SalesController:62] Retrieving salespeople.
+[INFO:Mon 2/20/2017 01:16:59PM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Mon 2/20/2017 01:16:59PM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Mon 2/20/2017 01:16:59PM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Mon 2/20/2017 01:17:00PM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"

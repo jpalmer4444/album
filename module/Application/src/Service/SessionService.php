@@ -11,7 +11,6 @@ use DataAccess\FFM\Entity\Repository\Impl\UserRoleXrefRepositoryImpl;
 use DataAccess\FFM\Entity\User;
 use DataAccess\FFM\Entity\UserRoleXref;
 use DateTime;
-use Zend\Http\Header\SetCookie;
 use Zend\Http\Request;
 use Zend\Http\Response;
 use Zend\Session\SessionManager;
@@ -81,7 +80,12 @@ class SessionService extends BaseService {
     protected $response;
 
     public function __construct(
-    UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository, SessionManager $sessionManager, Request $request, Response $response, CookieService $cookieService) {
+            UserRepositoryImpl $userrepository, 
+            UserRoleXrefRepositoryImpl $userrolexrefrepository, 
+            SessionManager $sessionManager, 
+            Request $request, 
+            Response $response, 
+            CookieService $cookieService) {
         $this->cookieService = $cookieService;
         $this->setUserRepository($userrepository);
         $this->setUserRoleXrefRepository($userrolexrefrepository);
@@ -118,7 +122,7 @@ class SessionService extends BaseService {
                 foreach ($roleXrefs as $role) {
                     $this->roles[$idx++] = $role;
                 }
-                $salespersoninplayusernamecookie = $this->getCookie('salesperson');
+                $salespersoninplayusernamecookie = $this->cookieService->getCookie('salesperson', $this->request);
                 $this->log(this::class, __LINE__, "(LOGIN) Looked up salesperson: " . (!empty($salespersoninplayusernamecookie) ? $salespersoninplayusernamecookie : "NULL"));
                 if (!empty($salespersoninplayusernamecookie)) {
                     $this->salespersoninplay = $this->userrepository->findUser($salespersoninplayusernamecookie);
@@ -145,8 +149,8 @@ class SessionService extends BaseService {
             unset($this->sessionId);
             unset($this->salespersoninplay);
             unset($this->user);
-            $this->deleteCookie("salesperson");
-            $this->deleteCookie("requestedRoute");
+            $this->cookieService->deleteCookie("salesperson", $this->response);
+            $this->cookieService->deleteCookie("requestedRoute", $this->response);
             $this->sessionManager->getStorage()->clear();
             while ($this->sessionManager->sessionExists()) {
                 $this->sessionManager->destroy();
@@ -165,7 +169,7 @@ class SessionService extends BaseService {
                 foreach ($roleXrefs as $role) {
                     $this->roles[] = $role;
                 }
-                $salespersoninplayusernamecookie = $this->getCookie('salesperson');
+                $salespersoninplayusernamecookie = $this->cookieService->getCookie('salesperson', $this->request);
                 if (!empty($salespersoninplayusernamecookie)) {
                     $this->salespersoninplay = $this->userrepository->findUser($salespersoninplayusernamecookie);
                 }
@@ -177,59 +181,16 @@ class SessionService extends BaseService {
         }
     }
 
-    private function setCookie($name, $value, $timeplus) {
-        if (empty($timeplus)) {
-            $timeplus = $this->cookieService->getCookieLifetime();
-        }
-        try {
-            $this->createCookie($name, $value, $timeplus);
-        } catch (\Exception $exc) {
-            $this->log(this::class, __LINE__, "Exception: " . $exc->getTraceAsString());
-        }
-    }
-
-    private function createCookie($name, $value, $timeplus) {
-        if (empty($timeplus)) {
-            $timeplus = $this->cookieService->getCookieLifetime();;
-        }
-        // create a cookie
-        $cookie = new SetCookie(
-                $name, $value, time() + $timeplus, // 1 year lifetime
-                '/'
-        );
-
-        $this->response->getHeaders()->addHeader($cookie);
-    }
-
-    private function deleteCookie($name) {
-        $cookie = new SetCookie(
-                $name, '', strtotime('-1 Year', time()), // -1 year lifetime (negative from now)
-                '/'
-        );
-        $this->response->getHeaders()->addHeader($cookie);
-    }
-
-    private function getCookie($name) {
-        try {
-            $cookie = $this->request->getCookie();
-            if ($cookie->offsetExists($name)) {
-                return $cookie->offsetGet($name);
-            }
-        } catch (\Exception $exc) {
-            $this->log(this::class, __LINE__, "Exception: " . $exc->getTraceAsString());
-        }
-    }
-
     public function addRequestedRoute($requestedRoute, $seconds) {
         if (empty($seconds)) {
             $seconds = $this->cookieService->getCookieLifetime();;
         }
         //adds a 1 hour cookie.
-        $this->setCookie('requestedRoute', $requestedRoute, $seconds);
+        $this->cookieService->setCookie('requestedRoute', $requestedRoute, $seconds, $this->response);
     }
 
     public function getRequestedRoute() {
-        $cookie = $this->getCookie('requestedRoute');
+        $cookie = $this->cookieService->getCookie('requestedRoute', $this->request);
         return !empty($cookie) ? $cookie : NULL;
     }
 
@@ -238,7 +199,7 @@ class SessionService extends BaseService {
 
         //adds a 1 hour cookie.
         $this->log(this::class, __LINE__, 'Added Salespersoninplay: ' . $salespersoninplayusername);
-        $this->setCookie('salesperson', $salespersoninplayusername, $seconds);
+        $this->cookieService->setCookie('salesperson', $salespersoninplayusername, $seconds, $this->response);
     }
 
     public function admin() {

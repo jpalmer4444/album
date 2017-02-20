@@ -19,9 +19,6 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
     
     public function getAutoloaderConfig() {
         return array(
-            Strings::CLASS_MAP_AUTO_LOADER => array(
-                __DIR__ . '/autoload_classmap.php',
-            ),
             Strings::STANDARD_AUTO_LOADER => array(
                 Strings::NAMESPACES => array(
                     __NAMESPACE__ => __DIR__ . '/' . __NAMESPACE__,

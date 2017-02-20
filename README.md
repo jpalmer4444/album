@@ -659,7 +659,7 @@ sudo service httpd restart
             <b>object</b>(<i>Login\Model\MyAuthStorage</i>)[<i>351</i>]
               ...
           <i>protected</i> 'entityManager' <font color='#888a85'>=&gt;</font> 
-            <b>object</b>(<i>Application\Service\FFMEntityManagerService</i>)[<i>253</i>]
+            <b>object</b>(<i>Application\Service\EntityService</i>)[<i>253</i>]
               ...
           <i>protected</i> 'checkboxService' <font color='#888a85'>=&gt;</font> 
             <b>object</b>(<i>Sales\Service\CheckboxService</i>)[<i>255</i>]

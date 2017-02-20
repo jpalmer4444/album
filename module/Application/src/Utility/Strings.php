@@ -16,10 +16,10 @@ class Strings {
 
     /**
      * @see EntityManagerInterface
-     * FFMEntityManagerService
+     * EntityService
      * Service that provides an entry point into Doctrine EntityManager.
      */
-    const FFM_ENTITY_MANAGER = 'FFMEntityManager';
+    const ENTITY_SERVICE = 'EntityService';
 
     /**
      * @see SessionManager

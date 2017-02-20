@@ -14,7 +14,7 @@ class ReportService {
     protected $pricingoverridereportrepository;
     
     public function __construct($container) {
-        $this->pricingoverridereportrepository = $container->get('FFMEntityManager')->
+        $this->pricingoverridereportrepository = $container->get('EntityService')->
                 getEntityManager()->getRepository('DataAccess\FFM\Entity\PricingOverrideReport');
     }
     

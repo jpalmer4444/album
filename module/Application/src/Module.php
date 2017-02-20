@@ -11,7 +11,7 @@ namespace Application;
 use Application\Controller\IndexController;
 use Application\Factory\CookieServiceFactory;
 use Application\Factory\DateServiceFactory;
-use Application\Factory\FFMEntityManagerServiceFactory;
+use Application\Factory\EntityServiceFactory;
 use Application\Factory\LoggingServiceFactory;
 use Application\Factory\ReportServiceFactory;
 use Application\Factory\RestServiceFactory;
@@ -49,9 +49,6 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
 
     public function getAutoloaderConfig() {
         return array(
-            Strings::CLASS_MAP_AUTO_LOADER => array(
-                __DIR__ . '/autoload_classmap.php',
-            ),
             Strings::STANDARD_AUTO_LOADER => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
@@ -66,7 +63,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
                 'LoggingService' => LoggingServiceFactory::class,
                 Strings::REST_SERVICE => RestServiceFactory::class,
                 Strings::REPORT_SERVICE => ReportServiceFactory::class,
-                Strings::FFM_ENTITY_MANAGER => FFMEntityManagerServiceFactory::class,
+                'EntityService' => EntityServiceFactory::class,
                 'SessionService' => SessionServiceFactory::class,
                 'DateService' => DateServiceFactory::class,
                 'SynchronizationService' => SynchronizationServiceFactory::class,
