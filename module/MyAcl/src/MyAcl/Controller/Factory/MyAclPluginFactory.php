@@ -2,17 +2,18 @@
 
 namespace MyAcl\Controller\Factory;
 
+use Interop\Container\ContainerInterface;
 use MyAcl\Controller\Plugin\MyAclPlugin;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 
 /*
  * Factory for creating MyAclPlugin
  */
 
-class MyAclPluginFactory 
+class MyAclPluginFactory implements FactoryInterface
 {
-    public function __invoke(ServiceLocatorInterface $container) {
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL) {
         $loggingService = $container->get('LoggingService');
                     $sessionService = $container->get('SessionService');
                     return new MyAclPlugin($loggingService, $sessionService);

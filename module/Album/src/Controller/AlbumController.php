@@ -70,7 +70,7 @@ class AlbumController extends AbstractActionController
         // in redirecting to the landing page.
         try {
             $album = $this->table->getAlbum($id);
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $this->redirect()->toRoute('album', ['action' => 'index']);
         }
 

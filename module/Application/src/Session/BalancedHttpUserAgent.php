@@ -24,9 +24,11 @@ class BalancedHttpUserAgent extends HttpUserAgent{
                    ? $_SERVER['HTTP_USER_AGENT']
                    : null;
         
-        $this->log(__LINE__, "UserAgent: " . $userAgent . " this->data: " . $this->getData());
-
-        return ($userAgent === $this->getData());
+        $same = strcmp($userAgent, $this->getData()) == 0;
+        if(empty($same)){
+            $this->log(__LINE__, "SessionValidation failed: " . $userAgent . " this->data: " . $this->getData());
+        }
+        return $same;
     }
     
     private function log($line, $msg){

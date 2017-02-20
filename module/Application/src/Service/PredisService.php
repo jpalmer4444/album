@@ -24,7 +24,7 @@ class PredisService  {
             session_start();
             $this->sessionId = session_id();
             Logger::info("PredisService", __LINE__, 'Generated session_id: ' . $this->sessionId);
-        } catch (Exception $exception){
+        } catch (\Exception $exception){
             $msg = 'Cannot generate session_id assuming the environment is testing.';
             Logger::stderr("PredisService", __LINE__, $msg);
             Logger::info("PredisService", __LINE__, $msg);

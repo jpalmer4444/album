@@ -1,9 +1,8 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * SessionValidator that retrieves correct cookie from headers
+ * behind an ELB.
  */
 
 namespace Application\Session;
@@ -18,20 +17,55 @@ use Zend\Session\Validator\RemoteAddr;
  */
 class BalancedRemoteAddr extends RemoteAddr{
     
-    public static function getUseProxy() {
-        return true;
+    const METADATA_ELB = "(ELB)";
+    const METADATA_REMOTE_ADDR = "(REMOTE_ADDR)";
+    
+    protected function getIpAddress() {
+        //Just get the headers if we can or else use the SERVER global
+        if ( function_exists( 'apache_request_headers' ) ) {
+            $headers = apache_request_headers();
+        } else {
+            $headers = $_SERVER;
+        }
+        //Get the forwarded IP if it exists
+        if ( array_key_exists( 'X-Forwarded-For', $headers ) && 
+                filter_var( $headers['X-Forwarded-For'], 
+                        FILTER_VALIDATE_IP, 
+                        FILTER_FLAG_IPV4 ) ) {
+            $the_ip = $headers['X-Forwarded-For'];
+        } elseif ( array_key_exists( 'HTTP_X_FORWARDED_FOR', $headers ) && 
+                filter_var( $headers['HTTP_X_FORWARDED_FOR'], 
+                        FILTER_VALIDATE_IP, 
+                        FILTER_FLAG_IPV4 )
+        ) {
+            $the_ip = $headers['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $the_ip = filter_var( $_SERVER['REMOTE_ADDR'], 
+                    FILTER_VALIDATE_IP, 
+                    FILTER_FLAG_IPV4 );
+        }
+        return $the_ip;
     }
 
-    //UserAgent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.87 Safari/537.36
-    
     public function isValid()
     {
-        $this->log(__LINE__, "IPAddress: " . $this->getIpAddress() . " this->data: " . $this->getData());
+        $msg_addr = "IPAddress: " . $this->getIpAddress() . " this->data: " . $this->getData();
+        $elbIpAddress = $this->getServer("REMOTE_ADDR");
+        $msg_elb = "IPAddress: " . $elbIpAddress;
+        $this->log(__LINE__, $msg_addr, $this::METADATA_REMOTE_ADDR);
+        $this->log(__LINE__, $msg_elb, $this::METADATA_ELB);
         return ($this->getIpAddress() === $this->getData());
     }
     
-    private function log($line, $msg){
-        Logger::info("BalancedRemoteAddr", $line, $msg);
+    private function log($line, $msg, $metadata = ""){
+        $shortName = "BalancedRemoteAddr";
+        Logger::info($shortName . $metadata, $line, $msg);
+    }
+    
+    private function getServer($key){
+        return isset($_SERVER[$key])
+                   ? $_SERVER[$key]
+                   : null;
     }
 
     

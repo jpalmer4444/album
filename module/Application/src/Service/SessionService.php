@@ -1,9 +1,7 @@
 <?php
 
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Manages Session Data.
  */
 
 namespace Application\Service;
@@ -23,68 +21,113 @@ use Zend\Session\SessionManager;
  *
  * @author jasonpalmer
  */
-class SessionService {
+class SessionService extends BaseService {
 
+    protected $cookieLifetime;
+
+    /**
+     * Session ID
+     * @see session_id()
+     * @var string
+     */
     protected $sessionId;
+
+    /**
+     * UserRepository
+     * @var DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl
+     */
     protected $userrepository;
+
+    /**
+     * UserRoleXrefRepository
+     * @var DataAccess\FFM\Entity\Repository\Impl\UserRoleXrefRepositoryImpl
+     */
     protected $userrolexrefrepository;
+
+    /**
+     * Roles
+     * @var DataAccess\FFM\Entity\UserRoleXref
+     */
     protected $roles;
+
+    /**
+     * SessionManager
+     * @var Zend\Session\SessionManager
+     */
     protected $sessionManager;
+
+    /**
+     * Salesperson In Play
+     * @var DataAccess\FFM\Entity\User
+     */
     protected $salespersoninplay;
+
+    /**
+     * User
+     * @var DataAccess\FFM\Entity\User
+     */
     protected $user;
+
+    /**
+     * Request
+     * @var Zend\Http\Request
+     */
     protected $request;
 
-    public function __construct(UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository, SessionManager $sessionManager, Request $request, Response $response) {
-        $this->userrepository = $userrepository;
-        $this->userrolexrefrepository = $userrolexrefrepository;
-        $this->request = $request;
-        $this->response = $response;
-        $this->sessionManager = $sessionManager;
-        //$sessionManager->start();
-        $this->sessionId = $sessionManager->getId();
+    /**
+     * Response
+     * @var Zend\Http\Response
+     */
+    protected $response;
+
+    public function __construct(
+    UserRepositoryImpl $userrepository, UserRoleXrefRepositoryImpl $userrolexrefrepository, SessionManager $sessionManager, Request $request, Response $response, $cookieLifetime = 86400) {
+        $this->cookieLifetime = $cookieLifetime;
+        $this->setUserRepository($userrepository);
+        $this->setUserRoleXrefRepository($userrolexrefrepository);
+        $this->setRequest($request);
+        $this->setResponse($response);
+        $this->setSessionManager($sessionManager);
+        $this->setSessionId($this->sessionManager->getId());
         if (!$this->sessionId) {
-            if ($sessionManager->isValid()) {
-                $sessionManager->start();
-                $this->sessionId = $sessionManager->getId();
-            }else{
-                $sessionManager->destroy();
-                $sessionManager->start(TRUE);
+            if ($this->sessionManager->isValid()) {
+                $this->sessionManager->start();
+                $this->sessionId = $this->sessionManager->getId();
             }
         }
-        Logger::info("SessionService", __LINE__, "(CONSTRUCTOR) Session Id: " . $this->sessionId);
-        
+        $this->log(this::class, __LINE__, "(CONSTRUCTOR) Session Id: " . $this->sessionId);
         $this->doLookup();
     }
 
     public function login($username, $session_id = NULL) {
         try {
             $this->sessionId = !empty($session_id) ? $session_id : $this->sessionManager->getId();
-            Logger::info("SessionService", __LINE__, "(LOGIN) Session Id: " . $this->sessionId);
-            Logger::info("SessionService", __LINE__, "(LOGIN) username: " . $username);
+            $this->log(this::class, __LINE__, "(LOGIN) Session Id: " . $this->sessionId);
+            $this->log(this::class, __LINE__, "(LOGIN) username: " . $username);
             $user = $this->userrepository->findUser($username);
             $user->setSessionId($this->sessionId);
             $user->setLastLogin(new DateTime());
             $this->userrepository->mergeAndFlush($user);
             $this->user = $user;
-            Logger::info("SessionService", __LINE__, "(LOGIN) Saved Session ID: " . $user->getSessionId());
+            $this->log(this::class, __LINE__, "(LOGIN) Saved Session ID: " . $user->getSessionId());
             if (!empty($this->user)) {
                 $roleXrefs = $this->userrolexrefrepository->findBy(array('username' => $this->user->getUsername()));
                 $this->roles = [];
                 $idx = 0;
-                Logger::info("SessionService", __LINE__, "(LOGIN) Adding Roles: " . print_r($roleXrefs, TRUE));
+                $this->log(this::class, __LINE__, "(LOGIN) Adding Roles: " . print_r($roleXrefs, TRUE));
                 foreach ($roleXrefs as $role) {
                     $this->roles[$idx++] = $role;
                 }
                 $salespersoninplayusernamecookie = $this->getCookie('salesperson');
-                Logger::info("SessionService", __LINE__, "(LOGIN) Looked up salesperson: " . (!empty($salespersoninplayusernamecookie) ? $salespersoninplayusernamecookie : "NULL"));
+                $this->log(this::class, __LINE__, "(LOGIN) Looked up salesperson: " . (!empty($salespersoninplayusernamecookie) ? $salespersoninplayusernamecookie : "NULL"));
                 if (!empty($salespersoninplayusernamecookie)) {
                     $this->salespersoninplay = $this->userrepository->findUser($salespersoninplayusernamecookie);
                 }
             } else {
-                Logger::info("SessionService", __LINE__, "Login Failed!");
+                $this->log(this::class, __LINE__, "Login Failed!");
             }
-        } catch (Exception $exc) {
-            Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
+        } catch (\Exception $exc) {
+            $this->log(this::class, __LINE__, "Exception: " . $exc->getTraceAsString());
         }
     }
 
@@ -105,11 +148,11 @@ class SessionService {
             $this->deleteCookie("salesperson");
             $this->deleteCookie("requestedRoute");
             $this->sessionManager->getStorage()->clear();
-            while($this->sessionManager->sessionExists()){
+            while ($this->sessionManager->sessionExists()) {
                 $this->sessionManager->destroy();
             }
-        } catch (Exception $exc) {
-            Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
+        } catch (\Exception $exc) {
+            $this->log(this::class, __LINE__, "Exception: " . $exc->getTraceAsString());
         }
     }
 
@@ -127,22 +170,28 @@ class SessionService {
                     $this->salespersoninplay = $this->userrepository->findUser($salespersoninplayusernamecookie);
                 }
             } else {
-                Logger::info("SessionService", __LINE__, "No Session data found.");
+                $this->log(this::class, __LINE__, "No Session data found.");
             }
         } catch (\Exception $exc) {
-            Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
+            $this->log(this::class, __LINE__, "Exception: " . $exc->getTraceAsString());
         }
     }
 
-    private function setCookie($name, $value, $timeplus = 3600) {
+    private function setCookie($name, $value, $timeplus) {
+        if (empty($timeplus)) {
+            $timeplus = $this->cookieLifetime;
+        }
         try {
             $this->createCookie($name, $value, $timeplus);
-        } catch (Exception $exc) {
-            Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
+        } catch (\Exception $exc) {
+            $this->log(this::class, __LINE__, "Exception: " . $exc->getTraceAsString());
         }
     }
 
-    private function createCookie($name, $value, $timeplus = 3600) {
+    private function createCookie($name, $value, $timeplus) {
+        if (empty($timeplus)) {
+            $timeplus = $this->cookieLifetime;
+        }
         // create a cookie
         $cookie = new SetCookie(
                 $name, $value, time() + $timeplus, // 1 year lifetime
@@ -166,12 +215,15 @@ class SessionService {
             if ($cookie->offsetExists($name)) {
                 return $cookie->offsetGet($name);
             }
-        } catch (Exception $exc) {
-            Logger::info("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
+        } catch (\Exception $exc) {
+            $this->log(this::class, __LINE__, "Exception: " . $exc->getTraceAsString());
         }
     }
 
-    public function addRequestedRoute($requestedRoute, $seconds = 3600) {
+    public function addRequestedRoute($requestedRoute, $seconds) {
+        if (empty($seconds)) {
+            $seconds = $this->cookieLifetime;
+        }
         //adds a 1 hour cookie.
         $this->setCookie('requestedRoute', $requestedRoute, $seconds);
     }
@@ -181,9 +233,11 @@ class SessionService {
         return !empty($cookie) ? $cookie : NULL;
     }
 
-    public function addSalespersonInPlay($salespersoninplayusername, $seconds = 3600) {
+    public function addSalespersonInPlay($salespersoninplayusername) {
+        $seconds = $this->cookieLifetime;
+
         //adds a 1 hour cookie.
-        Logger::info("UsersController", __LINE__, 'Added Salespersoninplay: ' . $salespersoninplayusername);
+        $this->log(this::class, __LINE__, 'Added Salespersoninplay: ' . $salespersoninplayusername);
         $this->setCookie('salesperson', $salespersoninplayusername, $seconds);
     }
 
@@ -191,7 +245,7 @@ class SessionService {
         $role = $this->getRole();
         $roleArr = array($role => $role);
         //$roleStr will be a boolean if there is no roles present in session.
-        Logger::info("SessionService", __LINE__, strval($roleArr[$role]));
+        $this->log(this::class, __LINE__, strval($roleArr[$role]));
         return !empty($roleArr) ? array_key_exists("admin", $roleArr) : false;
     }
 
@@ -227,6 +281,31 @@ class SessionService {
         $facade = empty($this->salespersoninplay);
         return $facade ? $this->getUser() :
                 $this->getSalespersonInPlay();
+    }
+
+    //Private
+    private function setUserRepository($userrepository) {
+        $this->userrepository = $userrepository;
+    }
+
+    private function setUserRoleXrefRepository($userrolexrefrepository) {
+        $this->userrolexrefrepository = $userrolexrefrepository;
+    }
+
+    private function setRequest($request) {
+        $this->request = $request;
+    }
+
+    private function setResponse($response) {
+        $this->response = $response;
+    }
+
+    private function setSessionManager($sessionManager) {
+        $this->sessionManager = $sessionManager;
+    }
+
+    private function setSessionId($sessionId) {
+        $this->sessionId = $sessionId;
     }
 
 }

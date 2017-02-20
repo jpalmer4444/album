@@ -13,17 +13,21 @@ use DateTimeZone;
 class DateUtils {
     
     public static function getDailyCutoff() {
-        $pre1pm = false;
-        if (date('H') < 13) {
-            $pre1pm = true;
-        }
-        if ($pre1pm) {
+        //Jeff asked for temporary override to return all rows and not limiting by cutoff
+        //$pre1pm = false;
+        //if (date('H') < 13) {
+        //    $pre1pm = true;
+        //}
+        //if ($pre1pm) {
             //it is before 1:00PM UTC now - so set the query to retrieve all rows since yesterday at 1:00PM
-            return DateUtils::fromOneToOne();
-        } else {
+        //    return DateUtils::fromOneToOne();
+        //} else {
             //it is after 1:00PM UTC now - so set the query to retrieve all rows since today at 1:00PM
-            return DateUtils::fromOne();
-        }
+        //    return DateUtils::fromOne();
+        //}
+        $date = new DateTime();
+        $date->setDate(2017, 1, 1);
+        return $date;
     }
 
     public static function fromOne() {
@@ -36,7 +40,6 @@ class DateUtils {
     
     private static function getDateTime($start){
         $date = strtotime($start);
-        $time = "13:00:00"; //overwrite time to 1:00 if it is after 1:00.
         $tz_string = "US/Samoa"; // Use one from list of TZ names http://php.net/manual/en/timezones.php UTC?
         $tz_object = new DateTimeZone($tz_string);
         $datetime = new DateTime();

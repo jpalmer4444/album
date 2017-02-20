@@ -1,20 +1,34 @@
 <?php
-    $form = $this->form;
-    $this->headLink()
-            ->appendStylesheet($this->basePath() . 'mycss/login.css');
-    $form->setAttribute('action', $this->url(
-                    'login/process', array(
-                'action' => 'authenticate',
-                        )
-    ));
-    $form->setAttribute('class', 'form-signin');
-    $form->prepare();
-    $formLabel = $this->plugin('formLabel');
-    $username = $form->get('username');
-    $submit = $form->get('submit');
-    $rememberme = $form->get('rememberme');
-    $password = $form->get('password');
+$form = $this->form;
+$this->headLink()
+        ->appendStylesheet($this->basePath() . 'mycss/login.css');
+$form->setAttribute('action', $this->url(
+                'login/process', array(
+            'action' => 'authenticate',
+                )
+));
+$form->setAttribute('class', 'form-signin');
+$form->prepare();
+$formLabel = $this->plugin('formLabel');
+$username = $form->get('username');
+$submit = $form->get('submit');
+$rememberme = $form->get('rememberme');
+$password = $form->get('password');
 ?>
+
+<style>
+    ul {
+        list-style-type: none;
+    }
+    .login-list{
+        width: 90%;
+        text-align: center;
+    }
+    .error{
+        font-weight: bold;
+        color: red;
+    }
+</style>
 
 <div class="container">
     <div class="row">
@@ -24,14 +38,20 @@
                 <img class="profile-img"
                      src="https://lh5.googleusercontent.com/-b0-k99FZlyE/AAAAAAAAAAI/AAAAAAAAAAA/eu7opA4byxI/photo.jpg?sz=120"
                      alt="">
-                <?php echo $this->form()->openTag($form) ?>
-                    <?php echo $this->formInput($username) ?>
-                    <?php echo $this->formInput($password) ?>
-                    <?php echo $this->formSubmit($submit) ?>
-                    <label class="checkbox pull-left">
-                        
-                    </label>
-                <?php echo $this->form()->closeTag() ?>
+                     <?php echo $this->form()->openTag($form) ?>
+                     <?php echo $this->formInput($username) ?>
+                     <?php echo $this->formInput($password) ?>
+                     <?php echo $this->formSubmit($submit) ?>
+                     <?php echo $this->form()->closeTag() ?>
+                     <?php
+                     if ($this->messages) {
+                         echo '<ul class="login-list">';
+                         foreach ($this->messages as $message) {
+                             echo '<li class="error">' . $message . '</li>';
+                         }
+                         echo '</ul>';
+                     }
+                     ?>
             </div>
         </div>
     </div>

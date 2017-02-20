@@ -2,17 +2,18 @@
 
 namespace Sales\Factory;
 
+use Interop\Container\ContainerInterface;
 use Sales\Controller\SalesController;
-use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Description of SalesControllerFactory
  *
  * @author jasonpalmer
  */
-class SalesControllerFactory {
+class SalesControllerFactory implements FactoryInterface{
 
-    public function __invoke(ServiceManager $container) {
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL) {
         return new SalesController(
                 $container, 
                 $container->get('FFMEntityManager'), 

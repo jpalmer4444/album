@@ -24,7 +24,7 @@ class ProductRepositoryImpl extends FFMRepository {
             $product->setId($this->findMaxNegative());
             $this->getEntityManager()->getConnection()->commit();
             return $product;
-        } catch (Exception $exc) {
+        } catch (\Exception $exc) {
             $this->getEntityManager()->getConnection()->rollBack();
             throw $exc;
         }

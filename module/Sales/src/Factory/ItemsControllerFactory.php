@@ -2,17 +2,18 @@
 
 namespace Sales\Factory;
 
+use Interop\Container\ContainerInterface;
 use Sales\Controller\ItemsController;
-use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Description of ItemsControllerFactory
  *
  * @author jasonpalmer
  */
-class ItemsControllerFactory {
+class ItemsControllerFactory implements FactoryInterface{
     
-    public function __invoke(ServiceManager $container) {
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL) {
         $loggingService = $container->get('LoggingService');
                     $sessionService = $container->get('SessionService');
                     $pricingconfig = $container->get('config')['pricing_config'];

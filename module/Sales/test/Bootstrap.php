@@ -122,7 +122,7 @@ class Bootstrap {
 try {
     Bootstrap::init();
     Bootstrap::chroot();
-} catch (Exception $exc) {
+} catch (\Exception $exc) {
     echo $exc->getTraceAsString();
 }
 

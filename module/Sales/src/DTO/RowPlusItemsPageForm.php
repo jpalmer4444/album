@@ -71,9 +71,8 @@ class RowPlusItemsPageForm extends Form {
                 ),
             ],
             'attributes' => array(
-                'class' => 'form-control',
-                'data-rule-number' => true,
-                'data-msg-number' => 'Override Price must be a valid dollar amount'
+                'class' => 'form-control ffm-money',
+                'data-msg-money' => 'Override Price must be a valid dollar amount < 10,000.00'
             ),
         ]);
         $this->add([

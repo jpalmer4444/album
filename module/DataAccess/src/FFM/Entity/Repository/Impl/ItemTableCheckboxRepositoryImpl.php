@@ -27,7 +27,7 @@ class ItemTableCheckboxRepositoryImpl extends FFMRepository {
             if (!empty(count($arr))) {
                 return $arr[0];
             }
-        } catch (Exception $exc) {
+        } catch (\Exception $exc) {
             Logger::info("ItemTableCheckboxRepositoryImpl", __LINE__, $exc->getTraceAsString());
         }
     }

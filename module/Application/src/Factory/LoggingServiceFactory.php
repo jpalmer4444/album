@@ -3,17 +3,18 @@
 namespace Application\Factory;
 
 use Application\Service\LoggingService;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Description of LoggingServiceFactory
  *
  * @author jasonpalmer
  */
-class LoggingServiceFactory {
+class LoggingServiceFactory implements FactoryInterface{
 
-    public function __invoke(ServiceLocatorInterface $sm) {
-        return new LoggingService($sm->get('Log\\App'));
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL) {
+        return new LoggingService($container->get('Log\\App'));
     }
 
 }

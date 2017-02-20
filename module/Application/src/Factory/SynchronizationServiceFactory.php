@@ -2,7 +2,7 @@
 
 namespace Application\Factory;
 
-use Application\Service\RestService;
+use Application\Service\SynchronizationService;
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
@@ -11,10 +11,11 @@ use Zend\ServiceManager\Factory\FactoryInterface;
  *
  * @author jasonpalmer
  */
-class RestServiceFactory implements FactoryInterface{
+class SynchronizationServiceFactory implements FactoryInterface {
 
     public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL) {
-        return new RestService($container);
+        //need to rewrite this for testing! Which means injecting objects!
+        return new SynchronizationService($container);
     }
 
 }

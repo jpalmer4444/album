@@ -3,7 +3,6 @@
 namespace Ajax\Service\Sales;
 
 use Ajax\Service\Sales\ItemsFilterTableArrayService;
-use Application\Utility\DateUtils;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
 
@@ -14,12 +13,12 @@ use DataAccess\FFM\Entity\RowPlusItemsPage;
  */
 class ItemsFilterTableArrayService  {
     
-    const QUERY_PAGES = "SELECT rowPlus FROM DataAccess\FFM\Entity\RowPlusItemsPage rowPlus WHERE rowPlus._created >= :created AND rowPlus._active = 1 AND rowPlus._customerid = :customerid AND rowPlus._salesperson = :salesperson ORDER BY rowPlus._created DESC";
+    const QUERY_PAGES = "SELECT rowPlus FROM DataAccess\FFM\Entity\RowPlusItemsPage rowPlus WHERE rowPlus._created >= :created AND rowPlus._active = 1 AND rowPlus._customerid = :customerid AND rowPlus._salesperson = :salesperson GROUP BY rowPlus.productname ORDER BY rowPlus._created DESC";
     
-    const QUERY_OVERRIDES = "SELECT override FROM DataAccess\FFM\Entity\ItemPriceOverride override WHERE override._created >= :created AND override._active = 1 AND override._customerid = :customerid AND override._salesperson = :salesperson GROUP BY override.id ORDER BY override._created DESC";
-    
+    const QUERY_OVERRIDES = "SELECT override FROM DataAccess\FFM\Entity\ItemPriceOverride override WHERE override._created >= :created AND override._active = 1 AND override._customerid = :customerid AND override._salesperson = :salesperson GROUP BY override.id ORDER BY override._created ASC";
 
     protected $logger;
+    protected $dateService;
     protected $pricingconfig;
     protected $sessionService;
     protected $entityManager;
@@ -29,6 +28,7 @@ class ItemsFilterTableArrayService  {
 
     public function __construct($sm) {
         $this->logger = $sm->get('LoggingService');
+        $this->dateService = $sm->get('DateService');
         $this->sessionService = $sm->get('SessionService');
         $this->pricingconfig = $sm->get('config')['pricing_config'];
         $this->entityManager = $sm->get('FFMEntityManager');
@@ -55,7 +55,6 @@ class ItemsFilterTableArrayService  {
         $msg = 'Retrieved ' . count($restcallitems) . ' ' . $this->pricingconfig['by_sku_object_items_controller'] . '.';
         Logger::debug("ItemsFilterTableArrayService", __LINE__, $msg);
         $merged = array();
-        $customer = $this->customerrepository->findCustomer($customerid);
 
         //add override column for override price
         foreach ($restcallitems as &$item) {
@@ -63,7 +62,6 @@ class ItemsFilterTableArrayService  {
         }
 
         //now lookup any RowPlusItemsPage rows that are active and add them to the results.
-        //take care to only get latest rows and ignoring any rows added previously today.
         $rowPlusItemPages = $this->query(
                 ItemsFilterTableArrayService::QUERY_PAGES, $customerid
         );
@@ -97,10 +95,6 @@ class ItemsFilterTableArrayService  {
 
         Logger::info("ItemsFilterTableArrayService", __LINE__, 'Found ' . count($removedSKUS) . ' removedSKUs in Session!');
 
-        //foreach ($removedSKUS as $removed) {
-        //Logger::info("ItemsFilterTableArrayService", __LINE__, 'Setting checkbox for table row with SKU: ' . $removed);
-        //}
-        //create a selected field for each REST call item based on removed SKUs.
         $removedIDS = array();
         foreach ($removedSKUS as $product) {
             $removedIDS [] = $product->getId();
@@ -112,12 +106,6 @@ class ItemsFilterTableArrayService  {
             $adjWholesale = "";
             $adjRetail = "";
             $adjOverrideprice = $item->getOverrideprice();
-
-            //if override exists - then graph it in.
-            //if (array_key_exists(strval($item->getId()), $overrideMap)) {
-            //$adjOverrideprice = $overrideMap[strval($item->getProduct()->getId())];
-            //Logger::info("ItemsFilterTableArrayService", __LINE__, "ItemsFilterTableArrayService: Found Override in map: " . $adjOverrideprice);
-            //}
 
             Logger::info("ItemsFilterTableArrayService", __LINE__, "RowPlusItemPage.Id: " . $item->getId());
 
@@ -148,7 +136,7 @@ class ItemsFilterTableArrayService  {
         //needs to be aware of admin role because if the User is an admin - they need to see the Products for the selected salesperson.
         return $this->entityManager->getEntityManager()->
                         createQuery($q)->setParameter("customerid", $customerid)->
-                        setParameter("created", DateUtils::getDailyCutoff())->
+                        setParameter("created", $this->dateService->getDailyCutoff())->
                         setParameter("salesperson", $this->sessionService->admin() && !empty($this->sessionService->getSalespersonInPlay()) ?
                                 $this->sessionService->getSalespersonInPlay()->getUsername() :
                                 $this->sessionService->getUser()->getUsername())

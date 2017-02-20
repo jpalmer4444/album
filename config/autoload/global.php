@@ -19,7 +19,7 @@ use Zend\Session\Storage\SessionArrayStorage;
 return [
     'session_config' => [
         // Cookie expires in 24 hours
-        'cookie_lifetime' => 36000,
+        'cookie_lifetime' => 86400,
         'cookie_secure' => true
     ],
     'session_manager' => [

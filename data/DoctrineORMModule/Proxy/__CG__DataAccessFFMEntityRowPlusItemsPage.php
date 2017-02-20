@@ -474,15 +474,4 @@ class RowPlusItemsPage extends \DataAccess\FFM\Entity\RowPlusItemsPage implement
         return parent::bind($form, $postData, $instance);
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function setLogger($logger)
-    {
-
-        $this->__initializer__ && $this->__initializer__->__invoke($this, 'setLogger', [$logger]);
-
-        return parent::setLogger($logger);
-    }
-
 }

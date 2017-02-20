@@ -218,7 +218,7 @@ var generateDetailsModalBody = function (rowIdx, columns) {
                                                     <div class="col-md-4">\n\
                                                         <div class="input-group">\n\
                                                             <div class="input-group-addon">$</div>\n\
-                                                            <input type="text" class="form-control" value="' + overrideprice + '" required data-msg="Override Price is required" id="overrideprice" aria-describedby="priceHelpInline" placeholder="Price">\n\
+                                                            <input type="text" class="form-control ffm-money" value="' + overrideprice + '" data-msg-money="Override Price must be a valid dollar amount < 10,000.00" id="overrideprice" name="overrideprice" aria-describedby="priceHelpInline" placeholder="Price">\n\
                                                         </div>\n\
                                                     </div>\n\
                                                     \n\

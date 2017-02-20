@@ -9,7 +9,7 @@
         
       - name: Zip pricing
         shell: |
-            cd /u/local/jasonpalmer/
+            cd {{ lookup('env','PROJECT_HOME_DIR') }}/
             zip -r pricing.zip pricing/
             
       - name: SCP pricing

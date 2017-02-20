@@ -3,17 +3,18 @@
 namespace Application\Factory;
 
 use Application\Service\PredisService;
-use Zend\ServiceManager\ServiceLocatorInterface;
+use Interop\Container\ContainerInterface;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Description of LoggingServiceFactory
  *
  * @author jasonpalmer
  */
-class PredisServiceFactory {
+class PredisServiceFactory implements FactoryInterface{
 
-    public function __invoke(ServiceLocatorInterface $sm) {
-        return new PredisService($sm);
+    public function __invoke(ContainerInterface $container, $requestedName, mixed $options = null) {
+        return new PredisService($container);
     }
 
 }

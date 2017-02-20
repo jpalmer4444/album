@@ -53,13 +53,13 @@
                 </div>
                 <div id="navbar5" class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
-                        
+
                         <?php if (isset($this->FFM_SESSION["user"]) && count($this->FFM_SESSION["user"]) > 0): ?>
                             <li>
                                 <a href="<?php echo $this->url('login/process', array('action' => 'logout')); ?>">Logout</a>
                             </li>
                         <?php endif; ?>
-                            
+
                         <?php if (isset($this->FFM_SESSION["roles"]) && count($this->FFM_SESSION["roles"]) > 0): ?>
                             <?php if ($this->FFM_SESSION["roles"][0]->getRole() == "admin"): ?>
                                 <li>
@@ -71,7 +71,7 @@
                                 </li>
                             <?php endif; ?>
                         <?php endif; ?>
-                                
+
                         <?php if (isset($this->FFM_SESSION["user"])): ?>
                             <li>
                                 <a 
@@ -83,8 +83,8 @@
                                     href="<?= $this->url('users') ?>">Customers</a>
                             </li>
                         <?php endif; ?>
-                            
-                            
+
+
                     </ul>
                 </div>
                 <!--/.nav-collapse -->

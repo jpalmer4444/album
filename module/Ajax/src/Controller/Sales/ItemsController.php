@@ -2,15 +2,11 @@
 
 namespace Ajax\Controller\Sales;
 
+use Application\Service\FFMEntityManagerService;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\ItemPriceOverride;
-use DataAccess\FFM\Entity\Product;
-use DataAccess\FFM\Entity\UserProduct;
 use DateTime;
 use Doctrine\DBAL\LockMode;
-use Doctrine\ORM\Query\Expr\From;
-use Doctrine\ORM\Query\Expr\OrderBy;
-use Doctrine\ORM\Query\Expr\Select;
 use Exception;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\Mvc\MvcEvent;
@@ -25,19 +21,34 @@ use Zend\View\Model\JsonModel;
 class ItemsController extends AbstractRestfulController {
 
     protected $restService;
-    protected $logger;
     protected $sessionManager;
     protected $pricingconfig;
     protected $entityManager;
     protected $itemsFilterService;
     protected $checkboxService;
     protected $productrepository;
-    protected $userproductrepository;
+    protected $itempriceoverriderepository;
     protected $customerrepository;
     protected $rowplusitemspagerepository;
     protected $customerid;
-    protected $qb;
     protected $sessionService;
+    protected $synchronizationService;
+
+    public function __construct($container) {
+        Logger::info("ItemsController", __LINE__, 'Building ItemController (AJAX).');
+        $this->restService = $container->get('RestService');
+        $this->synchronizationService = $container->get('SynchronizationService');
+        $this->checkboxService = $container->get('CheckboxService');
+        $this->pricingconfig = $container->get('config')['pricing_config'];
+        $this->entityManager = $this->getEntityManager($container);
+        $this->itemsFilterService = $container->get('ItemsFilterTableArrayService');
+        $this->sessionService = $container->get('SessionService');
+        $this->sessionManager = $container->get(SessionManager::class);
+        $this->productrepository = $this->getRepo('DataAccess\FFM\Entity\Product', $container);
+        $this->rowplusitemspagerepository = $this->getRepo('DataAccess\FFM\Entity\RowPlusItemsPage', $container);
+        $this->customerrepository = $this->getRepo('DataAccess\FFM\Entity\Customer', $container);
+        $this->itempriceoverriderepository = $this->getRepo('DataAccess\FFM\Entity\ItemPriceOverride', $container);
+    }
 
     public function onDispatch(MvcEvent $e) {
         Logger::info("ItemsController", __LINE__, "" . $e->getParam("request")->getRequestUri());
@@ -48,43 +59,38 @@ class ItemsController extends AbstractRestfulController {
         }
     }
 
-    function getEntityManager($container) {
+    /**
+     * Returns an instance of FFMEntityManagerService
+     * @param type $container
+     * @return FFMEntityManagerService
+     */
+    private function getEntityManager($container) {
         return $container->get('FFMEntityManager')->getEntityManager();
     }
 
-    function getRepo($model, $container) {
+    private function getRepo($model, $container) {
         return $this->getEntityManager($container)->
                         getRepository($model);
     }
 
-    function getQueryBuilder($container) {
-        return $this->getEntityManager($container)->
-                        createQueryBuilder();
-    }
-
-    public function __construct($container) {
-        Logger::info("ItemsController", __LINE__, 'Building ItemController (AJAX).');
-        $this->restService = $container->get('RestService');
-        $this->checkboxService = $container->get('CheckboxService');
-        $this->logger = $container->get('LoggingService');
-        $this->pricingconfig = $container->get('config')['pricing_config'];
-        $this->entityManager = $this->getEntityManager($container);
-        $this->itemsFilterService = $container->get('ItemsFilterTableArrayService');
-        $this->sessionService = $container->get('SessionService');
-        $this->sessionManager = $container->get(SessionManager::class);
-        $this->productrepository = $this->getRepo('DataAccess\FFM\Entity\Product', $container);
-        $this->rowplusitemspagerepository = $this->getRepo('DataAccess\FFM\Entity\RowPlusItemsPage', $container);
-        $this->customerrepository = $this->getRepo('DataAccess\FFM\Entity\Customer', $container);
-        $this->userproductrepository = $this->getRepo('DataAccess\FFM\Entity\UserProduct', $container);
-        $this->qb = $this->getQueryBuilder($container);
-    }
-
     //framework calls get when an id parameter is not found in request
+    /**
+     * When an id is <strong>NOT</strong> present in query parameters the Zend Framework will automatically
+     * dispatch such a request to the getList() method in the mapped controller. 
+     * 
+     * This method is used for several cases (based on "myaction" parameter):
+     *      1. select
+     *          Used 
+     * 
+     * 
+     * ** I am unsure if this is only true when the Request is a Json Request based on Accept header.
+     * 
+     * @return JsonModel
+     */
     public function getList() {
+
         Logger::info("ItemsController", __LINE__, 'ItemsController Ajax called.');
-        $username = $this->params()->fromQuery("username");
-        $session_id = $this->params()->fromQuery("session_id");
-        $this->sessionService->login($username, $session_id);
+        $this->forceSessionLogin();
         switch ($this->params()->fromQuery("myaction")) {
             case "select" : {
                     return $this->select();
@@ -102,9 +108,7 @@ class ItemsController extends AbstractRestfulController {
     //framework calls get when an id parameter is found in request
     public function get($id) {
         Logger::info("ItemsController", __LINE__, 'ItemsController Ajax called.');
-        $username = $this->params()->fromQuery("username");
-        $session_id = $this->params()->fromQuery("session_id");
-        $this->sessionService->login($username, $session_id);
+        $this->forceSessionLogin();
         switch ($this->params()->fromQuery("myaction")) {
             case "overridePrice" :
             default : {
@@ -113,116 +117,183 @@ class ItemsController extends AbstractRestfulController {
         }
     }
 
-    public function rest($url, $method = "GET", $params = []) {
+    private function forceSessionLogin() {
+        $username = $this->params()->fromQuery("username");
+        $session_id = $this->params()->fromQuery("session_id");
+        $this->sessionService->login($username, $session_id);
+    }
+
+    public function makeRestCall($url, $method = "GET", $params = []) {
         return $this->restService->rest($url, $method, $params);
     }
 
-    function ifstrpos($var) {
-        return (strpos($var, 'P') !== false);
+    function transaction() {
+        $this->entityManager->getConnection()->beginTransaction();
     }
 
-    function getItemPriceOverride($customerid, $id) {
+    function saveItemPriceOverride($record, $rowIndex) {
+        try {
+            $this->transaction();
+            Logger::info("ItemsController", __LINE__, 'Calling saveItemPriceOverride');
+            $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->sessionService->getSalespersonInPlay()) ?
+                    $this->sessionService->getUser()->getUsername() :
+                    $this->sessionService->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
+            $record->setSalesperson($salesperson);
+            $this->persistRecord($record);
+            Logger::info("ItemsController", __LINE__, 'ItemPriceOverride saved.');
+            return new JsonModel(array(
+                'success' => true, 'index' => $rowIndex, 'overrideprice' => $record->getOverrideprice()
+            ));
+        } catch (Exception $e) {
+            $this->entityManager->getConnection()->rollBack();
+            Logger::info("ItemsController", __LINE__, strval($e));
+            return new JsonModel(array(
+                'success' => false,
+            ));
+        }
+    }
+
+    private function persistRecord($record) {
+        
+        $this->entityManager->persist($record);
+        $this->entityManager->flush();
+        $this->entityManager->getConnection()->commit();
+        
+    }
+
+    function setLatestOverridePriceInactive($customerid, $salespersonusername, $productid, $rowIndex) {
+        
+        Logger::info("ItemsController", __LINE__, 'find ItemPriceOverride salesperson: ' . $salespersonusername . " ProductId: " . $productid . " CustomerId: " . $customerid);
+        
+        $record = $this->itempriceoverriderepository->findItemPriceOverride($salespersonusername, $productid, $customerid);
+        
+        if (!empty($record)) {
+            $record->setActive(0);
+            $this->itempriceoverriderepository->mergeAndFlush($record);
+            $nextrecord = $this->itempriceoverriderepository->findItemPriceOverride($salespersonusername, $productid, $customerid);
+        }
+        
+        Logger::info("ItemsController", __LINE__, 'ItemPriceOverride set inactive.');
+        
+        return new JsonModel(array(
+            'success' => true,
+            'index' => $rowIndex,
+            'overrideprice' => !empty($nextrecord) ? $nextrecord->getOverrideprice() : ''
+        ));
+    }
+
+    private function parameter($param) {
+        return $this->params()->fromQuery($param);
+    }
+
+    private function overridePriceOnItemPriceOverride($id) {
+
+        //test if price is zero
+        if (empty($this->parameter('overrideprice'))) {
+
+            return $this->setLatestOverridePriceInactive(
+                            $this->parameter('customerid'), $this->parameter('salesperson'), 
+                            substr($id, 1), $this->parameter('index')
+            );
+        }
+
+        //save overridePrice in DB
+        $record = $this->createNewItemPriceOverride(
+                $this->parameter('customerid'), $id, 
+                $this->parameter('overrideprice')
+                );
+
+        return $this->saveItemPriceOverride($record, $this->parameter('index'));
+    }
+
+    private function createNewItemPriceOverride($customerid, $id, $overrideprice) {
         $record = new ItemPriceOverride();
+        $created = new DateTime("now");
+        $record->setCreated($created);
+        $record->setOverrideprice($overrideprice);
+        $record->setActive(true);
+        $this->setCustomerOnRecord($customerid, $record);
+        $this->setProductOnRecord(substr($id, 1), $record);
+        return $record;
+    }
+
+    private function setCustomerOnRecord($customerid, $record) {
+        $customer = $this->customerrepository->findCustomer($customerid);
+        $record->setCustomer($customer);
+    }
+
+    private function setProductOnRecord($productid, $record) {
+        $product = $this->productrepository->findProduct($productid);
+        $record->setProduct($product);
+    }
+
+    protected function overridePrice($id) {
+        //log this action
+        Logger::info("ItemsController", __LINE__, 'Saving overrideprice: ' . $this->parameter('overrideprice') . '.');
+
+        //test type of ID to know which kind of record to add
+        if ($this->ifRowPlusItemsPageID($id)) {
+
+            return $this->overridePriceOnItemPriceOverride($id);
+        } else {
+            //update existing RowPlusItemsPage row
+
+            return $this->saveRowPlusItemsPage($id, $this->parameter('index'));
+        }
+    }
+
+    private function saveRowPlusItemsPage($id, $rowIndex) {
+
+        try {
+            //lookup the record
+            $record = $this->getRowPlusItemsPage($this->parameter('customerid'), $id, $this->parameter('overrideprice'));
+            //start a transaction
+            $this->transaction();
+            //lookup salesperson
+            $salesperson = $this->getSalesperson();
+            //set salesperson
+            $record->setSalesperson($salesperson);
+            $this->entityManager->merge($record);
+            $this->entityManager->flush();
+            $this->entityManager->getConnection()->commit();
+            Logger::info("ItemsController", __LINE__, 'RowPlusItemsPage saved.');
+            return new JsonModel(array(
+                'success' => true,
+                'index' => $rowIndex,
+                'overrideprice' => $record->getOverrideprice()
+            ));
+        } catch (Exception $e) {
+            $this->entityManager->getConnection()->rollBack();
+            Logger::info("ItemsController", __LINE__, strval($e));
+            return new JsonModel(array(
+                'success' => false,
+            ));
+        }
+    }
+
+    private function getSalesperson() {
+        return $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->sessionService->getSalespersonInPlay()) ?
+                        $this->sessionService->getUser()->getUsername() :
+                        $this->sessionService->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
+    }
+
+    private function getRowPlusItemsPage($customerid, $id, $overrideprice) {
+        $record = $this->rowplusitemspagerepository->findRowPlusItemsPage(substr($id, 1));
         $created = new DateTime("now");
         $record->setCreated($created);
         $record->setActive(true);
         $customer = $this->customerrepository->findCustomer($customerid);
         $record->setCustomer($customer);
-        $product = $this->productrepository->findProduct(substr($id, 1));
-        $record->setProduct($product);
+        if (!empty($overrideprice)) {
+            $record->setOverrideprice($overrideprice);
+        }else{
+            $record->setOverrideprice(NULL);
+        }
         return $record;
     }
-    
-    function transaction(){
-        $this->entityManager->getConnection()->beginTransaction();
-    }
-    
-    function saveItemPriceOverride($record, $rowIndex){
-        try {
-                //... do some work
-                $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->sessionService->getSalespersonInPlay()) ?
-                        $this->sessionService->getUser()->getUsername() :
-                        $this->sessionService->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
-                $record->setSalesperson($salesperson);
-                $this->entityManager->persist($record);
-                $this->entityManager->flush();
-                $this->entityManager->getConnection()->commit();
-                Logger::info("ItemsController", __LINE__, 'ItemPriceOverride saved.');
-                return new JsonModel(array(
-                    'success' => true,
-                    'index' => $rowIndex,
-                    'overrideprice' => $record->getOverrideprice()
-                ));
-            } catch (Exception $e) {
-                $this->entityManager->getConnection()->rollBack();
-                Logger::info("ItemsController", __LINE__, strval($e));
-                return new JsonModel(array(
-                    'success' => false,
-                ));
-            }
-    }
-    
-    function saveRowPlusItemsPage($record, $rowIndex){
-        try {
-                //... do some work
-                $salesperson = $this->entityManager->find('DataAccess\FFM\Entity\User', empty($this->sessionService->getSalespersonInPlay()) ?
-                        $this->sessionService->getUser()->getUsername() :
-                        $this->sessionService->getSalespersonInPlay()->getUsername(), LockMode::PESSIMISTIC_READ);
-                $record->setSalesperson($salesperson);
-                $this->entityManager->merge($record);
-                $this->entityManager->flush();
-                $this->entityManager->getConnection()->commit();
-                Logger::info("ItemsController", __LINE__, 'RowPlusItemsPage saved.');
-                return new JsonModel(array(
-                    'success' => true,
-                    'index' => $rowIndex,
-                    'overrideprice' => $record->getOverrideprice()
-                ));
-            } catch (Exception $e) {
-                $this->entityManager->getConnection()->rollBack();
-                Logger::info("ItemsController", __LINE__, strval($e));
-                return new JsonModel(array(
-                    'success' => false,
-                ));
-            }
-    }
-    
-    function getRowPlusItemsPage($customerid, $id, $overrideprice){
-        $record = $this->rowplusitemspagerepository->findRowPlusItemsPage(substr($id, 1));
-            $created = new DateTime("now");
-            $record->setCreated($created);
-            $record->setActive(true);
-            $customer = $this->customerrepository->findCustomer($customerid);
-            $record->setCustomer($customer);
-            if (!empty($overrideprice)) {
-                $record->setOverrideprice($overrideprice);
-            }
-            return $record;
-    }
 
-    protected function overridePrice($id) {
-        $customerid = $this->params()->fromQuery('customerid');
-        $rowIndex = $this->params()->fromQuery('index');
-        $overrideprice = $this->params()->fromQuery('overrideprice');
-        Logger::info("ItemsController", __LINE__, 'Saving overrideprice: ' . $overrideprice . '.');
-        //we can either have an $id that begins with 'P' which needs an ItemPriceOverride
-        //OR
-        //we can have an $id that begins with 'A' which has a corresponding RowPlusItemsRow.
-        if ($this->ifstrpos($id)) {
-            //save overridePrice in DB
-            $record = $this->getItemPriceOverride($customerid, $id);
-            if (!empty($overrideprice)) {
-                $record->setOverrideprice($overrideprice);
-            }
-            $this->transaction();
-            Logger::info("ItemsController", __LINE__, 'Calling saveItemPriceOverride');
-            return $this->saveItemPriceOverride($record, $rowIndex);
-        } else {
-            //update existing RowPlusItemsPage row
-            $record = $this->getRowPlusItemsPage($customerid, $id, $overrideprice);
-            $this->transaction();
-            return $this->saveRowPlusItemsPage($record, $rowIndex);
-        }
+    private function ifRowPlusItemsPageID($var) {
+        return (strpos($var, 'P') !== false);
     }
 
     protected function getTable() {
@@ -230,23 +301,15 @@ class ItemsController extends AbstractRestfulController {
         $customerid = $this->params()->fromQuery('customerid');
         $this->customerid = $customerid;
         $params = $this->getBaseBySkuParams();
-        /*
-         * access_log
-         * error_log
-         * pricing-custom.log
-         * pricing-error.log
-         * ssl_error_log
-         * ssl_request_log
-         */
         $params["customerid"] = $customerid;
         $method = $this->pricingconfig['by_sku_method'];
-        $json = $this->rest($this->pricingconfig['by_sku_base_url'], $method, $params);
+        $json = $this->makeRestCall($this->pricingconfig['by_sku_base_url'], $method, $params);
         $restcallitemsmerged = [];
         if ($json && array_key_exists($this->pricingconfig['by_sku_object_items_controller'], $json)) {
             //iterate
             //$json[$this->pricingconfig['by_sku_object_items_controller']]
             //and find corresponding rows in DB and insert or update as appropriate.
-            $this->sync($json);
+            $this->synchronizationService->sync($json, $this->customerid);
             $restcallitemsmerged = $this->itemsFilterService->_filter($json[$this->pricingconfig['by_sku_object_items_controller']], $customerid);
         } else {
             Logger::debug("ItemsController", __LINE__, 'No ' . $this->pricingconfig['by_sku_object_items_controller'] . ' items found.');
@@ -254,106 +317,6 @@ class ItemsController extends AbstractRestfulController {
         return new JsonModel(array(
             "data" => $restcallitemsmerged
         ));
-    }
-
-    private function sync($json) {
-        $some = FALSE;
-        //now lookup these items in the DB and update if there are discrepancies
-        $this->qb->add('select', new Select(array('u')))
-                ->add('from', new From('DataAccess\FFM\Entity\Product', 'u'));
-        $arr = [];
-        foreach ($json[$this->pricingconfig['by_sku_object_items_controller']] as $product) {
-            $some = TRUE;
-            $arr [] = $this->qb->expr()->eq('u.id', "'" . utf8_encode($product['id']) . "'");
-        }
-        
-        if(empty($some)){
-            Logger::info("ItemsController", __LINE__, 'No items found to sync');
-            return;
-        }
-
-        $this->qb->add('where', $this->qb->expr()->orX(
-                                implode(" OR ", $arr)
-                ))
-                ->add('orderBy', new OrderBy('u.productname', 'ASC'));
-        $query = $this->qb->getQuery();
-        $dbcustomers = $query->getResult();
-        Logger::info("ItemsController", __LINE__, 'Found ' . count($dbcustomers) . ' customers in db.');
-        $inDb = count($dbcustomers);
-        $inSvc = count($json[$this->pricingconfig['by_sku_object_items_controller']]);
-        Logger::info("ItemsController", __LINE__, 'Found ' . $inSvc . ' items in svc and ' . $inDb . ' in DB.');
-        if ($inDb < $inSvc) {
-            //remove every matching row in DB and rewrite them all to guarantee we have latest data
-            //in theory this should flush everything out and keep records up-to-date over time.
-            $some = false;
-            try {
-                foreach ($json[$this->pricingconfig['by_sku_object_items_controller']] as $product) {
-                    //lookup item with id
-                    $cdb = $this->productrepository->find($product['id']);
-                    if (!empty($cdb)) {
-                        //update existing record
-                        $cdb->setSku($product['sku']);
-                        $cdb->setProductname($product['productname']);
-                        $cdb->setDescription($product['shortescription']);
-                        $userproduct = $this->userproductrepository->findUserProduct($this->customerid, $product['id']);
-                        if (empty($userproduct)) {
-                            $userproduct = new UserProduct();
-                            $userProducts = $cdb->getUserProducts();
-                            $userProducts->add($userproduct);
-                            $customer = $this->customerrepository->findCustomer($this->customerid);
-                            $userproduct->setCustomer($customer);
-                            $userproduct->setProduct($cdb);
-                            $this->userproductrepository->persist($userproduct);
-                        }
-                        $userproduct->setComment($product['comment']);
-                        $userproduct->setOption($product['option']);
-                        $cdb->setQty($product['qty']);
-                        if (!empty($product['wholesale'])) {
-                            $cdb->setWholesale($product['wholesale']);
-                        }
-                        if (!empty($product['retail'])) {
-                            $cdb->setRetail($product['retail']);
-                        }
-                        $cdb->setUom($product['uom']);
-                        $this->userproductrepository->merge($userproduct);
-                        $some = true;
-                    } else {
-                        //insert record because it doesn't exist.
-                        $cdb = new Product();
-                        $cdb->setId($product['id']);
-                        $userproduct = new UserProduct();
-                        $userproduct->setComment($product['comment']);
-                        $userproduct->setOption($product['option']);
-                        $userProducts = $cdb->getUserProducts();
-                        $userProducts->add($userproduct);
-                        //lookup salesperson
-                        $customer = $this->customerrepository->findCustomer($this->customerid);
-                        $userproduct->setCustomer($customer);
-                        $userproduct->setProduct($cdb);
-                        $cdb->setSku($product['sku']);
-                        $cdb->setStatus($product['status'] ? true : false);
-                        $cdb->setSaturdayenabled($product['saturdayenabled'] ? true : false);
-                        $cdb->setProductname($product['productname']);
-                        $cdb->setDescription($product['shortescription']);
-                        $cdb->setQty($product['qty']);
-                        if (!empty($product['wholesale'])) {
-                            $cdb->setWholesale($product['wholesale']);
-                        }
-                        if (!empty($product['retail'])) {
-                            $cdb->setRetail($product['retail']);
-                        }
-                        $cdb->setUom($product['uom']);
-                        $this->userproductrepository->persist($userproduct);
-                        $some = true;
-                    }
-                }
-                if ($some) {
-                    $this->userproductrepository->flush();
-                }
-            } catch (Exception $exc) {
-                var_dump($exc);
-            }
-        }
     }
 
     protected function select() {
@@ -366,9 +329,11 @@ class ItemsController extends AbstractRestfulController {
         if (empty($userinplay)) {
             Logger::info("ItemsController", __LINE__, "UserinPlay is null!");
         }
-        foreach ($ids as $id) {
-            Logger::info("ItemsController", __LINE__, 'Selecting ' . $id);
-            $this->checkboxService->addRemovedID($id, $customerid, $userinplay->getUsername());
+        if (!empty($ids)) {
+            foreach ($ids as $id) {
+                Logger::info("ItemsController", __LINE__, 'Selecting ' . $id);
+                $this->checkboxService->addRemovedID($id, $customerid, $userinplay->getUsername());
+            }
         }
         return new JsonModel(array(
             "success" => true

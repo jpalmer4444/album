@@ -9,11 +9,13 @@
 namespace Application;
 
 use Application\Controller\IndexController;
+use Application\Factory\DateServiceFactory;
 use Application\Factory\FFMEntityManagerServiceFactory;
 use Application\Factory\LoggingServiceFactory;
 use Application\Factory\ReportServiceFactory;
 use Application\Factory\RestServiceFactory;
 use Application\Factory\SessionServiceFactory;
+use Application\Factory\SynchronizationServiceFactory;
 use Application\Utility\Strings;
 use Zend\Http\Request;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -65,6 +67,8 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
                 Strings::REPORT_SERVICE => ReportServiceFactory::class,
                 Strings::FFM_ENTITY_MANAGER => FFMEntityManagerServiceFactory::class,
                 'SessionService' => SessionServiceFactory::class,
+                'DateService' => DateServiceFactory::class,
+                'SynchronizationService' => SynchronizationServiceFactory::class,
             ),
         );
     }

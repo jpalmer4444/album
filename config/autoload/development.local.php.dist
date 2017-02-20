@@ -37,6 +37,12 @@ return [
             'CN_match' => 'svc.localhost'
         ),
     ],
+    'daily_cutoff' => [
+        //'time_string' => 'today -1 year',
+        'year' => 2017,
+        'month' => 1,
+        'date' => 1
+    ],
     'db' => [
         'driver' => 'Pdo',
         'dsn' => "mysql:dbname=md_dgtl;host=localhost",

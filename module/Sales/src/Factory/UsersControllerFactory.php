@@ -2,17 +2,18 @@
 
 namespace Sales\Factory;
 
+use Interop\Container\ContainerInterface;
 use Sales\Controller\UsersController;
-use Zend\ServiceManager\ServiceManager;
+use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
  * Description of UsersControllerFactory
  *
  * @author jasonpalmer
  */
-class UsersControllerFactory {
+class UsersControllerFactory implements FactoryInterface {
     
-    public function __invoke(ServiceManager $container) {
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = NULL) {
         return new UsersController(
                             $container
                     );
