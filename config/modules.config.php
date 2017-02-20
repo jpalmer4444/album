@@ -32,10 +32,8 @@ return [
     'DoctrineORMModule',
     'DataAccess',
     'Application',
-    'Album', 
     'Login',
     'Sales',
     'MyAcl',
-    'Ajax',
     'Command'
 ];

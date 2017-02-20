@@ -32,6 +32,7 @@ class Module implements AutoloaderProviderInterface, ConfigProviderInterface, Se
                 "Sales\Controller\ItemsController" => "Sales\Factory\ItemsControllerFactory",
                 "Sales\Controller\SalesController" => "Sales\Factory\SalesControllerFactory",
                 "Sales\Controller\UsersController" => "Sales\Factory\UsersControllerFactory",
+                "Sales\Controller\ApiController" => "Sales\Factory\ApiControllerFactory",
             ),
         ];
     }

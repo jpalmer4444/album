@@ -1,16 +1,16 @@
 <?php
 
-namespace Ajax\Service\Sales;
+namespace Application\Service;
 
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\RowPlusItemsPage;
 
 /**
- * Description of ItemsFilterTableArrayService
+ * Description of TableService
  *
  * @author jasonpalmer
  */
-class ItemsFilterTableArrayService  {
+class TableService extends BaseService {
     
     const QUERY_PAGES = "SELECT rowPlus FROM DataAccess\FFM\Entity\RowPlusItemsPage rowPlus WHERE rowPlus._created >= :created AND rowPlus._active = 1 AND rowPlus._customerid = :customerid AND rowPlus._salesperson = :salesperson GROUP BY rowPlus.productname ORDER BY rowPlus._created DESC";
     
@@ -52,7 +52,7 @@ class ItemsFilterTableArrayService  {
 
         //iterate items
         $msg = 'Retrieved ' . count($restcallitems) . ' ' . $this->pricingconfig['by_sku_object_items_controller'] . '.';
-        Logger::debug("ItemsFilterTableArrayService", __LINE__, $msg);
+        Logger::debug("TableService", __LINE__, $msg);
         $merged = array();
 
         //add override column for override price
@@ -62,11 +62,11 @@ class ItemsFilterTableArrayService  {
 
         //now lookup any RowPlusItemsPage rows that are active and add them to the results.
         $rowPlusItemPages = $this->query(
-                ItemsFilterTableArrayService::QUERY_PAGES, $customerid
+                TableService::QUERY_PAGES, $customerid
         );
 
         $itemPriceOverrides = $this->query(
-                ItemsFilterTableArrayService::QUERY_OVERRIDES, $customerid
+                TableService::QUERY_OVERRIDES, $customerid
         );
 
         $overrideMap = array();
@@ -75,13 +75,13 @@ class ItemsFilterTableArrayService  {
         foreach ($itemPriceOverrides as $price) {
             $override = $price->getOverrideprice();
             $pid = strval($price->getProduct()->getId());
-            Logger::info("ItemsFilterTableArrayService", __LINE__, 'Found saved overrideprice: ' . $override . ' with productID: ' . $pid);
+            Logger::info("TableService", __LINE__, 'Found saved overrideprice: ' . $override . ' with productID: ' . $pid);
             $overrideMap[$pid] = $override;
             $foundSomeOverrides = true;
         }
 
         if (!$foundSomeOverrides) {
-            Logger::info("ItemsFilterTableArrayService", __LINE__, "No price overrides found!");
+            Logger::info("TableService", __LINE__, "No price overrides found!");
         }
 
         //now allow rows found in DB SO: A row will either be from a User adding the entire row it
@@ -92,7 +92,7 @@ class ItemsFilterTableArrayService  {
         //get a reference to IDS that have been selected from the table.
         $removedSKUS = $this->retrieveRemovedSkus($customerid);
 
-        Logger::info("ItemsFilterTableArrayService", __LINE__, 'Found ' . count($removedSKUS) . ' removedSKUs in Session!');
+        Logger::info("TableService", __LINE__, 'Found ' . count($removedSKUS) . ' removedSKUs in Session!');
 
         $removedIDS = array();
         foreach ($removedSKUS as $product) {
@@ -106,7 +106,7 @@ class ItemsFilterTableArrayService  {
             $adjRetail = "";
             $adjOverrideprice = $item->getOverrideprice();
 
-            Logger::info("ItemsFilterTableArrayService", __LINE__, "RowPlusItemPage.Id: " . $item->getId());
+            Logger::info("TableService", __LINE__, "RowPlusItemPage.Id: " . $item->getId());
 
             $addSelected = false;
             if (in_array($item->getId(), $removedIDS)) {

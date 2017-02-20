@@ -17,6 +17,7 @@ use Application\Factory\ReportServiceFactory;
 use Application\Factory\RestServiceFactory;
 use Application\Factory\SessionServiceFactory;
 use Application\Factory\SynchronizationServiceFactory;
+use Application\Factory\TableServiceFactory;
 use Application\Utility\Strings;
 use Zend\Http\Request;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
@@ -68,6 +69,7 @@ class Module implements ConfigProviderInterface, ServiceProviderInterface, Autol
                 'DateService' => DateServiceFactory::class,
                 'SynchronizationService' => SynchronizationServiceFactory::class,
                 'CookieService' => CookieServiceFactory::class,
+                'TableService' => TableServiceFactory::class,
             ),
         );
     }

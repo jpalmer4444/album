@@ -48,7 +48,7 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
     var submitOverride = function (rowIdx, id, form) {
       var overrideprice = JQUTILS.getVal('overrideprice');
       var data = $(form).serialize();
-      $.getJSON("ajax/items?username=" + _username + "&session_id=" + _session_id + "&salesperson=" + _salespersonusername + "&myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername=" + encodeURIComponent("<?= $escaper->escapeHtml($this->customername) ?>") + "&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
+      $.getJSON("api?username=" + _username + "&session_id=" + _session_id + "&salesperson=" + _salespersonusername + "&myaction=overridePrice&index=" + rowIdx + "&customerid=<?= $this->customerid ?>&customername=" + encodeURIComponent("<?= $escaper->escapeHtml($this->customername) ?>") + "&id=" + encodeURIComponent(id) + "&overrideprice=" + encodeURIComponent(overrideprice), data, function (data) {
         return overrideCallback(data);
       });
       return false;
@@ -171,9 +171,9 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
     $(document).ready(function () {
       //initialize page tool tips.
       $('[data-toggle="tooltip"]').tooltip();
-      console.log("Making datatables AJAX call with url: " + '/ajax/items?myaction=customerlisttableget&customerid=' + _customer_id);
+      console.log("Making datatables AJAX call with url: " + '/api?myaction=customerlisttableget&customerid=' + _customer_id);
       $API = $('#customerlisttable').DataTable({
-        "ajax": '/ajax/items?username=' + _username + '&session_id=' + _session_id + '&myaction=customerlisttableget&customerid=' + _customer_id,
+        "ajax": '/api?username=' + _username + '&session_id=' + _session_id + '&myaction=customerlisttableget&customerid=' + _customer_id,
         //#############################################################
         //#############################################################
         //##
@@ -325,7 +325,7 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
             action: function () {
               $API.rows({page: 'all'}).select();
               //now manually select all checkboxes and redraw table.
-              var url = "ajax/items?username=" + _username + "&session_id=" + _session_id + "&myaction=select";
+              var url = "api?username=" + _username + "&session_id=" + _session_id + "&myaction=select";
               $API.rows({page: 'all'}).every(function (rowIdx, tableLoop, rowLoop) {
                 $('#selected_row_' + rowIdx).attr('checked', 'checked');
                 url += '&ids[]=' + $API.row(rowIdx).data()['id'];
@@ -352,7 +352,7 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
                 $API.row(rowIdx).invalidate();
               });
               //send notify to items REST controller to un-select all items in result set.
-              $.getJSON("ajax/items?username=" + _username + "&session_id=" + _session_id + "&myaction=unselect&customerid=" + _customer_id, function () {
+              $.getJSON("api?username=" + _username + "&session_id=" + _session_id + "&myaction=unselect&customerid=" + _customer_id, function () {
               }).done(function () {
                 console.log('Unselected All');
               }).fail(function () {
@@ -522,7 +522,7 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
         var checked = forCheck.checked;
         var rowObj = $API.row(rowIdx).data();
         var id = rowObj['id'];
-        var url = "ajax/items?username=" + _username + "&session_id=" + _session_id + "&myaction=";
+        var url = "api?username=" + _username + "&session_id=" + _session_id + "&myaction=";
         if (checked) {
           url += 'select';
           $API.row(rowIdx).data()['selected'] = true;

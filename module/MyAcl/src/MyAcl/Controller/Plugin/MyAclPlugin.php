@@ -58,6 +58,7 @@ class MyAclPlugin extends AbstractPlugin {
         $acl->addResource('sales:Sales\Controller\ItemsController:index');
         $acl->addResource('sales:Sales\Controller\ItemsController:report');
         $acl->addResource('sales:Sales\Controller\UsersController:index');
+        $acl->addResource('sales:Sales\Controller\ApiController:api');
 
         //command route
         $acl->addResource('command:Command\Controller\Reporting\PriceOverrideController:priceoverridereport');
@@ -86,6 +87,8 @@ class MyAclPlugin extends AbstractPlugin {
         // $acl->allow('role', 'resource', 'controller:action');
         // Sales -------------------------->
         $acl->allow('sales', 'login:Login\Controller\LoginController:logout');
+        //sales:Sales\Controller\SalesController:api
+        $acl->allow('sales', 'sales:Sales\Controller\ApiController:api');
         $acl->allow('sales', 'login:Login\Controller\SuccessController:index');
         $acl->allow('sales', 'sales:Sales\Controller\ItemsController:index');
         $acl->allow('sales', 'sales:Sales\Controller\ItemsController:report');
