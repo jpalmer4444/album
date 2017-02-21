@@ -1,5 +1,11 @@
 Notes:
 
+Development (Sass and gulp) tmux run: 
+Sass watch folder:*.sass folder/dist/.
+gulp
+
+
+
 Contexts and related functionality.
 
 /sales      --> Sales\Controller\SalesController

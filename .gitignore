@@ -3,6 +3,8 @@ vendor/
 nbproject/
 config/development.config.php
 data/cache/*
+public/node_modules/
+public/js/dist
 !data/cache/.gitkeep
 phpunit.xml
 ubuntu-xenial-16.04-cloudimg-console.log

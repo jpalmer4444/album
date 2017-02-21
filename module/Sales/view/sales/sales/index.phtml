@@ -1,30 +1,20 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            &nbsp;
-        </div>
-        <div class="col-md-12">
             <nav class="breadcrumb">
-                <li class="active">Sales</li>
+                <span class="active">Sales</span>
             </nav>
-            <div class="ffm-callout ffm-callout-warning">
-                <h2 >Salespeople</h2>
-                <hr/>
-                <p>Fulton Fish Market Salespeople.</p>
-            </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="list-group">
                 <?php foreach ($this->json["salespeople"] as $salesperson): ?>
-              
                     <a href="<?php echo $this->url('users', [], array('query' => array('salespersonid' => $salesperson["id"], 'salesperson' => $salesperson["salesperson"]))); ?>" 
                        class="list-group-item list-group-item-action">
-                        <span class="tag tag-grey tag-pill float-xs-right"><?php echo $salesperson["id"]; ?></span>
+                        <span class="my-tag tag tag-grey tag-pill float-xs-right"><?php echo $salesperson["id"]; ?></span>
                         <h5 class="list-group-item-heading"><?php echo $salesperson["salesperson"]; ?></h5>
                     </a>
-                
                 <?php endforeach; ?>
             </div>
         </div>

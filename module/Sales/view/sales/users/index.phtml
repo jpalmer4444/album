@@ -4,36 +4,28 @@ $escaper = new Escaper('utf-8');
 ?>
 <script type="text/javascript">
     $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();
+        //$('[data-toggle="tooltip"]').tooltip();
     });
 </script>
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            &nbsp;
-        </div>
         <div class="col-md-12">
             <nav class="breadcrumb">
                 <?php if (!empty($this->roles)): ?>
                     <?php if ($this->roles[0]->getRole() == "admin"): ?>
                         <?php if (isset($this->salespersoninplayname)): ?>
                                 <li>
-                                    <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales"><?= $this->salespersoninplayname ?></a>
+                                    <a href="/sales"><?= $this->salespersoninplayname ?></a>
                                 </li>
                         <?php else: ?>
                             <li>
-                                <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales">Salespeople</a>
+                                <a href="/sales">Salespeople</a>
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
                 <?php endif; ?>
                 <li class="active">Customers</li>
             </nav>
-            <div class="ffm-callout ffm-callout-warning">
-                <h2 >Customers</h2>
-                <hr/>
-                <p>Select one of your customers</p>
-            </div>
         </div>
     </div>
     <div class="row">
@@ -42,13 +34,8 @@ $escaper = new Escaper('utf-8');
                 <?php foreach ($this->json["customers"] as $customer): ?>
                     <a href="<?php echo $this->url('items', [], array('query' => array('customerid' => $customer["id"], 'customername' => $escaper->escapeUrl($customer['name']), 'companyname' => $escaper->escapeUrl($customer['company'])))); ?>" 
                        class="list-group-item list-group-item-action">
-                        <span class="tag tag-grey tag-pill float-xs-right"><?php echo $customer["id"] ?></span>
-                        <h2 class="list-group-item-heading">
-                            <span class="text-capitalize text-info tag tag-charcoal tag-pill"><?php echo $customer["company"] ?></span> 
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <span class="text-muted"><?php echo $customer["name"] ?></span>
-                        </h2>
-                        <h5><?php echo $customer["email"] ?></h5>
+                        <span class="my-tag tag tag-grey tag-pill float-xs-right"><?php echo $customer["name"] ?></span>
+                        <h5 class="list-group-item-heading"><?php echo $customer["company"] ?></h5>
                     </a>
                 <?php endforeach; ?>
             </div>

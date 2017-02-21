@@ -187,7 +187,7 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
             'targets': 0,
             'searchable': false,
             'orderable': false,
-            'width': '1%',
+            'width': '3%',
             'className': 'dt-body-center',
             'render': function (data, type, row, meta) {
               if (data) {
@@ -562,24 +562,24 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
             if ($(this).hasClass('ffm-custom-append')) {
               $(this).attr('data-target', '#addProductModal');
               $(this).attr('data-toggle', 'modal');
-              $(this).attr('title', 'Add Product. Please call or lookup the correct SKU.');
-              $(this).attr('data-placement', 'bottom');
-              $(this).tooltip();
+              //$(this).attr('title', 'Add Product. Please call or lookup the correct SKU.');
+              //$(this).attr('data-placement', 'bottom');
+              //$(this).tooltip();
             } else if ($(this).hasClass('buttons-pdf')) {
               //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
-              $(this).attr('title', 'Click to generate PDF. Disabled rows with no override price and unchecked Product rows will not be included.');
-              $(this).attr('data-placement', 'top');
-              $(this).tooltip();
+              //$(this).attr('title', 'Click to generate PDF. Disabled rows with no override price and unchecked Product rows will not be included.');
+              //$(this).attr('data-placement', 'top');
+              //$(this).tooltip();
             } else if (index === 0) {
               //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
-              $(this).attr('title', 'Click to select all rows.');
-              $(this).attr('data-placement', 'top');
-              $(this).tooltip();
+              //$(this).attr('title', 'Click to select all rows.');
+              //$(this).attr('data-placement', 'top');
+              //$(this).tooltip();
             } else if (index === 1) {
               //data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson."
-              $(this).attr('title', 'Click to unselect all rows.');
-              $(this).attr('data-placement', 'bottom');
-              $(this).tooltip();
+              //$(this).attr('title', 'Click to unselect all rows.');
+              //$(this).attr('data-placement', 'bottom');
+              //$(this).tooltip();
             }
           });
         }
@@ -640,35 +640,29 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            &nbsp;
-        </div>
-        <div class="col-md-12">
             <nav class="breadcrumb">
                 <?php if (!empty($this->roles)): ?>
                     <?php if ($this->roles[0]->getRole() == "admin"): ?>
                         <?php if (isset($this->salespersonname)): ?>
                             <li>
-                                <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales"><?= $this->salespersonname ?></a>
+                                <a href="/sales"><?= $this->salespersonname ?></a>
                             </li>
                         <?php else: ?>
                             <li>
-                                <a data-toggle="tooltip" data-placement="top" title="Click to change selected Salesperson." href="/sales">Salespeople</a>
+                                <a href="/sales">Salespeople</a>
                             </li>
                         <?php endif; ?>
                     <?php endif; ?>
                 <?php endif; ?>
                 <li>
-                    <a data-toggle="tooltip" data-placement="top" title="Click to change selected Customer." href="/users">
+                    <a href="/users">
                         <?= $escaper->escapeHtml($this->customername) ?>
                     </a>
                 </li>
-                <li class="active">Products</li>
+                <li class="active my-active">
+                    <?= ucwords($escaper->escapeHtml($this->companynamehtml)) ?>
+                </li>
             </nav>
-            <div class="ffm-callout ffm-callout-warning">
-                <h2 >Products <span class="text-muted pull-right"><?= ucwords($escaper->escapeHtml($this->companynamehtml)) ?></span></h2>
-                <hr/>
-                <p>Please make selections for your customer.</p>
-            </div>
         </div>
     </div>
     <div class="row">
@@ -755,8 +749,8 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
                             <!--
                              AJAX Form Submit
                             -->
-                            <button id="cancel" class="btn btn-danger" data-dismiss="modal">Cancel</button>
-                            <input type="submit" class="btn btn-default" 
+                            <button id="cancel" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                            <input type="submit" class="btn btn-primary" 
                                    value="Submit" form="addRowItemsForm">
                         </div>
                     </div>

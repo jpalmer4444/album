@@ -5,14 +5,14 @@
 //##
 //#############################################################
 //#############################################################
-let items_entityMap = {
+var items_entityMap = {
   "\\+": ' ',
   "\\&#039;": '\'',
   "\\&#x00027;": '\'',
   "\\&apos;": '\''
 };
 
-let items_keys = Object.keys(items_entityMap);
+var items_keys = Object.keys(items_entityMap);
 
 //#############################################################
 //#############################################################
@@ -236,7 +236,7 @@ var generateDetailsModalBody = function (rowIdx, columns) {
   //##
   //#############################################################
   //#############################################################
-  data += '                                       <button data-toggle="tooltip" data-dismiss="modal" title="Press To Cancel" class="btn btn-danger" >\n\
+  data += '                                       <button data-toggle="tooltip" data-dismiss="modal" title="Press To Cancel" class="btn btn-default" >\n\
                                                                     Close\n\
                                                                 </button>\n\
                                                             </span>\n\
@@ -244,7 +244,7 @@ var generateDetailsModalBody = function (rowIdx, columns) {
                                                         <div class="col-md-4">\n\
                                                             <span class="pull-left">\n\
                                                                 <button id="override_form_submit" onclick="initForm()" type="submit" data-ffm-row-index="' + rowIdx + '" data-ffm-id="' + id + '" \n\
-                                                                        data-toggle="tooltip" title="Submit Price Override" class="btn btn-default">\n\
+                                                                        data-toggle="tooltip" title="Submit Price Override" class="btn btn-primary">\n\
                                                                     Override\n\
                                                                 </button>\n\
                                                             </span>\n\
