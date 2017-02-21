@@ -94,7 +94,9 @@ class LoginController extends AbstractActionController {
                 $result = $this->getAuthService()->authenticate();
                 foreach ($result->getMessages() as $message) {
                     //save message temporary into flashmessenger
-                    $this->plugin('flashmessenger')->addMessage($message);
+                    if(strcmp($message, "Authentication successful.") != 0){
+                        $this->plugin('flashmessenger')->addMessage($message);
+                    }
                 }
                 if ($result->isValid()) {
                     //set roles

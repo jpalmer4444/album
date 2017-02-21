@@ -99,39 +99,39 @@ class SessionService extends BaseService {
                 $this->sessionId = $this->sessionManager->getId();
             }
         }
-        $this->log(this::class, __LINE__, "(CONSTRUCTOR) Session Id: " . $this->sessionId);
+        $this->log("SessionService", __LINE__, "(CONSTRUCTOR) Session Id: " . $this->sessionId);
         $this->doLookup();
     }
 
     public function login($username, $session_id = NULL) {
         try {
             $this->sessionId = !empty($session_id) ? $session_id : $this->sessionManager->getId();
-            $this->log(this::class, __LINE__, "(LOGIN) Session Id: " . $this->sessionId);
-            $this->log(this::class, __LINE__, "(LOGIN) username: " . $username);
+            $this->log("SessionService", __LINE__, "(LOGIN) Session Id: " . $this->sessionId);
+            $this->log("SessionService", __LINE__, "(LOGIN) username: " . $username);
             $user = $this->userrepository->findUser($username);
             $user->setSessionId($this->sessionId);
             $user->setLastLogin(new DateTime());
             $this->userrepository->mergeAndFlush($user);
             $this->user = $user;
-            $this->log(this::class, __LINE__, "(LOGIN) Saved Session ID: " . $user->getSessionId());
+            $this->log("SessionService", __LINE__, "(LOGIN) Saved Session ID: " . $user->getSessionId());
             if (!empty($this->user)) {
                 $roleXrefs = $this->userrolexrefrepository->findBy(array('username' => $this->user->getUsername()));
                 $this->roles = [];
                 $idx = 0;
-                $this->log(this::class, __LINE__, "(LOGIN) Adding Roles: " . print_r($roleXrefs, TRUE));
+                $this->log("SessionService", __LINE__, "(LOGIN) Adding Roles: " . (!empty($roleXrefs) ? $roleXrefs[0]->getRole() : "roleXrefs empty! Session Service Error."));
                 foreach ($roleXrefs as $role) {
                     $this->roles[$idx++] = $role;
                 }
                 $salespersoninplayusernamecookie = $this->cookieService->getCookie('salesperson', $this->request);
-                $this->log(this::class, __LINE__, "(LOGIN) Looked up salesperson: " . (!empty($salespersoninplayusernamecookie) ? $salespersoninplayusernamecookie : "NULL"));
+                $this->log("SessionService", __LINE__, "(LOGIN) Looked up salesperson: " . (!empty($salespersoninplayusernamecookie) ? $salespersoninplayusernamecookie : "NULL"));
                 if (!empty($salespersoninplayusernamecookie)) {
                     $this->salespersoninplay = $this->userrepository->findUser($salespersoninplayusernamecookie);
                 }
             } else {
-                $this->log(this::class, __LINE__, "Login Failed!");
+                $this->log("SessionService", __LINE__, "Login Failed!");
             }
         } catch (\Exception $exc) {
-            $this->log(this::class, __LINE__, "Exception: " . $exc->getTraceAsString());
+            $this->log("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
         }
     }
 
@@ -156,7 +156,7 @@ class SessionService extends BaseService {
                 $this->sessionManager->destroy();
             }
         } catch (\Exception $exc) {
-            $this->log(this::class, __LINE__, "Exception: " . $exc->getTraceAsString());
+            $this->log("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
         }
     }
 
@@ -174,10 +174,10 @@ class SessionService extends BaseService {
                     $this->salespersoninplay = $this->userrepository->findUser($salespersoninplayusernamecookie);
                 }
             } else {
-                $this->log(this::class, __LINE__, "No Session data found.");
+                $this->log("SessionService", __LINE__, "No Session data found.");
             }
         } catch (\Exception $exc) {
-            $this->log(this::class, __LINE__, "Exception: " . $exc->getTraceAsString());
+            $this->log("SessionService", __LINE__, "Exception: " . $exc->getTraceAsString());
         }
     }
 
@@ -198,7 +198,7 @@ class SessionService extends BaseService {
         $seconds = $this->cookieService->getCookieLifetime();;
 
         //adds a 1 hour cookie.
-        $this->log(this::class, __LINE__, 'Added Salespersoninplay: ' . $salespersoninplayusername);
+        $this->log("SessionService", __LINE__, 'Added Salespersoninplay: ' . $salespersoninplayusername);
         $this->cookieService->setCookie('salesperson', $salespersoninplayusername, $seconds, $this->response);
     }
 
@@ -206,7 +206,7 @@ class SessionService extends BaseService {
         $role = $this->getRole();
         $roleArr = array($role => $role);
         //$roleStr will be a boolean if there is no roles present in session.
-        $this->log(this::class, __LINE__, strval($roleArr[$role]));
+        $this->log("SessionService", __LINE__, "User Role: " . strval($roleArr[$role]));
         return !empty($roleArr) ? array_key_exists("admin", $roleArr) : false;
     }
 
