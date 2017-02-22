@@ -2,16 +2,16 @@
 
 namespace Sales\Controller;
 
+use Application\Controller\BaseController;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Customer;
 use DateTime;
 use Doctrine\ORM\Query\Expr\From;
 use Doctrine\ORM\Query\Expr\OrderBy;
 use Doctrine\ORM\Query\Expr\Select;
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
-class UsersController extends AbstractActionController {
+class UsersController extends BaseController {
 
     const ID = "jpalmer";
     const PASSWORD = "goodbass";

@@ -5,6 +5,7 @@ namespace Sales\Controller;
 /**
  */
 
+use Application\Controller\BaseController;
 use Application\Service\LoggingService;
 use Application\Service\LoggingServiceInterface;
 use Application\Service\SessionService;
@@ -17,18 +18,16 @@ use DataAccess\FFM\Entity\Repository\Impl\ProductRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\RowPlusItemsPageRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserProductRepositoryImpl;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
-use DataAccess\FFM\Entity\User;
 use DateTime;
 use Login\Model\MyAuthStorage;
 use Sales\Service\SalesFormService;
 use Zend\Form\Form;
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
-class ItemsController extends AbstractActionController {
+class ItemsController extends BaseController {
 
     protected $logger;
     protected $sessionService;

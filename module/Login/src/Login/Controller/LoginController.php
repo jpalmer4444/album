@@ -101,7 +101,7 @@ class LoginController extends AbstractActionController {
                 if ($result->isValid()) {
                     //set roles
 
-                    $this->sessionService->login($request->getPost('username'));
+                    $this->sessionService->login($request->getPost('username'), $this->sessionManager->getId());
                     //if user is admin user then set salespersonInPlay to the user
                     $redirect = $this->sessionService->admin() ? 'sales' : 'users';
 

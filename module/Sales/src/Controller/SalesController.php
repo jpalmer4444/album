@@ -2,16 +2,16 @@
 
 namespace Sales\Controller;
 
+use Application\Controller\BaseController;
 use Application\Service\EntityService;
 use Application\Utility\Logger;
 use DataAccess\FFM\Entity\Repository\Impl\UserRepositoryImpl;
 use DataAccess\FFM\Entity\User;
-use Zend\Mvc\Controller\AbstractActionController;
 use Zend\ServiceManager\AbstractPluginManager;
 use Zend\View\Model\JsonModel;
 use Zend\View\Model\ViewModel;
 
-class SalesController extends AbstractActionController {
+class SalesController extends BaseController {
 
     protected $restService;
     protected $logger;

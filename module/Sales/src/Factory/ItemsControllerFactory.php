@@ -2,6 +2,7 @@
 
 namespace Sales\Factory;
 
+use Application\Utility\Strings;
 use Interop\Container\ContainerInterface;
 use Sales\Controller\ItemsController;
 use Zend\ServiceManager\Factory\FactoryInterface;
@@ -25,7 +26,7 @@ class ItemsControllerFactory implements FactoryInterface{
                     $productrepository = $container->get('EntityService')->getEntityManager()->getRepository('DataAccess\FFM\Entity\Product');
                     $userproductrepository = $container->get('EntityService')->getEntityManager()->getRepository('DataAccess\FFM\Entity\UserProduct');
                     $pricingoverridereportrepository = $container->get('EntityService')->getEntityManager()->getRepository('DataAccess\FFM\Entity\PricingOverrideReport');
-                    return new ItemsController(
+                    $itemsController = new ItemsController(
                             $loggingService,
                             $sessionService,
                             $formManager,
@@ -38,6 +39,14 @@ class ItemsControllerFactory implements FactoryInterface{
                             $salesFromService,
                             $pricingconfig
                     );
+                    
+                    //set BaseController properties.
+                    $itemsController->setDbAdapter($container->get(Strings::ZEND_DB_ADAPTER));
+                    $itemsController->setAuthService($container->get(Strings::AUTH_SERVICE));
+                    $itemsController->setConfig($container->get('Config'));
+                    
+                    //return the controller
+                    return $itemsController;
     }
     
 }

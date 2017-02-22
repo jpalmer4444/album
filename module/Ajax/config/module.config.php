@@ -1,7 +1,5 @@
 <?php
 
-use Ajax\Controller\Sales\ItemsController;
-
 return array(
     'router' => array(
         'routes' => array(

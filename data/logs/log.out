@@ -1634,3 +1634,431 @@
 [INFO:Tue 2/21/2017 11:21:11PM:MyAclPlugin:135] Allowed: 1
 [INFO:Tue 2/21/2017 11:21:11PM:LoginController:63] Checking for identity
 [INFO:Tue 2/21/2017 11:21:11PM:LoginController:72] Identity not found.
+[INFO:Wed 2/22/2017 07:57:42AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:57:42AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:57:42AM:SessionService:102] (CONSTRUCTOR) Session Id: 0f2c5b849c5011b976066f65264b5c05
+[INFO:Wed 2/22/2017 07:57:42AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:57:42AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 07:57:49AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 07:57:51AM:ItemsController:38] Building ItemController (AJAX).
+[INFO:Wed 2/22/2017 07:57:51AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:57:51AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:57:51AM:SessionService:102] (CONSTRUCTOR) Session Id: 0f2c5b849c5011b976066f65264b5c05
+[INFO:Wed 2/22/2017 07:57:51AM:ItemsController:54] /ajax/items?username=jpalmer&session_id=0f2c5b849c5011b976066f65264b5c05&myaction=customerlisttableget&customerid=1153&_=1487771869124
+[INFO:Wed 2/22/2017 07:57:51AM:ItemsController:92] ItemsController Ajax called.
+[INFO:Wed 2/22/2017 07:57:51AM:SessionService:109] (LOGIN) Session Id: 0f2c5b849c5011b976066f65264b5c05
+[INFO:Wed 2/22/2017 07:57:51AM:SessionService:110] (LOGIN) username: jpalmer
+[INFO:Wed 2/22/2017 07:57:51AM:SessionService:116] (LOGIN) Saved Session ID: 0f2c5b849c5011b976066f65264b5c05
+[INFO:Wed 2/22/2017 07:57:51AM:SessionService:121] (LOGIN) Adding Roles: admin
+[INFO:Wed 2/22/2017 07:57:51AM:SessionService:126] (LOGIN) Looked up salesperson: bzakrinski
+[INFO:Wed 2/22/2017 07:57:51AM:ItemsController:300] Retrieving customerlistitems.
+[INFO:Wed 2/22/2017 07:57:51AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customerlistitems&1153
+[INFO:Wed 2/22/2017 07:57:53AM:SynchronizationService:66] Found 6 customers in db.
+[INFO:Wed 2/22/2017 07:57:53AM:SynchronizationService:69] Found 6 items in svc and 6 in DB.
+[DEBUG:Wed 2/22/2017 07:57:53AM:ItemsFilterTableArrayService:56] Retrieved 6 customerlistitems.
+[INFO:Wed 2/22/2017 07:57:53AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:57:53AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:57:53AM:ItemsFilterTableArrayService:85] No price overrides found!
+[INFO:Wed 2/22/2017 07:57:53AM:ItemsFilterTableArrayService:96] Found 0 removedSKUs in Session!
+[INFO:Wed 2/22/2017 07:57:53AM:ItemsFilterTableArrayService:110] RowPlusItemPage.Id: 6
+[INFO:Wed 2/22/2017 07:57:53AM:ItemsFilterTableArrayService:110] RowPlusItemPage.Id: 2
+[INFO:Wed 2/22/2017 07:57:53AM:ItemsFilterTableArrayService:110] RowPlusItemPage.Id: 3
+[INFO:Wed 2/22/2017 07:57:53AM:ItemsFilterTableArrayService:110] RowPlusItemPage.Id: 1
+[INFO:Wed 2/22/2017 07:57:57AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:57:57AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:57:57AM:SessionService:102] (CONSTRUCTOR) Session Id: 0f2c5b849c5011b976066f65264b5c05
+[INFO:Wed 2/22/2017 07:57:57AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:57:57AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 07:57:57AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:57:57AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:57:57AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:57:57AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:57:57AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:57:57AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:57:57AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 07:57:57AM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 07:57:57AM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 07:57:57AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 07:57:57AM:LoginController:63] Checking for identity
+[INFO:Wed 2/22/2017 07:57:57AM:LoginController:72] Identity not found.
+[INFO:Wed 2/22/2017 07:57:59AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 07:58:04AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:58:04AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:58:04AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 07:58:04AM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 07:58:04AM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 07:58:04AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 07:58:04AM:LoginController:83] AuthenticationAction called.
+[INFO:Wed 2/22/2017 07:58:04AM:SessionService:109] (LOGIN) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 07:58:04AM:SessionService:110] (LOGIN) username: jpalmer
+[INFO:Wed 2/22/2017 07:58:04AM:SessionService:116] (LOGIN) Saved Session ID: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 07:58:04AM:SessionService:121] (LOGIN) Adding Roles: admin
+[INFO:Wed 2/22/2017 07:58:04AM:SessionService:126] (LOGIN) Looked up salesperson: NULL
+[INFO:Wed 2/22/2017 07:58:04AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:58:05AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:58:05AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:58:05AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 07:58:05AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:58:05AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 07:58:05AM:SalesController:62] Retrieving salespeople.
+[INFO:Wed 2/22/2017 07:58:05AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Wed 2/22/2017 07:58:05AM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Wed 2/22/2017 07:58:05AM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Wed 2/22/2017 07:58:06AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 07:58:11AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:58:11AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:58:11AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 07:58:11AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:58:11AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 07:58:11AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:58:11AM:UsersController:49] ISADMIN
+[INFO:Wed 2/22/2017 07:58:11AM:SessionService:201] Added Salespersoninplay: bzakrinski
+[INFO:Wed 2/22/2017 07:58:11AM:UsersController:65] Retrieving Salespeople. ID: 206
+[INFO:Wed 2/22/2017 07:58:11AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customers&206
+[INFO:Wed 2/22/2017 07:58:12AM:UsersController:78] Retrieved #1 customers.
+[INFO:Wed 2/22/2017 07:58:12AM:UsersController:96] Found 41 users in db.
+[INFO:Wed 2/22/2017 07:58:13AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 07:58:15AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:58:15AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:58:15AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 07:58:15AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:58:16AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 07:58:17AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 07:58:17AM:ItemsController:38] Building ItemController (AJAX).
+[INFO:Wed 2/22/2017 07:58:17AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 07:58:17AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 07:58:17AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 07:58:17AM:ItemsController:54] /ajax/items?username=jpalmer&session_id=2c0d7d59ceed0d1c8bc04d9b505cada0&myaction=customerlisttableget&customerid=1127&_=1487771897198
+[INFO:Wed 2/22/2017 07:58:17AM:ItemsController:92] ItemsController Ajax called.
+[INFO:Wed 2/22/2017 07:58:17AM:SessionService:109] (LOGIN) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 07:58:17AM:SessionService:110] (LOGIN) username: jpalmer
+[INFO:Wed 2/22/2017 07:58:17AM:SessionService:116] (LOGIN) Saved Session ID: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 07:58:17AM:SessionService:121] (LOGIN) Adding Roles: admin
+[INFO:Wed 2/22/2017 07:58:17AM:SessionService:126] (LOGIN) Looked up salesperson: bzakrinski
+[INFO:Wed 2/22/2017 07:58:17AM:ItemsController:300] Retrieving customerlistitems.
+[INFO:Wed 2/22/2017 07:58:17AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customerlistitems&1127
+[INFO:Wed 2/22/2017 07:58:18AM:SynchronizationService:66] Found 5 customers in db.
+[INFO:Wed 2/22/2017 07:58:18AM:SynchronizationService:69] Found 5 items in svc and 5 in DB.
+[DEBUG:Wed 2/22/2017 07:58:18AM:ItemsFilterTableArrayService:56] Retrieved 5 customerlistitems.
+[INFO:Wed 2/22/2017 07:58:19AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:58:19AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 07:58:19AM:ItemsFilterTableArrayService:85] No price overrides found!
+[INFO:Wed 2/22/2017 07:58:19AM:ItemsFilterTableArrayService:96] Found 0 removedSKUs in Session!
+[INFO:Wed 2/22/2017 08:33:16AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:33:16AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:33:16AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:33:16AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:33:17AM:DataAccess\Module:63]  Error dispatching controller "Sales\Controller\ItemsController". Error was: "error-exception", Exception(Unable to resolve service "Zend\Authentication\AuthenticationService" to a factory; are you certain you provided it during configuration?): #0 /u/local/jasonpalmer/pricing/vendor/zendframework/zend-servicemanager/src/ServiceManager.php(757): Zend\ServiceManager\ServiceManager->getFactory('Zend\\Authentica...')
+#1 /u/local/jasonpalmer/pricing/vendor/zendframework/zend-servicemanager/src/ServiceManager.php(200): Zend\ServiceManager\ServiceManager->doCreate('Zend\\Authentica...')
+#2 /u/local/jasonpalmer/pricing/module/Sales/src/Factory/ItemsControllerFactory.php(46): Zend\ServiceManager\ServiceManager->get('Zend\\Authentica...')
+#3 /u/local/jasonpalmer/pricing/vendor/zendframework/zend-servicemanager/src/ServiceManager.php(758): Sales\Factory\ItemsControllerFactory->__invoke(Object(Zend\ServiceManager\ServiceManager), 'Sales\\Controlle...', NULL)
+#4 /u/local/jasonpalmer/pricing/vendor/zendframework/zend-servicemanager/src/ServiceManager.php(200): Zend\ServiceManager\ServiceManager->doCreate('Sales\\Controlle...')
+#5 /u/local/jasonpalmer/pricing/vendor/zendframework/zend-servicemanager/src/AbstractPluginManager.php(141): Zend\ServiceManager\ServiceManager->get('Sales\\Controlle...')
+#6 /u/local/jasonpalmer/pricing/vendor/zendframework/zend-mvc/src/DispatchListener.php(95): Zend\ServiceManager\AbstractPluginManager->get('Sales\\Controlle...')
+#7 /u/local/jasonpalmer/pricing/vendor/zendframework/zend-eventmanager/src/EventManager.php(322): Zend\Mvc\DispatchListener->onDispatch(Object(Zend\Mvc\MvcEvent))
+#8 /u/local/jasonpalmer/pricing/vendor/zendframework/zend-eventmanager/src/EventManager.php(179): Zend\EventManager\EventManager->triggerListeners(Object(Zend\Mvc\MvcEvent), Object(Closure))
+#9 /u/local/jasonpalmer/pricing/vendor/zendframework/zend-mvc/src/Application.php(332): Zend\EventManager\EventManager->triggerEventUntil(Object(Closure), Object(Zend\Mvc\MvcEvent))
+#10 /u/local/jasonpalmer/pricing/public/index.php(48): Zend\Mvc\Application->run()
+#11 {main}
+[INFO:Wed 2/22/2017 08:33:17AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 08:34:49AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:34:49AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:34:49AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:34:49AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:34:50AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:34:51AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 08:34:51AM:ItemsController:38] Building ItemController (AJAX).
+[INFO:Wed 2/22/2017 08:34:51AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:34:51AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:34:51AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:34:52AM:ItemsController:54] /ajax/items?username=jpalmer&session_id=2c0d7d59ceed0d1c8bc04d9b505cada0&myaction=customerlisttableget&customerid=1127&_=1487774091100
+[INFO:Wed 2/22/2017 08:34:52AM:ItemsController:92] ItemsController Ajax called.
+[INFO:Wed 2/22/2017 08:34:52AM:SessionService:109] (LOGIN) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:34:52AM:SessionService:110] (LOGIN) username: jpalmer
+[INFO:Wed 2/22/2017 08:34:52AM:SessionService:116] (LOGIN) Saved Session ID: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:34:52AM:SessionService:121] (LOGIN) Adding Roles: admin
+[INFO:Wed 2/22/2017 08:34:52AM:SessionService:126] (LOGIN) Looked up salesperson: bzakrinski
+[INFO:Wed 2/22/2017 08:34:52AM:ItemsController:300] Retrieving customerlistitems.
+[INFO:Wed 2/22/2017 08:34:52AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customerlistitems&1127
+[INFO:Wed 2/22/2017 08:34:53AM:SynchronizationService:66] Found 5 customers in db.
+[INFO:Wed 2/22/2017 08:34:53AM:SynchronizationService:69] Found 5 items in svc and 5 in DB.
+[DEBUG:Wed 2/22/2017 08:34:53AM:ItemsFilterTableArrayService:56] Retrieved 5 customerlistitems.
+[INFO:Wed 2/22/2017 08:34:53AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:34:53AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:34:53AM:ItemsFilterTableArrayService:85] No price overrides found!
+[INFO:Wed 2/22/2017 08:34:53AM:ItemsFilterTableArrayService:96] Found 0 removedSKUs in Session!
+[INFO:Wed 2/22/2017 08:34:59AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:34:59AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:34:59AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:34:59AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:34:59AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:34:59AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:34:59AM:UsersController:57] ISADMIN BUT NO SALES
+[INFO:Wed 2/22/2017 08:34:59AM:UsersController:65] Retrieving Salespeople. ID: 206
+[INFO:Wed 2/22/2017 08:34:59AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customers&206
+[INFO:Wed 2/22/2017 08:35:00AM:UsersController:78] Retrieved #1 customers.
+[INFO:Wed 2/22/2017 08:35:00AM:UsersController:96] Found 41 users in db.
+[INFO:Wed 2/22/2017 08:35:01AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 08:35:07AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:35:07AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:35:07AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:35:07AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:35:08AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:35:09AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 08:35:09AM:ItemsController:38] Building ItemController (AJAX).
+[INFO:Wed 2/22/2017 08:35:09AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:35:09AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:35:09AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:35:09AM:ItemsController:54] /ajax/items?username=jpalmer&session_id=2c0d7d59ceed0d1c8bc04d9b505cada0&myaction=customerlisttableget&customerid=1153&_=1487774108957
+[INFO:Wed 2/22/2017 08:35:09AM:ItemsController:92] ItemsController Ajax called.
+[INFO:Wed 2/22/2017 08:35:09AM:SessionService:109] (LOGIN) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:35:09AM:SessionService:110] (LOGIN) username: jpalmer
+[INFO:Wed 2/22/2017 08:35:09AM:SessionService:116] (LOGIN) Saved Session ID: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:35:09AM:SessionService:121] (LOGIN) Adding Roles: admin
+[INFO:Wed 2/22/2017 08:35:09AM:SessionService:126] (LOGIN) Looked up salesperson: bzakrinski
+[INFO:Wed 2/22/2017 08:35:09AM:ItemsController:300] Retrieving customerlistitems.
+[INFO:Wed 2/22/2017 08:35:09AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customerlistitems&1153
+[INFO:Wed 2/22/2017 08:35:10AM:SynchronizationService:66] Found 6 customers in db.
+[INFO:Wed 2/22/2017 08:35:10AM:SynchronizationService:69] Found 6 items in svc and 6 in DB.
+[DEBUG:Wed 2/22/2017 08:35:10AM:ItemsFilterTableArrayService:56] Retrieved 6 customerlistitems.
+[INFO:Wed 2/22/2017 08:35:10AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:35:10AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:35:10AM:ItemsFilterTableArrayService:85] No price overrides found!
+[INFO:Wed 2/22/2017 08:35:10AM:ItemsFilterTableArrayService:96] Found 0 removedSKUs in Session!
+[INFO:Wed 2/22/2017 08:35:10AM:ItemsFilterTableArrayService:110] RowPlusItemPage.Id: 6
+[INFO:Wed 2/22/2017 08:35:10AM:ItemsFilterTableArrayService:110] RowPlusItemPage.Id: 2
+[INFO:Wed 2/22/2017 08:35:10AM:ItemsFilterTableArrayService:110] RowPlusItemPage.Id: 3
+[INFO:Wed 2/22/2017 08:35:10AM:ItemsFilterTableArrayService:110] RowPlusItemPage.Id: 1
+[INFO:Wed 2/22/2017 08:35:51AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:35:51AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:35:51AM:SessionService:102] (CONSTRUCTOR) Session Id: 2c0d7d59ceed0d1c8bc04d9b505cada0
+[INFO:Wed 2/22/2017 08:35:51AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:35:51AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:35:51AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:35:51AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:35:51AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:35:51AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:35:51AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:35:51AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:35:51AM:SessionService:102] (CONSTRUCTOR) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:35:51AM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 08:35:51AM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 08:35:51AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:35:51AM:LoginController:63] Checking for identity
+[INFO:Wed 2/22/2017 08:35:51AM:LoginController:72] Identity not found.
+[INFO:Wed 2/22/2017 08:35:52AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 08:35:59AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:35:59AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:35:59AM:SessionService:102] (CONSTRUCTOR) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:35:59AM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 08:35:59AM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 08:35:59AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:35:59AM:LoginController:83] AuthenticationAction called.
+[INFO:Wed 2/22/2017 08:36:00AM:SessionService:109] (LOGIN) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:00AM:SessionService:110] (LOGIN) username: jmeade
+[INFO:Wed 2/22/2017 08:36:00AM:SessionService:116] (LOGIN) Saved Session ID: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:00AM:SessionService:121] (LOGIN) Adding Roles: sales
+[INFO:Wed 2/22/2017 08:36:00AM:SessionService:126] (LOGIN) Looked up salesperson: NULL
+[INFO:Wed 2/22/2017 08:36:00AM:SessionService:209] User Role: sales
+[INFO:Wed 2/22/2017 08:36:00AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:00AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:00AM:SessionService:102] (CONSTRUCTOR) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:00AM:SessionService:209] User Role: sales
+[INFO:Wed 2/22/2017 08:36:00AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:36:00AM:SessionService:209] User Role: sales
+[INFO:Wed 2/22/2017 08:36:00AM:UsersController:61] ISNOTADMIN
+[INFO:Wed 2/22/2017 08:36:00AM:UsersController:65] Retrieving Salespeople. ID: 180
+[INFO:Wed 2/22/2017 08:36:00AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customers&180
+[INFO:Wed 2/22/2017 08:36:01AM:UsersController:78] Retrieved #1 customers.
+[INFO:Wed 2/22/2017 08:36:02AM:UsersController:96] Found 156 users in db.
+[INFO:Wed 2/22/2017 08:36:03AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 08:36:05AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:05AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:05AM:SessionService:102] (CONSTRUCTOR) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:05AM:SessionService:209] User Role: sales
+[INFO:Wed 2/22/2017 08:36:06AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:36:07AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 08:36:07AM:ItemsController:38] Building ItemController (AJAX).
+[INFO:Wed 2/22/2017 08:36:07AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:07AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:07AM:SessionService:102] (CONSTRUCTOR) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:07AM:ItemsController:54] /ajax/items?username=jmeade&session_id=ab1cc04899b392ef666f4cbdbc416b9d&myaction=customerlisttableget&customerid=592&_=1487774166890
+[INFO:Wed 2/22/2017 08:36:07AM:ItemsController:92] ItemsController Ajax called.
+[INFO:Wed 2/22/2017 08:36:07AM:SessionService:109] (LOGIN) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:07AM:SessionService:110] (LOGIN) username: jmeade
+[INFO:Wed 2/22/2017 08:36:07AM:SessionService:116] (LOGIN) Saved Session ID: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:07AM:SessionService:121] (LOGIN) Adding Roles: sales
+[INFO:Wed 2/22/2017 08:36:07AM:SessionService:126] (LOGIN) Looked up salesperson: NULL
+[INFO:Wed 2/22/2017 08:36:07AM:ItemsController:300] Retrieving customerlistitems.
+[INFO:Wed 2/22/2017 08:36:07AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customerlistitems&592
+[INFO:Wed 2/22/2017 08:36:08AM:SynchronizationService:66] Found 5 customers in db.
+[INFO:Wed 2/22/2017 08:36:08AM:SynchronizationService:69] Found 9 items in svc and 5 in DB.
+[DEBUG:Wed 2/22/2017 08:36:08AM:ItemsFilterTableArrayService:56] Retrieved 9 customerlistitems.
+[INFO:Wed 2/22/2017 08:36:08AM:SessionService:209] User Role: sales
+[INFO:Wed 2/22/2017 08:36:09AM:SessionService:209] User Role: sales
+[INFO:Wed 2/22/2017 08:36:09AM:ItemsFilterTableArrayService:85] No price overrides found!
+[INFO:Wed 2/22/2017 08:36:09AM:ItemsFilterTableArrayService:96] Found 0 removedSKUs in Session!
+[INFO:Wed 2/22/2017 08:36:29AM:ItemsController:38] Building ItemController (AJAX).
+[INFO:Wed 2/22/2017 08:36:29AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:29AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:29AM:SessionService:102] (CONSTRUCTOR) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:29AM:ItemsController:54] /ajax/items?username=jmeade&session_id=ab1cc04899b392ef666f4cbdbc416b9d&salesperson=jmeade&myaction=overridePrice&index=4&customerid=592&customername=Brian%20Loiacono&id=P1132&overrideprice=8.99&overrideprice=8.99
+[INFO:Wed 2/22/2017 08:36:29AM:ItemsController:110] ItemsController Ajax called.
+[INFO:Wed 2/22/2017 08:36:29AM:SessionService:109] (LOGIN) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:29AM:SessionService:110] (LOGIN) username: jmeade
+[INFO:Wed 2/22/2017 08:36:29AM:SessionService:116] (LOGIN) Saved Session ID: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:29AM:SessionService:121] (LOGIN) Adding Roles: sales
+[INFO:Wed 2/22/2017 08:36:29AM:SessionService:126] (LOGIN) Looked up salesperson: NULL
+[INFO:Wed 2/22/2017 08:36:29AM:ItemsController:232] Saving overrideprice: 8.99.
+[INFO:Wed 2/22/2017 08:36:29AM:ItemsController:137] Calling saveItemPriceOverride
+[INFO:Wed 2/22/2017 08:36:29AM:ItemsController:143] ItemPriceOverride saved.
+[INFO:Wed 2/22/2017 08:36:36AM:ItemsController:38] Building ItemController (AJAX).
+[INFO:Wed 2/22/2017 08:36:36AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:36AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:36AM:SessionService:102] (CONSTRUCTOR) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:36AM:ItemsController:54] /ajax/items?username=jmeade&session_id=ab1cc04899b392ef666f4cbdbc416b9d&salesperson=jmeade&myaction=overridePrice&index=4&customerid=592&customername=Brian%20Loiacono&id=P1132&overrideprice=&overrideprice=
+[INFO:Wed 2/22/2017 08:36:36AM:ItemsController:110] ItemsController Ajax called.
+[INFO:Wed 2/22/2017 08:36:36AM:SessionService:109] (LOGIN) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:36AM:SessionService:110] (LOGIN) username: jmeade
+[INFO:Wed 2/22/2017 08:36:36AM:SessionService:116] (LOGIN) Saved Session ID: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:36AM:SessionService:121] (LOGIN) Adding Roles: sales
+[INFO:Wed 2/22/2017 08:36:36AM:SessionService:126] (LOGIN) Looked up salesperson: NULL
+[INFO:Wed 2/22/2017 08:36:36AM:ItemsController:232] Saving overrideprice: .
+[INFO:Wed 2/22/2017 08:36:36AM:ItemsController:166] find ItemPriceOverride salesperson: jmeade ProductId: 1132 CustomerId: 592
+[INFO:Wed 2/22/2017 08:36:37AM:ItemsController:176] ItemPriceOverride set inactive.
+[INFO:Wed 2/22/2017 08:36:44AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:44AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:44AM:SessionService:102] (CONSTRUCTOR) Session Id: ab1cc04899b392ef666f4cbdbc416b9d
+[INFO:Wed 2/22/2017 08:36:44AM:SessionService:209] User Role: sales
+[INFO:Wed 2/22/2017 08:36:44AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:36:44AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:44AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:44AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:44AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:45AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:45AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:45AM:SessionService:102] (CONSTRUCTOR) Session Id: 7f2a502278edb52cba102246929c9744
+[INFO:Wed 2/22/2017 08:36:45AM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 08:36:45AM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 08:36:45AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:36:45AM:LoginController:63] Checking for identity
+[INFO:Wed 2/22/2017 08:36:45AM:LoginController:72] Identity not found.
+[INFO:Wed 2/22/2017 08:36:45AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 08:36:50AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:50AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:50AM:SessionService:102] (CONSTRUCTOR) Session Id: 7f2a502278edb52cba102246929c9744
+[INFO:Wed 2/22/2017 08:36:50AM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 08:36:50AM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 08:36:50AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:36:50AM:LoginController:83] AuthenticationAction called.
+[INFO:Wed 2/22/2017 08:36:51AM:SessionService:109] (LOGIN) Session Id: 7f2a502278edb52cba102246929c9744
+[INFO:Wed 2/22/2017 08:36:51AM:SessionService:110] (LOGIN) username: jdowns
+[INFO:Wed 2/22/2017 08:36:51AM:SessionService:116] (LOGIN) Saved Session ID: 7f2a502278edb52cba102246929c9744
+[INFO:Wed 2/22/2017 08:36:51AM:SessionService:121] (LOGIN) Adding Roles: admin
+[INFO:Wed 2/22/2017 08:36:51AM:SessionService:126] (LOGIN) Looked up salesperson: NULL
+[INFO:Wed 2/22/2017 08:36:51AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:36:52AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:52AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:52AM:SessionService:102] (CONSTRUCTOR) Session Id: 7f2a502278edb52cba102246929c9744
+[INFO:Wed 2/22/2017 08:36:52AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:36:52AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:36:52AM:SalesController:62] Retrieving salespeople.
+[INFO:Wed 2/22/2017 08:36:52AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Wed 2/22/2017 08:36:52AM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Wed 2/22/2017 08:36:52AM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Wed 2/22/2017 08:36:53AM:DataAccess\Module:63]  Error dispatching controller "". Error was: "error-router-no-match"
+[INFO:Wed 2/22/2017 08:36:58AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:58AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:58AM:SessionService:102] (CONSTRUCTOR) Session Id: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:36:58AM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 08:36:58AM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 08:36:58AM:MyAclPlugin:135] Allowed: 
+[INFO:Wed 2/22/2017 08:36:58AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:36:58AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:36:58AM:SessionService:102] (CONSTRUCTOR) Session Id: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:36:58AM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 08:36:58AM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 08:36:58AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:36:58AM:LoginController:63] Checking for identity
+[INFO:Wed 2/22/2017 08:36:58AM:LoginController:65] Identity found.
+[INFO:Wed 2/22/2017 08:37:11AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:37:11AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:37:11AM:SessionService:102] (CONSTRUCTOR) Session Id: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:37:11AM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 08:37:11AM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 08:37:11AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:37:11AM:LoginController:83] AuthenticationAction called.
+[INFO:Wed 2/22/2017 08:37:12AM:SessionService:109] (LOGIN) Session Id: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:37:12AM:SessionService:110] (LOGIN) username: cmetallo
+[INFO:Wed 2/22/2017 08:37:12AM:SessionService:116] (LOGIN) Saved Session ID: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:37:12AM:SessionService:121] (LOGIN) Adding Roles: admin
+[INFO:Wed 2/22/2017 08:37:12AM:SessionService:126] (LOGIN) Looked up salesperson: bzakrinski
+[INFO:Wed 2/22/2017 08:37:12AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:37:12AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:37:12AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:37:12AM:SessionService:102] (CONSTRUCTOR) Session Id: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:37:12AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:37:12AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:37:12AM:SalesController:62] Retrieving salespeople.
+[INFO:Wed 2/22/2017 08:37:12AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&salespeople
+[INFO:Wed 2/22/2017 08:37:13AM:SalesController:72] Retrieved 5 salespeople.
+[INFO:Wed 2/22/2017 08:37:13AM:SalesController:89] query: SELECT DISTINCT(user.email) as email, user.phone1 as phone, user.salespersonname as salesperson FROM DataAccess\FFM\Entity\User user WHERE user.salespersonname IN ('Bill Zakrinski', 'Cyndi Metallo', 'David Bacon', 'Iris Derfler', 'Jody Meade') ORDER BY user.username DESC
+[INFO:Wed 2/22/2017 08:37:15AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:37:15AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:37:15AM:SessionService:102] (CONSTRUCTOR) Session Id: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:37:15AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:37:16AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:37:16AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:37:16AM:UsersController:49] ISADMIN
+[INFO:Wed 2/22/2017 08:37:16AM:SessionService:201] Added Salespersoninplay: jmeade
+[INFO:Wed 2/22/2017 08:37:16AM:UsersController:65] Retrieving Salespeople. ID: 180
+[INFO:Wed 2/22/2017 08:37:16AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customers&180
+[INFO:Wed 2/22/2017 08:37:16AM:UsersController:78] Retrieved #1 customers.
+[INFO:Wed 2/22/2017 08:37:17AM:UsersController:96] Found 156 users in db.
+[INFO:Wed 2/22/2017 08:37:20AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:37:20AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:37:20AM:SessionService:102] (CONSTRUCTOR) Session Id: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:37:20AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:37:20AM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 08:37:20AM:ItemsController:38] Building ItemController (AJAX).
+[INFO:Wed 2/22/2017 08:37:20AM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 08:37:20AM:BalancedRemoteAddr(ELB):61] IPAddress: ::1
+[INFO:Wed 2/22/2017 08:37:20AM:SessionService:102] (CONSTRUCTOR) Session Id: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:37:21AM:ItemsController:54] /ajax/items?username=cmetallo&session_id=39f01f56f5efc1bcc4f12a9b6ce2ccc2&myaction=customerlisttableget&customerid=569&_=1487774240435
+[INFO:Wed 2/22/2017 08:37:21AM:ItemsController:92] ItemsController Ajax called.
+[INFO:Wed 2/22/2017 08:37:21AM:SessionService:109] (LOGIN) Session Id: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:37:21AM:SessionService:110] (LOGIN) username: cmetallo
+[INFO:Wed 2/22/2017 08:37:21AM:SessionService:116] (LOGIN) Saved Session ID: 39f01f56f5efc1bcc4f12a9b6ce2ccc2
+[INFO:Wed 2/22/2017 08:37:21AM:SessionService:121] (LOGIN) Adding Roles: admin
+[INFO:Wed 2/22/2017 08:37:21AM:SessionService:126] (LOGIN) Looked up salesperson: jmeade
+[INFO:Wed 2/22/2017 08:37:21AM:ItemsController:300] Retrieving customerlistitems.
+[INFO:Wed 2/22/2017 08:37:21AM:RestService:36] Calling WebService with GET URL: https://svc.localhost/bySKU.php?jpalmer&goodbass&customerlistitems&569
+[INFO:Wed 2/22/2017 08:37:22AM:SynchronizationService:66] Found 11 customers in db.
+[INFO:Wed 2/22/2017 08:37:22AM:SynchronizationService:69] Found 11 items in svc and 11 in DB.
+[DEBUG:Wed 2/22/2017 08:37:22AM:ItemsFilterTableArrayService:56] Retrieved 11 customerlistitems.
+[INFO:Wed 2/22/2017 08:37:22AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:37:22AM:SessionService:209] User Role: admin
+[INFO:Wed 2/22/2017 08:37:22AM:ItemsFilterTableArrayService:85] No price overrides found!
+[INFO:Wed 2/22/2017 08:37:22AM:ItemsFilterTableArrayService:96] Found 0 removedSKUs in Session!
+[INFO:Wed 2/22/2017 08:37:22AM:ItemsFilterTableArrayService:110] RowPlusItemPage.Id: 5
+[INFO:Wed 2/22/2017 02:38:18PM:BalancedRemoteAddr(REMOTE_ADDR):60] IPAddress:  this->data: 
+[INFO:Wed 2/22/2017 02:38:18PM:BalancedRemoteAddr(ELB):61] IPAddress: 
+[INFO:Wed 2/22/2017 02:38:18PM:SessionService:102] (CONSTRUCTOR) Session Id: 45nam3bt8up515dbmku73qo8e7
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 02:38:19PM:MyAclPlugin:135] Allowed: 
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:102] (CONSTRUCTOR) Session Id: 45nam3bt8up515dbmku73qo8e7
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 02:38:19PM:MyAclPlugin:135] Allowed: 
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:102] (CONSTRUCTOR) Session Id: 45nam3bt8up515dbmku73qo8e7
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 02:38:19PM:MyAclPlugin:135] Allowed: 
+[INFO:Wed 2/22/2017 02:38:19PM:SalesFormService:42] Sanitizing...
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:102] (CONSTRUCTOR) Session Id: 45nam3bt8up515dbmku73qo8e7
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:177] No Session data found.
+[INFO:Wed 2/22/2017 02:38:19PM:SessionService:209] User Role: 
+[INFO:Wed 2/22/2017 02:38:20PM:MyAclPlugin:135] Allowed: 1
+[INFO:Wed 2/22/2017 02:38:20PM:LoginController:63] Checking for identity
+[INFO:Wed 2/22/2017 02:38:20PM:LoginController:72] Identity not found.
