@@ -104,9 +104,8 @@ class RowPlusItemsPageForm extends Form {
                 ),
             ],
             'attributes' => array(
-                'class' => 'form-control',
-                'data-rule-digits' => true,
-                'data-msg-digits' => 'SKU must be a valid number'
+                'class' => 'form-control ffm-sku',
+                'data-msg-sku' => 'Please enter a valid SKU'
             ),
         ]);
     }

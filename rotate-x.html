@@ -1,0 +1,100 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Rotate-X</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    </head>
+
+    <body>
+        <style>
+            .around-delete-list{
+                position: relative;
+                width: 100px;
+            }
+            .delete-list{
+                width: 20px;
+                height:20px;
+                position: absolute;
+                display: inline-block;
+                top: -8px;
+                left: 88px;
+                border-bottom: 1px solid #aa1717;
+                border-left: 1px solid #aa1717;
+                background: transparent;
+                -webkit-transition: all 0.6s ease-in-out;
+                -moz-transition: all 0.6s ease-in-out;
+                -o-transition: all 0.6s ease-in-out;
+                -ms-transition: all 0.6s ease-in-out;
+                transition: all 0.6s ease-in-out;
+            }
+            .delete-list:hover{
+                background: #aa1717;
+                -webkit-transition: all 0.6s ease-in-out;
+                -moz-transition: all 0.6s ease-in-out;
+                -o-transition: all 0.6s ease-in-out;
+                -ms-transition: all 0.6s ease-in-out;
+                transition: all 0.6s ease-in-out;
+            }
+            .delete-list a::before{
+                text-align: center;
+                z-index: 3;
+            }
+
+            .delete-list a{
+                color: #aa1717;
+                width: 20px;
+                height: 20px;
+                font-size: 1.3rem;
+                padding-top:1px;
+                padding-left:5px;
+                overflow: hidden;
+                -webkit-transition: all 0.3s ease;
+                -moz-transition: all 0.3s ease;
+                -o-transition: all 0.3s ease;
+                -ms-transition: all 0.3s ease;
+                transition: all 0.3s ease;
+            }
+
+            .delete-list:hover a{
+                color: #FFFFFF !important;
+                text-decoration: none;
+                position:absolute;
+                top: -2px;
+                left: -1px;
+                -webkit-transform: rotate(90deg);
+                -o-transform: rotate(90deg);
+                -moz-transform: rotate(90deg);
+                -ms-transform: rotate(90deg);
+                transform: rotate(90deg);
+            }
+            /*
+            Set size of spinning icon.
+            */
+            .ffm-hover-glyph{
+                width: 20px;
+                height: 20px;
+            }
+        </style>
+        <div class="container-fluid">
+            <div class="around-delete-list" >
+                <div class="pull-me"></div>
+                <div title="Permanently remove product" id="divbutton_1" data-meta-row="1"
+                     class="delete-list" >
+                    <a id="button_1"
+                       href="#"
+                       data-meta-row="1"
+                       class="pull-right" >
+                        <span id="glyphbutton_1" data-meta-row="1" class="glyphicon glyphicon-remove ffm-hover-glyph" aria-hidden="true">
+                        </span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -75,6 +75,10 @@ class UsersController extends BaseController {
         $method = $this->pricingconfig['by_sku_method'];
 
         $json = $this->rest($url, $method, $params);
+        
+        //we need to check against DB here - if there are rows returned without a corresonding useer in the DB - 
+        //then DO NOT RENDER IT OR YOU WILL THROW EXCEPTIONS!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        
         Logger::info("UsersController", __LINE__, 'Retrieved #' . count($json) . ' ' . $this->pricingconfig['by_sku_object_users_controller'] . '.');
 
         //now lookup these items in the DB and update if there are discrepancies

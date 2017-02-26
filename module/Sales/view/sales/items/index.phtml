@@ -57,6 +57,33 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
     //#############################################################
     //#############################################################
     //##
+    //##    Delete Added Product button click handler.
+    //##    Sends REST DELETE to Ajax Endpoint. The Endpoint
+    //##    deletes the associated Added Product (RowPlusItemsPage)
+    //##    then we need to update the table by removing the deleted 
+    //##    row.
+    //##
+    //#############################################################
+    //#############################################################
+    var deleteAddedProduct = function (rowIndex, id) {
+      $.getJSON("ajax/items?myaction=delete&session_id=" + _session_id + "&myid=" + encodeURIComponent(id), function () {
+      }).done(function (result) {
+        if (result.success) {
+          console.log("Added Product deleted.");
+          $API.row(rowIndex).remove();
+          $API.draw(false);
+        } else {
+          console.log("No Success! Result: " + JSON.stringify(result));
+        }
+      }).fail(function () {
+        console.log("select REST Call failed.");
+      });
+      return false;
+    };
+
+    //#############################################################
+    //#############################################################
+    //##
     //##    Is used to re-initialize the override price on every table click
     //##
     //#############################################################
@@ -190,7 +217,9 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
             'width': '3%',
             'className': 'dt-body-center',
             'render': function (data, type, row, meta) {
+              //console.log(JSON.stringify(row.id));
               if (data) {
+
                 //inform select plugin of selected state.
                 $API.row(meta.row).select();
                 return '<input class="row_checkbox" id="selected_row_' + meta.row + '" type="checkbox" checked>';
@@ -273,7 +302,29 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
               return result;
             }
           },
-          {"data": "sku"},
+          {
+            "data": "sku",
+            "render": function (data, type, row, meta) {
+              var result = '';
+              //console.log(JSON.stringify(row))
+              if (row['id'].indexOf('A') === 0) {
+                result += ' <div class="around-delete-list" >\n\
+                            <div class="pull-me">' + (data ? data : '&nbsp;') + '</div>\n\
+                            <div title="Permanently remove product" id="divbutton_' + row.id + '" data-meta-row="' + meta.row + '" \n\
+                                class="delete-list" >\n\
+                                <a id="button_' + row.id + '"\n\
+                                        href="#" \n\
+                                        data-meta-row="' + meta.row + '"\n\
+                                        class="pull-right" >\n\
+                                            <span id="glyphbutton_' + row.id + '" data-meta-row="' + meta.row + '" class="glyphicon glyphicon-remove ffm-hover-glyph" aria-hidden="true"></span>\n\
+                                </a>\n\
+                            </div></div>';
+              } else {
+                result += '<div style="width: 100%"><span>' + data + '</span></div>';
+              }
+              return result;
+            }
+          },
           {"data": "id", visible: false},
         ],
         //#############################################################
@@ -491,12 +542,26 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
       //#############################################################
       //#############################################################
       $("#customerlisttable").on('click', 'tbody tr td:nth-child(2), tbody tr td:nth-child(3), tbody tr td:nth-child(4), tbody tr td:nth-child(5), tbody tr td:nth-child(6), tbody tr td:nth-child(7), tbody tr td:nth-child(8), tbody tr td:nth-child(9), tbody tr td:nth-child(10), tbody tr td:nth-child(11), tbody tr td:nth-child(12)', function (e) {
-        var row = $API.row($(this).parent());
-        //alert(JSON.stringify(row.data()));
-        var modal = wrapModal(row);
-        console.log('Showing Modal!');
-        $('#detailRowModal').remove();
-        $('footer').after($(modal).modal('show'));
+
+        //only handle clicks that the target is NOT the Added Products button.
+        var target = e.target;
+        console.log('TargetId: ' + e.target.id + " with rowIndex: " + rowIndex);
+        //we know the Delete Added Product Button was clicked when the target id exists and it starts with button_
+        if (target && target.id && target.id.indexOf('button_') !== -1) {
+          //go ahead and 
+          var addedProductId = target.id.substring(target.id.indexOf('_') + 1);
+          var rowIndex = $(e.target).attr("data-meta-row");
+          console.log('Clicked Remove Added with ID: ' + addedProductId + " with rowIndex: " + rowIndex);
+          deleteAddedProduct(rowIndex, addedProductId);
+        } else {
+          //go ahead and show the override price dialog
+          var row = $API.row($(this).parent());
+          var modal = wrapModal(row);
+          console.log('Showing Modal!');
+          $('#detailRowModal').remove();
+          $('footer').after($(modal).modal('show'));
+
+        }
       });
 
       //row_checkbox
@@ -586,10 +651,20 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
         //##########  END Custom Datatables Buttons Impl ##############
       });
 
+      //
+
+      skuValidationFnc = function (value, element) {
+        var isValidMoney = /^[a-z0-9A-Z\-]{1,20}$/.test(value);
+        if (value > 10000 && isValidMoney) {
+          isValidMoney = !isValidMoney;
+        }
+        return this.optional(element) || isValidMoney;
+      };
+
       moneyValidationFnc = function (value, element) {
         var isValidMoney = /^(?=.)(?!\$$)(([1-9][0-9]{0,2}(,[0-9]{3})*)|[0-9]+)?(\.[0-9]{2})?$/.test(value);
-        if(value > 10000 && isValidMoney){
-            isValidMoney = !isValidMoney;
+        if (value > 10000 && isValidMoney) {
+          isValidMoney = !isValidMoney;
         }
         return this.optional(element) || isValidMoney;
       };
@@ -599,8 +674,16 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
               moneyValidationFnc,
               "You must enter a valid dollar amount."
               );
+              
+      $.validator.addMethod(
+              "sku",
+              skuValidationFnc,
+              "You must enter a valid sku (alpha-numeric)."
+              );
 
-      $.validator.addClassRules("ffm-money", { money: true });
+      $.validator.addClassRules("ffm-money", {money: true});
+      
+      $.validator.addClassRules("ffm-sku", {sku: true});
 
 
       //#############################################################
@@ -635,6 +718,73 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
     .error-list{
         width: 90%;
         text-align: center;
+    }
+    .around-delete-list{
+        position: relative;
+        width: 100px;
+    }
+    .delete-list{
+        width: 20px;
+        height:20px;
+        position: absolute;
+        display: inline-block;
+        top: -8px;
+        left: 88px;
+        border-bottom: 1px solid #aa1717;
+        border-left: 1px solid #aa1717;
+        background: transparent;
+        -webkit-transition: all 0.6s ease-in-out;
+        -moz-transition: all 0.6s ease-in-out;
+        -o-transition: all 0.6s ease-in-out;
+        -ms-transition: all 0.6s ease-in-out;
+        transition: all 0.6s ease-in-out;
+    }
+    .delete-list:hover{
+        background: #aa1717;
+        -webkit-transition: all 0.6s ease-in-out;
+        -moz-transition: all 0.6s ease-in-out;
+        -o-transition: all 0.6s ease-in-out;
+        -ms-transition: all 0.6s ease-in-out;
+        transition: all 0.6s ease-in-out;
+    }
+    .delete-list a::before{
+        text-align: center;
+        z-index: 3;
+    }
+    
+    .delete-list a{
+        color: #aa1717;
+        width: 20px;
+        height: 20px;
+        font-size: 1.3rem;
+        padding-top:1px;
+        padding-left:5px;
+        overflow: hidden;
+        -webkit-transition: all 0.3s ease;
+        -moz-transition: all 0.3s ease;
+        -o-transition: all 0.3s ease;
+        -ms-transition: all 0.3s ease;
+        transition: all 0.3s ease;
+    }
+
+    .delete-list:hover a{
+        color: #FFFFFF !important;
+        text-decoration: none;
+        position:absolute;
+        top: -2px;
+        left: -1px;
+        -webkit-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        transform: rotate(90deg);
+    }
+    /*
+    Set size of spinning icon.
+    */
+    .ffm-hover-glyph{
+        width: 20px;
+        height: 20px;
     }
 </style>
 <div class="container-fluid">

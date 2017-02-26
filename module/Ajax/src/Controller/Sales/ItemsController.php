@@ -90,10 +90,13 @@ class ItemsController extends AbstractRestfulController {
     public function getList() {
 
         Logger::info("ItemsController", __LINE__, 'ItemsController Ajax called.');
-        $this->forceSessionLogin();
+        //$this->forceSessionLogin();
         switch ($this->params()->fromQuery("myaction")) {
             case "select" : {
                     return $this->select();
+                }
+            case "delete" : {
+                    return $this->deleteAddedProduct($this->params()->fromQuery("myid"));
                 }
             case "unselect" : {
                     return $this->unselect();
@@ -108,13 +111,32 @@ class ItemsController extends AbstractRestfulController {
     //framework calls get when an id parameter is found in request
     public function get($id) {
         Logger::info("ItemsController", __LINE__, 'ItemsController Ajax called.');
-        $this->forceSessionLogin();
+        //$this->forceSessionLogin();
         switch ($this->params()->fromQuery("myaction")) {
             case "overridePrice" :
             default : {
                     return $this->overridePrice($id);
                 }
         }
+    }
+    
+    /*
+     * return new JsonModel(array(
+                'success' => true,
+                'index' => $rowIndex,
+                'overrideprice' => $record->getOverrideprice()
+            ));
+     */
+    
+    //framework calls get when an id parameter is found in request
+    public function deleteAddedProduct($id) {
+        Logger::info("ItemsController", __LINE__, 'ItemsController Delete called.');
+        //trim first character from ID - then remove that row from the DB RowPlusItemsTable
+        $this->rowplusitemspagerepository->deleteRowPlusItemsPage(substr($id, 1));
+        return new JsonModel(array(
+                'success' => true,
+                'removed_id' => $id
+            ));
     }
 
     private function forceSessionLogin() {
@@ -300,7 +322,7 @@ class ItemsController extends AbstractRestfulController {
         Logger::info("ItemsController", __LINE__, 'Retrieving ' . $this->pricingconfig['by_sku_object_items_controller'] . '.');
         $customerid = $this->params()->fromQuery('customerid');
         $this->customerid = $customerid;
-        $params = $this->getBaseBySkuParams();
+        $params = $this->getWebServiceQueryParams();
         $params["customerid"] = $customerid;
         $method = $this->pricingconfig['by_sku_method'];
         $json = $this->makeRestCall($this->pricingconfig['by_sku_base_url'], $method, $params);
@@ -379,7 +401,8 @@ class ItemsController extends AbstractRestfulController {
         ));
     }
 
-    private function getBaseBySkuParams() {
+    private function getWebServiceQueryParams() {
+        
         return [
             "id" => $this->pricingconfig['by_sku_userid'],
             "pw" => $this->pricingconfig['by_sku_password'],

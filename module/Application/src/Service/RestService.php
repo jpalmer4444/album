@@ -33,7 +33,7 @@ class RestService  {
         $request->getHeaders()->addHeaders(array(
             'Content-Type' => 'application/x-www-form-urlencoded; charset=UTF-8'
         ));
-        Logger::info("RestService", __LINE__, "Calling WebService with GET URL: " . $url . "?" . implode("&",$params));
+        Logger::info("RestService", __LINE__, "Calling WebService with GET URL: " . $url . "?" . http_build_query($params, NULL, "&"));
         $request->setUri($url);
         $request->setMethod($method);
         if (strcmp(strtoupper($method), "GET") == 0) {
