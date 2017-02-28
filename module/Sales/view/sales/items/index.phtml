@@ -72,6 +72,13 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
           console.log("Added Product deleted.");
           $API.row(rowIndex).remove();
           $API.draw(false);
+          $.getJSON('/ajax/items?username=' + _username + '&session_id=' + _session_id + '&myaction=customerlisttableget&customerid=' + _customer_id, function () {
+      }).done(function (result) {
+          $API.clear();
+          $API.rows.add(result.data);
+          $API.draw();
+      });
+        //
         } else {
           console.log("No Success! Result: " + JSON.stringify(result));
         }
@@ -580,8 +587,9 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
         //id="selected_row_${rowIdx}
         var $input = $(this).children('input');
         var forCheck = $input[0];
-        if (e.target.id !== $input.attr('id'))
+        if (e.target.id !== $input.attr('id')){
           $input.prop('checked', !$input.prop('checked'));
+        }
         var rowIdx = new Number($input.attr('id').replace('selected_row_', ''));
         //console.log('Idx: '+rowIdx);
         var checked = forCheck.checked;
@@ -674,7 +682,7 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
               moneyValidationFnc,
               "You must enter a valid dollar amount."
               );
-              
+
       $.validator.addMethod(
               "sku",
               skuValidationFnc,
@@ -682,7 +690,7 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
               );
 
       $.validator.addClassRules("ffm-money", {money: true});
-      
+
       $.validator.addClassRules("ffm-sku", {sku: true});
 
 
@@ -751,7 +759,7 @@ echo $this->inlineScript()->prependFile($this->basePath('js/pages/items.js?uuid=
         text-align: center;
         z-index: 3;
     }
-    
+
     .delete-list a{
         color: #aa1717;
         width: 20px;
